@@ -6,7 +6,7 @@ jobs:
       postgres:
         image: postgres
         env:
-          POSTGRES_DATABASE: trpcdb
+          POSTGRES_DATABASE: workplacify-db
           POSTGRES_USER: postgres
           POSTGRES_HOST_AUTH_METHOD: trust
         ports:
@@ -17,7 +17,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node: ['18.x']
+        node: ["18.x"]
         os: [ubuntu-latest]
     steps:
       - name: Checkout repo

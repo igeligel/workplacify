@@ -3,6 +3,6 @@
  * Make sure to import this file rather than `superjson` directly.
  * @see https://github.com/blitz-js/superjson#recipes
  */
-import superjson from 'superjson';
+import superjson from "superjson";
 
 export const transformer = superjson;

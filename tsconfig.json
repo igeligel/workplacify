@@ -14,13 +14,9 @@
     "resolveJsonModule": true,
     "noUncheckedIndexedAccess": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
-    "baseUrl": ".",
-    "types": ["vitest/globals"],
-    "paths": {
-      "~/*": ["src/*"]
-    }
+    "types": ["vitest/globals"]
   },
   "include": [
     "next-env.d.ts",

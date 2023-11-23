@@ -1,27 +1,40 @@
-import type { NextPage } from 'next';
-import type { AppType, AppProps } from 'next/app';
-import type { ReactElement, ReactNode } from 'react';
+import { ChakraProvider } from "@chakra-ui/react";
+import { SessionProvider } from "next-auth/react";
+import type { AppProps, AppType } from "next/app";
 
-import { DefaultLayout } from '~/components/DefaultLayout';
-import { trpc } from '~/utils/trpc';
-import '~/styles/globals.css';
+import { SidebarBrandWithHeader } from "../chakra-starter/application-ui/sidebar-with-header";
+import { BaseLayout } from "../components/BaseLayout";
+import { trpc } from "../utils/trpc";
 
-export type NextPageWithLayout<
-  TProps = Record<string, unknown>,
-  TInitialProps = TProps,
-> = NextPage<TProps, TInitialProps> & {
-  getLayout?: (page: ReactElement) => ReactNode;
+type LandingPageWrapperProps = {
+  children: React.ReactNode;
+};
+const LandingPageWrapper = (props: LandingPageWrapperProps) => {
+  return <BaseLayout>{props.children}</BaseLayout>;
 };
 
-type AppPropsWithLayout = AppProps & {
-  Component: NextPageWithLayout;
+const AppWrapper = (props: LandingPageWrapperProps) => {
+  return <SidebarBrandWithHeader>{props.children}</SidebarBrandWithHeader>;
 };
 
-const MyApp = (({ Component, pageProps }: AppPropsWithLayout) => {
-  const getLayout =
-    Component.getLayout ?? ((page) => <DefaultLayout>{page}</DefaultLayout>);
+const MyApp = ((props: AppProps) => {
+  const { Component, pageProps, router } = props;
+  const { session } = pageProps;
 
-  return getLayout(<Component {...pageProps} />);
+  let LayoutWrapper = LandingPageWrapper;
+  if (router.pathname.startsWith("/app")) {
+    LayoutWrapper = AppWrapper;
+  }
+
+  return (
+    <SessionProvider session={session}>
+      <ChakraProvider>
+        <LayoutWrapper>
+          <Component {...pageProps} />
+        </LayoutWrapper>
+      </ChakraProvider>
+    </SessionProvider>
+  );
 }) as AppType;
 
 export default trpc.withTRPC(MyApp);

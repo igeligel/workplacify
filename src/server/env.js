@@ -4,19 +4,19 @@
  * It has to be a `.js`-file to be imported there.
  */
 /* eslint-disable @typescript-eslint/no-var-requires */
-const { z } = require('zod');
+const { z } = require("zod");
 
 /*eslint sort-keys: "error"*/
 const envSchema = z.object({
   DATABASE_URL: z.string().url(),
-  NODE_ENV: z.enum(['development', 'test', 'production']),
+  NODE_ENV: z.enum(["development", "test", "production"]),
 });
 
 const env = envSchema.safeParse(process.env);
 
 if (!env.success) {
   console.error(
-    '❌ Invalid environment variables:',
+    "❌ Invalid environment variables:",
     JSON.stringify(env.error.format(), null, 4),
   );
   process.exit(1);
