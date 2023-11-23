@@ -7,12 +7,24 @@ import {
   Heading,
   Icon,
   IconButton,
-  Text,
   VStack,
 } from "@chakra-ui/react";
+import { GetServerSideProps } from "next";
 import { FiX } from "react-icons/fi";
 
+import { FormOfficeAdd } from "../../../../components/FormOfficeAdd";
+import { appAuthRedirect } from "../../../../server/nextMiddleware/appAuthRedirect";
+import { useOfficeFormStore } from "../../../../stores/officeFormStore";
+
 const OfficesNewPage = () => {
+  const name = useOfficeFormStore((state) => state.name);
+  const description = useOfficeFormStore((state) => state.description);
+
+  const onSaveClick = () => {
+    console.log("name", name);
+    console.log("description", description);
+  };
+
   return (
     <VStack alignItems={"flex-start"}>
       <Box width={"100%"}>
@@ -45,6 +57,7 @@ const OfficesNewPage = () => {
               _hover={{
                 backgroundColor: "orange.500",
               }}
+              onClick={onSaveClick}
             >
               Save office
             </Button>
@@ -52,11 +65,32 @@ const OfficesNewPage = () => {
         </Box>
       </Box>
       <Divider />
-      <Container maxW={"container.sm"}>
-        <Box>Office Information</Box>
+      <Container maxW={"container.sm"} paddingTop={4}>
+        <VStack width={"100%"} alignItems={"flex-start"} spacing={4}>
+          <Heading as={"h1"} fontSize={"lg"} color={"gray.700"}>
+            Office Information
+          </Heading>
+
+          <VStack width={"100%"} alignItems={"flex-start"} spacing={3}>
+            <FormOfficeAdd />
+          </VStack>
+        </VStack>
       </Container>
     </VStack>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { redirect, session } = await appAuthRedirect({
+    context,
+  });
+  if (redirect) return { redirect };
+
+  return {
+    props: {
+      session,
+    },
+  };
 };
 
 export default OfficesNewPage;

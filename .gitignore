@@ -42,3 +42,5 @@ yarn-error.log*
 playwright/test-results
 
 certificates
+
+.env

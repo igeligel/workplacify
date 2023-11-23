@@ -1,3 +1,22 @@
+-- CreateEnum
+CREATE TYPE "WorkplacifyPreference" AS ENUM ('DESK_BOOKING', 'WORKPLACE_ANALYTICS', 'JOIN_ORGANIZATION');
+
+-- CreateEnum
+CREATE TYPE "UserRole" AS ENUM ('ADMIN', 'MEMBER');
+
+-- CreateTable
+CREATE TABLE "onboarding_selection" (
+    "id" TEXT NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL,
+    "user_id" TEXT NOT NULL,
+    "workplacify_preferences" "WorkplacifyPreference"[],
+    "temporary_invite_code" TEXT,
+    "submitted" BOOLEAN NOT NULL DEFAULT false,
+
+    CONSTRAINT "onboarding_selection_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateTable
 CREATE TABLE "organization" (
     "id" TEXT NOT NULL,
@@ -5,6 +24,7 @@ CREATE TABLE "organization" (
     "description" TEXT,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
+    "invite_code" TEXT NOT NULL,
 
     CONSTRAINT "organization_pkey" PRIMARY KEY ("id")
 );
@@ -107,6 +127,7 @@ CREATE TABLE "user" (
     "email_verified" TIMESTAMP(3),
     "image" TEXT,
     "organization_id" TEXT,
+    "user_role" "UserRole" NOT NULL DEFAULT 'MEMBER',
 
     CONSTRAINT "user_pkey" PRIMARY KEY ("id")
 );
@@ -117,6 +138,9 @@ CREATE TABLE "verification_token" (
     "token" TEXT NOT NULL,
     "expires" TIMESTAMP(3) NOT NULL
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "organization_invite_code_key" ON "organization"("invite_code");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "account_provider_provider_account_id_key" ON "account"("provider", "provider_account_id");
@@ -132,6 +156,9 @@ CREATE UNIQUE INDEX "verification_token_token_key" ON "verification_token"("toke
 
 -- CreateIndex
 CREATE UNIQUE INDEX "verification_token_identifier_token_key" ON "verification_token"("identifier", "token");
+
+-- AddForeignKey
+ALTER TABLE "onboarding_selection" ADD CONSTRAINT "onboarding_selection_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "office" ADD CONSTRAINT "office_organization_id_fkey" FOREIGN KEY ("organization_id") REFERENCES "organization"("id") ON DELETE SET NULL ON UPDATE CASCADE;
