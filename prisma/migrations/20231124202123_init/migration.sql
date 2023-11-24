@@ -83,10 +83,14 @@ CREATE TABLE "office_room" (
 -- CreateTable
 CREATE TABLE "desk" (
     "id" TEXT NOT NULL,
+    "public_desk_id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "description" TEXT,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
+    "floor_id" TEXT NOT NULL,
+    "x" DOUBLE PRECISION NOT NULL,
+    "y" DOUBLE PRECISION NOT NULL,
 
     CONSTRAINT "desk_pkey" PRIMARY KEY ("id")
 );
@@ -128,6 +132,7 @@ CREATE TABLE "user" (
     "image" TEXT,
     "organization_id" TEXT,
     "user_role" "UserRole" NOT NULL DEFAULT 'MEMBER',
+    "current_office_id" TEXT,
 
     CONSTRAINT "user_pkey" PRIMARY KEY ("id")
 );
@@ -141,6 +146,9 @@ CREATE TABLE "verification_token" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "organization_invite_code_key" ON "organization"("invite_code");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "desk_public_desk_id_key" ON "desk"("public_desk_id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "account_provider_provider_account_id_key" ON "account"("provider", "provider_account_id");
@@ -173,6 +181,9 @@ ALTER TABLE "meeting_room" ADD CONSTRAINT "meeting_room_floor_id_fkey" FOREIGN K
 ALTER TABLE "office_room" ADD CONSTRAINT "office_room_floor_id_fkey" FOREIGN KEY ("floor_id") REFERENCES "floor"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "desk" ADD CONSTRAINT "desk_floor_id_fkey" FOREIGN KEY ("floor_id") REFERENCES "floor"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "account" ADD CONSTRAINT "account_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -180,3 +191,6 @@ ALTER TABLE "session" ADD CONSTRAINT "session_user_id_fkey" FOREIGN KEY ("user_i
 
 -- AddForeignKey
 ALTER TABLE "user" ADD CONSTRAINT "user_organization_id_fkey" FOREIGN KEY ("organization_id") REFERENCES "organization"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "user" ADD CONSTRAINT "user_current_office_id_fkey" FOREIGN KEY ("current_office_id") REFERENCES "office"("id") ON DELETE SET NULL ON UPDATE CASCADE;
