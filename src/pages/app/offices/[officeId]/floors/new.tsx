@@ -9,37 +9,20 @@ import {
   Icon,
   IconButton,
   VStack,
-  useToast,
 } from "@chakra-ui/react";
-import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { FiX } from "react-icons/fi";
 
-import { FormOfficeAdd } from "../../../../components/FormOfficeAdd";
-import { appAuthRedirect } from "../../../../server/nextMiddleware/appAuthRedirect";
-import { useOfficeFormStore } from "../../../../stores/officeFormStore";
-import { trpc } from "../../../../utils/trpc";
+import { FormFloorAdd } from "../../../../../components/FormFloorAdd";
 
-const OfficesNewPage = () => {
-  const addOfficeMutation = trpc.office.add.useMutation();
-  const name = useOfficeFormStore((state) => state.name);
-  const description = useOfficeFormStore((state) => state.description);
-  const toast = useToast();
+const FloorAddPage = () => {
   const router = useRouter();
 
-  const onSaveClick = async () => {
-    await addOfficeMutation.mutateAsync({
-      name,
-      description,
-    });
-    toast({
-      title: "Office added.",
-      description: "We've added the office.",
-      status: "success",
-      duration: 5000,
-      isClosable: true,
-    });
-    router.push("/app/offices");
+  const officeId =
+    typeof router.query.officeId === "string" ? router.query.officeId : null;
+
+  const onSaveClick = () => {
+    console.log("save click");
   };
 
   return (
@@ -53,7 +36,7 @@ const OfficesNewPage = () => {
               aria-label={"close"}
               icon={<Icon as={FiX} />}
               as={Link}
-              href={"/app/offices"}
+              href={`/app/offices/${officeId}`}
             />
             <Box height={"100%"} paddingY={"2"}>
               <Divider orientation="vertical" />
@@ -64,7 +47,7 @@ const OfficesNewPage = () => {
               fontWeight={500}
               fontSize={"md"}
             >
-              Add a office
+              Add a floor
             </Heading>
           </HStack>
           <HStack>
@@ -84,14 +67,14 @@ const OfficesNewPage = () => {
         </Box>
       </Box>
       <Divider />
-      <Container maxW={"container.sm"} paddingTop={4}>
+      <Container maxW={"container.xl"} paddingTop={4}>
         <VStack width={"100%"} alignItems={"flex-start"} spacing={4}>
           <Heading as={"h1"} fontSize={"lg"} color={"gray.700"}>
-            Office Information
+            Floor Information
           </Heading>
 
           <VStack width={"100%"} alignItems={"flex-start"} spacing={3}>
-            <FormOfficeAdd />
+            <FormFloorAdd />
           </VStack>
         </VStack>
       </Container>
@@ -99,17 +82,4 @@ const OfficesNewPage = () => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { redirect, session } = await appAuthRedirect({
-    context,
-  });
-  if (redirect) return { redirect };
-
-  return {
-    props: {
-      session,
-    },
-  };
-};
-
-export default OfficesNewPage;
+export default FloorAddPage;

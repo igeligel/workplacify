@@ -53,6 +53,7 @@ model Office {
   organization   Organization? @relation(fields: [organizationId], references: [id])
   organizationId String?       @map("organization_id")
   floors         Floor[]
+  User           User[]
 
   @@map("office")
 }
@@ -69,6 +70,7 @@ model Floor {
   officeRoom  OfficeRoom[]
   office      Office?       @relation(fields: [officeId], references: [id])
   officeId    String?       @map("office_id")
+  desks       Desk[]
 
   @@map("floor")
 }
@@ -103,6 +105,8 @@ model Desk {
   description String?
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
+  Floor       Floor?   @relation(fields: [floorId], references: [id])
+  floorId     String?  @map("floor_id")
 
   @@map("desk")
 }
@@ -154,6 +158,8 @@ model User {
   organizationId      String?               @map("organization_id")
   userRole            UserRole              @default(MEMBER) @map("user_role")
   onboardingSelection OnboardingSelection[]
+  currentOffice       Office?               @relation(fields: [currentOfficeId], references: [id])
+  currentOfficeId     String?               @map("current_office_id")
 
   @@map("user")
 }
