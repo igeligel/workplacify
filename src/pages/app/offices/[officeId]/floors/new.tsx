@@ -14,15 +14,29 @@ import { useRouter } from "next/router";
 import { FiX } from "react-icons/fi";
 
 import { FormFloorAdd } from "../../../../../components/FormFloorAdd";
+import { useOfficeFloorFormStore } from "../../../../../stores/officeFloorFormStore";
+import { trpc } from "../../../../../utils/trpc";
 
 const FloorAddPage = () => {
   const router = useRouter();
+  const name = useOfficeFloorFormStore((state) => state.name);
+  const description = useOfficeFloorFormStore((state) => state.description);
+  const desks = useOfficeFloorFormStore((state) => state.desks);
+  const imageUrl = useOfficeFloorFormStore((state) => state.imageUrl);
+  const createFloorMutation = trpc.floor.createFloor.useMutation();
 
   const officeId =
     typeof router.query.officeId === "string" ? router.query.officeId : null;
 
-  const onSaveClick = () => {
-    console.log("save click");
+  const onSaveClick = async () => {
+    if (!officeId) return;
+    await createFloorMutation.mutateAsync({
+      officeId: officeId,
+      name: name,
+      description,
+      imageUrl,
+      desks: desks,
+    });
   };
 
   return (

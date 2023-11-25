@@ -9,10 +9,12 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
+import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { FiChevronLeft } from "react-icons/fi";
 
 import { DisplayFloors } from "../../../../components/DisplayFloors";
+import { appAuthRedirect } from "../../../../server/nextMiddleware/appAuthRedirect";
 import { trpc } from "../../../../utils/trpc";
 
 const OfficePage = () => {
@@ -84,6 +86,19 @@ const OfficePage = () => {
       </VStack>
     </Container>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { redirect, session } = await appAuthRedirect({
+    context,
+  });
+  if (redirect) return { redirect };
+
+  return {
+    props: {
+      session,
+    },
+  };
 };
 
 export default OfficePage;

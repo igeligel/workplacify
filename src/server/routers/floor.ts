@@ -10,11 +10,23 @@ export const floorRouter = router({
     .input(
       z.object({
         officeId: z.string(),
+        name: z.string(),
+        description: z.string(),
+        desks: z.array(
+          z.object({
+            name: z.string().optional(),
+            publicDeskId: z.string(),
+            description: z.string().optional(),
+            x: z.number(),
+            y: z.number(),
+          }),
+        ),
+        imageUrl: z.string().optional(),
       }),
     )
     .mutation(async (resolverProps) => {
       const { ctx } = resolverProps;
-      const { officeId } = resolverProps.input;
+      const { officeId, name, description, desks } = resolverProps.input;
 
       const user = await getUserFromSession(ctx.session, {
         includeOrganization: true,
@@ -28,8 +40,8 @@ export const floorRouter = router({
 
       const floor = await prisma.floor.create({
         data: {
-          name: "Floor 1",
-          description: "First Floor",
+          name: name,
+          description: description,
           office: {
             connect: {
               id: officeId,
@@ -37,17 +49,18 @@ export const floorRouter = router({
           },
         },
       });
+      const mappedDesks = desks.map((desk) => {
+        return {
+          name: desk.name,
+          publicDeskId: desk.publicDeskId,
+          description: desk.description,
+          x: desk.x,
+          y: desk.y,
+          floorId: floor.id,
+        };
+      });
       await prisma.desk.createMany({
-        data: [
-          {
-            name: "Desk 1",
-            publicDeskId: "desk-1",
-            description: "First Desk",
-            x: 0.0,
-            y: 0.0,
-            floorId: floor.id,
-          },
-        ],
+        data: mappedDesks,
       });
       const createdFloor = await prisma.floor.findFirst({
         where: {

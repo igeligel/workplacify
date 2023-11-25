@@ -37,6 +37,7 @@ import { trpc } from "../../../utils/trpc";
 const SetupPage = () => {
   const router = useRouter();
   const toast = useToast();
+  const [isCreated, setIsCreated] = useState<boolean>(false);
   const [initialLoadComplete, isInitialLoadComplete] = useState<boolean>(false);
   const [inviteCode, setInviteCode] = useState<string>("");
   const onboardingSelection = trpc.onboardingSelection.get.useQuery();
@@ -75,7 +76,7 @@ const SetupPage = () => {
   });
 
   useEffect(() => {
-    const updateOnboardingSelection = async () => {
+    const createOnboardingSelectionAction = async () => {
       // Create onboarding selection with default state
       await createOnboardingSelectionMutation.mutateAsync({
         submitted: false,
@@ -89,12 +90,16 @@ const SetupPage = () => {
     if (!onboardingSelection.isFetched) return;
     if (createOnboardingSelectionMutation.isLoading) return;
     if (onboardingSelection.data) return;
-    updateOnboardingSelection();
+    if (isCreated) return;
+    setIsCreated(true);
+    createOnboardingSelectionAction();
   }, [
     createOnboardingSelectionMutation,
     onboardingSelection.data,
     onboardingSelection.isFetched,
     onboardingSelection,
+    isCreated,
+    setIsCreated,
   ]);
 
   type UpdateOnboardingSelectionProps = {

@@ -1,24 +1,41 @@
 import {
+  Alert,
+  AlertIcon,
   Box,
   Button,
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
   FormControl,
   FormHelperText,
   FormLabel,
+  HStack,
+  Icon,
+  IconButton,
   Image,
   Input,
+  Switch,
   Text,
   Textarea,
   useToast,
 } from "@chakra-ui/react";
 import { justify } from "@cloudinary/url-gen/qualifiers/textAlignment";
 import { ChangeEventHandler, useRef, useState } from "react";
+import { FiMinus, FiPlus, FiX } from "react-icons/fi";
 import {
   TransformComponent,
   TransformWrapper,
   useTransformEffect,
 } from "react-zoom-pan-pinch";
 
-import { useOfficeFloorFormStore } from "../stores/officeFloorFormStore";
+import {
+  DeskFormState,
+  useOfficeFloorFormStore,
+} from "../stores/officeFloorFormStore";
 
 const getExtension = (filename: string) => {
   const parts = filename.split(".");
@@ -48,14 +65,6 @@ const validateSize = (file: File | undefined) => {
   }
 };
 
-type Desk = {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-  id: string;
-};
-
 // const mockedImageScale = 1.2459935897435896;
 // const mockedDesks: Desk[] = [
 //   {
@@ -66,18 +75,21 @@ type Desk = {
 //     id: "1",
 //   },
 // ];
-const mockedDesks: Desk[] = [];
+// const mockedDesks: Desk[] = [];
 
 export const FormFloorAdd = () => {
   const [isAddMarkerMode, setIsAddMarkerMode] = useState<boolean>(false);
   const imageRef = useRef<HTMLImageElement>(null);
-  const [desks, setDesks] = useState<Desk[]>(mockedDesks);
+  // const [desks, setDesks] = useState<Desk[]>(mockedDesks);
+  const desks = useOfficeFloorFormStore((state) => state.desks);
+  const setDesks = useOfficeFloorFormStore((state) => state.setDesks);
   const toast = useToast();
   const [image, setImage] = useState<null | File>(null);
-  const [positionX, setPositionX] = useState<number>(0);
-  const [positionY, setPositionY] = useState<number>(0);
   const [scale, setScale] = useState<number>(1);
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [currentSelectedDesk, setCurrentSelectedDesk] =
+    useState<null | DeskFormState>(null);
+  const imageUrl = useOfficeFloorFormStore((state) => state.imageUrl);
+  const setImageUrl = useOfficeFloorFormStore((state) => state.setImageUrl);
   const name = useOfficeFloorFormStore((state) => state.name);
   const setName = useOfficeFloorFormStore((state) => state.setName);
   const description = useOfficeFloorFormStore((state) => state.description);
@@ -95,8 +107,6 @@ export const FormFloorAdd = () => {
         method: "POST",
         body: formData,
       });
-
-      console.log({ res });
     } catch (error) {
       toast({
         title: "Error uploading floor plan",
@@ -120,16 +130,6 @@ export const FormFloorAdd = () => {
     }
 
     setImageUrl(uploadUrl);
-
-    // const options = {
-    //   cloudName: "dpfc44mfl",
-    //   apiKey: "645792244653174",
-    //   uploadSignatureTimestamp: cloudinarySignatureQuery.data.timestamp,
-    //   uploadSignature: cloudinarySignatureQuery.data.signature,
-    //   cropping: false,
-    //   folder: "signed_upload_floor_plans_uw",
-    // };
-    // options
   };
 
   const handleImageChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -164,9 +164,6 @@ export const FormFloorAdd = () => {
     });
   };
 
-  const mockImageUrl =
-    "http://res.cloudinary.com/dpfc44mfl/image/upload/v1700824216/floor_plans/yrroo17bqj9lgcmqgp7u.png";
-
   return (
     <>
       <FormControl>
@@ -190,20 +187,15 @@ export const FormFloorAdd = () => {
           Helpful tip: Any special instructions for this floor?
         </FormHelperText>
       </FormControl>
-      <Box>
-        <input type="file" onChange={handleImageChange} className="block" />
-      </Box>
-      <Box>
-        {isAddMarkerMode ? <Text>On</Text> : <Text>off</Text>}
-        <Button
-          onClick={() => {
-            setIsAddMarkerMode(!isAddMarkerMode);
-          }}
-        >
-          Toggle marker mode
-        </Button>
-      </Box>
-      {mockImageUrl && (
+      {!imageUrl && (
+        <>
+          <Box>
+            <input type="file" onChange={handleImageChange} className="block" />
+          </Box>
+          <Button onClick={onUploadTrigger}>Upload floor plan</Button>
+        </>
+      )}
+      {imageUrl && (
         <Box>
           <TransformWrapper
             initialScale={1}
@@ -211,21 +203,82 @@ export const FormFloorAdd = () => {
             initialPositionY={0}
             disabled={isAddMarkerMode}
             onTransformed={(props) => {
-              setPositionX(props.state.positionX);
-              setPositionX(props.state.positionY);
               setScale(props.state.scale);
             }}
           >
             {(props) => {
-              const { zoomIn, zoomOut, resetTransform, ...rest } = props;
+              const { zoomIn, zoomOut, resetTransform } = props;
 
               return (
                 <>
-                  <div className="tools">
-                    <button onClick={() => zoomIn()}>+</button>
-                    <button onClick={() => zoomOut()}>-</button>
-                    <button onClick={() => resetTransform()}>x</button>
-                  </div>
+                  <Box display={"flex"} flexDirection={"column"}>
+                    {isAddMarkerMode && (
+                      <Alert status="info" marginBottom={4}>
+                        <AlertIcon />
+                        You are now in marker mode. You can&apos;t zoom or pan
+                        the image. Click on the image to add a desk.
+                      </Alert>
+                    )}
+                    <Box display={"flex"} justifyContent={"space-between"}>
+                      <Box>
+                        <FormControl
+                          display="flex"
+                          alignItems="flex-start"
+                          flexDirection={"column"}
+                        >
+                          <FormLabel htmlFor="zoom-controls" mb="0">
+                            Zoom controls
+                          </FormLabel>
+                          <HStack id={"zoom-controls"} paddingTop={1}>
+                            <IconButton
+                              colorScheme="blue"
+                              aria-label="zoom in"
+                              icon={<Icon as={FiPlus} />}
+                              onClick={() => {
+                                setIsAddMarkerMode(false);
+                                zoomIn();
+                              }}
+                            />
+                            <IconButton
+                              colorScheme="blue"
+                              aria-label="zoom out"
+                              icon={<Icon as={FiMinus} />}
+                              onClick={() => {
+                                setIsAddMarkerMode(false);
+                                zoomOut();
+                              }}
+                            />
+                            <IconButton
+                              colorScheme="blue"
+                              aria-label="reset zoom"
+                              icon={<Icon as={FiX} />}
+                              onClick={() => {
+                                setIsAddMarkerMode(false);
+                                resetTransform();
+                              }}
+                            />
+                          </HStack>
+                        </FormControl>
+                      </Box>
+                      <Box>
+                        <Box>
+                          <FormControl display="flex" alignItems="center">
+                            <FormLabel htmlFor="toggle-marker-mode" mb="0">
+                              Marker mode enabled?
+                            </FormLabel>
+                            <Switch
+                              id="toggle-marker-mode"
+                              isChecked={isAddMarkerMode}
+                              onChange={(e) => {
+                                setIsAddMarkerMode(e.target.checked);
+                              }}
+                            />
+                          </FormControl>
+                        </Box>
+                      </Box>
+                    </Box>
+                  </Box>
+
                   <TransformComponent>
                     <Box
                       position={"relative"}
@@ -235,20 +288,13 @@ export const FormFloorAdd = () => {
                         const rect = target.getBoundingClientRect();
                         const x = e.clientX - rect.left; //x position within the element.
                         const y = e.clientY - rect.top; //y position within the element.
-                        console.log("Left? : " + x + " ; Top? : " + y + ".");
-                        console.log(
-                          "scaled x? : " +
-                            x / scale +
-                            "; Scaled y : " +
-                            y / scale,
-                        );
                         if (!imageRef?.current) return;
 
                         const imageScale =
                           imageRef.current.naturalWidth /
                           imageRef.current.width;
                         const maximumNumber = desks
-                          .map((desk) => Number(desk.id))
+                          .map((desk) => Number(desk.publicDeskId))
                           .sort((a, b) => {
                             return b - a;
                           })[0];
@@ -259,9 +305,7 @@ export const FormFloorAdd = () => {
                           {
                             x: (x * imageScale) / scale - offsetOfMarker,
                             y: (y * imageScale) / scale - offsetOfMarker,
-                            width: 20,
-                            height: 20,
-                            id: newId.toString(),
+                            publicDeskId: newId.toString(),
                           },
                         ]);
                       }}
@@ -274,27 +318,53 @@ export const FormFloorAdd = () => {
                             imageRef.current.width;
                           return (
                             <Box
-                              key={desk.id}
+                              key={desk.publicDeskId}
                               position={"absolute"}
                               borderRadius={"100%"}
                               display={"flex"}
+                              borderWidth={
+                                currentSelectedDesk?.publicDeskId ===
+                                desk.publicDeskId
+                                  ? 2
+                                  : 0
+                              }
+                              borderColor={
+                                currentSelectedDesk?.publicDeskId ===
+                                desk.publicDeskId
+                                  ? "blue.500"
+                                  : "transparent"
+                              }
                               justifyContent={"center"}
                               alignItems={"center"}
                               transform={`translate(${desk.x / scale}px, ${
                                 desk.y / scale
                               }px)`}
-                              height={`${desk.height}px`}
-                              width={`${desk.width}px`}
+                              height={`20px`}
+                              width={`20px`}
                               backgroundColor={"red.500"}
                               onClick={(e) => {
                                 e.stopPropagation();
+                                if (!isAddMarkerMode) return;
+                                const deskClickedOn = desks.find(
+                                  (e) => e.publicDeskId === desk.publicDeskId,
+                                );
+                                if (!deskClickedOn) return;
+                                if (
+                                  deskClickedOn.publicDeskId ===
+                                  currentSelectedDesk?.publicDeskId
+                                ) {
+                                  setCurrentSelectedDesk(null);
+                                  return;
+                                }
+
+                                setCurrentSelectedDesk(deskClickedOn);
                               }}
                             >
-                              {desk.id}
+                              {desk.publicDeskId}
                             </Box>
                           );
                         })}
-                      <img ref={imageRef} src={mockImageUrl} alt="test" />
+                      <img ref={imageRef} src={imageUrl} alt="test" />
                     </Box>
                   </TransformComponent>
                 </>
@@ -303,8 +373,46 @@ export const FormFloorAdd = () => {
           </TransformWrapper>
         </Box>
       )}
-      {/* {imageUrl && <Image src={} />} */}
-      <Button onClick={onUploadTrigger}>Upload floor plan</Button>
+      <Drawer
+        isOpen={!!currentSelectedDesk}
+        placement="right"
+        onClose={() => {
+          setCurrentSelectedDesk(null);
+        }}
+        // finalFocusRef={btnRef}
+      >
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton
+            onClick={() => {
+              setCurrentSelectedDesk(null);
+            }}
+          />
+          <DrawerHeader>Edit desk</DrawerHeader>
+
+          <DrawerBody>
+            Current desk: #{currentSelectedDesk?.publicDeskId}
+          </DrawerBody>
+
+          <DrawerFooter>
+            <Button
+              colorScheme="red"
+              mr={3}
+              onClick={() => {
+                if (!currentSelectedDesk) return;
+                const filteredDesks = desks.filter(
+                  (desk) =>
+                    desk.publicDeskId !== currentSelectedDesk.publicDeskId,
+                );
+                setDesks(filteredDesks);
+                setCurrentSelectedDesk(null);
+              }}
+            >
+              Remove
+            </Button>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
     </>
   );
 };

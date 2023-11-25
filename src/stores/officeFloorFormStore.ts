@@ -1,9 +1,10 @@
 import { create } from "zustand";
 
-interface DeskFormState {
-  id: string;
-  name: string;
-  description: string;
+export interface DeskFormState {
+  id?: string;
+  name?: string;
+  publicDeskId: string;
+  description?: string;
   x: number;
   y: number;
 }
@@ -16,6 +17,8 @@ interface OfficeFloorFormState {
   setDescription: (newDescription: string) => void;
   setDesks: (newDesks: DeskFormState[]) => void;
   reset: () => void;
+  imageUrl?: string;
+  setImageUrl: (newImageUrl: string) => void;
 }
 
 export const useOfficeFloorFormStore = create<OfficeFloorFormState>((set) => ({
@@ -35,4 +38,9 @@ export const useOfficeFloorFormStore = create<OfficeFloorFormState>((set) => ({
       return { ...state, desks: newDesks };
     }),
   reset: () => set({ name: "", description: "" }),
+  imageUrl: undefined,
+  setImageUrl: (newImageUrl) =>
+    set((state) => {
+      return { ...state, imageUrl: newImageUrl };
+    }),
 }));

@@ -102,7 +102,7 @@ model OfficeRoom {
 model Desk {
   id           String   @id @default(cuid())
   publicDeskId String   @unique @map("public_desk_id")
-  name         String
+  name         String?
   description  String?
   createdAt    DateTime @default(now()) @map("created_at")
   updatedAt    DateTime @updatedAt @map("updated_at")
