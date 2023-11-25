@@ -37,6 +37,7 @@ const FloorAddPage = () => {
       imageUrl,
       desks: desks,
     });
+    router.push(`/app/offices/${officeId}`);
   };
 
   return (
@@ -75,7 +76,7 @@ const FloorAddPage = () => {
               }}
               onClick={onSaveClick}
             >
-              Save office
+              Save floor
             </Button>
           </HStack>
         </Box>

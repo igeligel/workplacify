@@ -1,4 +1,3 @@
-import { Prisma } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
@@ -30,7 +29,11 @@ export const officeRouter = router({
           organizationId: user.organizationId,
         },
         include: {
-          floors: true,
+          floors: {
+            include: {
+              desks: true,
+            },
+          },
         },
       });
       return office;

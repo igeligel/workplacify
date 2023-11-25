@@ -148,9 +148,6 @@ CREATE TABLE "verification_token" (
 CREATE UNIQUE INDEX "organization_invite_code_key" ON "organization"("invite_code");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "desk_public_desk_id_key" ON "desk"("public_desk_id");
-
--- CreateIndex
 CREATE UNIQUE INDEX "account_provider_provider_account_id_key" ON "account"("provider", "provider_account_id");
 
 -- CreateIndex

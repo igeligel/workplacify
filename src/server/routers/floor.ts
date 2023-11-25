@@ -26,7 +26,8 @@ export const floorRouter = router({
     )
     .mutation(async (resolverProps) => {
       const { ctx } = resolverProps;
-      const { officeId, name, description, desks } = resolverProps.input;
+      const { officeId, name, description, desks, imageUrl } =
+        resolverProps.input;
 
       const user = await getUserFromSession(ctx.session, {
         includeOrganization: true,
@@ -42,6 +43,7 @@ export const floorRouter = router({
         data: {
           name: name,
           description: description,
+          floorPlan: imageUrl,
           office: {
             connect: {
               id: officeId,
@@ -71,6 +73,39 @@ export const floorRouter = router({
         },
       });
       return createdFloor;
+    }),
+  delete: publicProcedure
+    .input(
+      z.object({
+        id: z.string(),
+      }),
+    )
+    .mutation(async (resolverProps) => {
+      const { ctx } = resolverProps;
+      const { id } = resolverProps.input;
+
+      const user = await getUserFromSession(ctx.session, {
+        includeOrganization: true,
+      });
+      if (!user.organization) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Something went wrong, the administrator has been notified.",
+        });
+      }
+      // Remove desks first.
+      await prisma.desk.deleteMany({
+        where: {
+          floorId: id,
+        },
+      });
+
+      const floor = await prisma.floor.delete({
+        where: {
+          id: id,
+        },
+      });
+      return floor;
     }),
   getFloor: publicProcedure.query(async (resolverProps) => {
     const { ctx } = resolverProps;
