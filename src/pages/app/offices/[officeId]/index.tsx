@@ -1,5 +1,6 @@
 import { Link } from "@chakra-ui/next-js";
 import {
+  Box,
   Button,
   Container,
   Divider,
@@ -11,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
-import { FiChevronLeft } from "react-icons/fi";
+import { FiChevronLeft, FiPlus } from "react-icons/fi";
 
 import { DisplayFloors } from "../../../../components/DisplayFloors";
 import { appAuthRedirect } from "../../../../server/nextMiddleware/appAuthRedirect";
@@ -42,7 +43,9 @@ const OfficePage = () => {
           as={Link}
           backgroundColor={"orange.400"}
           textColor={"white"}
+          textDecoration={"none"}
           _hover={{
+            textDecoration: "none",
             backgroundColor: "orange.500",
           }}
           href={"/app/offices/new"}
@@ -69,13 +72,34 @@ const OfficePage = () => {
       >
         Offices
       </Button>
-      <VStack paddingTop={4} alignItems={"flex-start"}>
-        <Heading as={"h1"} fontSize={"lg"} color={"gray.700"}>
-          {getOfficeQuery.data.name}
-        </Heading>
-        <Text>{getOfficeQuery.data.description}</Text>
-      </VStack>
-      <VStack divider={<Divider />} alignItems={"flex-start"}>
+      <Box display={"flex"} justifyContent={"space-between"}>
+        <VStack paddingTop={4} alignItems={"flex-start"}>
+          <Heading as={"h1"} fontSize={"lg"} color={"gray.700"}>
+            Name: {getOfficeQuery.data.name}
+          </Heading>
+          <Text>Description: {getOfficeQuery.data.description}</Text>
+        </VStack>
+        <Box>
+          <Button
+            as={Link}
+            href={`/app/offices/${getOfficeQuery.data.id}/floors/new`}
+            colorScheme="orange"
+            leftIcon={<Icon as={FiPlus} />}
+            backgroundColor={"orange.400"}
+            textColor={"white"}
+            textDecoration={"none"}
+            _hover={{ backgroundColor: "orange.500", textDecoration: "none" }}
+          >
+            Add floor
+          </Button>
+        </Box>
+      </Box>
+      <VStack
+        marginTop={4}
+        divider={<Divider />}
+        alignItems={"flex-start"}
+        spacing={4}
+      >
         <Heading as={"h2"} fontSize={"md"} color={"gray.700"}>
           Floors
         </Heading>

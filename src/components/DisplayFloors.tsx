@@ -69,9 +69,9 @@ export const DisplayFloors = (props: DisplayFloorsProps) => {
   );
 
   return (
-    <div>
-      <TableContainer>
-        <Table variant="simple">
+    <Box width={"100%"}>
+      <TableContainer width={"100%"}>
+        <Table variant="simple" width={"100%"}>
           <Thead>
             <Tr>
               <Th>Name</Th>
@@ -157,6 +157,6 @@ export const DisplayFloors = (props: DisplayFloorsProps) => {
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
-    </div>
+    </Box>
   );
 };

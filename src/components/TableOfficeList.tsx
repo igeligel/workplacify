@@ -37,8 +37,10 @@ export const TableOfficeList = () => {
           colorScheme="orange"
           backgroundColor={"orange.400"}
           textColor={"white"}
+          textDecoration={"none"}
           _hover={{
             backgroundColor: "orange.500",
+            textDecoration: "none",
           }}
         >
           Add office
