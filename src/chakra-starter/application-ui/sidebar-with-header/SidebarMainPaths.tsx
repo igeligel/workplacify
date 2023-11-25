@@ -31,10 +31,10 @@ export const SidebarMainPaths = () => {
         isActive={router.pathname === "/app/analytics"}
       /> */}
       <MenuItem
-        title={"Check In"}
+        title={"Schedule"}
         icon={GrSchedules}
-        href={"/app/check-in"}
-        isActive={router.pathname === "/app/check-in"}
+        href={"/app/schedule"}
+        isActive={router.pathname === "/app/schedule"}
       />
     </VStack>
   );

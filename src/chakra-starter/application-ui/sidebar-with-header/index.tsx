@@ -1,7 +1,9 @@
 import { Box, IconButton, useBreakpointValue } from "@chakra-ui/react";
+import { UserRole } from "@prisma/client";
 import { useState } from "react";
 import { FiChevronRight } from "react-icons/fi";
 
+import { trpc } from "../../../utils/trpc";
 import { Sidebar } from "./Sidebar";
 
 type Variant = {
@@ -20,6 +22,9 @@ export const SidebarBrandWithHeader = (props: SideNavigationProps) => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const variants = useBreakpointValue({ base: smVariant, md: mdVariant });
 
+  const userQuery = trpc.user.get.useQuery();
+  const isUserAdmin = userQuery.data?.userRole === UserRole.ADMIN;
+
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
   };
@@ -32,7 +37,7 @@ export const SidebarBrandWithHeader = (props: SideNavigationProps) => {
         variant={variants.navigation}
         isOpen={isSidebarOpen}
         onClose={toggleSidebar}
-        isUserAdmin={true}
+        isUserAdmin={isUserAdmin}
         isUserSetup={true}
       />
       <Box marginLeft={(!variants.navigationButton && 300) || 0} flex={1}>

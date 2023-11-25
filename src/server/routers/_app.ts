@@ -8,6 +8,7 @@ import { officeRouter } from "./office";
 import { onboardingSelectionRouter } from "./onboardingSelection";
 import { organizationRouter } from "./organization";
 import { postRouter } from "./post";
+import { userRouter } from "./user";
 
 export const appRouter = router({
   healthcheck: publicProcedure.query(() => "yay!"),
@@ -16,6 +17,7 @@ export const appRouter = router({
   cloudinary: cloudinaryRouter,
   floor: floorRouter,
   organization: organizationRouter,
+  user: userRouter,
   post: postRouter,
 });
 

@@ -6,6 +6,27 @@ import { getUserFromSession } from "../queries/getUserFromSession";
 import { publicProcedure, router } from "../trpc";
 
 export const officeRouter = router({
+  getById: publicProcedure
+    .input(z.object({ id: z.string() }))
+    .query(async (resolverProps) => {
+      const { ctx, input } = resolverProps;
+      const user = await getUserFromSession(ctx.session, {
+        includeOrganization: true,
+      });
+      if (user.userRole !== "ADMIN") {
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: "You are not allowed to access this resource",
+        });
+      }
+      const office = await prisma.office.findFirst({
+        where: {
+          id: input.id,
+          organizationId: user.organizationId,
+        },
+      });
+      return office;
+    }),
   get: publicProcedure
     .input(
       z.object({
