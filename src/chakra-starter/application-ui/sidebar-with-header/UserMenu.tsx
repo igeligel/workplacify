@@ -44,7 +44,7 @@ export const UserMenu = ({ isUserAdmin }: Props) => {
       <VStack spacing={"0.5"} marginTop={"2"}>
         {isUserAdmin ? (
           <Link
-            href={"#"}
+            href={"/app/organization-settings"}
             width={"100%"}
             textDecoration={"none"}
             _hover={{ textDecoration: "none" }}

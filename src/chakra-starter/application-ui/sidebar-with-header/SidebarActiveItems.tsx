@@ -1,14 +1,21 @@
 import { Link } from "@chakra-ui/next-js";
 import { Box, Heading, Text, VStack } from "@chakra-ui/react";
-import { FiStar } from "react-icons/fi";
 
+// import { FiStar } from "react-icons/fi";
 import { GroupedMenuItem } from "./GroupedMenuItem";
 
+type SubItem = {
+  id: number;
+  title: string;
+  icon: any;
+};
+
 export const SidebarActiveItems = () => {
-  const currentItems = [
-    { id: 1, title: "SubItem 1", icon: FiStar },
-    { id: 2, title: "SubItem 2", icon: FiStar },
-  ];
+  // const currentItems = [
+  //   { id: 1, title: "SubItem 1", icon: FiStar },
+  //   { id: 2, title: "SubItem 2", icon: FiStar },
+  // ];
+  const currentItems: SubItem[] = [];
   const noCurrentItems = currentItems.length === 0;
 
   return (

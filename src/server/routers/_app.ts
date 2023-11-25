@@ -6,6 +6,7 @@ import { cloudinaryRouter } from "./cloudinary";
 import { floorRouter } from "./floor";
 import { officeRouter } from "./office";
 import { onboardingSelectionRouter } from "./onboardingSelection";
+import { organizationRouter } from "./organization";
 import { postRouter } from "./post";
 
 export const appRouter = router({
@@ -14,6 +15,7 @@ export const appRouter = router({
   onboardingSelection: onboardingSelectionRouter,
   cloudinary: cloudinaryRouter,
   floor: floorRouter,
+  organization: organizationRouter,
   post: postRouter,
 });
 
