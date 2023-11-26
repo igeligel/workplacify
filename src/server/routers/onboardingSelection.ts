@@ -192,10 +192,7 @@ export const onboardingSelectionRouter = router({
         },
       });
       if (onboardingSelection) {
-        throw new TRPCError({
-          code: "CONFLICT",
-          message: "Onboarding selection already existing",
-        });
+        return null;
       }
       const createdOnboardingSelection =
         await prisma.onboardingSelection.create({

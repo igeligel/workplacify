@@ -8,6 +8,7 @@ import { officeRouter } from "./office";
 import { onboardingSelectionRouter } from "./onboardingSelection";
 import { organizationRouter } from "./organization";
 import { postRouter } from "./post";
+import { scheduleRouter } from "./schedule";
 import { userRouter } from "./user";
 
 export const appRouter = router({
@@ -18,6 +19,7 @@ export const appRouter = router({
   floor: floorRouter,
   organization: organizationRouter,
   user: userRouter,
+  schedule: scheduleRouter,
   post: postRouter,
 });
 
