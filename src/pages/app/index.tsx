@@ -11,10 +11,12 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
+import { GetServerSideProps } from "next";
 import { MdOutlineFeedback, MdOutlineTry } from "react-icons/md";
 
 import { GetStartedModuleInviteEmployees } from "../../components/GetStartedModule/GetStartedModuleInviteEmployees";
 import { GetStartedModuleOfficeCreate } from "../../components/GetStartedModule/GetStartedModuleOfficeCreate";
+import { appAuthRedirect } from "../../server/nextMiddleware/appAuthRedirect";
 
 const AppPage = () => {
   return (
@@ -85,6 +87,19 @@ const AppPage = () => {
       </Box>
     </Container>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { redirect, session } = await appAuthRedirect({
+    context,
+  });
+  if (redirect) return { redirect };
+
+  return {
+    props: {
+      session,
+    },
+  };
 };
 
 export default AppPage;

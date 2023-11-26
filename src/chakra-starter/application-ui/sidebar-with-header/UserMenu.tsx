@@ -7,6 +7,7 @@ import { FiBriefcase, FiSettings, FiUsers } from "react-icons/fi";
 import { trpc } from "../../../utils/trpc";
 import { MenuItem } from "./MenuItem";
 import { MenuItemPopover } from "./MenuItemPopover";
+import { UserMenuOfficeSelector } from "./UserMenuOfficeSelector";
 
 const AccountSubMenu = () => {
   const onLogoutClick = async () => {
@@ -40,13 +41,6 @@ type Props = {
 };
 
 export const UserMenu = ({ isUserAdmin }: Props) => {
-  const userQuery = trpc.user.get.useQuery();
-  const officeQuery = trpc.office.getById.useQuery(
-    { id: userQuery.data!.currentOfficeId! },
-    {
-      enabled: !!userQuery.data?.currentOfficeId,
-    },
-  );
   return (
     <Box width={"100%"}>
       <VStack spacing={"0.5"} marginTop={"2"}>
@@ -60,20 +54,8 @@ export const UserMenu = ({ isUserAdmin }: Props) => {
             <MenuItem title={"Organization Settings"} icon={FiUsers} />
           </Link>
         ) : null}
-        {(userQuery.isFetched || officeQuery.isFetched) &&
-        officeQuery.data?.name ? (
-          <MenuItemPopover
-            title={`Selected Office: ${officeQuery.data.name}`}
-            icon={FiSettings}
-            submenu={<AccountSubMenu />}
-          />
-        ) : (
-          <MenuItemPopover
-            title={`Select Office`}
-            icon={FiSettings}
-            submenu={<AccountSubMenu />}
-          />
-        )}
+
+        <UserMenuOfficeSelector />
 
         <MenuItemPopover
           title={"Account"}
