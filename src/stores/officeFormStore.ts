@@ -5,6 +5,8 @@ interface OfficeFormState {
   description: string;
   setName: (newName: string) => void;
   setDescription: (newDescription: string) => void;
+  timezone: string;
+  setTimezone: (newTimezone: string) => void;
   reset: () => void;
 }
 
@@ -18,6 +20,11 @@ export const useOfficeFormStore = create<OfficeFormState>((set) => ({
   setDescription: (newDescription) =>
     set((state) => {
       return { ...state, description: newDescription };
+    }),
+  timezone: "Etc/GMT",
+  setTimezone: (newTimezone) =>
+    set((state) => {
+      return { ...state, timezone: newTimezone };
     }),
   reset: () => set({ name: "", description: "" }),
 }));

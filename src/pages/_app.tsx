@@ -1,6 +1,7 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { SessionProvider } from "next-auth/react";
 import type { AppProps, AppType } from "next/app";
+import "react-day-picker/dist/style.css";
 
 import { SidebarBrandWithHeader } from "../chakra-starter/application-ui/sidebar-with-header";
 import { BaseLayout } from "../components/BaseLayout";

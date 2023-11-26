@@ -5,14 +5,17 @@ import {
   Input,
   Textarea,
 } from "@chakra-ui/react";
+import TimezoneSelect, { ITimezoneOption } from "react-timezone-select";
 
 import { useOfficeFormStore } from "../stores/officeFormStore";
 
 export const FormOfficeAdd = () => {
   const name = useOfficeFormStore((state) => state.name);
   const setName = useOfficeFormStore((state) => state.setName);
+  const timezone = useOfficeFormStore((state) => state.timezone);
   const description = useOfficeFormStore((state) => state.description);
   const setDescription = useOfficeFormStore((state) => state.setDescription);
+  const setTimezone = useOfficeFormStore((state) => state.setTimezone);
 
   return (
     <>
@@ -38,6 +41,15 @@ export const FormOfficeAdd = () => {
         <FormHelperText>
           Helpful tip: Add a link to your office instructions.
         </FormHelperText>
+      </FormControl>
+      <FormControl>
+        <FormLabel>Time zone</FormLabel>
+        <TimezoneSelect
+          value={timezone}
+          onChange={(timezone: ITimezoneOption) => {
+            setTimezone(timezone.value);
+          }}
+        ></TimezoneSelect>
       </FormControl>
     </>
   );

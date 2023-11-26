@@ -24,6 +24,7 @@ const OfficesNewPage = () => {
   const addOfficeMutation = trpc.office.add.useMutation();
   const name = useOfficeFormStore((state) => state.name);
   const description = useOfficeFormStore((state) => state.description);
+  const timezone = useOfficeFormStore((state) => state.timezone);
   const toast = useToast();
   const router = useRouter();
 
@@ -31,6 +32,7 @@ const OfficesNewPage = () => {
     await addOfficeMutation.mutateAsync({
       name,
       description,
+      timezone,
     });
     toast({
       title: "Office added.",

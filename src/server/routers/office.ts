@@ -82,6 +82,7 @@ export const officeRouter = router({
       z.object({
         name: z.string(),
         description: z.string().optional(),
+        timezone: z.string(),
       }),
     )
     .mutation(async (resolverProps) => {
@@ -100,6 +101,7 @@ export const officeRouter = router({
           name: input.name,
           description: input.description,
           organizationId: user.organizationId,
+          timezone: input.timezone,
         },
       });
       return office;

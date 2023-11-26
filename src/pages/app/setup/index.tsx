@@ -83,6 +83,7 @@ const SetupPage = () => {
         workplacifyPreferences: [],
         temporaryInviteCode: undefined,
       });
+      setIsCreated(true);
       onboardingSelection.refetch();
     };
 
@@ -91,7 +92,6 @@ const SetupPage = () => {
     if (createOnboardingSelectionMutation.isLoading) return;
     if (onboardingSelection.data) return;
     if (isCreated) return;
-    setIsCreated(true);
     createOnboardingSelectionAction();
   }, [
     createOnboardingSelectionMutation,
@@ -110,11 +110,13 @@ const SetupPage = () => {
   const updateOnboardingSelection = async (
     props: UpdateOnboardingSelectionProps,
   ) => {
-    await updateOnboardingSelectionMutation.mutateAsync({
-      submitted: props.submitted ?? false,
-      workplacifyPreferences: props.workplacifyPreferences,
-      temporaryInviteCode: props.inviteCode,
-    });
+    try {
+      await updateOnboardingSelectionMutation.mutateAsync({
+        submitted: props.submitted ?? false,
+        workplacifyPreferences: props.workplacifyPreferences,
+        temporaryInviteCode: props.inviteCode,
+      });
+    } catch (error) {}
   };
 
   const onDeskBookingClick = () => {

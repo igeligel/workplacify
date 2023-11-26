@@ -36,6 +36,7 @@ CREATE TABLE "office" (
     "description" TEXT,
     "longitude" DOUBLE PRECISION,
     "latitude" DOUBLE PRECISION,
+    "timezone" TEXT NOT NULL DEFAULT 'Etc/GMT',
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
     "organization_id" TEXT,
@@ -78,6 +79,22 @@ CREATE TABLE "office_room" (
     "floor_id" TEXT NOT NULL,
 
     CONSTRAINT "office_room_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "desk_schedule" (
+    "id" TEXT NOT NULL,
+    "desk_id" TEXT NOT NULL,
+    "date" TIMESTAMP(3),
+    "timezone" TEXT NOT NULL DEFAULT 'Etc/GMT',
+    "whole_day" BOOLEAN NOT NULL DEFAULT false,
+    "start_time" TIMESTAMP(3),
+    "end_time" TIMESTAMP(3),
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL,
+    "user_id" TEXT,
+
+    CONSTRAINT "desk_schedule_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -176,6 +193,12 @@ ALTER TABLE "meeting_room" ADD CONSTRAINT "meeting_room_floor_id_fkey" FOREIGN K
 
 -- AddForeignKey
 ALTER TABLE "office_room" ADD CONSTRAINT "office_room_floor_id_fkey" FOREIGN KEY ("floor_id") REFERENCES "floor"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "desk_schedule" ADD CONSTRAINT "desk_schedule_desk_id_fkey" FOREIGN KEY ("desk_id") REFERENCES "desk"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "desk_schedule" ADD CONSTRAINT "desk_schedule_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "user"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "desk" ADD CONSTRAINT "desk_floor_id_fkey" FOREIGN KEY ("floor_id") REFERENCES "floor"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

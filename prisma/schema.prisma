@@ -48,6 +48,7 @@ model Office {
   description    String?
   longitude      Float?
   latitude       Float?
+  timezone       String        @default("Etc/GMT")
   createdAt      DateTime      @default(now()) @map("created_at")
   updatedAt      DateTime      @updatedAt @map("updated_at")
   organization   Organization? @relation(fields: [organizationId], references: [id])
@@ -99,17 +100,35 @@ model OfficeRoom {
   @@map("office_room")
 }
 
+model DeskSchedule {
+  id        String    @id @default(cuid())
+  desk      Desk      @relation(fields: [deskId], references: [id])
+  deskId    String    @map("desk_id")
+  date      DateTime? @map("date")
+  timezone  String    @default("Etc/GMT")
+  wholeDay  Boolean   @default(false) @map("whole_day")
+  startTime DateTime? @map("start_time")
+  endTime   DateTime? @map("end_time")
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  user      User?     @relation(fields: [userId], references: [id])
+  userId    String?   @map("user_id")
+
+  @@map("desk_schedule")
+}
+
 model Desk {
-  id           String   @id @default(cuid())
-  publicDeskId String   @map("public_desk_id")
+  id           String         @id @default(cuid())
+  publicDeskId String         @map("public_desk_id")
   name         String?
   description  String?
-  createdAt    DateTime @default(now()) @map("created_at")
-  updatedAt    DateTime @updatedAt @map("updated_at")
-  Floor        Floor    @relation(fields: [floorId], references: [id])
-  floorId      String   @map("floor_id")
-  x            Float    @map("x")
-  y            Float    @map("y")
+  createdAt    DateTime       @default(now()) @map("created_at")
+  updatedAt    DateTime       @updatedAt @map("updated_at")
+  Floor        Floor          @relation(fields: [floorId], references: [id])
+  floorId      String         @map("floor_id")
+  x            Float          @map("x")
+  y            Float          @map("y")
+  DeskSchedule DeskSchedule[]
 
   @@map("desk")
 }
@@ -163,6 +182,7 @@ model User {
   onboardingSelection OnboardingSelection[]
   currentOffice       Office?               @relation(fields: [currentOfficeId], references: [id])
   currentOfficeId     String?               @map("current_office_id")
+  DeskSchedule        DeskSchedule[]
 
   @@map("user")
 }
