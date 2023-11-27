@@ -70,6 +70,15 @@ export const scheduleRouter = router({
             in: desksInCurrentOffice.map((desk) => desk.id),
           },
         },
+        include: {
+          user: {
+            select: {
+              id: true,
+              name: true,
+              image: true,
+            },
+          },
+        },
       });
 
       const hoursAdded24 = addHours(zonedDate, 24);
@@ -205,5 +214,87 @@ export const scheduleRouter = router({
       });
 
       return deskSchedule;
+    }),
+  cancelDeskForDay: publicProcedure
+    .input(z.object({ deskScheduleId: z.string(), day: z.string() }))
+    .mutation(async (resolverProps) => {
+      const { ctx } = resolverProps;
+      const user = await getUserFromSession(ctx.session, {
+        includeOrganization: true,
+      });
+
+      if (!user.organizationId) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "You are not part of an organization",
+        });
+      }
+
+      await prisma.organization.findFirst({
+        where: {
+          id: user.organizationId,
+        },
+      });
+
+      if (!user.currentOfficeId) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "You are not part of an office. Select an office first.",
+        });
+      }
+
+      const usersOffice = await prisma.office.findFirst({
+        where: {
+          id: user.currentOfficeId,
+        },
+      });
+
+      const floors = await prisma.floor.findMany({
+        where: {
+          officeId: user.currentOfficeId,
+        },
+      });
+
+      const desksInCurrentOffice = await prisma.desk.findMany({
+        where: {
+          floorId: {
+            in: floors.map((floor) => floor.id),
+          },
+        },
+      });
+      const queriedDate = parseISO(resolverProps.input.day);
+      // UTC
+      const zonedDate = utcToZonedTime(
+        queriedDate,
+        usersOffice?.timezone || "UTC",
+      );
+
+      const deskSchedules = await prisma.deskSchedule.findMany({
+        where: {
+          id: resolverProps.input.deskScheduleId,
+          deskId: {
+            in: desksInCurrentOffice.map((desk) => desk.id),
+          },
+        },
+      });
+      // Check if user has already booked a desk for this day
+      const userHasBookedDesk = getHasConflictingReservation(
+        zonedDate,
+        user.id,
+        deskSchedules,
+      );
+      if (!userHasBookedDesk) {
+        throw new TRPCError({
+          code: "CONFLICT",
+          message: "You have not booked a desk for this day",
+        });
+      }
+
+      await prisma.deskSchedule.delete({
+        where: {
+          id: resolverProps.input.deskScheduleId,
+        },
+      });
+      return null;
     }),
 });

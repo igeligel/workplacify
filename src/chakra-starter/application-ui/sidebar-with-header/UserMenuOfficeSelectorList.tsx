@@ -25,9 +25,7 @@ export const UserMenuOfficeSelectorList = (
           await updateSelectedOfficeMutation.mutateAsync({
             id: office.id,
           });
-          utils.user.get.invalidate();
-          utils.office.getById.invalidate();
-          utils.office.list.invalidate();
+          utils.invalidate();
         };
 
         return (

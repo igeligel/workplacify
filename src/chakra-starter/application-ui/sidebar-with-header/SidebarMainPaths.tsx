@@ -1,14 +1,17 @@
 import { VStack } from "@chakra-ui/react";
+import { UserRole } from "@prisma/client";
 import { useRouter } from "next/router";
 // import { VscGraphLine } from "react-icons/vsc";
 import { FiHome } from "react-icons/fi";
 import { GrSchedules } from "react-icons/gr";
 import { HiOutlineBuildingOffice } from "react-icons/hi2";
 
+import { trpc } from "../../../utils/trpc";
 import { MenuItem } from "./MenuItem";
 
 export const SidebarMainPaths = () => {
   const router = useRouter();
+  const userQuery = trpc.user.get.useQuery();
 
   return (
     <VStack spacing={"0.5"} marginTop={"2"}>
@@ -18,12 +21,17 @@ export const SidebarMainPaths = () => {
         href={"/app"}
         isActive={router.pathname === "/app"}
       />
-      <MenuItem
-        title={"Offices"}
-        icon={HiOutlineBuildingOffice}
-        href={"/app/offices"}
-        isActive={router.pathname === "/app/offices"}
-      />
+      {userQuery.data?.userRole === UserRole.ADMIN ? (
+        <MenuItem
+          title={"Offices"}
+          icon={HiOutlineBuildingOffice}
+          href={"/app/offices"}
+          isActive={router.pathname === "/app/offices"}
+        />
+      ) : (
+        <></>
+      )}
+
       {/* <MenuItem
         title={"Analytics"}
         icon={VscGraphLine}

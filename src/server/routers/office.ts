@@ -13,12 +13,6 @@ export const officeRouter = router({
       const user = await getUserFromSession(ctx.session, {
         includeOrganization: true,
       });
-      if (user.userRole !== "ADMIN") {
-        throw new TRPCError({
-          code: "FORBIDDEN",
-          message: "You are not allowed to access this resource",
-        });
-      }
       const office = await prisma.office.findFirst({
         where: {
           id: input.id,
@@ -64,12 +58,7 @@ export const officeRouter = router({
     const user = await getUserFromSession(ctx.session, {
       includeOrganization: true,
     });
-    if (user.userRole !== "ADMIN") {
-      throw new TRPCError({
-        code: "FORBIDDEN",
-        message: "You are not allowed to access this resource",
-      });
-    }
+
     const offices = await prisma.office.findMany({
       where: {
         organizationId: user.organizationId,

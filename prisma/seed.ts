@@ -3,12 +3,30 @@
  *
  * @link https://www.prisma.io/docs/guides/database/seed-database
  */
-import { PrismaClient } from "@prisma/client";
+import { faker } from "@faker-js/faker";
+import { PrismaClient, UserRole } from "@prisma/client";
+import { addHours, parseISO, startOfDay } from "date-fns";
+import { utcToZonedTime } from "date-fns-tz";
 
 const prisma = new PrismaClient();
 
 async function main() {
   // console.log({ prisma });
+
+  const isOrganizationExisting = await prisma.organization.findFirst({
+    where: {
+      name: "Acme Inc.",
+    },
+  });
+  if (isOrganizationExisting) {
+    console.log("✅✅✅ SEED ALREADY DONE ✅✅✅");
+    console.log(
+      "Use the invite code to join an organization with data: ",
+      isOrganizationExisting.inviteCode,
+    );
+    console.log("✅✅✅ END of seed description ✅✅✅");
+    return;
+  }
 
   const organization = await prisma.organization.create({
     data: {
@@ -34,7 +52,79 @@ async function main() {
       organizationId: organization.id,
     },
   });
-  // const berlinOffice2 =
+
+  const user1 = await prisma.user.create({
+    data: {
+      email: faker.internet.email(),
+      name: faker.person.fullName(),
+      image: faker.image.avatar(),
+      organizationId: organization.id,
+      userRole: UserRole.MEMBER,
+      currentOfficeId: berlinOffice1.id,
+    },
+  });
+
+  const user2 = await prisma.user.create({
+    data: {
+      email: faker.internet.email(),
+      name: faker.person.fullName(),
+      image: faker.image.avatar(),
+      organizationId: organization.id,
+      userRole: UserRole.MEMBER,
+      currentOfficeId: berlinOffice1.id,
+    },
+  });
+  const user3 = await prisma.user.create({
+    data: {
+      email: faker.internet.email(),
+      name: faker.person.fullName(),
+      image: faker.image.avatar(),
+      organizationId: organization.id,
+      userRole: UserRole.MEMBER,
+      currentOfficeId: berlinOffice1.id,
+    },
+  });
+  const user4 = await prisma.user.create({
+    data: {
+      email: faker.internet.email(),
+      name: faker.person.fullName(),
+      image: faker.image.avatar(),
+      organizationId: organization.id,
+      userRole: UserRole.MEMBER,
+      currentOfficeId: berlinOffice1.id,
+    },
+  });
+  const user5 = await prisma.user.create({
+    data: {
+      email: faker.internet.email(),
+      name: faker.person.fullName(),
+      image: faker.image.avatar(),
+      organizationId: organization.id,
+      userRole: UserRole.MEMBER,
+      currentOfficeId: berlinOffice1.id,
+    },
+  });
+  const user6 = await prisma.user.create({
+    data: {
+      email: faker.internet.email(),
+      name: faker.person.fullName(),
+      image: faker.image.avatar(),
+      organizationId: organization.id,
+      userRole: UserRole.MEMBER,
+      currentOfficeId: berlinOffice1.id,
+    },
+  });
+  const user7 = await prisma.user.create({
+    data: {
+      email: faker.internet.email(),
+      name: faker.person.fullName(),
+      image: faker.image.avatar(),
+      organizationId: organization.id,
+      userRole: UserRole.MEMBER,
+      currentOfficeId: berlinOffice1.id,
+    },
+  });
+
   await prisma.office.create({
     data: {
       name: "Berlin Office #2 - Potsdamer Platz",
@@ -68,45 +158,53 @@ async function main() {
     },
   });
 
-  await prisma.desk.createMany({
-    data: [
-      {
-        floorId: berlinOffice1Floor1.id,
-        publicDeskId: "1",
-        x: 1139.44391025641,
-        y: 434.6709735576923,
-      },
-      {
-        floorId: berlinOffice1Floor1.id,
-        publicDeskId: "2",
-        x: 544.2836538461539,
-        y: 444.2703325320513,
-      },
-      {
-        floorId: berlinOffice1Floor1.id,
-        publicDeskId: "3",
-        x: 546.2035256410257,
-        y: 688.0940504807693,
-      },
-      {
-        floorId: berlinOffice1Floor1.id,
-        publicDeskId: "4",
-        x: 1139.44391025641,
-        y: 860.8825120192308,
-      },
-      {
-        floorId: berlinOffice1Floor1.id,
-        publicDeskId: "5",
-        x: 1022.331730769231,
-        y: 642.0171274038462,
-      },
-      {
-        floorId: berlinOffice1Floor1.id,
-        publicDeskId: "6",
-        x: 1268.075320512821,
-        y: 642.0171274038462,
-      },
-    ],
+  const desk1 = await prisma.desk.create({
+    data: {
+      floorId: berlinOffice1Floor1.id,
+      publicDeskId: "1",
+      x: 1139.44391025641,
+      y: 434.6709735576923,
+    },
+  });
+  const desk2 = await prisma.desk.create({
+    data: {
+      floorId: berlinOffice1Floor1.id,
+      publicDeskId: "2",
+      x: 544.2836538461539,
+      y: 444.2703325320513,
+    },
+  });
+  const desk3 = await prisma.desk.create({
+    data: {
+      floorId: berlinOffice1Floor1.id,
+      publicDeskId: "3",
+      x: 546.2035256410257,
+      y: 688.0940504807693,
+    },
+  });
+  const desk4 = await prisma.desk.create({
+    data: {
+      floorId: berlinOffice1Floor1.id,
+      publicDeskId: "4",
+      x: 1139.44391025641,
+      y: 860.8825120192308,
+    },
+  });
+  const desk5 = await prisma.desk.create({
+    data: {
+      floorId: berlinOffice1Floor1.id,
+      publicDeskId: "5",
+      x: 1022.331730769231,
+      y: 642.0171274038462,
+    },
+  });
+  const desk6 = await prisma.desk.create({
+    data: {
+      floorId: berlinOffice1Floor1.id,
+      publicDeskId: "6",
+      x: 1268.075320512821,
+      y: 642.0171274038462,
+    },
   });
 
   // const berlinOffice1Floor2 =
@@ -116,6 +214,22 @@ async function main() {
       description: `Floor 2 at Berlin Office #1 is a vibrant workspace that fosters collaboration and creativity. This floor is home to a diverse team of engineers dedicated to driving innovation across Acme Inc.'s global endeavors. With a focus on quality and excellence, this floor is committed to delivering cutting-edge solutions that set new industry standards. Situated in Berlin's dynamic environment, Floor 2 epitomizes Acme Inc.'s commitment to engineering brilliance and its relentless pursuit of shaping the future of technology.`,
       officeId: berlinOffice1.id,
       // TODO - add floor plan
+    },
+  });
+
+  const startOfDayDate = startOfDay(new Date());
+  // UTC
+  const zonedDate = utcToZonedTime(startOfDayDate, berlinOffice1.timezone);
+
+  await prisma.deskSchedule.create({
+    data: {
+      userId: user1.id,
+      deskId: desk1.id,
+      date: zonedDate,
+      timezone: berlinOffice1.timezone,
+      wholeDay: true,
+      startTime: zonedDate,
+      endTime: addHours(zonedDate, 24),
     },
   });
 

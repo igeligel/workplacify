@@ -1,5 +1,3 @@
-// import { signOut } from "next-auth/react";
-import { Box } from "@chakra-ui/react";
 import { FiSettings } from "react-icons/fi";
 
 import { trpc } from "../../../utils/trpc";
@@ -20,6 +18,7 @@ export const UserMenuOfficeSelector = () => {
 
   if (!userQuery.isFetched) return null;
   if (!officeListQuery.isFetched) return null;
+
   if (hasCurrentOfficeId && !officeQuery.isFetched) {
     return null;
   }

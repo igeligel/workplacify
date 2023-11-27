@@ -1,4 +1,4 @@
-import { Desk, DeskSchedule } from "@prisma/client";
+import { Desk, DeskSchedule, Prisma, User } from "@prisma/client";
 
 // DeskSchedule
 // {
@@ -31,10 +31,21 @@ type Period = {
   start: Date;
   end: Date;
 };
+type MappedDeskSchedule = Prisma.DeskScheduleGetPayload<{
+  include: {
+    user: {
+      select: {
+        id: true;
+        name: true;
+        image: true;
+      };
+    };
+  };
+}>;
 
 const calculateFreePeriods = (
   deskId: string,
-  deskSchedules: DeskSchedule[],
+  deskSchedules: MappedDeskSchedule[],
   startingTime: Date,
   endTime: Date,
 ): { start: Date; end: Date }[] => {
@@ -91,12 +102,20 @@ const calculateFreePeriods = (
   return freePeriods;
 };
 
+type PeriodWithUserInfo = Period & {
+  id: string;
+  wholeDay: boolean;
+  deskScheduleId: string;
+  name: string | null;
+  image: string | null;
+};
+
 const calculateUsedPeriods = (
   deskId: string,
-  deskSchedules: DeskSchedule[],
+  deskSchedules: MappedDeskSchedule[],
   startingTime: Date,
   endTime: Date,
-): { start: Date; end: Date }[] => {
+): PeriodWithUserInfo[] => {
   const schedulesForDesk = deskSchedules.filter(
     (schedule) =>
       schedule.deskId === deskId &&
@@ -109,16 +128,30 @@ const calculateUsedPeriods = (
           schedule.startTime < endTime)),
   );
 
-  const usedPeriods: Period[] = [];
+  const usedPeriods: PeriodWithUserInfo[] = [];
 
   if (schedulesForDesk.length > 0) {
     schedulesForDesk.forEach((schedule) => {
+      if (!schedule.user) return;
       if (schedule.wholeDay) {
-        usedPeriods.push({ start: startingTime, end: endTime });
+        usedPeriods.push({
+          start: startingTime,
+          end: endTime,
+          id: schedule.user.id,
+          deskScheduleId: schedule.id,
+          wholeDay: schedule.wholeDay,
+          name: schedule.user.name,
+          image: schedule.user.image,
+        });
       } else if (schedule.startTime && schedule.endTime) {
         usedPeriods.push({
           start: schedule.startTime,
           end: schedule.endTime,
+          id: schedule.user.id,
+          deskScheduleId: schedule.id,
+          wholeDay: schedule.wholeDay,
+          name: schedule.user.name,
+          image: schedule.user.image,
         });
       }
     });
@@ -133,13 +166,13 @@ type FreeDesksWithTime = Record<
   {
     desk: Desk;
     freePeriods: Period[];
-    usedPeriods: Period[];
+    usedPeriods: PeriodWithUserInfo[];
     wholeDayFree: boolean;
   }
 >;
 
 type GetFreeDesksPerDay = {
-  deskSchedules: DeskSchedule[];
+  deskSchedules: MappedDeskSchedule[];
   desksInCurrentOffice: Desk[];
   // Because of time zone differences we include start and end here
   startingTime: Date;
