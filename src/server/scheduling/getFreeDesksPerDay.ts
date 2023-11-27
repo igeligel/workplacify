@@ -33,66 +33,96 @@ type Period = {
 };
 
 const calculateFreePeriods = (
+  deskId: string,
   deskSchedules: DeskSchedule[],
   startingTime: Date,
   endTime: Date,
 ): { start: Date; end: Date }[] => {
-  const freePeriods = [{ start: startingTime, end: endTime }];
+  const schedulesForDesk = deskSchedules.filter(
+    (schedule) =>
+      schedule.deskId === deskId &&
+      ((schedule.date &&
+        schedule.date > startingTime &&
+        schedule.date < endTime) ||
+        (schedule.startTime &&
+          schedule.endTime &&
+          schedule.endTime > startingTime &&
+          schedule.startTime < endTime)),
+  );
 
-  deskSchedules.forEach((schedule) => {
-    if (schedule.wholeDay) {
-      // If the wholeDay field is true, the desk is booked for the entire day
-      freePeriods.length = 0; // Clear free periods since desk is booked whole day
-    } else if (schedule.startTime && schedule.endTime) {
-      const scheduleStart = schedule.startTime;
-      const scheduleEnd = schedule.endTime;
+  let freePeriods = [{ start: startingTime, end: endTime }];
 
-      const updatedFreePeriods: Period[] = [];
-      freePeriods.forEach((freePeriod) => {
-        if (scheduleStart < freePeriod.end && scheduleEnd > freePeriod.start) {
-          if (scheduleStart > freePeriod.start) {
-            updatedFreePeriods.push({
-              start: freePeriod.start,
-              end: scheduleStart,
-            });
+  if (schedulesForDesk.length > 0) {
+    schedulesForDesk.forEach((schedule) => {
+      if (schedule.wholeDay) {
+        freePeriods.length = 0; // Clear free periods since desk is booked whole day
+      } else if (schedule.startTime && schedule.endTime) {
+        const scheduleStart = schedule.startTime;
+        const scheduleEnd = schedule.endTime;
+
+        const updatedFreePeriods: Period[] = [];
+        freePeriods.forEach((freePeriod) => {
+          if (
+            scheduleStart < freePeriod.end &&
+            scheduleEnd > freePeriod.start
+          ) {
+            if (scheduleStart > freePeriod.start) {
+              updatedFreePeriods.push({
+                start: freePeriod.start,
+                end: scheduleStart,
+              });
+            }
+            if (scheduleEnd < freePeriod.end) {
+              updatedFreePeriods.push({
+                start: scheduleEnd,
+                end: freePeriod.end,
+              });
+            }
+          } else {
+            updatedFreePeriods.push(freePeriod);
           }
-          if (scheduleEnd < freePeriod.end) {
-            updatedFreePeriods.push({
-              start: scheduleEnd,
-              end: freePeriod.end,
-            });
-          }
-        } else {
-          updatedFreePeriods.push(freePeriod);
-        }
-      });
+        });
 
-      freePeriods.length = 0;
-      freePeriods.push(...updatedFreePeriods);
-    }
-  });
+        freePeriods = updatedFreePeriods;
+      }
+    });
+  }
 
   return freePeriods;
 };
 
 const calculateUsedPeriods = (
+  deskId: string,
   deskSchedules: DeskSchedule[],
   startingTime: Date,
   endTime: Date,
 ): { start: Date; end: Date }[] => {
+  const schedulesForDesk = deskSchedules.filter(
+    (schedule) =>
+      schedule.deskId === deskId &&
+      ((schedule.date &&
+        schedule.date > startingTime &&
+        schedule.date < endTime) ||
+        (schedule.startTime &&
+          schedule.endTime &&
+          schedule.endTime > startingTime &&
+          schedule.startTime < endTime)),
+  );
+
   const usedPeriods: Period[] = [];
 
-  deskSchedules.forEach((schedule) => {
-    if (schedule.wholeDay) {
-      // If the wholeDay field is true, the desk is booked for the entire day
-      usedPeriods.push({ start: startingTime, end: endTime });
-    } else if (schedule.startTime && schedule.endTime) {
-      usedPeriods.push({
-        start: schedule.startTime,
-        end: schedule.endTime,
-      });
-    }
-  });
+  if (schedulesForDesk.length > 0) {
+    schedulesForDesk.forEach((schedule) => {
+      if (schedule.wholeDay) {
+        usedPeriods.push({ start: startingTime, end: endTime });
+      } else if (schedule.startTime && schedule.endTime) {
+        usedPeriods.push({
+          start: schedule.startTime,
+          end: schedule.endTime,
+        });
+      }
+    });
+  }
 
   return usedPeriods;
 };
@@ -127,11 +157,13 @@ export const getFreeDesksPerDay = (
     const deskId = desk.id;
 
     const freePeriods = calculateFreePeriods(
+      deskId,
       deskSchedules,
       startingTime,
       endTime,
     );
     const usedPeriods = calculateUsedPeriods(
+      deskId,
       deskSchedules,
       startingTime,
       endTime,
