@@ -21,6 +21,7 @@ import { trpc } from "../../../utils/trpc";
 
 const OrganizationSettingsPage = () => {
   const organizationQuery = trpc.organization.get.useQuery();
+  const userQuery = trpc.user.get.useQuery();
   const [, copyToClipboard] = useCopyToClipboard();
   const toast = useToast();
 
@@ -81,7 +82,7 @@ const OrganizationSettingsPage = () => {
                   <br />
                 </Text>
                 <Text as={"p"}>
-                  Use invite code: `852d4202-a6c1-4830-8a9a-c57e51ced575`
+                  Use invite code: `{organizationQuery.data?.inviteCode}`
                 </Text>
               </AccordionPanel>
             </AccordionItem>
@@ -108,12 +109,12 @@ const OrganizationSettingsPage = () => {
                   started.
                   <br />
                   <br />
-                  Invite code: `852d4202-a6c1-4830-8a9a-c57e51ced575`
+                  Invite code: `{organizationQuery.data?.inviteCode}`
                   <br />
                   <br />
                   Best regards,
                   <br />
-                  [Your Name]
+                  {userQuery.data?.name ? userQuery.data?.name : "[Your Name]"}
                 </Text>
               </AccordionPanel>
             </AccordionItem>
@@ -137,7 +138,7 @@ const OrganizationSettingsPage = () => {
                   useful too. Here&apos;s an invite for you:
                   <br />
                   <br />
-                  Invite code: `852d4202-a6c1-4830-8a9a-c57e51ced575`
+                  Invite code: `{organizationQuery.data?.inviteCode}`
                   <br />
                   <br />
                   Let me know if you need any help!
@@ -145,7 +146,7 @@ const OrganizationSettingsPage = () => {
                   <br />
                   Best,
                   <br />
-                  [Your Name]
+                  {userQuery.data?.name ? userQuery.data?.name : "[Your Name]"}
                 </Text>
               </AccordionPanel>
             </AccordionItem>
@@ -172,7 +173,7 @@ const OrganizationSettingsPage = () => {
                   invite to you:
                   <br />
                   <br />
-                  Invite code: `852d4202-a6c1-4830-8a9a-c57e51ced575`
+                  Invite code: `{organizationQuery.data?.inviteCode}`
                   <br />
                   <br />
                   Feel free to reach out if you have any questions!
@@ -180,7 +181,7 @@ const OrganizationSettingsPage = () => {
                   <br />
                   Best regards,
                   <br />
-                  [Your Name]
+                  {userQuery.data?.name ? userQuery.data?.name : "[Your Name]"}
                 </Text>
               </AccordionPanel>
             </AccordionItem>

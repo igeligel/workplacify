@@ -8,6 +8,7 @@ import {
   HStack,
   Heading,
   Icon,
+  Spinner,
   Text,
   VStack,
 } from "@chakra-ui/react";
@@ -17,8 +18,11 @@ import { MdOutlineFeedback, MdOutlineTry } from "react-icons/md";
 import { GetStartedModuleInviteEmployees } from "../../components/GetStartedModule/GetStartedModuleInviteEmployees";
 import { GetStartedModuleOfficeCreate } from "../../components/GetStartedModule/GetStartedModuleOfficeCreate";
 import { appAuthRedirect } from "../../server/nextMiddleware/appAuthRedirect";
+import { trpc } from "../../utils/trpc";
 
 const AppPage = () => {
+  const userQuery = trpc.user.get.useQuery();
+  const isLoading = userQuery.isLoading;
   return (
     <Container maxW={"container.2xl"}>
       <Box
@@ -36,11 +40,37 @@ const AppPage = () => {
         </Box>
         <Box paddingTop={4}>
           <Grid templateColumns="repeat(3, 1fr)" gap={2}>
-            <GridItem w="100%">
-              <GetStartedModuleOfficeCreate />
+            <GridItem w="100%" h={"100%"}>
+              {isLoading ? (
+                <Box
+                  minHeight={"350px"}
+                  height={"100%"}
+                  display={"flex"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  maxWidth={"80%"}
+                >
+                  <Spinner />
+                </Box>
+              ) : (
+                <GetStartedModuleOfficeCreate />
+              )}
             </GridItem>
-            <GridItem w="100%" h="10">
-              <GetStartedModuleInviteEmployees />
+            <GridItem w="100%" h={"100%"}>
+              {isLoading ? (
+                <Box
+                  minHeight={"350px"}
+                  height={"100%"}
+                  display={"flex"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  maxWidth={"80%"}
+                >
+                  <Spinner />
+                </Box>
+              ) : (
+                <GetStartedModuleInviteEmployees />
+              )}
             </GridItem>
             <GridItem w="100%" h="10">
               <VStack spacing={4} alignItems={"flex-start"}>
