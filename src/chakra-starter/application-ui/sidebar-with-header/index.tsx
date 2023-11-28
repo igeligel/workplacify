@@ -1,7 +1,6 @@
-import { Box, IconButton, useBreakpointValue } from "@chakra-ui/react";
+import { Box, Button, IconButton, useBreakpointValue } from "@chakra-ui/react";
 import { UserRole } from "@prisma/client";
-import { useState } from "react";
-import { FiChevronRight } from "react-icons/fi";
+import { FiMenu } from "react-icons/fi";
 
 import { trpc } from "../../../utils/trpc";
 import { Sidebar } from "./Sidebar";
@@ -44,14 +43,23 @@ export const SidebarBrandWithHeader = (props: SideNavigationProps) => {
       />
       <Box marginLeft={(!variants.navigationButton && 300) || 0} flex={1}>
         {variants.navigationButton && (
-          <Box>
+          <Box paddingLeft={3} paddingTop={2} onClick={toggleSidebar}>
             <IconButton
               aria-label="Toggle sidebar"
-              icon={<FiChevronRight />}
+              icon={<FiMenu />}
               colorScheme="blackAlpha"
-              variant="outline"
-              onClick={toggleSidebar}
+              variant="ghost"
             />
+            <Button
+              variant={"link"}
+              colorScheme="gray"
+              textDecoration={"none"}
+              _hover={{
+                textDecoration: "none",
+              }}
+            >
+              Menu
+            </Button>
           </Box>
         )}
         <Box
