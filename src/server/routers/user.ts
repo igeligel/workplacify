@@ -43,4 +43,21 @@ export const userRouter = router({
       });
       return office;
     }),
+  update: publicProcedure
+    .input(z.object({ name: z.string() }))
+    .mutation(async (resolverProps) => {
+      const { ctx, input } = resolverProps;
+      const user = await getUserFromSession(ctx.session, {
+        includeOrganization: false,
+      });
+      await prisma.user.update({
+        where: {
+          id: user.id,
+        },
+        data: {
+          name: input.name,
+        },
+      });
+      return user;
+    }),
 });

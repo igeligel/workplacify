@@ -19,7 +19,7 @@ const AccountSubMenu = () => {
   return (
     <VStack width={"100%"} spacing={"0.5"}>
       <Link
-        href={"#"}
+        href={"/app/account/settings"}
         width={"100%"}
         textDecoration={"none"}
         _hover={{ textDecoration: "none" }}
