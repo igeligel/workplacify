@@ -15,31 +15,35 @@ import {
 import { GetServerSideProps } from "next";
 import { MdOutlineFeedback, MdOutlineTry } from "react-icons/md";
 
-import { GetStartedModuleInviteEmployees } from "../../components/GetStartedModule/GetStartedModuleInviteEmployees";
-import { GetStartedModuleOfficeCreate } from "../../components/GetStartedModule/GetStartedModuleOfficeCreate";
 import { useGetStartedModules } from "../../hooks/useGetStartedModules";
 import { appAuthRedirect } from "../../server/nextMiddleware/appAuthRedirect";
-import { trpc } from "../../utils/trpc";
 
 const AppPage = () => {
   const { isLoading, modules } = useGetStartedModules();
   return (
-    <Container maxW={"container.2xl"}>
+    <Container maxW={"container.2xl"} paddingX={{ base: "2", lg: "4" }}>
       <Box
-        paddingX={"16"}
-        paddingTop={"12"}
+        paddingX={{ base: "6", lg: "16" }}
+        paddingTop={{ base: "4", lg: "12" }}
         background={"gray.50"}
         borderRadius={4}
         overflow={"hidden"}
         boxShadow={"xl"}
       >
         <Box>
-          <Heading as={"h2"} fontSize={"2xl"} color={"gray.700"}>
+          <Heading
+            as={"h2"}
+            fontSize={{ base: "lg", lg: "2xl" }}
+            color={"gray.700"}
+          >
             Get started with workplacify
           </Heading>
         </Box>
         <Box paddingTop={4}>
-          <Grid templateColumns="repeat(3, 1fr)" gap={2}>
+          <Grid
+            templateColumns={{ base: "repeat(1, 1fr)", lg: "repeat(3, 1fr)" }}
+            gap={2}
+          >
             {modules.map((module) => {
               const { uuid, Component } = module;
 
@@ -62,26 +66,13 @@ const AppPage = () => {
                 </GridItem>
               );
             })}
-
-            {/* <GridItem w="100%" h={"100%"}>
-              {isLoading ? (
-                <Box
-                  minHeight={"350px"}
-                  height={"100%"}
-                  display={"flex"}
-                  justifyContent={"center"}
-                  alignItems={"center"}
-                  maxWidth={"80%"}
-                >
-                  <Spinner />
-                </Box>
-              ) : (
-                <GetStartedModuleInviteEmployees />
-              )}
-            </GridItem> */}
-            <GridItem w="100%" h="10">
-              <VStack spacing={4} alignItems={"flex-start"}>
-                <HStack spacing={4} alignItems={"flex-start"}>
+            <GridItem w="100%">
+              <VStack
+                paddingY={{ base: 4, lg: 0 }}
+                spacing={{ base: 2, lg: 4 }}
+                alignItems={"flex-start"}
+              >
+                <HStack spacing={{ base: 2, lg: 4 }} alignItems={"flex-start"}>
                   <Icon
                     transform={"translateY(8px)"}
                     color={"gray.500"}
@@ -92,13 +83,16 @@ const AppPage = () => {
                     <Text>90/90 days left</Text>
                   </Box>
                 </HStack>
-                <HStack spacing={4} alignItems={"flex-start"}>
+                <HStack spacing={{ base: 2, lg: 4 }} alignItems={"flex-start"}>
                   <Icon
                     transform={"translateY(4px)"}
                     color={"gray.500"}
                     as={MdOutlineFeedback}
-                  ></Icon>
-                  <VStack spacing={3} alignItems={"flex-start"}>
+                  />
+                  <VStack
+                    spacing={{ base: 1, lg: 3 }}
+                    alignItems={"flex-start"}
+                  >
                     <Heading as={"h3"} fontSize={"sm"} color={"gray.700"}>
                       Missing something?
                     </Heading>
