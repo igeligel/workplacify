@@ -10,7 +10,6 @@ export const getHasConflictingReservation = (
   const schedulesForDay = deskSchedules.filter((schedule) => {
     if (schedule.wholeDay) {
       if (!schedule.date) {
-        console.log("No date on schedule");
         return false;
       }
       const wholeDayEqual = isEqual(day, schedule.date);

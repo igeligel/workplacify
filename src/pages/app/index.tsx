@@ -3,6 +3,13 @@ import {
   Box,
   Button,
   Container,
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
   Grid,
   GridItem,
   HStack,
@@ -10,15 +17,21 @@ import {
   Icon,
   Spinner,
   Text,
+  Textarea,
   VStack,
 } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
+import { useState } from "react";
 import { MdOutlineFeedback, MdOutlineTry } from "react-icons/md";
 
 import { useGetStartedModules } from "../../hooks/useGetStartedModules";
 import { appAuthRedirect } from "../../server/nextMiddleware/appAuthRedirect";
+import { trpc } from "../../utils/trpc";
 
 const AppPage = () => {
+  const sendFeedbackMutation = trpc.discord.sendFeedback.useMutation();
+  const [isFeedbackDrawerOpen, setIsFeedbackDrawerOpen] = useState(false);
+  const [feedbackText, setFeedbackText] = useState("");
   const { isLoading, modules } = useGetStartedModules();
   return (
     <Container maxW={"container.2xl"} paddingX={{ base: "2", lg: "4" }}>
@@ -106,6 +119,9 @@ const AppPage = () => {
                         textDecoration: "none",
                         color: "orange.500",
                       }}
+                      onClick={() => {
+                        setIsFeedbackDrawerOpen(true);
+                      }}
                     >
                       Request feature
                     </Button>
@@ -116,6 +132,58 @@ const AppPage = () => {
           </Grid>
         </Box>
       </Box>
+      <Drawer
+        size={"md"}
+        isOpen={isFeedbackDrawerOpen}
+        placement="right"
+        onClose={() => {
+          setIsFeedbackDrawerOpen(false);
+        }}
+      >
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader>Request a feature</DrawerHeader>
+
+          <DrawerBody>
+            <Textarea
+              value={feedbackText}
+              onChange={(e) => {
+                setFeedbackText(e.target.value);
+              }}
+              rows={10}
+              placeholder="Type here..."
+            />
+          </DrawerBody>
+
+          <DrawerFooter>
+            <Button
+              variant="outline"
+              mr={3}
+              onClick={() => {
+                setIsFeedbackDrawerOpen(false);
+              }}
+            >
+              Cancel
+            </Button>
+            <Button
+              colorScheme="orange"
+              backgroundColor={"orange.400"}
+              _hover={{
+                backgroundColor: "orange.500",
+              }}
+              onClick={async () => {
+                await sendFeedbackMutation.mutateAsync({
+                  feedback: feedbackText,
+                });
+                setIsFeedbackDrawerOpen(false);
+              }}
+            >
+              Send
+            </Button>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
     </Container>
   );
 };

@@ -121,7 +121,6 @@ const SchedulePage = () => {
                   );
                   const deskScheduleIdToCancel = periodToCancel?.deskScheduleId;
                   if (!deskScheduleIdToCancel) return;
-                  console.log({ deskScheduleIdToCancel });
                   await cancelDeskForDayMutation.mutateAsync({
                     deskScheduleId: deskScheduleIdToCancel,
                     day: formattedDate,
