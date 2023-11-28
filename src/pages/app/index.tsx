@@ -17,12 +17,12 @@ import { MdOutlineFeedback, MdOutlineTry } from "react-icons/md";
 
 import { GetStartedModuleInviteEmployees } from "../../components/GetStartedModule/GetStartedModuleInviteEmployees";
 import { GetStartedModuleOfficeCreate } from "../../components/GetStartedModule/GetStartedModuleOfficeCreate";
+import { useGetStartedModules } from "../../hooks/useGetStartedModules";
 import { appAuthRedirect } from "../../server/nextMiddleware/appAuthRedirect";
 import { trpc } from "../../utils/trpc";
 
 const AppPage = () => {
-  const userQuery = trpc.user.get.useQuery();
-  const isLoading = userQuery.isLoading;
+  const { isLoading, modules } = useGetStartedModules();
   return (
     <Container maxW={"container.2xl"}>
       <Box
@@ -40,23 +40,30 @@ const AppPage = () => {
         </Box>
         <Box paddingTop={4}>
           <Grid templateColumns="repeat(3, 1fr)" gap={2}>
-            <GridItem w="100%" h={"100%"}>
-              {isLoading ? (
-                <Box
-                  minHeight={"350px"}
-                  height={"100%"}
-                  display={"flex"}
-                  justifyContent={"center"}
-                  alignItems={"center"}
-                  maxWidth={"80%"}
-                >
-                  <Spinner />
-                </Box>
-              ) : (
-                <GetStartedModuleOfficeCreate />
-              )}
-            </GridItem>
-            <GridItem w="100%" h={"100%"}>
+            {modules.map((module) => {
+              const { uuid, Component } = module;
+
+              return (
+                <GridItem key={uuid} w="100%" h={"100%"}>
+                  {isLoading ? (
+                    <Box
+                      minHeight={"350px"}
+                      height={"100%"}
+                      display={"flex"}
+                      justifyContent={"center"}
+                      alignItems={"center"}
+                      maxWidth={"80%"}
+                    >
+                      <Spinner />
+                    </Box>
+                  ) : (
+                    <Component />
+                  )}
+                </GridItem>
+              );
+            })}
+
+            {/* <GridItem w="100%" h={"100%"}>
               {isLoading ? (
                 <Box
                   minHeight={"350px"}
@@ -71,7 +78,7 @@ const AppPage = () => {
               ) : (
                 <GetStartedModuleInviteEmployees />
               )}
-            </GridItem>
+            </GridItem> */}
             <GridItem w="100%" h="10">
               <VStack spacing={4} alignItems={"flex-start"}>
                 <HStack spacing={4} alignItems={"flex-start"}>

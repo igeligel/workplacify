@@ -5,6 +5,7 @@ import { FiChevronRight } from "react-icons/fi";
 
 import { trpc } from "../../../utils/trpc";
 import { Sidebar } from "./Sidebar";
+import { useMenuStore } from "./menuStore";
 
 type Variant = {
   navigation: "drawer" | "sidebar";
@@ -19,14 +20,15 @@ type SideNavigationProps = {
 };
 
 export const SidebarBrandWithHeader = (props: SideNavigationProps) => {
-  const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const isSidebarOpen = useMenuStore((state) => state.isSidebarOpen);
+  const setIsSidebarOpen = useMenuStore((state) => state.setIsSidebarOpen);
   const variants = useBreakpointValue({ base: smVariant, md: mdVariant });
 
   const userQuery = trpc.user.get.useQuery();
   const isUserAdmin = userQuery.data?.userRole === UserRole.ADMIN;
 
   const toggleSidebar = () => {
-    setSidebarOpen(!isSidebarOpen);
+    setIsSidebarOpen(!isSidebarOpen);
   };
 
   if (!variants) return null;
