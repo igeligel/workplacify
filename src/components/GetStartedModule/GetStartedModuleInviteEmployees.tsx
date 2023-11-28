@@ -69,8 +69,10 @@ export const GetStartedModuleInviteEmployees = () => {
         </VStack>
         <Box maxWidth={"80%"}>
           <Image
+            borderTopLeftRadius={"lg"}
+            borderTopRightRadius={"lg"}
             boxShadow={"lg"}
-            src={"https://placehold.co/650x450"}
+            src={"/get-started-invite-colleagues.png"}
             alt={"placeholder"}
             transition={"transform 0.25s ease-in-out"}
             transform={
