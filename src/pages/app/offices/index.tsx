@@ -20,7 +20,14 @@ const OfficesPage = () => {
   return (
     <Container maxW={"container.2xl"}>
       <Box display={"flex"} justifyContent={"space-between"}>
-        <Heading>Offices</Heading>
+        <Heading
+          fontSize={{
+            base: "xl",
+            md: "2xl",
+          }}
+        >
+          Offices
+        </Heading>
 
         <HStack>
           <Button
@@ -35,19 +42,26 @@ const OfficesPage = () => {
               backgroundColor: "orange.500",
               textDecoration: "none",
             }}
+            size={{ base: "sm", md: "md" }}
           >
             Add office
           </Button>
         </HStack>
       </Box>
       <Box>
-        <Tabs colorScheme="orange">
+        <Tabs
+          colorScheme="orange"
+          size={{
+            base: "sm",
+            md: "md",
+          }}
+        >
           <TabList>
             <Tab>All offices</Tab>
           </TabList>
 
           <TabPanels>
-            <TabPanel>
+            <TabPanel paddingX={{ base: 0, lg: 4 }}>
               <TableOfficeList />
             </TabPanel>
           </TabPanels>

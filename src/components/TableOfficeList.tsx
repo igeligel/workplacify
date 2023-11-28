@@ -52,7 +52,7 @@ export const TableOfficeList = () => {
   return (
     <>
       <TableContainer>
-        <Table variant="simple">
+        <Table size={{ base: "sm", lg: "md" }} variant="simple">
           <Thead>
             <Tr>
               <Th>Name</Th>

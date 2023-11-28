@@ -63,7 +63,8 @@ export const SidebarBrandWithHeader = (props: SideNavigationProps) => {
           </Box>
         )}
         <Box
-          padding={"4"}
+          paddingX={{ base: 2, lg: "4" }}
+          paddingY={{ base: 0, lg: "4" }}
           display={"flex"}
           minHeight={"100vh"}
           flexDirection={"column"}

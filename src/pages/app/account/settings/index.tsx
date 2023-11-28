@@ -82,6 +82,7 @@ const AccountSettings = () => {
             <HStack>
               {/* <Button variant={"outline"}>Save and add more</Button> */}
               <Button
+                size={{ base: "sm", md: "md" }}
                 colorScheme="orange"
                 backgroundColor={"orange.400"}
                 textColor={"white"}
