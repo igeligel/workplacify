@@ -83,7 +83,7 @@ export const GetStartedLink = (props: GetStartedLinkProps) => {
         </VStack>
         <Box
           maxWidth={{ base: "100%", lg: "80%" }}
-          maxHeight={{ base: "125px", lg: "auto" }}
+          maxHeight={{ base: "125px", lg: "none" }}
           overflow={{ base: "hidden", lg: "visible" }}
         >
           <Image
