@@ -27,12 +27,23 @@ import { Desk, DeskSchedule, Prisma, User } from "@prisma/client";
 //   y: number;
 // }
 
+type DeskWithFloor = Prisma.DeskGetPayload<{
+  include: {
+    Floor: true;
+  };
+}>;
+
 type Period = {
   start: Date;
   end: Date;
 };
 type MappedDeskSchedule = Prisma.DeskScheduleGetPayload<{
   include: {
+    desk: {
+      include: {
+        Floor: true;
+      };
+    };
     user: {
       select: {
         id: true;
@@ -164,7 +175,7 @@ type FreeDesksWithTime = Record<
   // deskId
   string,
   {
-    desk: Desk;
+    desk: DeskWithFloor;
     freePeriods: Period[];
     usedPeriods: PeriodWithUserInfo[];
     wholeDayFree: boolean;
@@ -173,7 +184,7 @@ type FreeDesksWithTime = Record<
 
 type GetFreeDesksPerDay = {
   deskSchedules: MappedDeskSchedule[];
-  desksInCurrentOffice: Desk[];
+  desksInCurrentOffice: DeskWithFloor[];
   // Because of time zone differences we include start and end here
   startingTime: Date;
   endTime: Date;

@@ -56,6 +56,9 @@ export const scheduleRouter = router({
             in: floors.map((floor) => floor.id),
           },
         },
+        include: {
+          Floor: true,
+        },
       });
       const queriedDate = parseISO(resolverProps.input.day);
       // UTC
@@ -71,6 +74,11 @@ export const scheduleRouter = router({
           },
         },
         include: {
+          desk: {
+            include: {
+              Floor: true,
+            },
+          },
           user: {
             select: {
               id: true,

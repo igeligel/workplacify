@@ -144,7 +144,8 @@ const SchedulePage = () => {
                         fontWeight={500}
                         color={"gray.700"}
                       >
-                        Desk: {freeDeskSchedules.desk.publicDeskId}
+                        {freeDeskSchedules.desk.Floor.name} - Desk{" "}
+                        {freeDeskSchedules.desk.publicDeskId}
                         {freeDeskSchedules.usedPeriods.map((usedPeriod) => {
                           const isOccupiedWholeDay = usedPeriod.wholeDay;
 
