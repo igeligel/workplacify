@@ -136,7 +136,6 @@ async function main() {
     },
   });
 
-  // const bengaluruOffice1 =
   await prisma.office.create({
     data: {
       name: "Bengaluru Office #1",
@@ -154,66 +153,266 @@ async function main() {
       description: `Floor 1 at Berlin Office #1 is a vibrant workspace that fosters collaboration and creativity. This floor is home to a diverse team of engineers dedicated to driving innovation across Acme Inc.'s global endeavors. With a focus on quality and excellence, this floor is committed to delivering cutting-edge solutions that set new industry standards. Situated in Berlin's dynamic environment, Floor 1 epitomizes Acme Inc.'s commitment to engineering brilliance and its relentless pursuit of shaping the future of technology.`,
       officeId: berlinOffice1.id,
       floorPlan:
-        "http://res.cloudinary.com/dpfc44mfl/image/upload/v1701020948/floor_plans/bxdioepma89ezqsljzfr.png",
+        "http://res.cloudinary.com/dpfc44mfl/image/upload/v1701200863/floor_plans/impxvy3dob2r7n1iupqc.png",
     },
   });
 
-  const desk1 = await prisma.desk.create({
+  const floor1desk1 = await prisma.desk.create({
     data: {
       floorId: berlinOffice1Floor1.id,
       publicDeskId: "1",
-      x: 1139.44391025641,
-      y: 434.6709735576923,
+      x: 262.7704326923077,
+      y: 166.0563151041667,
     },
   });
-  const desk2 = await prisma.desk.create({
+  const floor1desk2 = await prisma.desk.create({
     data: {
       floorId: berlinOffice1Floor1.id,
       publicDeskId: "2",
-      x: 544.2836538461539,
-      y: 444.2703325320513,
+      x: 264.8938301282051,
+      y: 326.372821514423,
     },
   });
   const desk3 = await prisma.desk.create({
     data: {
       floorId: berlinOffice1Floor1.id,
       publicDeskId: "3",
-      x: 546.2035256410257,
-      y: 688.0940504807693,
+      x: 653.4755608974358,
+      y: 159.6861227964743,
     },
   });
   const desk4 = await prisma.desk.create({
     data: {
       floorId: berlinOffice1Floor1.id,
       publicDeskId: "4",
-      x: 1139.44391025641,
-      y: 860.8825120192308,
+      x: 579.1566506410255,
+      y: 293.4601612580128,
     },
   });
   const desk5 = await prisma.desk.create({
     data: {
       floorId: berlinOffice1Floor1.id,
       publicDeskId: "5",
-      x: 1022.331730769231,
-      y: 642.0171274038462,
+      x: 737.3497596153845,
+      y: 294.5218599759615,
     },
   });
   const desk6 = await prisma.desk.create({
     data: {
       floorId: berlinOffice1Floor1.id,
       publicDeskId: "6",
-      x: 1268.075320512821,
-      y: 642.0171274038462,
+      x: 651.3521634615383,
+      y: 444.2213792067307,
+    },
+  });
+  const desk7 = await prisma.desk.create({
+    data: {
+      floorId: berlinOffice1Floor1.id,
+      publicDeskId: "7",
+      x: 1056.921073717949,
+      y: 164.9946163862179,
+    },
+  });
+  const desk8 = await prisma.desk.create({
+    data: {
+      floorId: berlinOffice1Floor1.id,
+      publicDeskId: "8",
+      x: 1048.427483974359,
+      y: 325.3111227964743,
+    },
+  });
+  const desk9 = await prisma.desk.create({
+    data: {
+      floorId: berlinOffice1Floor1.id,
+      publicDeskId: "9",
+      x: 371.0637019230769,
+      y: 848.7285907451923,
+    },
+  });
+  const desk10 = await prisma.desk.create({
+    data: {
+      floorId: berlinOffice1Floor1.id,
+      publicDeskId: "10",
+      x: 286.1278044871794,
+      y: 985.6877253605768,
+    },
+  });
+  const desk11 = await prisma.desk.create({
+    data: {
+      floorId: berlinOffice1Floor1.id,
+      publicDeskId: "11",
+      x: 445.3826121794871,
+      y: 983.5643279246793,
+    },
+  });
+  const desk12 = await prisma.desk.create({
+    data: {
+      floorId: berlinOffice1Floor1.id,
+      publicDeskId: "12",
+      x: 372.1254006410256,
+      y: 1133.263847155449,
+    },
+  });
+  const desk13 = await prisma.desk.create({
+    data: {
+      floorId: berlinOffice1Floor1.id,
+      publicDeskId: "13",
+      x: 713.9923878205127,
+      y: 844.4817958733973,
+    },
+  });
+  const desk14 = await prisma.desk.create({
+    data: {
+      floorId: berlinOffice1Floor1.id,
+      publicDeskId: "14",
+      x: 641.7968749999999,
+      y: 986.7494240785255,
+    },
+  });
+  const desk15 = await prisma.desk.create({
+    data: {
+      floorId: berlinOffice1Floor1.id,
+      publicDeskId: "15",
+      x: 806.3601762820512,
+      y: 983.5643279246793,
+    },
+  });
+  const desk16 = await prisma.desk.create({
+    data: {
+      floorId: berlinOffice1Floor1.id,
+      publicDeskId: "16",
+      x: 715.0540865384614,
+      y: 1131.140449719551,
+    },
+  });
+  const desk17 = await prisma.desk.create({
+    data: {
+      floorId: berlinOffice1Floor1.id,
+      publicDeskId: "16",
+      x: 1052.674278846154,
+      y: 957.0218599759614,
+    },
+  });
+  const desk18 = await prisma.desk.create({
+    data: {
+      floorId: berlinOffice1Floor1.id,
+      publicDeskId: "16",
+      x: 1051.612580128205,
+      y: 1114.153270232372,
     },
   });
 
-  // const berlinOffice1Floor2 =
-  await prisma.floor.create({
+  const berlinOffice1Floor2 = await prisma.floor.create({
     data: {
       name: "Floor 2",
       description: `Floor 2 at Berlin Office #1 is a vibrant workspace that fosters collaboration and creativity. This floor is home to a diverse team of engineers dedicated to driving innovation across Acme Inc.'s global endeavors. With a focus on quality and excellence, this floor is committed to delivering cutting-edge solutions that set new industry standards. Situated in Berlin's dynamic environment, Floor 2 epitomizes Acme Inc.'s commitment to engineering brilliance and its relentless pursuit of shaping the future of technology.`,
       officeId: berlinOffice1.id,
-      // TODO - add floor plan
+      floorPlan:
+        "http://res.cloudinary.com/dpfc44mfl/image/upload/v1701200327/floor_plans/s1bjbtkfiwtdpjiegvjl.png",
+    },
+  });
+  const floor2desk1 = await prisma.desk.create({
+    data: {
+      floorId: berlinOffice1Floor2.id,
+      publicDeskId: "1",
+      x: 133.5,
+      y: 346.90625,
+    },
+  });
+  const floor2desk2 = await prisma.desk.create({
+    data: {
+      floorId: berlinOffice1Floor2.id,
+      publicDeskId: "2",
+      x: 248.5,
+      y: 346.90625,
+    },
+  });
+  const floor2desk3 = await prisma.desk.create({
+    data: {
+      floorId: berlinOffice1Floor2.id,
+      publicDeskId: "3",
+      x: 241.5,
+      y: 461.90625,
+    },
+  });
+  const floor2desk4 = await prisma.desk.create({
+    data: {
+      floorId: berlinOffice1Floor2.id,
+      publicDeskId: "4",
+      x: 134.5,
+      y: 464.90625,
+    },
+  });
+  const floor2desk5 = await prisma.desk.create({
+    data: {
+      floorId: berlinOffice1Floor2.id,
+      publicDeskId: "5",
+      x: 443.5,
+      y: 380.90625,
+    },
+  });
+  const floor2desk6 = await prisma.desk.create({
+    data: {
+      floorId: berlinOffice1Floor2.id,
+      publicDeskId: "6",
+      x: 441.5,
+      y: 472.90625,
+    },
+  });
+  const floor2desk7 = await prisma.desk.create({
+    data: {
+      floorId: berlinOffice1Floor2.id,
+      publicDeskId: "7",
+      x: 579.5,
+      y: 379.90625,
+    },
+  });
+  const floor2desk8 = await prisma.desk.create({
+    data: {
+      floorId: berlinOffice1Floor2.id,
+      publicDeskId: "8",
+      x: 581.5,
+      y: 476.90625,
+    },
+  });
+  const floor2desk9 = await prisma.desk.create({
+    data: {
+      floorId: berlinOffice1Floor2.id,
+      publicDeskId: "9",
+      x: 765.5,
+      y: 342.90625,
+    },
+  });
+  const floor2desk10 = await prisma.desk.create({
+    data: {
+      floorId: berlinOffice1Floor2.id,
+      publicDeskId: "10",
+      x: 885.5,
+      y: 207.90625,
+    },
+  });
+  const floor2desk11 = await prisma.desk.create({
+    data: {
+      floorId: berlinOffice1Floor2.id,
+      publicDeskId: "11",
+      x: 888.5,
+      y: 343.90625,
+    },
+  });
+  const floor2desk12 = await prisma.desk.create({
+    data: {
+      floorId: berlinOffice1Floor2.id,
+      publicDeskId: "12",
+      x: 758.5,
+      y: 460.90625,
+    },
+  });
+  const floor2desk13 = await prisma.desk.create({
+    data: {
+      floorId: berlinOffice1Floor2.id,
+      publicDeskId: "13",
+      x: 894.5,
+      y: 464.90625,
     },
   });
 
@@ -224,7 +423,18 @@ async function main() {
   await prisma.deskSchedule.create({
     data: {
       userId: user1.id,
-      deskId: desk1.id,
+      deskId: floor1desk1.id,
+      date: zonedDate,
+      timezone: berlinOffice1.timezone,
+      wholeDay: true,
+      startTime: zonedDate,
+      endTime: addHours(zonedDate, 24),
+    },
+  });
+  await prisma.deskSchedule.create({
+    data: {
+      userId: user2.id,
+      deskId: floor1desk2.id,
       date: zonedDate,
       timezone: berlinOffice1.timezone,
       wholeDay: true,
