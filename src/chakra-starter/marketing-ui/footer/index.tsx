@@ -11,6 +11,8 @@ import {
 } from "@chakra-ui/react";
 import { ReactNode } from "react";
 
+import { WorkplacifyIcon } from "../../../components/WorkplacifyIcon";
+
 type ListHeaderProps = {
   children: ReactNode;
 };
@@ -36,8 +38,11 @@ export const Footer = () => {
         >
           <Stack spacing={6}>
             <Box display="flex" alignItems="center">
-              {/* <Icon h={8} w={8} as={Logo} marginRight={"2"} /> */}
+              <Box maxWidth={"50px"}>
+                <Icon h={2} w={2} as={WorkplacifyIcon} />
+              </Box>
               <Text
+                paddingLeft={2}
                 textAlign={useBreakpointValue({ base: "center", md: "left" })}
                 fontFamily={"heading"}
                 color={useColorModeValue("gray.800", "white")}

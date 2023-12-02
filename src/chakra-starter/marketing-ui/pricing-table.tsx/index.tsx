@@ -48,12 +48,10 @@ const PriceWrapper = (props: PriceWrapperProps) => {
 };
 
 export const ThreeTierPricing = () => {
-  const router = useRouter();
-
   return (
     <Box>
       <VStack spacing={2} textAlign="center">
-        <Heading as="h2" fontSize="4xl">
+        <Heading as="h2" fontSize="4xl" id="pricing">
           Plans that fit your organization
         </Heading>
         <Text fontSize="lg" color={"gray.500"}>
@@ -356,8 +354,9 @@ export const ThreeTierPricing = () => {
               <Button
                 textDecoration={"none"}
                 href={
-                  "mailto:hello@hackathon.camp?subject=Hackathon.camp enterprise"
+                  "mailto :hello@hackathon.camp?subject=Hackathon.camp enterprise"
                 }
+                target={"_blank"}
                 as={Link}
                 w="full"
                 colorScheme="orange"

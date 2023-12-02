@@ -3,7 +3,8 @@ import {
   Box,
   Collapse,
   Container,
-  Flex, // Icon,
+  Flex,
+  Icon, // Icon,
   IconButton,
   Stack,
   Text,
@@ -13,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { FiMenu, FiMinimize2 } from "react-icons/fi";
 
+import { WorkplacifyIcon } from "../../../components/WorkplacifyIcon";
 // import { Logo } from "../Core/Logo";
 import { NavbarAuthenticationElement } from "./NavbarAuthenticationElement";
 import { NavbarDesktop } from "./NavbarDesktop";
@@ -20,27 +22,27 @@ import { NavbarMobile } from "./NavbarMobile";
 import { NavItems } from "./types";
 
 const NAV_ITEMS: NavItems = [
-  {
-    label: "Product",
-    children: [
-      {
-        label: "Desk Management",
-        subLabel: "...",
-        href: "/product/desk-management",
-        tags: [],
-      },
-      {
-        label: "Office Utilization Reporting",
-        subLabel: "...",
-        href: "/product/office-utilization-reporting",
-        tags: [],
-      },
-    ],
-  },
+  // {
+  //   label: "Product",
+  //   children: [
+  //     {
+  //       label: "Desk Management",
+  //       subLabel: "...",
+  //       href: "/product/desk-management",
+  //       tags: [],
+  //     },
+  //     {
+  //       label: "Office Utilization Reporting",
+  //       subLabel: "...",
+  //       href: "/product/office-utilization-reporting",
+  //       tags: [],
+  //     },
+  //   ],
+  // },
 
   {
     label: "Pricing",
-    href: "/pricing",
+    href: "/#pricing",
   },
 ];
 
@@ -88,8 +90,11 @@ export const NavbarWithDrawer = () => {
                 textDecoration: "none",
               }}
             >
-              {/* <Icon h={12} w={12} as={Logo} marginRight={"2"} /> */}
+              <Box maxWidth={"25px"}>
+                <Icon h={2} w={2} as={WorkplacifyIcon} />
+              </Box>
               <Text
+                paddingLeft={2}
                 textAlign={useBreakpointValue({
                   base: "center",
                   md: "left",
