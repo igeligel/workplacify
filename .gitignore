@@ -44,3 +44,4 @@ playwright/test-results
 certificates
 
 .env
+.eslintcache
