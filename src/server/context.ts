@@ -1,10 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as trpcNext from "@trpc/server/adapters/next";
 import { Session, getServerSession } from "next-auth";
 
 import { nextAuthOptions } from "../pages/api/auth/[...nextauth]";
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface CreateContextOptions {
   session: Session | null;
 }

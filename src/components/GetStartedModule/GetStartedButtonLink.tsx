@@ -1,6 +1,4 @@
-import { Link } from "@chakra-ui/next-js";
 import {
-  Badge,
   Box,
   Button,
   HStack,

@@ -1,4 +1,3 @@
-import { Link } from "@chakra-ui/next-js";
 import { VStack } from "@chakra-ui/react";
 import { Office } from "@prisma/client";
 import { FiBriefcase } from "react-icons/fi";

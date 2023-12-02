@@ -12,7 +12,6 @@ import {
   VStack,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { useRouter } from "next/router";
 import { ReactNode } from "react";
 
 import { PricingFeatureListItem } from "./PricingFeatureListItem";

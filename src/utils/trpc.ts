@@ -41,6 +41,11 @@ export interface SSRContext extends NextPageContext {
   status?: number;
 }
 
+type ResponseMetaOptions = {
+  ctx: SSRContext;
+  clientErrors: any[];
+};
+
 /**
  * A set of strongly-typed React hooks from your `AppRouter` type signature with `createReactQueryHooks`.
  * @link https://trpc.io/docs/react#3-create-trpc-hooks
@@ -81,7 +86,7 @@ export const trpc = createTRPCNext<AppRouter, SSRContext>({
 
             const {
               // If you're using Node 18 before 18.15.0, omit the "connection" header
-              connection: _connection,
+              // connection: _connection,
               ...headers
             } = ctx.req.headers;
             return headers;
@@ -101,8 +106,8 @@ export const trpc = createTRPCNext<AppRouter, SSRContext>({
   /**
    * Set headers or status code when doing SSR
    */
-  responseMeta(opts) {
-    const ctx = opts.ctx as SSRContext;
+  responseMeta(opts: ResponseMetaOptions) {
+    const ctx = opts.ctx;
 
     if (ctx.status) {
       // If HTTP status set, propagate that

@@ -1,5 +1,4 @@
 import { TRPCError } from "@trpc/server";
-import { z } from "zod";
 
 import { prisma } from "../../server/prisma";
 import { getUserFromSession } from "../queries/getUserFromSession";

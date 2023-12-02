@@ -16,21 +16,14 @@ import {
   HStack,
   Icon,
   IconButton,
-  Image,
   Input,
   Switch,
-  Text,
   Textarea,
   useToast,
 } from "@chakra-ui/react";
-import { justify } from "@cloudinary/url-gen/qualifiers/textAlignment";
 import { ChangeEventHandler, useRef, useState } from "react";
 import { FiMinus, FiPlus, FiX } from "react-icons/fi";
-import {
-  TransformComponent,
-  TransformWrapper,
-  useTransformEffect,
-} from "react-zoom-pan-pinch";
+import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 
 import {
   DeskFormState,

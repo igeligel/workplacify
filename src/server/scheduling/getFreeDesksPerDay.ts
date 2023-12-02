@@ -1,4 +1,4 @@
-import { Desk, DeskSchedule, Prisma, User } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 
 // DeskSchedule
 // {
@@ -60,17 +60,23 @@ const calculateFreePeriods = (
   startingTime: Date,
   endTime: Date,
 ): { start: Date; end: Date }[] => {
-  const schedulesForDesk = deskSchedules.filter(
-    (schedule) =>
-      schedule.deskId === deskId &&
-      ((schedule.date &&
-        schedule.date > startingTime &&
-        schedule.date < endTime) ||
-        (schedule.startTime &&
-          schedule.endTime &&
-          schedule.endTime > startingTime &&
-          schedule.startTime < endTime)),
-  );
+  const schedulesForDesk = deskSchedules.filter((schedule) => {
+    const isMatchingDeskId = schedule.deskId === deskId;
+
+    const isMatchingBasedOnWholeDayDate =
+      schedule.date && schedule.date > startingTime && schedule.date < endTime;
+
+    const isMatchingBasedOnStartAndEndTime =
+      schedule.startTime &&
+      schedule.endTime &&
+      schedule.endTime > startingTime &&
+      schedule.startTime < endTime;
+
+    const isMatchingBasedOnTime =
+      isMatchingBasedOnWholeDayDate ?? isMatchingBasedOnStartAndEndTime;
+
+    return isMatchingDeskId && isMatchingBasedOnTime;
+  });
 
   let freePeriods = [{ start: startingTime, end: endTime }];
 
@@ -127,17 +133,23 @@ const calculateUsedPeriods = (
   startingTime: Date,
   endTime: Date,
 ): PeriodWithUserInfo[] => {
-  const schedulesForDesk = deskSchedules.filter(
-    (schedule) =>
-      schedule.deskId === deskId &&
-      ((schedule.date &&
-        schedule.date > startingTime &&
-        schedule.date < endTime) ||
-        (schedule.startTime &&
-          schedule.endTime &&
-          schedule.endTime > startingTime &&
-          schedule.startTime < endTime)),
-  );
+  const schedulesForDesk = deskSchedules.filter((schedule) => {
+    const isMatchingDesk = schedule.deskId === deskId;
+
+    const isMatchoingBasedOnWholeDayDate =
+      schedule.date && schedule.date > startingTime && schedule.date < endTime;
+
+    const isMatchingBasedOnStartAndEndTime =
+      schedule.startTime &&
+      schedule.endTime &&
+      schedule.endTime > startingTime &&
+      schedule.startTime < endTime;
+
+    const isMatchingBasedOnTime =
+      isMatchoingBasedOnWholeDayDate ?? isMatchingBasedOnStartAndEndTime;
+
+    return isMatchingDesk && isMatchingBasedOnTime;
+  });
 
   const usedPeriods: PeriodWithUserInfo[] = [];
 
