@@ -102,9 +102,6 @@ export const CallToActionWithAnnotation: React.FC = () => {
                 }}
                 onClick={async (e) => {
                   e.preventDefault();
-                  // posthog.capture("signup", {
-                  //   source: "CallToActionWithAnnotation",
-                  // });
                   router.push("/signup");
                 }}
               >
