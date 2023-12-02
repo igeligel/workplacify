@@ -1,4 +1,4 @@
-import { httpBatchLink, loggerLink } from "@trpc/client";
+import { TRPCClientError, httpBatchLink, loggerLink } from "@trpc/client";
 import { createTRPCNext } from "@trpc/next";
 import { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
 import { NextPageContext } from "next";
@@ -43,7 +43,7 @@ export interface SSRContext extends NextPageContext {
 
 type ResponseMetaOptions = {
   ctx: SSRContext;
-  clientErrors: any[];
+  clientErrors: TRPCClientError<AppRouter>[];
 };
 
 /**

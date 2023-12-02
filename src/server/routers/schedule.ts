@@ -155,6 +155,9 @@ export const scheduleRouter = router({
             in: floors.map((floor) => floor.id),
           },
         },
+        include: {
+          Floor: true,
+        },
       });
       const queriedDate = parseISO(resolverProps.input.day);
       const timeZone = usersOffice?.timezone ?? "UTC";
@@ -164,6 +167,20 @@ export const scheduleRouter = router({
         where: {
           deskId: {
             in: desksInCurrentOffice.map((desk) => desk.id),
+          },
+        },
+        include: {
+          desk: {
+            include: {
+              Floor: true,
+            },
+          },
+          user: {
+            select: {
+              id: true,
+              name: true,
+              image: true,
+            },
           },
         },
       });

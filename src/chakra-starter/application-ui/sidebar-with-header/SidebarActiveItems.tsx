@@ -1,5 +1,6 @@
 import { Link } from "@chakra-ui/next-js";
 import { Box, Heading, Text, VStack } from "@chakra-ui/react";
+import { IconType } from "react-icons";
 
 // import { FiStar } from "react-icons/fi";
 import { GroupedMenuItem } from "./GroupedMenuItem";
@@ -7,7 +8,7 @@ import { GroupedMenuItem } from "./GroupedMenuItem";
 type SubItem = {
   id: number;
   title: string;
-  icon: any;
+  icon: IconType;
 };
 
 export const SidebarActiveItems = () => {
