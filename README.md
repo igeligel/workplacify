@@ -1,88 +1,94 @@
-# Prisma + tRPC
+# workplacify
 
-## Features
+The open-source desk scheduling app for your office. [Learn more](https://workplacify.com).
 
-- 🧙‍♂️ E2E typesafety with [tRPC](https://trpc.io)
-- ⚡ Full-stack React with Next.js
-- ⚡ Database with Prisma
-- ⚙️ VSCode extensions
-- 🎨 ESLint + Prettier
-- 💚 CI setup using GitHub Actions:
-  - ✅ E2E testing with [Playwright](https://playwright.dev/)
-  - ✅ Linting
-- 🔐 Validates your env vars on build and start
+<div align="center">
 
-## Setup
+[Discord](https://discord.gg/m6EQptpj) · [Website](https://workplacify.com) · [Issues](https://github.com/igeligel/workplacify/issues)
 
-```bash
-pnpm create next-app --example https://github.com/trpc/trpc --example-path examples/next-prisma-starter trpc-prisma-starter
-cd trpc-prisma-starter
-pnpm
-pnpm dx
-```
+</div>
 
-### Requirements
+## About the Project
 
-- Node >= 18.0.0
-- Postgres
+We are the first open-source desk scheduling app for your office. Ever had conflicting desk schedules or an employee not getting their favorite desk? Tracking your desks in an Excel sheet? Use workplacify to manage your office desks and make your employees happy. A perfect alternative to Envoy, UnSpot, or desk.ly.
+
+### Built With
+
+- [Next.js](https://nextjs.org/?ref=workplacify.com)
+- [tRPC](https://trpc.io/?ref=workplacify.com)
+- [React.js](https://reactjs.org/?ref=workplacify.com)
+- [Chakra UI](https://chakra-ui.com/?ref=workplacify.com)
+- [Prisma](https://prisma.io/?ref=workplacify.com)
+
+## Contact us
+
+Meet us on [Discord](https://discord.gg/m6EQptpj) or [schedule a meeting](https://calendar.app.google/8pcg6kcqXvuyVPyq8) with the founder.
 
 ## Development
 
-### Start project
+### Setup
 
-```bash
-pnpm create next-app --example https://github.com/trpc/trpc --example-path examples/next-prisma-starter trpc-prisma-starter
-cd trpc-prisma-starter
-pnpm
-pnpm dx
-```
-
-### Commands
-
-```bash
-pnpm build      # runs `prisma generate` + `prisma migrate` + `next build`
-pnpm db-reset   # resets local db
-pnpm dev        # starts next.js
-pnpm dx         # starts postgres db + runs migrations + seeds + starts next.js
-pnpm test-dev   # runs e2e tests on dev
-pnpm test-start # runs e2e tests on `next start` - build required before
-pnpm test:unit  # runs normal Vitest unit tests
-pnpm test:e2e   # runs e2e tests
-```
+1. Fork the repository: https://github.com/igeligel/workplacify/fork and clone it to your local machine:
+   ```sh
+   git clone https://github.com/<your_username>/workplacify
+   ```
+1. Go to the project directory:
+   ```sh
+   cd workplacify
+   ```
+1. Install packages with npm
+   ```sh
+   npm install
+   ```
+1. Set up your `.env` file:
+   - Duplicate `.env.example` to `.env`
+   - Create a new `NEXTAUTH_SECRET`, for example via: https://bitwarden.com/password-generator/
+   - Generate the `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` via https://console.cloud.google.com/apis/credentials
+   - Generate the `CLOUDINARY_API_SECRET`, `CLOUDINARY_API_KEY`, and `CLOUDINARY_NAME` via https://cloudinary.com/console
+1. Setup Node If your Node version does not meet the project's requirements as instructed by the docs, "[nvm](https://github.com/nvm-sh/nvm)" (Node Version Manager) allows using Node at the version required by the project. You can also use [nvm-windows](https://github.com/coreybutler/nvm-windows). We are currently using Node.js 20.
+1. Start the database & development server:
+   ```sh
+   npm run db-up
+   npm run dx
+   ```
+1. Once starting you also should see an example organization id which you can join which has some static data already.
 
 ## Deployment
 
-### Using [Render](https://render.com/)
+Deployment is done via [render.com](https://render.com). You can deploy your own instance by clicking the button below:
 
-The project contains a [`render.yaml`](./render.yaml) [_"Blueprint"_](https://render.com/docs/blueprint-spec) which makes the project easily deployable on [Render](https://render.com/).
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
 
-Go to [dashboard.render.com/blueprints](https://dashboard.render.com/blueprints) and connect to this Blueprint and see how the app and database automatically gets deployed.
+## Contributing
 
-## Files of note
+We are still working on our contributing guide but feel free to open a PR or issue if you see something or want to request a feature.
 
-<table>
-  <thead>
-    <tr>
-      <th>Path</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><a href="./prisma/schema.prisma"><code>./prisma/schema.prisma</code></a></td>
-      <td>Prisma schema</td>
-    </tr>
-    <tr>
-      <td><a href="./src/pages/api/trpc/[trpc].ts"><code>./src/pages/api/trpc/[trpc].ts</code></a></td>
-      <td>tRPC response handler</td>
-    </tr>
-    <tr>
-      <td><a href="./src/server/routers"><code>./src/server/routers</code></a></td>
-      <td>Your app's different tRPC-routers</td>
-    </tr>
-  </tbody>
-</table>
+### Hacktoberfest
 
----
+We will be active maintainers during the [Hacktoberfest](https://hacktoberfest.com/). In 2024 we will focus on this.
 
-Created by [@alexdotjs](https://twitter.com/alexdotjs).
+## Integrations
+
+We are having some integrations of which some are necessary to run the application.
+
+### Google OAuth
+
+We use Google as the main auth provider. You can create your own OAuth credentials via https://console.cloud.google.com/apis/credentials. These credential can be then added to the `.env` file.
+
+### Cloudinary
+
+We are using cloudinary to save images of the floor. We currently do not have other providers to save the image, but we might work on this in the future. You can create your own Cloudinary credentials via https://cloudinary.com/console. These credential can be then added to the `.env` file.
+
+### Discord (for notifications)
+
+Discord is fully optional but we use it to notify the team around issues, or events that are happening on the platform, to interact with new users for example. You can create your own Discord bot via https://discord.com/developers/applications. These credential can be then added to the `.env` file.
+
+## License
+
+The code is licensed under the [MIT License](./LICENSE) mostly. Some parts are currently licensed under different licenses because they are commercial projects:
+
+- Chakra Starter: [PolyForm Strict License 1.0.0](./src/chakra-starter/LICENSE.MD)
+
+## Acknowledgements
+
+None so far!
