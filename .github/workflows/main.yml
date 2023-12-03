@@ -18,9 +18,12 @@ jobs:
           key: nodeModules-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             nodeModules-
-      - name: 4) Install dependencies
+      - name: 4) "Create env file"
+        run: |
+          echo "${{ secrets.ENV_FILE }}" > .env
+      - name: 5) Install dependencies
         run: npm install --frozen-lockfile
         env:
           CI: true
-      - name: 5) Build
+      - name: 6) Build
         run: npm run build-ci
