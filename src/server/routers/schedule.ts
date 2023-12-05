@@ -57,7 +57,7 @@ export const scheduleRouter = router({
           },
         },
         include: {
-          Floor: true,
+          floor: true,
         },
       });
       const queriedDate = parseISO(resolverProps.input.day);
@@ -74,7 +74,7 @@ export const scheduleRouter = router({
         include: {
           desk: {
             include: {
-              Floor: true,
+              floor: true,
             },
           },
           user: {
@@ -156,7 +156,7 @@ export const scheduleRouter = router({
           },
         },
         include: {
-          Floor: true,
+          floor: true,
         },
       });
       const queriedDate = parseISO(resolverProps.input.day);
@@ -172,7 +172,7 @@ export const scheduleRouter = router({
         include: {
           desk: {
             include: {
-              Floor: true,
+              floor: true,
             },
           },
           user: {

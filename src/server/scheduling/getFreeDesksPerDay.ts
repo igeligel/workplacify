@@ -29,7 +29,7 @@ import { Prisma } from "@prisma/client";
 
 type DeskWithFloor = Prisma.DeskGetPayload<{
   include: {
-    Floor: true;
+    floor: true;
   };
 }>;
 
@@ -41,7 +41,7 @@ type MappedDeskSchedule = Prisma.DeskScheduleGetPayload<{
   include: {
     desk: {
       include: {
-        Floor: true;
+        floor: true;
       };
     };
     user: {
