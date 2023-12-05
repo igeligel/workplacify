@@ -112,7 +112,7 @@ const SetupPage = () => {
   ) => {
     try {
       await updateOnboardingSelectionMutation.mutateAsync({
-        submitted: props.submitted ?? false,
+        submitted: props.submitted || false,
         workplacifyPreferences: props.workplacifyPreferences,
         temporaryInviteCode: props.inviteCode,
       });
@@ -200,7 +200,7 @@ const SetupPage = () => {
     if (!onboardingSelection.data) return;
     if (initialLoadComplete) return;
     setSelectedOptions(onboardingSelection.data.workplacifyPreferences);
-    setInviteCode(onboardingSelection.data.temporaryInviteCode ?? "");
+    setInviteCode(onboardingSelection.data.temporaryInviteCode || "");
 
     isInitialLoadComplete(true);
     if (onboardingSelection.data.submitted) {

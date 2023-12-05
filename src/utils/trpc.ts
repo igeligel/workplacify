@@ -23,7 +23,7 @@ function getBaseUrl() {
   }
 
   // assume localhost
-  return `http://127.0.0.1:${process.env.PORT ?? 3000}`;
+  return `http://127.0.0.1:${process.env.PORT || 3000}`;
 }
 
 /**
@@ -120,7 +120,7 @@ export const trpc = createTRPCNext<AppRouter, SSRContext>({
     if (error) {
       // Propagate http first error from API calls
       return {
-        status: error.data?.httpStatus ?? 500,
+        status: error.data?.httpStatus || 500,
       };
     }
 

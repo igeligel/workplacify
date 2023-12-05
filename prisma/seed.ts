@@ -288,7 +288,7 @@ async function main() {
   const desk17 = await prisma.desk.create({
     data: {
       floorId: berlinOffice1Floor1.id,
-      publicDeskId: "16",
+      publicDeskId: "17",
       x: 1052.674278846154,
       y: 957.0218599759614,
     },
@@ -296,7 +296,7 @@ async function main() {
   const desk18 = await prisma.desk.create({
     data: {
       floorId: berlinOffice1Floor1.id,
-      publicDeskId: "16",
+      publicDeskId: "18",
       x: 1051.612580128205,
       y: 1114.153270232372,
     },

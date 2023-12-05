@@ -23,7 +23,7 @@ export const UserMenuOfficeSelector = () => {
   const hasCurrentOfficeId =
     typeof userQuery.data?.currentOfficeId === "string";
   const officeQuery = trpc.office.getById.useQuery(
-    { id: userQuery.data?.currentOfficeId ?? "" },
+    { id: userQuery.data?.currentOfficeId || "" },
     {
       enabled: hasCurrentOfficeId,
     },

@@ -17,7 +17,7 @@ type MenuItemPopoverProps = MenuItemProps & {
 export const MenuItemPopover: React.FC<MenuItemPopoverProps> = (props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const derivedIsOpen = props.controlled?.isOpen ?? isOpen;
+  const derivedIsOpen = props.controlled?.isOpen || isOpen;
 
   const onToggleOpen = () => {
     if (props.controlled?.setIsOpen) {

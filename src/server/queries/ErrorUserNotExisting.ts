@@ -3,9 +3,9 @@ export class ErrorUserNotExisting extends Error {
   message = "The user does not exist.";
 
   constructor(message?: string) {
-    super(message ?? "The user does not exist.");
+    super(message || "The user does not exist.");
 
-    this.message = message ?? "The user does not exist.";
+    this.message = message || "The user does not exist.";
     this.name = "UserNotExistingError";
   }
 }

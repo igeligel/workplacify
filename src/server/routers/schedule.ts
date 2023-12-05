@@ -61,7 +61,7 @@ export const scheduleRouter = router({
         },
       });
       const queriedDate = parseISO(resolverProps.input.day);
-      const timeZone = usersOffice?.timezone ?? "UTC";
+      const timeZone = usersOffice?.timezone || "UTC";
       // UTC
       const zonedDate = utcToZonedTime(queriedDate, timeZone);
 
@@ -160,7 +160,7 @@ export const scheduleRouter = router({
         },
       });
       const queriedDate = parseISO(resolverProps.input.day);
-      const timeZone = usersOffice?.timezone ?? "UTC";
+      const timeZone = usersOffice?.timezone || "UTC";
       const zonedDate = utcToZonedTime(queriedDate, timeZone);
 
       const deskSchedules = await prisma.deskSchedule.findMany({
@@ -283,7 +283,7 @@ export const scheduleRouter = router({
         },
       });
       const queriedDate = parseISO(resolverProps.input.day);
-      const timeZone = usersOffice?.timezone ?? "UTC";
+      const timeZone = usersOffice?.timezone || "UTC";
       const zonedDate = utcToZonedTime(queriedDate, timeZone);
 
       const deskSchedules = await prisma.deskSchedule.findMany({

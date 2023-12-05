@@ -56,7 +56,7 @@ export const NavbarMobileItem = (props: NavItem) => {
           align={"start"}
         >
           {children?.map((child) => (
-            <Link href={child.href ?? "#"} py={2} key={child.label}>
+            <Link href={child.href || "#"} py={2} key={child.label}>
               {child.label}
             </Link>
           ))}

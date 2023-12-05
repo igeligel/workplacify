@@ -28,7 +28,7 @@ export const NavbarDesktop: React.FC<NavbarDesktopProps> = (props) => {
             <PopoverTrigger>
               <Box>
                 <Link
-                  href={navItem.href ?? "#"}
+                  href={navItem.href || "#"}
                   p={2}
                   fontSize={"sm"}
                   fontWeight={500}

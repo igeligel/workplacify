@@ -34,7 +34,7 @@ const AccountSettings = () => {
 
   useEffect(() => {
     if (userName === null) {
-      setUserName(userQuery.data?.name ?? "");
+      setUserName(userQuery.data?.name || "");
     }
   }, [userName, userQuery.data]);
 
@@ -110,7 +110,7 @@ const AccountSettings = () => {
                 <FormControl>
                   <FormLabel>Name</FormLabel>
                   <Input
-                    value={userName ?? ""}
+                    value={userName || ""}
                     placeholder={"BER-001"}
                     type="text"
                     onChange={(e) => setUserName(e.target.value)}

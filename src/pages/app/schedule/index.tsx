@@ -15,6 +15,7 @@ import { GetServerSideProps } from "next";
 import { useState } from "react";
 import { DayPicker } from "react-day-picker";
 
+import { ScheduleNoOfficeSelected } from "../../../components/ScheduleNoOfficeSelected";
 import { appAuthRedirect } from "../../../server/nextMiddleware/appAuthRedirect";
 import { trpc } from "../../../utils/trpc";
 
@@ -45,6 +46,10 @@ const SchedulePage = () => {
 
   if (!userQuery.data) {
     return <div>Not logged in</div>;
+  }
+
+  if (userQuery.data.currentOfficeId === null) {
+    return <ScheduleNoOfficeSelected />;
   }
 
   if (!getDeskSchedulesForDayQuery.data) {

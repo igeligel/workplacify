@@ -73,7 +73,7 @@ const calculateFreePeriods = (
       schedule.startTime < endTime;
 
     const isMatchingBasedOnTime =
-      isMatchingBasedOnWholeDayDate ?? isMatchingBasedOnStartAndEndTime;
+      isMatchingBasedOnWholeDayDate || isMatchingBasedOnStartAndEndTime;
 
     return isMatchingDeskId && isMatchingBasedOnTime;
   });
@@ -136,7 +136,7 @@ const calculateUsedPeriods = (
   const schedulesForDesk = deskSchedules.filter((schedule) => {
     const isMatchingDesk = schedule.deskId === deskId;
 
-    const isMatchoingBasedOnWholeDayDate =
+    const isMatchingBasedOnWholeDayDate =
       schedule.date && schedule.date > startingTime && schedule.date < endTime;
 
     const isMatchingBasedOnStartAndEndTime =
@@ -146,7 +146,7 @@ const calculateUsedPeriods = (
       schedule.startTime < endTime;
 
     const isMatchingBasedOnTime =
-      isMatchoingBasedOnWholeDayDate ?? isMatchingBasedOnStartAndEndTime;
+      isMatchingBasedOnWholeDayDate || isMatchingBasedOnStartAndEndTime;
 
     return isMatchingDesk && isMatchingBasedOnTime;
   });

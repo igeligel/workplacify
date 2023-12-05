@@ -18,7 +18,7 @@ export const NavbarDesktopSubMenu: React.FC<NavItem> = (props) => {
 
   return (
     <Link
-      href={href ?? "#"}
+      href={href || "#"}
       role={"group"}
       display={"block"}
       p={2}
