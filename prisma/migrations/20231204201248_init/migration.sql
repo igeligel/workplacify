@@ -1,8 +1,8 @@
 -- CreateEnum
-CREATE TYPE "WorkplacifyPreference" AS ENUM ('DESK_BOOKING', 'WORKPLACE_ANALYTICS', 'JOIN_ORGANIZATION');
+CREATE TYPE "workplacify_preference" AS ENUM ('DESK_BOOKING', 'WORKPLACE_ANALYTICS', 'JOIN_ORGANIZATION');
 
 -- CreateEnum
-CREATE TYPE "UserRole" AS ENUM ('ADMIN', 'MEMBER');
+CREATE TYPE "user_role" AS ENUM ('ADMIN', 'MEMBER');
 
 -- CreateTable
 CREATE TABLE "onboarding_selection" (
@@ -10,7 +10,7 @@ CREATE TABLE "onboarding_selection" (
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
     "user_id" TEXT NOT NULL,
-    "workplacify_preferences" "WorkplacifyPreference"[],
+    "workplacify_preferences" "workplacify_preference"[],
     "temporary_invite_code" TEXT,
     "submitted" BOOLEAN NOT NULL DEFAULT false,
 
@@ -115,10 +115,10 @@ CREATE TABLE "desk" (
 -- CreateTable
 CREATE TABLE "account" (
     "id" TEXT NOT NULL,
-    "user_id" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
     "type" TEXT NOT NULL,
     "provider" TEXT NOT NULL,
-    "provider_account_id" TEXT NOT NULL,
+    "providerAccountId" TEXT NOT NULL,
     "refresh_token" TEXT,
     "access_token" TEXT,
     "expires_at" INTEGER,
@@ -148,7 +148,7 @@ CREATE TABLE "user" (
     "email_verified" TIMESTAMP(3),
     "image" TEXT,
     "organization_id" TEXT,
-    "user_role" "UserRole" NOT NULL DEFAULT 'MEMBER',
+    "user_role" "user_role" NOT NULL DEFAULT 'MEMBER',
     "current_office_id" TEXT,
 
     CONSTRAINT "user_pkey" PRIMARY KEY ("id")
@@ -165,7 +165,7 @@ CREATE TABLE "verification_token" (
 CREATE UNIQUE INDEX "organization_invite_code_key" ON "organization"("invite_code");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "account_provider_provider_account_id_key" ON "account"("provider", "provider_account_id");
+CREATE UNIQUE INDEX "account_provider_providerAccountId_key" ON "account"("provider", "providerAccountId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "session_session_token_key" ON "session"("session_token");
@@ -204,7 +204,7 @@ ALTER TABLE "desk_schedule" ADD CONSTRAINT "desk_schedule_user_id_fkey" FOREIGN 
 ALTER TABLE "desk" ADD CONSTRAINT "desk_floor_id_fkey" FOREIGN KEY ("floor_id") REFERENCES "floor"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "account" ADD CONSTRAINT "account_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "account" ADD CONSTRAINT "account_userId_fkey" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "session" ADD CONSTRAINT "session_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE CASCADE;

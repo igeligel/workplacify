@@ -14,6 +14,8 @@ import {
 import { Caveat } from "next/font/google";
 import { useRouter } from "next/router";
 
+import { trpc } from "../../../utils/trpc";
+
 const caveat = Caveat({
   display: "swap",
   style: "normal",
@@ -36,7 +38,7 @@ const Arrow = createIcon({
 
 export const CallToActionWithAnnotation: React.FC = () => {
   const router = useRouter();
-
+  const user = trpc.user.get.useQuery();
   return (
     <Box
       display="flex"
@@ -89,7 +91,7 @@ export const CallToActionWithAnnotation: React.FC = () => {
           >
             <VStack spacing={"0.5"}>
               <Button
-                href={"/signup"}
+                href={user ? "/app" : "/api/auth/signin"}
                 as={Link}
                 colorScheme={"orange"}
                 bg={"orange.400"}
@@ -102,7 +104,7 @@ export const CallToActionWithAnnotation: React.FC = () => {
                 }}
                 onClick={async (e) => {
                   e.preventDefault();
-                  router.push("/signup");
+                  router.push(user ? "/app" : "/api/auth/signin");
                 }}
               >
                 Upload floor & schedule desks

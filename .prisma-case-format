@@ -1,0 +1,2 @@
+# file: .prisma-case-format
+uses_next_auth: true

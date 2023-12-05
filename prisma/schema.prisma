@@ -14,6 +14,8 @@ enum WorkplacifyPreference {
   DESK_BOOKING
   WORKPLACE_ANALYTICS
   JOIN_ORGANIZATION
+
+  @@map("workplacify_preference")
 }
 
 model OnboardingSelection {
@@ -54,7 +56,7 @@ model Office {
   organization   Organization? @relation(fields: [organizationId], references: [id])
   organizationId String?       @map("organization_id")
   floors         Floor[]
-  User           User[]
+  user           User[]
 
   @@map("office")
 }
@@ -104,7 +106,7 @@ model DeskSchedule {
   id        String    @id @default(cuid())
   desk      Desk      @relation(fields: [deskId], references: [id])
   deskId    String    @map("desk_id")
-  date      DateTime? @map("date")
+  date      DateTime?
   timezone  String    @default("Etc/GMT")
   wholeDay  Boolean   @default(false) @map("whole_day")
   startTime DateTime? @map("start_time")
@@ -124,21 +126,21 @@ model Desk {
   description  String?
   createdAt    DateTime       @default(now()) @map("created_at")
   updatedAt    DateTime       @updatedAt @map("updated_at")
-  Floor        Floor          @relation(fields: [floorId], references: [id])
+  floor        Floor          @relation(fields: [floorId], references: [id])
   floorId      String         @map("floor_id")
-  x            Float          @map("x")
-  y            Float          @map("y")
-  DeskSchedule DeskSchedule[]
+  x            Float
+  y            Float
+  deskSchedule DeskSchedule[]
 
   @@map("desk")
 }
 
 model Account {
   id                String  @id @default(cuid())
-  userId            String  @map("user_id")
+  userId            String
   type              String
   provider          String
-  providerAccountId String  @map("provider_account_id")
+  providerAccountId String
   refresh_token     String? @db.Text
   access_token      String? @db.Text
   expires_at        Int?
@@ -166,6 +168,8 @@ model Session {
 enum UserRole {
   ADMIN
   MEMBER
+
+  @@map("user_role")
 }
 
 model User {
@@ -182,7 +186,7 @@ model User {
   onboardingSelection OnboardingSelection[]
   currentOffice       Office?               @relation(fields: [currentOfficeId], references: [id])
   currentOfficeId     String?               @map("current_office_id")
-  DeskSchedule        DeskSchedule[]
+  deskSchedule        DeskSchedule[]
 
   @@map("user")
 }
