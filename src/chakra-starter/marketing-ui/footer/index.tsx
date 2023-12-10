@@ -83,7 +83,7 @@ export const Footer = () => {
           <Stack align={"flex-start"}>
             <ListHeader>Find Us</ListHeader>
             <Link
-              href={"https://www.github.com/"}
+              href={"https://github.com/igeligel/workplacify"}
               target="_blank"
               rel="noopener noreferrer nofollow"
             >
