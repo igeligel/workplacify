@@ -75,7 +75,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^8.3.1",
-    "@playwright/test": "^1.40.0",
+    "@playwright/test": "^1.40.1",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/multer": "^1.4.11",
     "@types/node": "^20.9.4",
