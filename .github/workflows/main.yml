@@ -20,7 +20,9 @@ jobs:
             nodeModules-
       - name: 4) "Create env file"
         run: |
+          touch .env
           echo "${{ secrets.ENV_FILE }}" > .env
+          cat .env
       - name: 5) Install dependencies
         run: npm install --frozen-lockfile
         env:
