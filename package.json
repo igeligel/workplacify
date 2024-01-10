@@ -50,7 +50,7 @@
     "@trpc/next": "^10.44.0",
     "@trpc/react-query": "^10.44.0",
     "@trpc/server": "^10.44.0",
-    "cloudinary": "^1.41.0",
+    "cloudinary": "^1.41.2",
     "clsx": "^2.0.0",
     "datauri": "^4.1.0",
     "date-fns": "^2.30.0",
