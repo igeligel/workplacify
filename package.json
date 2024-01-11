@@ -41,7 +41,7 @@
     "@chakra-ui/next-js": "^2.2.0",
     "@chakra-ui/react": "^2.8.2",
     "@cloudinary/react": "^1.11.2",
-    "@cloudinary/url-gen": "^1.13.0",
+    "@cloudinary/url-gen": "^1.14.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@prisma/client": "^5.6.0",
