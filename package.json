@@ -53,7 +53,7 @@
     "cloudinary": "^1.41.2",
     "clsx": "^2.0.0",
     "datauri": "^4.1.0",
-    "date-fns": "^2.30.0",
+    "date-fns": "^3.2.0",
     "date-fns-tz": "^2.0.0",
     "discord.js": "^14.14.1",
     "framer-motion": "^10.18.0",
