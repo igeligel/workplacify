@@ -5,7 +5,7 @@ import {
   Input,
   Textarea,
 } from "@chakra-ui/react";
-import TimezoneSelect, { ITimezoneOption } from "react-timezone-select";
+import TimezoneSelect from "react-timezone-select";
 
 import { useOfficeFormStore } from "../stores/officeFormStore";
 
@@ -46,8 +46,11 @@ export const FormOfficeAdd = () => {
         <FormLabel>Time zone</FormLabel>
         <TimezoneSelect
           value={timezone}
-          onChange={(timezone: ITimezoneOption) => {
-            setTimezone(timezone.value);
+          onChange={(timezone) => {
+            const parsedTimezone =
+              typeof timezone === "string" ? timezone : timezone.value;
+
+            setTimezone(parsedTimezone);
           }}
         ></TimezoneSelect>
       </FormControl>
