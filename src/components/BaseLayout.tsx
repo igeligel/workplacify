@@ -4,8 +4,6 @@ import Head from "next/head";
 import { Footer } from "../chakra-starter/marketing-ui/footer";
 import { NavbarWithDrawer } from "../chakra-starter/marketing-ui/navbar-with-drawer";
 
-// import { Footer } from "./Footer";
-
 type BaseLayoutProps = {
   children: React.ReactNode;
 };

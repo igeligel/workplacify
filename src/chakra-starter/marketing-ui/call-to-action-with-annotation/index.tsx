@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { Caveat } from "next/font/google";
 import { useRouter } from "next/router";
+import posthog from "posthog-js";
 
 import { trpc } from "../../../utils/trpc";
 
@@ -104,6 +105,9 @@ export const CallToActionWithAnnotation: React.FC = () => {
                 }}
                 onClick={async (e) => {
                   e.preventDefault();
+                  posthog.capture("to-signin", {
+                    from: "call-to-action-with-annotation",
+                  });
                   router.push(user ? "/app" : "/api/auth/signin");
                 }}
               >
