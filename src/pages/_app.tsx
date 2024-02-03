@@ -1,6 +1,8 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { SessionProvider } from "next-auth/react";
 import type { AppProps, AppType } from "next/app";
+import posthog from "posthog-js";
+import { useEffect } from "react";
 import "react-day-picker/dist/style.css";
 
 import { SidebarBrandWithHeader } from "../chakra-starter/application-ui/sidebar-with-header";
@@ -26,6 +28,12 @@ const MyApp = ((props: AppProps) => {
   if (router.pathname.startsWith("/app")) {
     LayoutWrapper = AppWrapper;
   }
+
+  useEffect(() => {
+    posthog.init("phc_8eCgastmlsUMsIr33zEoUx5pSwiT7GSqG3C3lJVVSNS", {
+      api_host: "https://eu.posthog.com",
+    });
+  }, []);
 
   return (
     <SessionProvider session={session}>
