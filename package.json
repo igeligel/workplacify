@@ -75,7 +75,7 @@
     "zustand": "^4.5.0"
   },
   "devDependencies": {
-    "@faker-js/faker": "^8.4.0",
+    "@faker-js/faker": "^8.4.1",
     "@playwright/test": "^1.41.2",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/multer": "^1.4.11",
