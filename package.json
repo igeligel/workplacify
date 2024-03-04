@@ -99,7 +99,7 @@
     "start-server-and-test": "^2.0.3",
     "tsx": "^4.7.0",
     "typescript": "^5.3.3",
-    "vite": "^5.0.12",
+    "vite": "^5.1.4",
     "vitest": "^1.2.2"
   },
   "publishConfig": {
