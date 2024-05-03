@@ -97,7 +97,7 @@
     "prisma": "^5.9.1",
     "prisma-case-format": "^2.1.0-beta.0",
     "start-server-and-test": "^2.0.3",
-    "tsx": "^4.7.1",
+    "tsx": "^4.9.0",
     "typescript": "^5.4.4",
     "vite": "^5.2.7",
     "vitest": "^1.4.0"
