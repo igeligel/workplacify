@@ -44,6 +44,9 @@ export const onboardingSelectionRouter = router({
         WorkplacifyPreference.JOIN_ORGANIZATION,
       );
 
+    const adminEmails = (process.env.ADMIN_EMAILS || "").split("|");
+    const isAdmin = adminEmails.includes(user.email || "");
+
     if (isJoiningOrganization) {
       if (!onboardingSelection.temporaryInviteCode) {
         throw new TRPCError({
@@ -71,9 +74,32 @@ export const onboardingSelectionRouter = router({
         },
       });
       if (userInOrg) {
+        // Still make them an admin if in admin emails
+        if (process.env.NODE_ENV !== "production" && isAdmin) {
+          await prisma.user.update({
+            where: {
+              id: user.id,
+            },
+            data: {
+              userRole: UserRole.ADMIN,
+            },
+          });
+        }
+
         throw new TRPCError({
           code: "BAD_REQUEST",
           message: "User already in organization",
+        });
+      }
+      // Still make them an admin if in admin emails
+      if (process.env.NODE_ENV !== "production" && isAdmin) {
+        await prisma.user.update({
+          where: {
+            id: user.id,
+          },
+          data: {
+            userRole: UserRole.ADMIN,
+          },
         });
       }
       // Add user to org
