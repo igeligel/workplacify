@@ -25,10 +25,8 @@ import { ChangeEventHandler, useRef, useState } from "react";
 import { FiMinus, FiPlus, FiX } from "react-icons/fi";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 
-import {
-  DeskFormState,
-  useOfficeFloorFormStore,
-} from "../stores/officeFloorFormStore";
+import { useOfficeFloorFormStore } from "../stores/officeFloorFormStore";
+import { DeskFormState } from "../stores/types";
 
 const getExtension = (filename: string) => {
   const parts = filename.split(".");
