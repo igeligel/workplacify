@@ -91,7 +91,9 @@ export const DisplayFloors = (props: DisplayFloorsProps) => {
                   backgroundColor: "gray.100",
                 }}
                 onClick={() => {
-                  router.push(`/app/offices/${props.office.id}`);
+                  router.push(
+                    `/app/offices/${props.office.id}/floors/${floor.id}`,
+                  );
                 }}
               >
                 <Td>{floor.name}</Td>

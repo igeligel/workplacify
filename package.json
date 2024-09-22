@@ -55,7 +55,7 @@
     "datauri": "^4.1.0",
     "date-fns": "^2.30.0",
     "date-fns-tz": "^2.0.1",
-    "discord.js": "^14.14.1",
+    "discord.js": "^14.16.1",
     "framer-motion": "^11.2.4",
     "multer": "^1.4.5-lts.1",
     "next": "^14.1.4",
@@ -68,15 +68,15 @@
     "react-dom": "^18.2.0",
     "react-icons": "^5.3.0",
     "react-timezone-select": "^3.2.3",
-    "react-use": "^17.5.0",
+    "react-use": "^17.5.1",
     "react-zoom-pan-pinch": "^3.4.4",
     "superjson": "^2.2.1",
     "zod": "^3.23.8",
-    "zustand": "^4.5.2"
+    "zustand": "^4.5.5"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
-    "@playwright/test": "^1.43.1",
+    "@playwright/test": "^1.47.0",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/multer": "^1.4.11",
     "@types/node": "^20.12.8",

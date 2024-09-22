@@ -12,7 +12,7 @@ services:
     # previewPlan: starter
     ## 👇 Preview Environment Initialization script:
     # initialDeployHook: npm run db-seed
-    buildCommand: npm install && npm run build
+    buildCommand: npm install --include=dev && npm run build --include=dev
     startCommand: npm run start
     healthCheckPath: /api/trpc/healthcheck
     envVars:
