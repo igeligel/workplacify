@@ -7,6 +7,8 @@ import {
   Heading,
   Spinner,
   Stack,
+  Tag,
+  Tooltip,
   VStack,
   useToast,
 } from "@chakra-ui/react";
@@ -100,113 +102,133 @@ const SchedulePage = () => {
             <VStack spacing={3} alignItems={"flex-start"}>
               {Object.values(
                 getDeskSchedulesForDayQuery.data.deskSchdulesMapped,
-              ).map((freeDeskSchedules) => {
-                const onBookClick = async () => {
-                  try {
-                    await bookDeskMutation.mutateAsync({
-                      deskId: freeDeskSchedules.desk.id,
+              )
+                .sort((a, b) => {
+                  const floorComparison = a.desk.floor.name.localeCompare(
+                    b.desk.floor.name,
+                  );
+                  if (floorComparison !== 0) return floorComparison;
+                  return a.desk.id.localeCompare(b.desk.id);
+                })
+                .map((freeDeskSchedules) => {
+                  const onBookClick = async () => {
+                    try {
+                      await bookDeskMutation.mutateAsync({
+                        deskId: freeDeskSchedules.desk.id,
+                        day: formattedDate,
+                      });
+                      utils.schedule.getDeskSchedulesForDay.invalidate();
+                    } catch (e) {
+                      toast({
+                        title: "Error while booking a desk",
+                        description:
+                          "You have booked a desk already in this office for this day.",
+                        status: "error",
+                        duration: 5000,
+                        isClosable: true,
+                      });
+                    }
+                  };
+
+                  const onCancelReservationClick = async () => {
+                    const periodToCancel = freeDeskSchedules.usedPeriods.find(
+                      (e) => e.wholeDay === true,
+                    );
+                    const deskScheduleIdToCancel =
+                      periodToCancel?.deskScheduleId;
+                    if (!deskScheduleIdToCancel) return;
+                    await cancelDeskForDayMutation.mutateAsync({
+                      deskScheduleId: deskScheduleIdToCancel,
                       day: formattedDate,
                     });
                     utils.schedule.getDeskSchedulesForDay.invalidate();
-                  } catch (e) {
-                    toast({
-                      title: "Error while booking a desk",
-                      description:
-                        "You have booked a desk already in this office for this day.",
-                      status: "error",
-                      duration: 5000,
-                      isClosable: true,
-                    });
-                  }
-                };
+                  };
 
-                const onCancelReservationClick = async () => {
-                  const periodToCancel = freeDeskSchedules.usedPeriods.find(
-                    (e) => e.wholeDay === true,
-                  );
-                  const deskScheduleIdToCancel = periodToCancel?.deskScheduleId;
-                  if (!deskScheduleIdToCancel) return;
-                  await cancelDeskForDayMutation.mutateAsync({
-                    deskScheduleId: deskScheduleIdToCancel,
-                    day: formattedDate,
-                  });
-                  utils.schedule.getDeskSchedulesForDay.invalidate();
-                };
+                  const canCancelReservation =
+                    freeDeskSchedules.usedPeriods.some(
+                      (period) => period.id === userQuery.data.id,
+                    );
 
-                const canCancelReservation = freeDeskSchedules.usedPeriods.some(
-                  (period) => period.id === userQuery.data.id,
-                );
-
-                return (
-                  <VStack
-                    spacing={1}
-                    key={freeDeskSchedules.desk.id}
-                    alignItems={"flex-start"}
-                  >
-                    <HStack>
-                      <Heading
-                        fontSize={"md"}
-                        fontWeight={500}
-                        color={"gray.700"}
-                      >
-                        {freeDeskSchedules.desk.floor.name} - Desk{" "}
-                        {freeDeskSchedules.desk.publicDeskId}
-                        {freeDeskSchedules.usedPeriods.map((usedPeriod) => {
-                          const isOccupiedWholeDay = usedPeriod.wholeDay;
-
-                          const occupationPeriod = `from ${usedPeriod.start.toLocaleTimeString()} to ${usedPeriod.end.toLocaleTimeString()}`;
-                          const occupationLabel = isOccupiedWholeDay
-                            ? "whole day"
-                            : occupationPeriod;
-                          const isOccupiedByWhom = usedPeriod.name
-                            ? ` by ${usedPeriod.name}`
-                            : ``;
-                          const label = `Is occupied ${occupationLabel}${isOccupiedByWhom}`;
-                          const key = `${occupationPeriod}-${isOccupiedByWhom}`;
-                          return <Box key={key}>{label}</Box>;
-                        })}
-                      </Heading>
-                      <Box>
-                        <Badge
-                          colorScheme={
-                            freeDeskSchedules.wholeDayFree ? "green" : "red"
-                          }
+                  return (
+                    <VStack
+                      spacing={1}
+                      key={freeDeskSchedules.desk.id}
+                      alignItems={"flex-start"}
+                    >
+                      <HStack alignItems={"flex-start"}>
+                        <VStack
+                          alignItems={"flex-start"}
+                          justifyContent={"flex-start"}
                         >
-                          {freeDeskSchedules.wholeDayFree
-                            ? "Available"
-                            : "Booked"}
-                        </Badge>
-                      </Box>
-                    </HStack>
-                    {canCancelReservation ? (
-                      <Button
-                        colorScheme="orange"
-                        backgroundColor={"orange.400"}
-                        _hover={{
-                          backgroundColor: "orange.500",
-                        }}
-                        size={"sm"}
-                        onClick={onCancelReservationClick}
-                      >
-                        Cancel reservation
-                      </Button>
-                    ) : (
-                      <Button
-                        colorScheme="orange"
-                        backgroundColor={"orange.400"}
-                        _hover={{
-                          backgroundColor: "orange.500",
-                        }}
-                        size={"sm"}
-                        onClick={onBookClick}
-                        isDisabled={!freeDeskSchedules.wholeDayFree}
-                      >
-                        Book
-                      </Button>
-                    )}
-                  </VStack>
-                );
-              })}
+                          <Heading
+                            fontSize={"md"}
+                            fontWeight={500}
+                            color={"gray.700"}
+                          >
+                            {freeDeskSchedules.desk.floor.name} - Desk{" "}
+                            {freeDeskSchedules.desk.publicDeskId}
+                            {freeDeskSchedules.usedPeriods.map((usedPeriod) => {
+                              const isOccupiedWholeDay = usedPeriod.wholeDay;
+
+                              const occupationPeriod = `from ${usedPeriod.start.toLocaleTimeString()} to ${usedPeriod.end.toLocaleTimeString()}`;
+                              const occupationLabel = isOccupiedWholeDay
+                                ? "whole day"
+                                : occupationPeriod;
+                              const isOccupiedByWhom = usedPeriod.name
+                                ? ` by ${usedPeriod.name}`
+                                : ``;
+                              const label = `Is occupied ${occupationLabel}${isOccupiedByWhom}`;
+                              const key = `${occupationPeriod}-${isOccupiedByWhom}`;
+                              return <Box key={key}>{label}</Box>;
+                            })}
+                          </Heading>
+                          {freeDeskSchedules.desk.name && (
+                            <Tooltip label="Custom name for this desk">
+                              <Tag>{freeDeskSchedules.desk.name}</Tag>
+                            </Tooltip>
+                          )}
+                        </VStack>
+                        <Box>
+                          <Badge
+                            colorScheme={
+                              freeDeskSchedules.wholeDayFree ? "green" : "red"
+                            }
+                          >
+                            {freeDeskSchedules.wholeDayFree
+                              ? "Available"
+                              : "Booked"}
+                          </Badge>
+                        </Box>
+                      </HStack>
+                      {canCancelReservation ? (
+                        <Button
+                          colorScheme="orange"
+                          backgroundColor={"orange.400"}
+                          _hover={{
+                            backgroundColor: "orange.500",
+                          }}
+                          size={"sm"}
+                          onClick={onCancelReservationClick}
+                        >
+                          Cancel reservation
+                        </Button>
+                      ) : (
+                        <Button
+                          colorScheme="orange"
+                          backgroundColor={"orange.400"}
+                          _hover={{
+                            backgroundColor: "orange.500",
+                          }}
+                          size={"sm"}
+                          onClick={onBookClick}
+                          isDisabled={!freeDeskSchedules.wholeDayFree}
+                        >
+                          Book
+                        </Button>
+                      )}
+                    </VStack>
+                  );
+                })}
             </VStack>
           </VStack>
         )}

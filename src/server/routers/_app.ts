@@ -5,6 +5,7 @@ import { publicProcedure, router } from "../trpc";
 import { cloudinaryRouter } from "./cloudinary";
 import { discordRouter } from "./discord";
 import { floorRouter } from "./floor";
+import { floorDeskRouter } from "./floorDesk";
 import { officeRouter } from "./office";
 import { onboardingSelectionRouter } from "./onboardingSelection";
 import { organizationRouter } from "./organization";
@@ -21,6 +22,7 @@ export const appRouter = router({
   user: userRouter,
   schedule: scheduleRouter,
   discord: discordRouter,
+  floorDesk: floorDeskRouter,
 });
 
 export type AppRouter = typeof appRouter;

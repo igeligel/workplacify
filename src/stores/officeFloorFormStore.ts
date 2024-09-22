@@ -1,13 +1,6 @@
 import { create } from "zustand";
 
-export interface DeskFormState {
-  id?: string;
-  name?: string;
-  publicDeskId: string;
-  description?: string;
-  x: number;
-  y: number;
-}
+import { DeskFormState } from "./types";
 
 interface OfficeFloorFormState {
   name: string;
