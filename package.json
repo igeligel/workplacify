@@ -51,7 +51,7 @@
     "@trpc/react-query": "^10.45.2",
     "@trpc/server": "^10.45.2",
     "cloudinary": "^2.5.0",
-    "clsx": "^2.1.0",
+    "clsx": "^2.1.1",
     "datauri": "^4.1.0",
     "date-fns": "^2.30.0",
     "date-fns-tz": "^2.0.1",
