@@ -42,7 +42,7 @@
     "@chakra-ui/react": "^2.8.2",
     "@cloudinary/react": "^1.13.0",
     "@cloudinary/url-gen": "^1.19.0",
-    "@emotion/react": "^11.11.4",
+    "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@prisma/client": "^5.19.1",
     "@tanstack/react-query": "^4.36.1",
