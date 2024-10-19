@@ -4,7 +4,7 @@ The open-source desk scheduling app for your office. [Learn more](https://workpl
 
 <div align="center">
 
-[Discord](https://discord.gg/m6EQptpj) · [Website](https://workplacify.com) · [Issues](https://github.com/igeligel/workplacify/issues)
+[Discord](https://discord.gg/MeNJDkKmBb) · [Website](https://workplacify.com) · [Issues](https://github.com/igeligel/workplacify/issues)
 
 </div>
 
