@@ -58,7 +58,7 @@
     "discord.js": "^14.16.3",
     "framer-motion": "^11.2.4",
     "multer": "^1.4.5-lts.1",
-    "next": "^14.2.13",
+    "next": "^15.1.0",
     "next-auth": "^4.24.7",
     "next-connect": "^1.0.0",
     "next-seo": "^6.6.0",
