@@ -29,6 +29,7 @@ import { DayPicker } from "react-day-picker";
 import { FiMinus, FiPlus, FiX } from "react-icons/fi";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 
+import { FloorDeskBooker } from "../../../components/FloorDeskBooker";
 import { ScheduleNoOfficeSelected } from "../../../components/ScheduleNoOfficeSelected";
 import { appAuthRedirect } from "../../../server/nextMiddleware/appAuthRedirect";
 import { trpc } from "../../../utils/trpc";
@@ -44,7 +45,6 @@ const SchedulePage = () => {
   const toast = useToast();
   const [day, setDay] = useState(new Date());
   const formattedDate = formatISO(day, { representation: "date" });
-  const imageRef = useRef<HTMLImageElement>(null);
 
   const userQuery = trpc.user.get.useQuery();
   const bookDeskMutation = trpc.schedule.bookDeskForDay.useMutation({});
@@ -117,10 +117,12 @@ const SchedulePage = () => {
             >
               All desks
             </Heading>
-            <Tabs width={"100%"} colorScheme="orange">
+            <Tabs width={"100%"} colorScheme="orange" isLazy>
               <TabList>
                 <Tab>List of desks</Tab>
-                <Tab>Map of desks</Tab>
+                {getFloorsForCurrentOfficeQuery.data?.map((floor) => {
+                  return <Tab key={floor.id}>{floor.name}</Tab>;
+                })}
               </TabList>
 
               <TabPanels>
@@ -264,105 +266,22 @@ const SchedulePage = () => {
                   </VStack>
                 </TabPanel>
 
-                <TabPanel>
-                  <Box>
-                    <TransformWrapper
-                      initialScale={1}
-                      initialPositionX={0}
-                      initialPositionY={0}
-                      onTransformed={(props) => {
-                        setScale(props.state.scale);
-                      }}
-                    >
-                      {(props) => {
-                        const { zoomIn, zoomOut, resetTransform } = props;
-
-                        return (
-                          <>
-                            <Box display={"flex"} flexDirection={"column"}>
-                              <Box
-                                display={"flex"}
-                                justifyContent={"space-between"}
-                              >
-                                <Box>
-                                  <FormControl
-                                    display="flex"
-                                    alignItems="flex-start"
-                                    flexDirection={"column"}
-                                  >
-                                    <FormLabel htmlFor="zoom-controls" mb="0">
-                                      Zoom controls
-                                    </FormLabel>
-                                    <HStack id={"zoom-controls"} paddingTop={1}>
-                                      <IconButton
-                                        colorScheme="blue"
-                                        aria-label="zoom in"
-                                        icon={<Icon as={FiPlus} />}
-                                        onClick={() => {
-                                          zoomIn();
-                                        }}
-                                      />
-                                      <IconButton
-                                        colorScheme="blue"
-                                        aria-label="zoom out"
-                                        icon={<Icon as={FiMinus} />}
-                                        onClick={() => {
-                                          zoomOut();
-                                        }}
-                                      />
-                                      <IconButton
-                                        colorScheme="blue"
-                                        aria-label="reset zoom"
-                                        icon={<Icon as={FiX} />}
-                                        onClick={() => {
-                                          resetTransform();
-                                        }}
-                                      />
-                                    </HStack>
-                                  </FormControl>
-                                </Box>
-                              </Box>
-                            </Box>
-
-                            <TransformComponent>
-                              <Box
-                                position={"relative"}
-                                onClick={(e) => {
-                                  // if (!isAddMarkerMode) return;
-                                  // const target = e.target as HTMLElement;
-                                  // const rect = target.getBoundingClientRect();
-                                  // const x = e.clientX - rect.left; //x position within the element.
-                                  // const y = e.clientY - rect.top; //y position within the element.
-                                  // if (!imageRef?.current) return;
-                                  // const imageScale =
-                                  //   imageRef.current.naturalWidth /
-                                  //   imageRef.current.width;
-                                  // const maximumNumber = desks
-                                  //   .map((desk) => Number(desk.publicDeskId))
-                                  //   .sort((a, b) => {
-                                  //     return b - a;
-                                  //   })[0];
-                                  // const newId = maximumNumber ? maximumNumber + 1 : 1;
-                                  // const offsetOfMarker = 10 * imageScale;
-                                  // setDesks([
-                                  //   ...desks,
-                                  //   {
-                                  //     x: (x * imageScale) / scale - offsetOfMarker,
-                                  //     y: (y * imageScale) / scale - offsetOfMarker,
-                                  //     publicDeskId: newId.toString(),
-                                  //   },
-                                  // ]);
-                                }}
-                              >
-                                <img ref={imageRef} src={imageUrl} alt="test" />
-                              </Box>
-                            </TransformComponent>
-                          </>
-                        );
-                      }}
-                    </TransformWrapper>
-                  </Box>
-                </TabPanel>
+                {getFloorsForCurrentOfficeQuery.data?.map((floor) => {
+                  return (
+                    <TabPanel key={floor.id}>
+                      {floor.floorPlan && (
+                        <FloorDeskBooker
+                          floor={floor}
+                          deskSchedulesMapped={
+                            getDeskSchedulesForDayQuery.data?.deskSchdulesMapped
+                          }
+                          userId={userQuery.data.id}
+                          day={day}
+                        />
+                      )}
+                    </TabPanel>
+                  );
+                })}
               </TabPanels>
             </Tabs>
           </VStack>

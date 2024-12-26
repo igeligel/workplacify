@@ -183,15 +183,17 @@ const calculateUsedPeriods = (
   return usedPeriods;
 };
 
-type FreeDesksWithTime = Record<
+export type DeskWithPeriods = {
+  desk: DeskWithFloor;
+  freePeriods: Period[];
+  usedPeriods: PeriodWithUserInfo[];
+  wholeDayFree: boolean;
+};
+
+export type FreeDesksWithTime = Record<
   // deskId
   string,
-  {
-    desk: DeskWithFloor;
-    freePeriods: Period[];
-    usedPeriods: PeriodWithUserInfo[];
-    wholeDayFree: boolean;
-  }
+  DeskWithPeriods
 >;
 
 type GetFreeDesksPerDay = {
