@@ -22,9 +22,7 @@ import { trpc } from "../../../../utils/trpc";
 
 const OfficesNewPage = () => {
   const addOfficeMutation = trpc.office.add.useMutation();
-  const name = useOfficeFormStore((state) => state.name);
-  const description = useOfficeFormStore((state) => state.description);
-  const timezone = useOfficeFormStore((state) => state.timezone);
+  const { name, description, timezone } = useOfficeFormStore();
   const toast = useToast();
   const router = useRouter();
 

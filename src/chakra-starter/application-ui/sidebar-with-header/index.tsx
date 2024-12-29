@@ -1,6 +1,7 @@
 import { Box, Button, IconButton, useBreakpointValue } from "@chakra-ui/react";
 import { UserRole } from "@prisma/client";
 import { FiMenu } from "react-icons/fi";
+import { useShallow } from "zustand/shallow";
 
 import { trpc } from "../../../utils/trpc";
 import { Sidebar } from "./Sidebar";

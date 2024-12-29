@@ -11,14 +11,8 @@ export const UserMenuOfficeSelector = () => {
     setIsOfficeSelectorOpen,
     isOfficeSelectorHighlighted,
     setIsOfficeSelectorHighlighted,
-  } = useMenuStore((state) => {
-    return {
-      isOfficeSelectorOpen: state.isOfficeSelectorOpen,
-      setIsOfficeSelectorOpen: state.setIsOfficeSelectorOpen,
-      isOfficeSelectorHighlighted: state.isOfficeSelectorHighlighted,
-      setIsOfficeSelectorHighlighted: state.setIsOfficeSelectorHighlighted,
-    };
-  });
+  } = useMenuStore();
+
   const userQuery = trpc.user.get.useQuery();
   const hasCurrentOfficeId =
     typeof userQuery.data?.currentOfficeId === "string";

@@ -7,11 +7,7 @@ export const ScheduleNoOfficeSelected = () => {
     setIsOfficeSelectorOpen,
     setIsOfficeSelectorHighlighted,
     setIsSidebarOpen,
-  } = useMenuStore((state) => ({
-    setIsOfficeSelectorOpen: state.setIsOfficeSelectorOpen,
-    setIsOfficeSelectorHighlighted: state.setIsOfficeSelectorHighlighted,
-    setIsSidebarOpen: state.setIsSidebarOpen,
-  }));
+  } = useMenuStore();
 
   const openSidebarAndOfficeSelector = () => {
     setIsSidebarOpen(true);

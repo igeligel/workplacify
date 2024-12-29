@@ -19,10 +19,7 @@ import { trpc } from "../../../../../utils/trpc";
 
 const FloorAddPage = () => {
   const router = useRouter();
-  const name = useOfficeFloorFormStore((state) => state.name);
-  const description = useOfficeFloorFormStore((state) => state.description);
-  const desks = useOfficeFloorFormStore((state) => state.desks);
-  const imageUrl = useOfficeFloorFormStore((state) => state.imageUrl);
+  const { name, description, desks, imageUrl } = useOfficeFloorFormStore();
   const createFloorMutation = trpc.floor.createFloor.useMutation();
 
   const officeId =

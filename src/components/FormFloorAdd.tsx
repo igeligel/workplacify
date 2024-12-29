@@ -72,21 +72,22 @@ export const FormFloorAdd = () => {
   const [isAddMarkerMode, setIsAddMarkerMode] = useState<boolean>(false);
   const imageRef = useRef<HTMLImageElement>(null);
   // const [desks, setDesks] = useState<Desk[]>(mockedDesks);
-  const desks = useOfficeFloorFormStore((state) => state.desks);
-  const setDesks = useOfficeFloorFormStore((state) => state.setDesks);
+  const {
+    desks,
+    setDesks,
+    imageUrl,
+    setImageUrl,
+    name,
+    setName,
+    description,
+    setDescription,
+  } = useOfficeFloorFormStore();
+
   const toast = useToast();
   const [image, setImage] = useState<null | File>(null);
   const [scale, setScale] = useState<number>(1);
   const [currentSelectedDesk, setCurrentSelectedDesk] =
     useState<null | DeskFormState>(null);
-  const imageUrl = useOfficeFloorFormStore((state) => state.imageUrl);
-  const setImageUrl = useOfficeFloorFormStore((state) => state.setImageUrl);
-  const name = useOfficeFloorFormStore((state) => state.name);
-  const setName = useOfficeFloorFormStore((state) => state.setName);
-  const description = useOfficeFloorFormStore((state) => state.description);
-  const setDescription = useOfficeFloorFormStore(
-    (state) => state.setDescription,
-  );
 
   const onUploadTrigger = async () => {
     if (!image) return;
