@@ -3,15 +3,10 @@ import {
   Box,
   Button,
   Container,
-  FormControl,
-  FormLabel,
   HStack,
   Heading,
-  Icon,
-  IconButton,
   Spinner,
   Stack,
-  Switch,
   Tab,
   TabList,
   TabPanel,
@@ -24,10 +19,8 @@ import {
 } from "@chakra-ui/react";
 import { formatISO } from "date-fns";
 import { GetServerSideProps } from "next";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { DayPicker } from "react-day-picker";
-import { FiMinus, FiPlus, FiX } from "react-icons/fi";
-import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 
 import { FloorDeskBooker } from "../../../components/FloorDeskBooker";
 import { ScheduleNoOfficeSelected } from "../../../components/ScheduleNoOfficeSelected";

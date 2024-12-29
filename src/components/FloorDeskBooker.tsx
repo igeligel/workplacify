@@ -17,7 +17,7 @@ import {
 } from "@chakra-ui/react";
 import { Prisma } from "@prisma/client";
 import { formatISO } from "date-fns";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { FiMinus, FiPlus, FiX } from "react-icons/fi";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 
@@ -63,16 +63,14 @@ export const FloorDeskBooker = (props: FloorDeskBookerProps) => {
       return;
     }
     const shouldRenderDesks = imageRef && desksForFloor.length > 0;
-    if (shouldRenderDesks) {
-      console.log("Desks are ready to be rendered");
+    if (!shouldRenderDesks) {
+      return;
     }
     if (!isImageLoaded) {
-      console.log("Image is not loaded yet");
       return;
     }
 
     if (!imageRef?.complete) {
-      console.log("Image is not complete yet");
       return;
     }
     setTimeout(() => {
