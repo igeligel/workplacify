@@ -10,6 +10,45 @@ import { getHasConflictingReservation } from "../scheduling/getHasConflictingRes
 import { publicProcedure, router } from "../trpc";
 
 export const scheduleRouter = router({
+  getFloorsForCurrentOffice: publicProcedure
+    .input(z.object({}))
+    .query(async (resolverProps) => {
+      const { ctx } = resolverProps;
+      const user = await getUserFromSession(ctx.session, {
+        includeOrganization: true,
+      });
+
+      if (!user.organizationId) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "You are not part of an organization",
+        });
+      }
+
+      await prisma.organization.findFirst({
+        where: {
+          id: user.organizationId,
+        },
+      });
+
+      if (!user.currentOfficeId) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "You are not part of an office. Select an office first.",
+        });
+      }
+
+      const floors = await prisma.floor.findMany({
+        where: {
+          officeId: user.currentOfficeId,
+          office: {
+            organizationId: user.organizationId,
+          },
+        },
+      });
+
+      return floors;
+    }),
   getDeskSchedulesForDay: publicProcedure
     .input(z.object({ day: z.string() }))
     .query(async (resolverProps) => {

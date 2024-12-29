@@ -3,10 +3,15 @@ import {
   Box,
   Button,
   Container,
+  FormControl,
+  FormLabel,
   HStack,
   Heading,
+  Icon,
+  IconButton,
   Spinner,
   Stack,
+  Switch,
   Tab,
   TabList,
   TabPanel,
@@ -19,9 +24,12 @@ import {
 } from "@chakra-ui/react";
 import { formatISO } from "date-fns";
 import { GetServerSideProps } from "next";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { DayPicker } from "react-day-picker";
+import { FiMinus, FiPlus, FiX } from "react-icons/fi";
+import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 
+import { FloorDeskBooker } from "../../../components/FloorDeskBooker";
 import { ScheduleNoOfficeSelected } from "../../../components/ScheduleNoOfficeSelected";
 import { appAuthRedirect } from "../../../server/nextMiddleware/appAuthRedirect";
 import { trpc } from "../../../utils/trpc";
@@ -48,8 +56,13 @@ const SchedulePage = () => {
       day: formattedDate,
     });
 
+  const getFloorsForCurrentOfficeQuery =
+    trpc.schedule.getFloorsForCurrentOffice.useQuery({});
+
   const isLoading =
-    userQuery.isLoading || getDeskSchedulesForDayQuery.isLoading;
+    userQuery.isLoading ||
+    getDeskSchedulesForDayQuery.isLoading ||
+    getFloorsForCurrentOfficeQuery.isLoading;
 
   if (!userQuery.data) {
     return <div>Not logged in</div>;
@@ -104,10 +117,12 @@ const SchedulePage = () => {
             >
               All desks
             </Heading>
-            <Tabs width={"100%"} colorScheme="orange">
+            <Tabs width={"100%"} colorScheme="orange" isLazy>
               <TabList>
                 <Tab>List of desks</Tab>
-                {/* <Tab>Map of desks</Tab> <TabPanel></TabPanel> */}
+                {getFloorsForCurrentOfficeQuery.data?.map((floor) => {
+                  return <Tab key={floor.id}>{floor.name}</Tab>;
+                })}
               </TabList>
 
               <TabPanels>
@@ -250,6 +265,23 @@ const SchedulePage = () => {
                       })}
                   </VStack>
                 </TabPanel>
+
+                {getFloorsForCurrentOfficeQuery.data?.map((floor) => {
+                  return (
+                    <TabPanel key={floor.id}>
+                      {floor.floorPlan && (
+                        <FloorDeskBooker
+                          floor={floor}
+                          deskSchedulesMapped={
+                            getDeskSchedulesForDayQuery.data?.deskSchdulesMapped
+                          }
+                          userId={userQuery.data.id}
+                          day={day}
+                        />
+                      )}
+                    </TabPanel>
+                  );
+                })}
               </TabPanels>
             </Tabs>
           </VStack>
