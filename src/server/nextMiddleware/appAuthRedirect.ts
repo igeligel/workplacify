@@ -1,8 +1,8 @@
 import { User } from "@prisma/client";
 import { GetServerSidePropsContext, Redirect } from "next";
-import { Session, getServerSession } from "next-auth";
+import { Session } from "next-auth";
 
-import { nextAuthOptions } from "../../pages/api/auth/[...nextauth]";
+import { auth } from "../../../auth";
 import { getUserFromSession } from "../queries/getUserFromSession";
 
 type AppAuthRedirectProps = {
@@ -19,11 +19,8 @@ export const appAuthRedirect = async (
   props: AppAuthRedirectProps,
 ): Promise<AppAuthRedirectReturnType> => {
   const { context, shouldRedirectToSetup = true } = props;
-  const session = await getServerSession(
-    context.req,
-    context.res,
-    nextAuthOptions,
-  );
+  // @ts-expect-error Types are not matching.
+  const session = await auth(context.req, context.res);
   if (!session) {
     return {
       redirect: {

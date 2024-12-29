@@ -37,7 +37,6 @@
     "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
-    "@auth/prisma-adapter": "^1.5.1",
     "@chakra-ui/next-js": "^2.2.0",
     "@chakra-ui/react": "^2.8.2",
     "@cloudinary/react": "^1.13.0",
@@ -58,8 +57,8 @@
     "discord.js": "^14.16.3",
     "framer-motion": "^11.2.4",
     "multer": "^1.4.5-lts.1",
-    "next": "^14.2.13",
-    "next-auth": "^4.24.11",
+    "next": "^14.2.22",
+    "next-auth": "^5.0.0-beta.25",
     "next-connect": "^1.0.0",
     "next-seo": "^6.6.0",
     "posthog-js": "^1.155.6",
@@ -75,6 +74,7 @@
     "zustand": "^4.5.5"
   },
   "devDependencies": {
+    "@auth/prisma-adapter": "^2.7.4",
     "@faker-js/faker": "^9.0.2",
     "@playwright/test": "^1.47.0",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
