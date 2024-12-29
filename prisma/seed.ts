@@ -5,8 +5,8 @@
  */
 import { faker } from "@faker-js/faker";
 import { PrismaClient, UserRole } from "@prisma/client";
-import { addHours, parseISO, startOfDay } from "date-fns";
-import { utcToZonedTime } from "date-fns-tz";
+import { addHours, startOfDay } from "date-fns";
+import { toZonedTime } from "date-fns-tz";
 
 const prisma = new PrismaClient();
 
@@ -418,7 +418,7 @@ async function main() {
 
   const startOfDayDate = startOfDay(new Date());
   // UTC
-  const zonedDate = utcToZonedTime(startOfDayDate, berlinOffice1.timezone);
+  const zonedDate = toZonedTime(startOfDayDate, berlinOffice1.timezone);
 
   await prisma.deskSchedule.create({
     data: {

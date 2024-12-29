@@ -1,6 +1,6 @@
 import { TRPCError } from "@trpc/server";
 import { addHours, parseISO } from "date-fns";
-import { utcToZonedTime } from "date-fns-tz";
+import { toZonedTime } from "date-fns-tz";
 import { z } from "zod";
 
 import { prisma } from "../../server/prisma";
@@ -102,7 +102,7 @@ export const scheduleRouter = router({
       const queriedDate = parseISO(resolverProps.input.day);
       const timeZone = usersOffice?.timezone || "UTC";
       // UTC
-      const zonedDate = utcToZonedTime(queriedDate, timeZone);
+      const zonedDate = toZonedTime(queriedDate, timeZone);
 
       const deskSchedules = await prisma.deskSchedule.findMany({
         where: {
@@ -200,7 +200,7 @@ export const scheduleRouter = router({
       });
       const queriedDate = parseISO(resolverProps.input.day);
       const timeZone = usersOffice?.timezone || "UTC";
-      const zonedDate = utcToZonedTime(queriedDate, timeZone);
+      const zonedDate = toZonedTime(queriedDate, timeZone);
 
       const deskSchedules = await prisma.deskSchedule.findMany({
         where: {
@@ -323,7 +323,7 @@ export const scheduleRouter = router({
       });
       const queriedDate = parseISO(resolverProps.input.day);
       const timeZone = usersOffice?.timezone || "UTC";
-      const zonedDate = utcToZonedTime(queriedDate, timeZone);
+      const zonedDate = toZonedTime(queriedDate, timeZone);
 
       const deskSchedules = await prisma.deskSchedule.findMany({
         where: {
