@@ -22,14 +22,20 @@
     "incremental": true,
     "types": [
       "vitest/globals"
+    ],
+    "plugins": [
+      {
+        "name": "next"
+      }
     ]
   },
   "include": [
-    "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     "./*.js",
-    "./src/**/*.js"
+    "./src/**/*.js",
+    "next-env.d.ts",
+    ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

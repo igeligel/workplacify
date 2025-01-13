@@ -1,7 +1,11 @@
 import * as trpcNext from "@trpc/server/adapters/next";
-import { Session, getServerSession } from "next-auth";
+import { Session } from "next-auth";
 
-import { nextAuthOptions } from "../pages/api/auth/[...nextauth]";
+import { auth } from "../auth";
+
+// import { Session, auth } from "next-auth";
+
+// import { nextAuthOptions } from "../pages/api/auth/[...nextauth]";
 
 interface CreateContextOptions {
   session: Session | null;
@@ -27,7 +31,7 @@ export async function createContext(
   opts: trpcNext.CreateNextContextOptions,
 ): Promise<Context> {
   // for API-response caching see https://trpc.io/docs/caching
-  const session = await getServerSession(opts.req, opts.res, nextAuthOptions);
+  const session = await auth(opts.req, opts.res);
 
   return await createContextInner({ session });
 }
