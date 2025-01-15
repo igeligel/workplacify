@@ -10,10 +10,13 @@ import {
   IconButton,
   VStack,
 } from "@chakra-ui/react";
+import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { FiX } from "react-icons/fi";
 
 import { FormFloorAdd } from "../../../../../components/FormFloorAdd";
+import { getMessages } from "../../../../../messages/getMessages";
+import { appAuthRedirect } from "../../../../../server/nextMiddleware/appAuthRedirect";
 import { useOfficeFloorFormStore } from "../../../../../stores/officeFloorFormStore";
 import { trpc } from "../../../../../utils/trpc";
 
@@ -92,6 +95,22 @@ const FloorAddPage = () => {
       </Container>
     </VStack>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { redirect, session } = await appAuthRedirect({
+    context,
+  });
+  if (redirect) return { redirect };
+
+  const messages = await getMessages(context);
+
+  return {
+    props: {
+      session,
+      messages,
+    },
+  };
 };
 
 export default FloorAddPage;

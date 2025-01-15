@@ -16,10 +16,13 @@ import {
   VStack,
   useToast,
 } from "@chakra-ui/react";
+import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { FiX } from "react-icons/fi";
 
+import { getMessages } from "../../../../messages/getMessages";
+import { appAuthRedirect } from "../../../../server/nextMiddleware/appAuthRedirect";
 import { trpc } from "../../../../utils/trpc";
 
 const AccountSettings = () => {
@@ -127,6 +130,22 @@ const AccountSettings = () => {
       </VStack>
     </>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { redirect, session } = await appAuthRedirect({
+    context,
+  });
+  if (redirect) return { redirect };
+
+  const messages = await getMessages(context);
+
+  return {
+    props: {
+      session,
+      messages,
+    },
+  };
 };
 
 export default AccountSettings;

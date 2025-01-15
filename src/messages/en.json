@@ -1,0 +1,63 @@
+{
+  "Menu": {
+    "pricing": "Pricing",
+    "labelToTheApp": "To the app"
+  },
+  "IndexPage": {
+    "cta1": "Elevate Workspace Efficiency",
+    "cta2": "Your Desk Scheduling Solution",
+    "ctaSubtitle": "Optimize desk usage effortlessly for enhanced workplace productivity and collaboration.",
+    "ctaActionAnnotation": "Invite your team and get started",
+    "ctaSubtitle2": "Free trial available; no credit card required",
+    "ctaAction": "Upload floor & schedule desks",
+    "whyWorkplacify": "Why workplacify?",
+    "whyWorkplacifyDescription": "The first open-source, self-hostable desk scheduling platform. Helping your employees to get their favorite desk and optimize your office spending with advanced analytics.",
+    "deskScheduling": "Desk scheduling",
+    "deskSchedulingDescription": "Ever had too many people in the office? We got you covered.",
+    "officeManagement": "Office management",
+    "officeManagementDescription": "Manage multiple offices, with multiple floors. Perfect for growing companies.",
+    "officeAnalytics": "Office analytics",
+    "officeAnalyticsDescription": "Want to save costs on office space? Our analytic tools will help you do just that.",
+    "floorPlanning": "Floor planning",
+    "floorPlanningDescription": "Assign desks to your floors and create outstanding floor maps.",
+    "openSource": "Open-source",
+    "openSourceDescription": "Self-host our software and customize it to your needs. We are open-source!"
+  },
+  "AppPage": {
+    "startBoxHeading": "Get started with workplacify",
+    "trialLabel": "Trial",
+    "trialDaysLeft": "{daysLeft}/{trialDuration} days left",
+    "feedbackHeading": "Missing something?",
+    "feedbackButton": "Request feature"
+  },
+  "GetStartedModule": {
+    "officeCreateHeading": "Create a new office",
+    "officeCreateImageAlt": "A preview on how it looks like to create an office",
+    "officeCreateBadgeNew": "new",
+    "getStartedLink": "Start",
+    "inviteEmployeesHeading": "Invite your colleagues",
+    "inviteEmployeesBadgeRecommended": "recommended",
+    "inviteEmployeesBadgeNew": "new",
+    "getStartedButtonLinkStart": "Start",
+    "chooseOfficeBadgeNew": "new",
+    "chooseOfficeHeading": "Choose your office",
+    "chooseOfficeImageAlt": "A preview on how it looks like to select an office",
+    "inviteEmployeesImageAlt": "A preview on how it looks like to invite colleagues",
+    "scheduleDeskHeading": "Schedule a desk for the next days",
+    "scheduleDeskImageAlt": "A preview on how it looks like to schedule a desk in workplacify",
+    "scheduleDeskBadgeNew": "new"
+  },
+  "AppMenu": {
+    "labelHome": "Home",
+    "labelOffices": "Offices",
+    "labelSchedule": "Schedule",
+    "labelSubmenu": "Submenu",
+    "noActiveItems": "There are currently no active items.",
+    "labelOrganizationSettings": "Organization Settings",
+    "selectedOffice": "Selected Office: {officeName}",
+    "selectOffice": "Select Office",
+    "labelAccount": "Account",
+    "labelSettings": "Settings",
+    "labelLogout": "Logout"
+  }
+}

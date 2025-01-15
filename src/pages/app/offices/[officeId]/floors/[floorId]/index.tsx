@@ -17,10 +17,13 @@ import {
   Tr,
   useDisclosure,
 } from "@chakra-ui/react";
+import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
 import { DrawerDeskEdit } from "../../../../../../components/DrawerDeskEdit";
+import { getMessages } from "../../../../../../messages/getMessages";
+import { appAuthRedirect } from "../../../../../../server/nextMiddleware/appAuthRedirect";
 import { trpc } from "../../../../../../utils/trpc";
 
 const FloorPage = () => {
@@ -111,6 +114,22 @@ const FloorPage = () => {
       </Box>
     </div>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { redirect, session } = await appAuthRedirect({
+    context,
+  });
+  if (redirect) return { redirect };
+
+  const messages = await getMessages(context);
+
+  return {
+    props: {
+      session,
+      messages,
+    },
+  };
 };
 
 export default FloorPage;

@@ -1,0 +1,63 @@
+{
+  "Menu": {
+    "pricing": "Preise",
+    "labelToTheApp": "Zur Anwendung"
+  },
+  "IndexPage": {
+    "cta1": "Höhere Effizienz im Arbeitsbereich",
+    "cta2": "Ihre Lösung für die Schreibtischplanung",
+    "ctaSubtitle": "Optimieren Sie mühelos die Nutzung Ihres Büros, um die Produktivität am Arbeitsplatz und die Zusammenarbeit zu verbessern.",
+    "ctaActionAnnotation": "Laden Sie Ihr Team ein und legen Sie los",
+    "ctaSubtitle2": "Kostenlose Testversion verfügbar; keine Bezahlung erforderlich",
+    "ctaAction": "Grundriss hochladen & Zeitplan starten",
+    "whyWorkplacify": "Warum workplacify?",
+    "whyWorkplacifyDescription": "Die erste Open-Source-Plattform für die Planung von Arbeitsplätzen, die selbst gehostet werden kann. Helfen Sie Ihren Mitarbeitern, ihren bevorzugten Schreibtisch zu finden und optimieren Sie Ihre Büroausgaben mit fortschrittlichen Analysen.",
+    "deskScheduling": "Schreibtisch-Planung",
+    "deskSchedulingDescription": "Hatten Sie schon einmal zu viele Mitarbeiter im Büro? Wir haben die Lösung für Sie.",
+    "officeManagement": "Büro-Verwaltung",
+    "officeManagementDescription": "Verwalten Sie mehrere Büros mit mehreren Stockwerken. Perfekt für wachsende Unternehmen.",
+    "officeAnalytics": "Büro-Analytik",
+    "officeAnalyticsDescription": "Sie möchten Kosten für Büroflächen sparen? Unsere Analysetools helfen Ihnen dabei.",
+    "floorPlanning": "Etagenplanung",
+    "floorPlanningDescription": "Weisen Sie Ihren Etagen Schreibtische zu und erstellen Sie hervorragende Etagenpläne.",
+    "openSourceDescription": "Hosten Sie unsere Software selbst und passen Sie sie an Ihre Bedürfnisse an. Wir sind quelloffen!",
+    "openSource": "Open-Source"
+  },
+  "AppPage": {
+    "startBoxHeading": "Starten Sie mit workplacify",
+    "trialLabel": "Probezeit",
+    "trialDaysLeft": "{daysLeft}/{trialDuration} Tage übrig",
+    "feedbackHeading": "Vermissen Sie etwas?",
+    "feedbackButton": "Feature anfordern"
+  },
+  "GetStartedModule": {
+    "officeCreateHeading": "Erstellen Sie ein neues Büro",
+    "officeCreateImageAlt": "Eine Vorschau, wie das Anlegen eines Büros aussieht",
+    "officeCreateBadgeNew": "neu",
+    "getStartedLink": "Starten",
+    "inviteEmployeesHeading": "Laden Sie Ihre Kollegen ein",
+    "inviteEmployeesBadgeRecommended": "empfohlen",
+    "inviteEmployeesBadgeNew": "neu",
+    "getStartedButtonLinkStart": "Starten",
+    "chooseOfficeBadgeNew": "neu",
+    "chooseOfficeHeading": "Wählen Sie Ihr Büro",
+    "chooseOfficeImageAlt": "Eine Vorschau, wie es aussieht, wenn Sie ein Büro auswählen",
+    "inviteEmployeesImageAlt": "Eine Vorschau, wie es aussieht, um Kollegen einzuladen",
+    "scheduleDeskHeading": "Planen Sie einen Schreibtisch für die nächsten Tage",
+    "scheduleDeskImageAlt": "Eine Vorschau, wie es aussieht, wenn Sie einen Schreibtisch in workplacify planen",
+    "scheduleDeskBadgeNew": "neu"
+  },
+  "AppMenu": {
+    "labelHome": "Startseite",
+    "labelOffices": "Büros",
+    "labelSchedule": "Zeitplan",
+    "labelSubmenu": "Untermenü",
+    "noActiveItems": "Zurzeit sind keine aktiven Artikel vorhanden.",
+    "labelOrganizationSettings": "Organisationseinstellungen",
+    "selectOffice": "Büro auswählen",
+    "selectedOffice": "Ausgewähltes Büro: {officeName}",
+    "labelAccount": "Benutzerkonto",
+    "labelSettings": "Einstellungen",
+    "labelLogout": "Abmelden"
+  }
+}

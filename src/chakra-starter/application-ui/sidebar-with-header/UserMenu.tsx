@@ -1,6 +1,7 @@
 import { Link } from "@chakra-ui/next-js";
 import { Box, VStack } from "@chakra-ui/react";
 import { signOut } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import React from "react";
 import { FiBriefcase, FiSettings, FiUsers } from "react-icons/fi";
 
@@ -9,8 +10,8 @@ import { MenuItemPopover } from "./MenuItemPopover";
 import { UserMenuOfficeSelector } from "./UserMenuOfficeSelector";
 
 const AccountSubMenu = () => {
+  const t = useTranslations("AppMenu");
   const onLogoutClick = async () => {
-    debugger;
     signOut({
       callbackUrl: "/",
     });
@@ -24,10 +25,14 @@ const AccountSubMenu = () => {
         textDecoration={"none"}
         _hover={{ textDecoration: "none" }}
       >
-        <MenuItem title={"Settings"} icon={FiBriefcase} />
+        <MenuItem title={t("labelSettings")} icon={FiBriefcase} />
       </Link>
 
-      <MenuItem title={"Logout"} icon={FiBriefcase} onClick={onLogoutClick} />
+      <MenuItem
+        title={t("labelLogout")}
+        icon={FiBriefcase}
+        onClick={onLogoutClick}
+      />
     </VStack>
   );
 };
@@ -37,6 +42,7 @@ type Props = {
 };
 
 export const UserMenu = ({ isUserAdmin }: Props) => {
+  const t = useTranslations("AppMenu");
   return (
     <Box width={"100%"}>
       <VStack spacing={"0.5"} marginTop={"2"}>
@@ -47,14 +53,14 @@ export const UserMenu = ({ isUserAdmin }: Props) => {
             textDecoration={"none"}
             _hover={{ textDecoration: "none" }}
           >
-            <MenuItem title={"Organization Settings"} icon={FiUsers} />
+            <MenuItem title={t("labelOrganizationSettings")} icon={FiUsers} />
           </Link>
         ) : null}
 
         <UserMenuOfficeSelector />
 
         <MenuItemPopover
-          title={"Account"}
+          title={t("labelAccount")}
           icon={FiSettings}
           submenu={<AccountSubMenu />}
         />

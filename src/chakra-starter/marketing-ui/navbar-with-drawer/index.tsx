@@ -12,6 +12,7 @@ import {
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
+import { useTranslations } from "next-intl";
 import { FiMenu, FiMinimize2 } from "react-icons/fi";
 
 import { WorkplacifyIcon } from "../../../components/WorkplacifyIcon";
@@ -21,32 +22,33 @@ import { NavbarDesktop } from "./NavbarDesktop";
 import { NavbarMobile } from "./NavbarMobile";
 import { NavItems } from "./types";
 
-const NAV_ITEMS: NavItems = [
-  // {
-  //   label: "Product",
-  //   children: [
-  //     {
-  //       label: "Desk Management",
-  //       subLabel: "...",
-  //       href: "/product/desk-management",
-  //       tags: [],
-  //     },
-  //     {
-  //       label: "Office Utilization Reporting",
-  //       subLabel: "...",
-  //       href: "/product/office-utilization-reporting",
-  //       tags: [],
-  //     },
-  //   ],
-  // },
-
-  {
-    label: "Pricing",
-    href: "/#pricing",
-  },
-];
-
 export const NavbarWithDrawer = () => {
+  const t = useTranslations("Menu");
+  const NAV_ITEMS: NavItems = [
+    // {
+    //   label: "Product",
+    //   children: [
+    //     {
+    //       label: "Desk Management",
+    //       subLabel: "...",
+    //       href: "/product/desk-management",
+    //       tags: [],
+    //     },
+    //     {
+    //       label: "Office Utilization Reporting",
+    //       subLabel: "...",
+    //       href: "/product/office-utilization-reporting",
+    //       tags: [],
+    //     },
+    //   ],
+    // },
+
+    {
+      label: t("pricing"),
+      href: "/#pricing",
+    },
+  ];
+
   const { isOpen, onToggle } = useDisclosure();
   return (
     <Box position="fixed" width={"100%"} zIndex={"999"} top={"0"}>

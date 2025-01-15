@@ -16,6 +16,7 @@ import { useRouter } from "next/router";
 import { FiX } from "react-icons/fi";
 
 import { FormOfficeAdd } from "../../../../components/FormOfficeAdd";
+import { getMessages } from "../../../../messages/getMessages";
 import { appAuthRedirect } from "../../../../server/nextMiddleware/appAuthRedirect";
 import { useOfficeFormStore } from "../../../../stores/officeFormStore";
 import { trpc } from "../../../../utils/trpc";
@@ -105,9 +106,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   });
   if (redirect) return { redirect };
 
+  const messages = await getMessages(context);
+
   return {
     props: {
       session,
+      messages,
     },
   };
 };

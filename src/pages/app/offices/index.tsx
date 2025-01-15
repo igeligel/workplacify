@@ -12,9 +12,12 @@ import {
   TabPanels,
   Tabs,
 } from "@chakra-ui/react";
+import { GetServerSideProps } from "next";
 import { FiPlus } from "react-icons/fi";
 
 import { TableOfficeList } from "../../../components/TableOfficeList";
+import { getMessages } from "../../../messages/getMessages";
+import { appAuthRedirect } from "../../../server/nextMiddleware/appAuthRedirect";
 
 const OfficesPage = () => {
   return (
@@ -69,6 +72,22 @@ const OfficesPage = () => {
       </Box>
     </Container>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { redirect, session } = await appAuthRedirect({
+    context,
+  });
+  if (redirect) return { redirect };
+
+  const messages = await getMessages(context);
+
+  return {
+    props: {
+      session,
+      messages,
+    },
+  };
 };
 
 export default OfficesPage;

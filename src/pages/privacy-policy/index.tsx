@@ -1,7 +1,9 @@
 import { Container } from "@chakra-ui/react";
+import { GetServerSideProps } from "next";
 import { NextSeo } from "next-seo";
 
 import { PrivacyPolicy } from "../../chakra-starter/marketing-ui/privacy-policy";
+import { getMessages } from "../../messages/getMessages";
 
 const companyName = "workplacify";
 const companyEmail = "kevinigeligeligel@gmail.com";
@@ -20,6 +22,16 @@ const PrivacyPolicyPage = () => {
       </Container>
     </>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const messages = await getMessages(context);
+
+  return {
+    props: {
+      messages,
+    },
+  };
 };
 
 export default PrivacyPolicyPage;

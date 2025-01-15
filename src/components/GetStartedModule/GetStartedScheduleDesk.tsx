@@ -1,16 +1,18 @@
+import { useTranslations } from "next-intl";
+
 import { GetStartedBadge } from "./GetStartedBadge";
 import { GetStartedLink } from "./GetStartedLink";
 
 export const GetStartGetStartedScheduleDesk = () => {
+  const t = useTranslations("GetStartedModule");
+
   return (
     <GetStartedLink
       href={"/app/schedule"}
-      heading={"Schedule a desk for the next days"}
+      heading={t("scheduleDeskHeading")}
       imageSource={"/get-started-schedule-desk.png"}
-      imageAlt={
-        "A preview on how it looks like to schedule a desk in workplacify"
-      }
-      badges={<GetStartedBadge>new</GetStartedBadge>}
+      imageAlt={t("scheduleDeskImageAlt")}
+      badges={<GetStartedBadge>{t("scheduleDeskBadgeNew")}</GetStartedBadge>}
     />
   );
 };

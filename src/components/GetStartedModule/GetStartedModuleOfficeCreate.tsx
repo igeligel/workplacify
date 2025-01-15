@@ -1,14 +1,18 @@
+import { useTranslations } from "next-intl";
+
 import { GetStartedBadge } from "./GetStartedBadge";
 import { GetStartedLink } from "./GetStartedLink";
 
 export const GetStartedModuleOfficeCreate = () => {
+  const t = useTranslations("GetStartedModule");
+
   return (
     <GetStartedLink
       href={"/app/offices/new"}
-      heading={"Create a new office"}
+      heading={t("officeCreateHeading")}
       imageSource={"/office-creation-preview.png"}
-      imageAlt={"A preview on how it looks like to create an office"}
-      badges={<GetStartedBadge>new</GetStartedBadge>}
+      imageAlt={t("officeCreateImageAlt")}
+      badges={<GetStartedBadge>{t("officeCreateBadgeNew")}</GetStartedBadge>}
     />
   );
 };

@@ -24,6 +24,7 @@ import { DayPicker } from "react-day-picker";
 
 import { FloorDeskBooker } from "../../../components/FloorDeskBooker";
 import { ScheduleNoOfficeSelected } from "../../../components/ScheduleNoOfficeSelected";
+import { getMessages } from "../../../messages/getMessages";
 import { appAuthRedirect } from "../../../server/nextMiddleware/appAuthRedirect";
 import { trpc } from "../../../utils/trpc";
 
@@ -168,7 +169,7 @@ const SchedulePage = () => {
 
                         const canCancelReservation =
                           freeDeskSchedules.usedPeriods.some(
-                            (period) => period.id === userQuery.data.id,
+                            (period) => period.id === userQuery.data?.id,
                           );
 
                         return (
@@ -290,9 +291,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   });
   if (redirect) return { redirect };
 
+  const messages = await getMessages(context);
+
   return {
     props: {
       session,
+      messages,
     },
   };
 };
