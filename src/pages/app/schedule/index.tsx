@@ -263,7 +263,7 @@ const SchedulePage = () => {
                 {getFloorsForCurrentOfficeQuery.data?.map((floor) => {
                   return (
                     <TabPanel key={floor.id}>
-                      {floor.floorPlan && (
+                      {floor.floorPlan && userQuery.data?.id && (
                         <FloorDeskBooker
                           floor={floor}
                           deskSchedulesMapped={
