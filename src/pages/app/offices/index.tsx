@@ -13,6 +13,7 @@ import {
   Tabs,
 } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
+import { useTranslations } from "next-intl";
 import { FiPlus } from "react-icons/fi";
 
 import { TableOfficeList } from "../../../components/TableOfficeList";
@@ -20,6 +21,7 @@ import { getMessages } from "../../../messages/getMessages";
 import { appAuthRedirect } from "../../../server/nextMiddleware/appAuthRedirect";
 
 const OfficesPage = () => {
+  const t = useTranslations("OfficePages");
   return (
     <Container maxW={"container.2xl"}>
       <Box display={"flex"} justifyContent={"space-between"}>
@@ -29,7 +31,7 @@ const OfficesPage = () => {
             md: "2xl",
           }}
         >
-          Offices
+          {t("headingOfficeList")}
         </Heading>
 
         <HStack>
@@ -47,7 +49,7 @@ const OfficesPage = () => {
             }}
             size={{ base: "sm", md: "md" }}
           >
-            Add office
+            {t("labelAddOffice")}
           </Button>
         </HStack>
       </Box>
@@ -60,7 +62,7 @@ const OfficesPage = () => {
           }}
         >
           <TabList>
-            <Tab>All offices</Tab>
+            <Tab>{t("labelAllOffices")}</Tab>
           </TabList>
 
           <TabPanels>

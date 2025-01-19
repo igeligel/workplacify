@@ -14,12 +14,14 @@ import {
   TableContainer,
   Tbody,
   Td,
+  Text,
   Th,
   Thead,
   Tr,
   VStack,
 } from "@chakra-ui/react";
 import { Office, Prisma } from "@prisma/client";
+import { useTranslations } from "next-intl";
 import router from "next/router";
 import { useState } from "react";
 import { FiCheck, FiX } from "react-icons/fi";
@@ -38,6 +40,7 @@ type DisplayFloorsProps = {
 };
 
 export const DisplayFloors = (props: DisplayFloorsProps) => {
+  const t = useTranslations("OfficePages");
   const utils = trpc.useUtils();
   const deleteFloorMutation = trpc.floor.delete.useMutation();
   const [removeModalOpen, setRemoveModalOpen] = useState(false);
@@ -47,7 +50,8 @@ export const DisplayFloors = (props: DisplayFloorsProps) => {
     return (
       <Box>
         <VStack>
-          No floors there yet
+          {t("noFloorsThereYet")}
+
           <Button
             as={Link}
             href={`/app/offices/${props.office.id}/floors/new`}
@@ -57,7 +61,7 @@ export const DisplayFloors = (props: DisplayFloorsProps) => {
             textDecoration={"none"}
             _hover={{ backgroundColor: "orange.500", textDecoration: "none" }}
           >
-            Add floor
+            {t("addFloor")}
           </Button>
         </VStack>
       </Box>
@@ -74,11 +78,11 @@ export const DisplayFloors = (props: DisplayFloorsProps) => {
         <Table variant="simple" width={"100%"}>
           <Thead>
             <Tr>
-              <Th>Name</Th>
-              <Th>Description</Th>
-              <Th>Has floor plan</Th>
-              <Th>Number of desks</Th>
-              <Th>Occupancy past 7d</Th>
+              <Th>{t("floorTableHeaderName")}</Th>
+              <Th>{t("floorTableHeaderDescription")}</Th>
+              <Th>{t("floorTableHeaderHasFloorPlan")}</Th>
+              <Th>{t("floorTableHeaderNumberOfDesks")}</Th>
+              <Th>{t("floorTableHeaderOccupancyPast7d")}</Th>
               <Th></Th>
             </Tr>
           </Thead>
@@ -97,21 +101,35 @@ export const DisplayFloors = (props: DisplayFloorsProps) => {
                 }}
               >
                 <Td>{floor.name}</Td>
-                <Td>{floor.description}</Td>
+                <Td maxW={"500px"}>
+                  <Box
+                    overflowWrap={"break-word"}
+                    wordBreak={"break-all"}
+                    // overflow={"clip"}
+                    style={{
+                      textOverflow: "ellipsis",
+                    }}
+                    maxW={"500px"}
+                    overflowX={"auto"}
+                  >
+                    {floor.description}
+                  </Box>
+                </Td>
                 <Td>
                   {floor.floorPlan ? <Icon as={FiCheck} /> : <Icon as={FiX} />}
                 </Td>
                 <Th>{floor.desks?.length || "N/A"}</Th>
-                <Th>N/A</Th>
+                <Th>-/-</Th>
                 <Th>
                   <Button
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.stopPropagation();
                       setRemoveFloorId(floor.id);
                       setRemoveModalOpen(true);
                     }}
                     colorScheme="red"
                   >
-                    Remove
+                    {t("floorTableButtonRemove")}
                   </Button>
                 </Th>
               </Tr>
@@ -134,7 +152,9 @@ export const DisplayFloors = (props: DisplayFloorsProps) => {
               setRemoveModalOpen(false);
             }}
           />
-          <DrawerHeader>Remove {floorToRemove?.name}?</DrawerHeader>
+          <DrawerHeader>
+            {t("floorRemoveModalHeader", { floorName: floorToRemove?.name })}
+          </DrawerHeader>
 
           <DrawerBody />
 
@@ -154,7 +174,7 @@ export const DisplayFloors = (props: DisplayFloorsProps) => {
                 setRemoveModalOpen(false);
               }}
             >
-              Remove
+              {t("floorRemoveModalButtonRemove")}
             </Button>
           </DrawerFooter>
         </DrawerContent>
