@@ -24,6 +24,7 @@ import {
 import { ChangeEventHandler, useRef, useState } from "react";
 import { FiMinus, FiPlus, FiX } from "react-icons/fi";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
+import { useTranslations } from "use-intl";
 
 import { useOfficeFloorFormStore } from "../stores/officeFloorFormStore";
 import { DeskFormState } from "../stores/types";
@@ -69,6 +70,7 @@ const validateSize = (file: File | undefined) => {
 // const mockedDesks: Desk[] = [];
 
 export const FormFloorAdd = () => {
+  const t = useTranslations("OfficePages");
   const [isAddMarkerMode, setIsAddMarkerMode] = useState<boolean>(false);
   const imageRef = useRef<HTMLImageElement>(null);
   // const [desks, setDesks] = useState<Desk[]>(mockedDesks);
@@ -101,8 +103,8 @@ export const FormFloorAdd = () => {
       });
     } catch (error) {
       toast({
-        title: "Error uploading floor plan",
-        description: "Please try again later",
+        title: t("errorTitleUploadingFloorPlan"),
+        description: t("errorDescriptionUploadingFloorPlan"),
         status: "error",
         duration: 9000,
         isClosable: true,
@@ -112,8 +114,8 @@ export const FormFloorAdd = () => {
     const uploadUrl = ((await res.json()) as { url: string }).url;
     if (!uploadUrl) {
       toast({
-        title: "Error uploading floor plan",
-        description: "Please try again later",
+        title: t("errorTitleUploadingFloorPlan"),
+        description: t("errorDescriptionUploadingFloorPlan"),
         status: "error",
         duration: 9000,
         isClosable: true,
@@ -136,14 +138,23 @@ export const FormFloorAdd = () => {
     // check if image
     const result = isImage(img.name);
     if (!result) {
-      const error = "File type should be a image";
-      alert(error);
+      toast({
+        title: t("errorTitleFileShouldBeImage"),
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
       return;
     }
     const isImageLarge = validateSize(img);
     if (isImageLarge) {
-      const error = "File must be less or equal to 5MB";
-      alert(error);
+      const error = t("errorFileMustBeLessOrEqual5MB");
+      toast({
+        title: error,
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
       return;
     }
     const reader = new FileReader();
@@ -159,24 +170,26 @@ export const FormFloorAdd = () => {
   return (
     <>
       <FormControl>
-        <FormLabel>Floor Name</FormLabel>
+        <FormLabel>{t("labelFloorName")}</FormLabel>
         <Input
           value={name}
           placeholder={"BER-001"}
           type="text"
           onChange={(e) => setName(e.target.value)}
         />
-        <FormHelperText>Use a unique identifier like BER-001</FormHelperText>
+        <FormHelperText>
+          {t("helperTextFloorNameUniqueIdentifier")}
+        </FormHelperText>
       </FormControl>
       <FormControl>
-        <FormLabel>Description</FormLabel>
+        <FormLabel>{t("labelFloorDescription")}</FormLabel>
         <Textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           rows={3}
         />
         <FormHelperText>
-          Helpful tip: Any special instructions for this floor?
+          {t("helperTextFloorDescriptionOptional")}
         </FormHelperText>
       </FormControl>
       {!imageUrl && (
@@ -184,7 +197,9 @@ export const FormFloorAdd = () => {
           <Box>
             <input type="file" onChange={handleImageChange} className="block" />
           </Box>
-          <Button onClick={onUploadTrigger}>Upload floor plan</Button>
+          <Button onClick={onUploadTrigger}>
+            {t("buttonUploadFloorPlan")}
+          </Button>
         </>
       )}
       {imageUrl && (
@@ -207,8 +222,7 @@ export const FormFloorAdd = () => {
                     {isAddMarkerMode && (
                       <Alert status="info" marginBottom={4}>
                         <AlertIcon />
-                        You are now in marker mode. You can&apos;t zoom or pan
-                        the image. Click on the image to add a desk.
+                        {t("alertMarkerModeEnabled")}
                       </Alert>
                     )}
                     <Box display={"flex"} justifyContent={"space-between"}>
@@ -219,7 +233,7 @@ export const FormFloorAdd = () => {
                           flexDirection={"column"}
                         >
                           <FormLabel htmlFor="zoom-controls" mb="0">
-                            Zoom controls
+                            {t("labelZoomControls")}
                           </FormLabel>
                           <HStack id={"zoom-controls"} paddingTop={1}>
                             <IconButton
@@ -256,7 +270,7 @@ export const FormFloorAdd = () => {
                         <Box>
                           <FormControl display="flex" alignItems="center">
                             <FormLabel htmlFor="toggle-marker-mode" mb="0">
-                              Marker mode enabled?
+                              {t("labelToggleMarkerMode")}
                             </FormLabel>
                             <Switch
                               id="toggle-marker-mode"
@@ -380,10 +394,12 @@ export const FormFloorAdd = () => {
               setCurrentSelectedDesk(null);
             }}
           />
-          <DrawerHeader>Edit desk</DrawerHeader>
+          <DrawerHeader>{t("HeaderDeskEdit")}</DrawerHeader>
 
           <DrawerBody>
-            Current desk: #{currentSelectedDesk?.publicDeskId}
+            {t("labelDeskNameWithId", {
+              id: currentSelectedDesk?.publicDeskId,
+            })}
           </DrawerBody>
 
           <DrawerFooter>
@@ -400,7 +416,7 @@ export const FormFloorAdd = () => {
                 setCurrentSelectedDesk(null);
               }}
             >
-              Remove
+              {t("buttonRemoveDesk")}
             </Button>
           </DrawerFooter>
         </DrawerContent>

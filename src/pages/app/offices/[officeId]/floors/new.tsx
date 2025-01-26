@@ -11,6 +11,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import { FiX } from "react-icons/fi";
 
@@ -21,6 +22,7 @@ import { useOfficeFloorFormStore } from "../../../../../stores/officeFloorFormSt
 import { trpc } from "../../../../../utils/trpc";
 
 const FloorAddPage = () => {
+  const t = useTranslations("OfficePages");
   const router = useRouter();
   const { name, description, desks, imageUrl } = useOfficeFloorFormStore();
   const createFloorMutation = trpc.floor.createFloor.useMutation();
@@ -62,7 +64,7 @@ const FloorAddPage = () => {
               fontWeight={500}
               fontSize={"md"}
             >
-              Add a floor
+              {t("headingAddFloor")}
             </Heading>
           </HStack>
           <HStack>
@@ -76,7 +78,7 @@ const FloorAddPage = () => {
               }}
               onClick={onSaveClick}
             >
-              Save floor
+              {t("buttonSaveFloor")}
             </Button>
           </HStack>
         </Box>
@@ -85,7 +87,7 @@ const FloorAddPage = () => {
       <Container maxW={"container.xl"} paddingTop={4}>
         <VStack width={"100%"} alignItems={"flex-start"} spacing={4}>
           <Heading as={"h1"} fontSize={"lg"} color={"gray.700"}>
-            Floor Information
+            {t("headingFloorInformation")}
           </Heading>
 
           <VStack width={"100%"} alignItems={"flex-start"} spacing={3}>

@@ -11,6 +11,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { Prisma } from "@prisma/client";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
@@ -29,6 +30,7 @@ type DrawerDeskEditProps = {
 };
 
 export const DrawerDeskEdit = (props: DrawerDeskEditProps) => {
+  const t = useTranslations("OfficePages");
   const { onCloseDrawer, selectedDesk } = props;
   const router = useRouter();
   const toast = useToast();
@@ -77,11 +79,11 @@ export const DrawerDeskEdit = (props: DrawerDeskEditProps) => {
   return (
     <DrawerContent>
       <DrawerCloseButton />
-      <DrawerHeader>Edit desk</DrawerHeader>
+      <DrawerHeader>{t("HeaderDeskEdit")}</DrawerHeader>
 
       <DrawerBody>
         <FormControl>
-          <FormLabel>Name</FormLabel>
+          <FormLabel>{t("labelDeskName")}</FormLabel>
           <Input
             value={name}
             onChange={(event) => {
@@ -93,10 +95,10 @@ export const DrawerDeskEdit = (props: DrawerDeskEditProps) => {
 
       <DrawerFooter>
         <Button variant="outline" mr={3} onClick={onCloseDrawer}>
-          Cancel
+          {t("buttonClose")}
         </Button>
         <Button colorScheme="orange" onClick={onSave}>
-          Save
+          {t("buttonSave")}
         </Button>
       </DrawerFooter>
     </DrawerContent>
