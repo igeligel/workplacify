@@ -144,5 +144,15 @@
     "close": "Close",
     "bookDeskForDay": "Book for the day",
     "zoomControls": "Zoom controls"
+  },
+  "UserSettings": {
+    "toastTitleAccountUpdated": "Account updated.",
+    "toastDescriptionAccountUpdated": "Changed the name of your account.",
+    "headingAccountSettings": "Account settings",
+    "buttonSaveAccount": "Save account",
+    "headingOfficeInformation": "Office Information",
+    "labelOfficeName": "Name",
+    "helperTextOfficeName": "Use your real name so coworkers can identify you",
+    "exampleName": "Joe Doe"
   }
 }

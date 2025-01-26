@@ -144,5 +144,15 @@
     "close": "Schließen",
     "bookDeskForDay": "Für den Tag buchen",
     "zoomControls": "Zoom-Kontrollen"
+  },
+  "UserSettings": {
+    "toastTitleAccountUpdated": "Konto aktualisiert.",
+    "toastDescriptionAccountUpdated": "Sie haben den Namen Ihres Kontos geändert.",
+    "headingAccountSettings": "Einstellungen des Kontos",
+    "buttonSaveAccount": "Konto speichern",
+    "headingOfficeInformation": "Büro-Informationen",
+    "labelOfficeName": "Name",
+    "helperTextOfficeName": "Verwenden Sie Ihren echten Namen, damit Ihre Kollegen Sie identifizieren können.",
+    "exampleName": "Max Mustermann"
   }
 }
