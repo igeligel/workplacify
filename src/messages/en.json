@@ -121,5 +121,28 @@
     "labelToggleMarkerMode": "Marker mode enabled?",
     "labelDeskNameWithId": "Current desk: #{id}",
     "buttonRemoveDesk": "Remove"
+  },
+  "SchedulePages": {
+    "notLoggedIn": "Not logged in",
+    "noSchedules": "No schedules",
+    "headingSchedule": "Schedule",
+    "headingAllDesks": "All desks",
+    "listOfDesks": "List of all desks",
+    "errorTitleWhileBooking": "Error while booking a desk",
+    "errorDescriptionWhileBooking": "You have booked a desk already in this office for this day.",
+    "badgeLabelAvailable": "Available",
+    "badgeLabelBooked": "Booked",
+    "isOccupiedWholeday": "Is occupied whole day{userCount, plural, =0 {} =1 { by {userName}} other {}}",
+    "isOccupiedSpecificTime": "Is occupied from {startTime} to {endTime}{userCount, plural, =0 {} =1 { by {userName}} other {}}",
+    "customNameForThisDesk": "Custom name for this desk",
+    "cancelReservation": "Cancel reservation",
+    "bookDesk": "Book",
+    "floorDeskName": "{floorName} - Desk {deskId}",
+    "deskName": "Desk #{deskId}",
+    "bookDeskWithName": "Book {deskName}",
+    "doYouWantToBookIt": "Do you want to book it?",
+    "close": "Close",
+    "bookDeskForDay": "Book for the day",
+    "zoomControls": "Zoom controls"
   }
 }

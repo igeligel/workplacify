@@ -121,5 +121,28 @@
     "labelToggleMarkerMode": "Markierungsmodus aktiviert?",
     "labelDeskNameWithId": "Aktueller Schreibtisch: #{id}",
     "buttonRemoveDesk": "Entfernen"
+  },
+  "SchedulePages": {
+    "notLoggedIn": "Nicht angemeldet",
+    "noSchedules": "Kein Zeitplan",
+    "headingSchedule": "Zeitplan",
+    "headingAllDesks": "Alle Schreibtische",
+    "listOfDesks": "Liste aller Schreibtische",
+    "errorTitleWhileBooking": "Fehler beim Buchen eines Schreibtisches",
+    "errorDescriptionWhileBooking": "Sie haben bereits einen Tisch in diesem Büro für diesen Tag gebucht.",
+    "badgeLabelAvailable": "Verfügbar",
+    "badgeLabelBooked": "Gebucht",
+    "isOccupiedWholeday": "Ist den ganzen Tag besetzt{userCount, plural, =0 {} =1 { von {userName}} other {}}",
+    "isOccupiedSpecificTime": "Ist belegt von {startTime} bis {endTime}{userCount, plural, =0 {} =1 { von {userName}} other {}}",
+    "customNameForThisDesk": "Benutzerdefinierter Name für diesen Schreibtisch",
+    "cancelReservation": "Reservierung stornieren",
+    "bookDesk": "Buchen",
+    "floorDeskName": "{floorName} - Schreibtisch {deskId}",
+    "deskName": "Schreibtisch #{deskId}",
+    "bookDeskWithName": "Reserviere {deskName}",
+    "doYouWantToBookIt": "Möchten Sie diesen Schreibtisch reservieren?",
+    "close": "Schließen",
+    "bookDeskForDay": "Für den Tag buchen",
+    "zoomControls": "Zoom-Kontrollen"
   }
 }
