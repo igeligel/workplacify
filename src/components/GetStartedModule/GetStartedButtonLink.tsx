@@ -8,6 +8,7 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { FiChevronRight } from "react-icons/fi";
 
@@ -22,6 +23,7 @@ type GetStartedButtonLinkProps = {
 export const GetStartedButtonLink = (props: GetStartedButtonLinkProps) => {
   const { onClick, badges, heading, imageSource, imageAlt } = props;
   const [isElementHovered, setIsElementHovered] = useState(false);
+  const t = useTranslations("GetStartedModule");
 
   return (
     <Button
@@ -70,7 +72,7 @@ export const GetStartedButtonLink = (props: GetStartedButtonLinkProps) => {
               as={Text}
               variant={"link"}
             >
-              Start
+              {t("getStartedButtonLinkStart")}
             </Button>
             <Icon
               marginInlineStart={"0px !important"}

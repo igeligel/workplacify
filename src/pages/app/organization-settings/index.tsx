@@ -15,8 +15,11 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
+import { GetServerSideProps } from "next";
 import { useCopyToClipboard } from "react-use";
 
+import { getMessages } from "../../../messages/getMessages";
+import { appAuthRedirect } from "../../../server/nextMiddleware/appAuthRedirect";
 import { trpc } from "../../../utils/trpc";
 
 const OrganizationSettingsPage = () => {
@@ -190,6 +193,22 @@ const OrganizationSettingsPage = () => {
       </Box>
     </Container>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { redirect, session } = await appAuthRedirect({
+    context,
+  });
+  if (redirect) return { redirect };
+
+  const messages = await getMessages(context);
+
+  return {
+    props: {
+      session,
+      messages,
+    },
+  };
 };
 
 export default OrganizationSettingsPage;

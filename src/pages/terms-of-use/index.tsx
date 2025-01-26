@@ -1,7 +1,9 @@
 import { Container } from "@chakra-ui/react";
+import { GetServerSideProps } from "next";
 import { NextSeo } from "next-seo";
 
 import { TermsOfUse } from "../../chakra-starter/marketing-ui/terms-of-use";
+import { getMessages } from "../../messages/getMessages";
 
 const companyName = "workplacify";
 const companyEmail = "kevinigeligeligel@gmail.com";
@@ -20,6 +22,16 @@ const TermsOfUsePage = () => {
       </Container>
     </>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const messages = await getMessages(context);
+
+  return {
+    props: {
+      messages,
+    },
+  };
 };
 
 export default TermsOfUsePage;

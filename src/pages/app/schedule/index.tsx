@@ -19,11 +19,14 @@ import {
 } from "@chakra-ui/react";
 import { formatISO } from "date-fns";
 import { GetServerSideProps } from "next";
+import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import { DayPicker } from "react-day-picker";
+import { de } from "react-day-picker/locale";
 
 import { FloorDeskBooker } from "../../../components/FloorDeskBooker";
 import { ScheduleNoOfficeSelected } from "../../../components/ScheduleNoOfficeSelected";
+import { getMessages } from "../../../messages/getMessages";
 import { appAuthRedirect } from "../../../server/nextMiddleware/appAuthRedirect";
 import { trpc } from "../../../utils/trpc";
 
@@ -34,6 +37,9 @@ const css = `
 `;
 
 const SchedulePage = () => {
+  const t = useTranslations("SchedulePages");
+  const currentLocale = useLocale();
+
   const utils = trpc.useUtils();
   const toast = useToast();
   const [day, setDay] = useState(new Date());
@@ -58,7 +64,7 @@ const SchedulePage = () => {
     getFloorsForCurrentOfficeQuery.isLoading;
 
   if (!userQuery.data) {
-    return <div>Not logged in</div>;
+    return <div>{t("notLoggedIn")}</div>;
   }
 
   if (userQuery.data.currentOfficeId === null) {
@@ -66,7 +72,7 @@ const SchedulePage = () => {
   }
 
   if (!getDeskSchedulesForDayQuery.data) {
-    return <div>No schedules</div>;
+    return <div>{t("noSchedules")}</div>;
   }
 
   return (
@@ -77,7 +83,7 @@ const SchedulePage = () => {
           lg: "3xl",
         }}
       >
-        Schedule
+        {t("headingSchedule")}
       </Heading>
       <Stack
         display={"flex"}
@@ -96,7 +102,7 @@ const SchedulePage = () => {
           style={{
             margin: "0 !important",
           }}
-          // footer={footer}
+          locale={currentLocale === "de" ? de : undefined}
         />
         {isLoading ? (
           <Spinner />
@@ -108,11 +114,11 @@ const SchedulePage = () => {
                 lg: "3xl",
               }}
             >
-              All desks
+              {t("headingAllDesks")}
             </Heading>
             <Tabs width={"100%"} colorScheme="orange" isLazy>
               <TabList>
-                <Tab>List of desks</Tab>
+                <Tab>{t("listOfDesks")}</Tab>
                 {getFloorsForCurrentOfficeQuery.data?.map((floor) => {
                   return <Tab key={floor.id}>{floor.name}</Tab>;
                 })}
@@ -141,9 +147,8 @@ const SchedulePage = () => {
                             utils.schedule.getDeskSchedulesForDay.invalidate();
                           } catch (e) {
                             toast({
-                              title: "Error while booking a desk",
-                              description:
-                                "You have booked a desk already in this office for this day.",
+                              title: t("errorTitleWhileBooking"),
+                              description: t("errorDescriptionWhileBooking"),
                               status: "error",
                               duration: 5000,
                               isClosable: true,
@@ -168,7 +173,7 @@ const SchedulePage = () => {
 
                         const canCancelReservation =
                           freeDeskSchedules.usedPeriods.some(
-                            (period) => period.id === userQuery.data.id,
+                            (period) => period.id === userQuery.data?.id,
                           );
 
                         return (
@@ -187,28 +192,47 @@ const SchedulePage = () => {
                                   fontWeight={500}
                                   color={"gray.700"}
                                 >
-                                  {freeDeskSchedules.desk.floor.name} - Desk{" "}
-                                  {freeDeskSchedules.desk.publicDeskId}
+                                  {t("floorDeskName", {
+                                    floorName:
+                                      freeDeskSchedules.desk.floor.name,
+                                    deskId: freeDeskSchedules.desk.publicDeskId,
+                                  })}
                                   {freeDeskSchedules.usedPeriods.map(
                                     (usedPeriod) => {
                                       const isOccupiedWholeDay =
                                         usedPeriod.wholeDay;
 
-                                      const occupationPeriod = `from ${usedPeriod.start.toLocaleTimeString()} to ${usedPeriod.end.toLocaleTimeString()}`;
-                                      const occupationLabel = isOccupiedWholeDay
-                                        ? "whole day"
-                                        : occupationPeriod;
-                                      const isOccupiedByWhom = usedPeriod.name
-                                        ? ` by ${usedPeriod.name}`
-                                        : ``;
-                                      const label = `Is occupied ${occupationLabel}${isOccupiedByWhom}`;
-                                      const key = `${occupationPeriod}-${isOccupiedByWhom}`;
+                                      const wholeDayText = t(
+                                        "isOccupiedWholeday",
+                                        {
+                                          userCount: usedPeriod.name ? 1 : 0,
+                                          userName: usedPeriod.name,
+                                        },
+                                      );
+
+                                      const specificTimeText = t(
+                                        "isOccupiedSpecificTime",
+                                        {
+                                          userCount: usedPeriod.name ? 1 : 0,
+                                          userName: usedPeriod.name,
+                                          startTime:
+                                            usedPeriod.start.toLocaleTimeString(),
+                                          endTime:
+                                            usedPeriod.end.toLocaleTimeString(),
+                                        },
+                                      );
+                                      const label = isOccupiedWholeDay
+                                        ? wholeDayText
+                                        : specificTimeText;
+
+                                      const key = `${isOccupiedWholeDay.toString()}-${usedPeriod.id}`;
+
                                       return <Box key={key}>{label}</Box>;
                                     },
                                   )}
                                 </Heading>
                                 {freeDeskSchedules.desk.name && (
-                                  <Tooltip label="Custom name for this desk">
+                                  <Tooltip label={t("customNameForThisDesk")}>
                                     <Tag>{freeDeskSchedules.desk.name}</Tag>
                                   </Tooltip>
                                 )}
@@ -222,8 +246,8 @@ const SchedulePage = () => {
                                   }
                                 >
                                   {freeDeskSchedules.wholeDayFree
-                                    ? "Available"
-                                    : "Booked"}
+                                    ? t("badgeLabelAvailable")
+                                    : t("badgeLabelBooked")}
                                 </Badge>
                               </Box>
                             </HStack>
@@ -237,7 +261,7 @@ const SchedulePage = () => {
                                 size={"sm"}
                                 onClick={onCancelReservationClick}
                               >
-                                Cancel reservation
+                                {t("cancelReservation")}
                               </Button>
                             ) : (
                               <Button
@@ -250,7 +274,7 @@ const SchedulePage = () => {
                                 onClick={onBookClick}
                                 isDisabled={!freeDeskSchedules.wholeDayFree}
                               >
-                                Book
+                                {t("bookDesk")}
                               </Button>
                             )}
                           </VStack>
@@ -262,7 +286,7 @@ const SchedulePage = () => {
                 {getFloorsForCurrentOfficeQuery.data?.map((floor) => {
                   return (
                     <TabPanel key={floor.id}>
-                      {floor.floorPlan && (
+                      {floor.floorPlan && userQuery.data?.id && (
                         <FloorDeskBooker
                           floor={floor}
                           deskSchedulesMapped={
@@ -290,9 +314,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   });
   if (redirect) return { redirect };
 
+  const messages = await getMessages(context);
+
   return {
     props: {
       session,
+      messages,
     },
   };
 };

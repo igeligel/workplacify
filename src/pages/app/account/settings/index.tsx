@@ -16,13 +16,18 @@ import {
   VStack,
   useToast,
 } from "@chakra-ui/react";
+import { GetServerSideProps } from "next";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { FiX } from "react-icons/fi";
 
+import { getMessages } from "../../../../messages/getMessages";
+import { appAuthRedirect } from "../../../../server/nextMiddleware/appAuthRedirect";
 import { trpc } from "../../../../utils/trpc";
 
 const AccountSettings = () => {
+  const t = useTranslations("UserSettings");
   const userQuery = trpc.user.get.useQuery();
   const updateUserMutation = trpc.user.update.useMutation();
   const router = useRouter();
@@ -44,8 +49,8 @@ const AccountSettings = () => {
       name: userName,
     });
     toast({
-      title: "Account updated.",
-      description: "Changed the name of your account.",
+      title: t("toastTitleAccountUpdated"),
+      description: t("toastDescriptionAccountUpdated"),
       status: "success",
       duration: 5000,
       isClosable: true,
@@ -76,7 +81,7 @@ const AccountSettings = () => {
                 fontWeight={500}
                 fontSize={"md"}
               >
-                Account settings
+                {t("headingAccountSettings")}
               </Heading>
             </HStack>
             <HStack>
@@ -91,7 +96,7 @@ const AccountSettings = () => {
                 }}
                 onClick={onSaveClick}
               >
-                Save account
+                {t("buttonSaveAccount")}
               </Button>
             </HStack>
           </Box>
@@ -100,7 +105,7 @@ const AccountSettings = () => {
         <Container maxW={"container.sm"} paddingTop={4}>
           <VStack width={"100%"} alignItems={"flex-start"} spacing={4}>
             <Heading as={"h1"} fontSize={"lg"} color={"gray.700"}>
-              Office Information
+              {t("headingOfficeInformation")}
             </Heading>
 
             {isLoading ? (
@@ -108,17 +113,15 @@ const AccountSettings = () => {
             ) : (
               <>
                 <FormControl>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>{t("labelOfficeName")}</FormLabel>
                   <Input
                     value={userName || ""}
-                    placeholder={"BER-001"}
+                    placeholder={t("exampleName")}
                     type="text"
                     onChange={(e) => setUserName(e.target.value)}
                     maxW={"500px"}
                   />
-                  <FormHelperText>
-                    Use your real name so coworkers can identify you
-                  </FormHelperText>
+                  <FormHelperText>{t("helperTextOfficeName")}</FormHelperText>
                 </FormControl>
               </>
             )}
@@ -127,6 +130,22 @@ const AccountSettings = () => {
       </VStack>
     </>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { redirect, session } = await appAuthRedirect({
+    context,
+  });
+  if (redirect) return { redirect };
+
+  const messages = await getMessages(context);
+
+  return {
+    props: {
+      session,
+      messages,
+    },
+  };
 };
 
 export default AccountSettings;

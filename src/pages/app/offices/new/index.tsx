@@ -12,15 +12,18 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import { FiX } from "react-icons/fi";
 
 import { FormOfficeAdd } from "../../../../components/FormOfficeAdd";
+import { getMessages } from "../../../../messages/getMessages";
 import { appAuthRedirect } from "../../../../server/nextMiddleware/appAuthRedirect";
 import { useOfficeFormStore } from "../../../../stores/officeFormStore";
 import { trpc } from "../../../../utils/trpc";
 
 const OfficesNewPage = () => {
+  const t = useTranslations("OfficePages");
   const addOfficeMutation = trpc.office.add.useMutation();
   const { name, description, timezone } = useOfficeFormStore();
   const toast = useToast();
@@ -33,8 +36,8 @@ const OfficesNewPage = () => {
       timezone,
     });
     toast({
-      title: "Office added.",
-      description: "We've added the office.",
+      title: t("toastTitleOfficeAdded"),
+      description: t("toastDescriptionOfficeAdded"),
       status: "success",
       duration: 5000,
       isClosable: true,
@@ -64,7 +67,7 @@ const OfficesNewPage = () => {
               fontWeight={500}
               fontSize={"md"}
             >
-              Add a office
+              {t("headingAddOffice")}
             </Heading>
           </HStack>
           <HStack>
@@ -78,7 +81,7 @@ const OfficesNewPage = () => {
               }}
               onClick={onSaveClick}
             >
-              Save office
+              {t("buttonSaveOffice")}
             </Button>
           </HStack>
         </Box>
@@ -87,7 +90,7 @@ const OfficesNewPage = () => {
       <Container maxW={"container.sm"} paddingTop={4}>
         <VStack width={"100%"} alignItems={"flex-start"} spacing={4}>
           <Heading as={"h1"} fontSize={"lg"} color={"gray.700"}>
-            Office Information
+            {t("headingOfficeInformation")}
           </Heading>
 
           <VStack width={"100%"} alignItems={"flex-start"} spacing={3}>
@@ -105,9 +108,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   });
   if (redirect) return { redirect };
 
+  const messages = await getMessages(context);
+
   return {
     props: {
       session,
+      messages,
     },
   };
 };

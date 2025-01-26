@@ -1,9 +1,11 @@
 import { Box, Container } from "@chakra-ui/react";
+import { GetStaticProps } from "next";
 import { NextSeo } from "next-seo";
 
 import { CallToActionWithAnnotation } from "../chakra-starter/marketing-ui/call-to-action-with-annotation";
 import { ThreeTierPricing } from "../chakra-starter/marketing-ui/pricing-table.tsx";
 import { SimpleCardWrapper } from "../components/SimpleCardWrapper";
+import { getMessages } from "../messages/getMessages";
 
 const IndexPage = () => {
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}/`;
@@ -49,6 +51,16 @@ const IndexPage = () => {
       {/* Mention Excel list */}
     </>
   );
+};
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const messages = await getMessages(context);
+
+  return {
+    props: {
+      messages: messages,
+    },
+  };
 };
 
 export default IndexPage;

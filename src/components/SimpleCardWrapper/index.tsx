@@ -8,6 +8,7 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { useTranslations } from "next-intl";
 import { ReactElement } from "react";
 import {
   FcBullish,
@@ -67,59 +68,48 @@ const Card = ({ heading, description, icon }: CardProps) => {
 };
 
 export const SimpleCardWrapper = () => {
+  const t = useTranslations("IndexPage");
   return (
     <Box p={{ base: 0, lg: 4 }}>
       <Stack spacing={4} as={Container} maxW={"3xl"} textAlign={"center"}>
         <Heading fontSize={{ base: "2xl", sm: "4xl" }} fontWeight={"bold"}>
-          Why workplacify?
+          {t("whyWorkplacify")}
         </Heading>
         <Text color={"gray.600"} fontSize={{ base: "sm", sm: "lg" }}>
-          The first open-source, self-hostable desk scheduling platform. Helping
-          your employees to get their favorite desk and optimize your office
-          spending with advanced analytics.
+          {t("whyWorkplacifyDescription")}
         </Text>
       </Stack>
 
       <Container maxW={"5xl"} mt={{ base: 6, lg: 12 }}>
         <Flex flexWrap="wrap" gridGap={{ base: 4, lg: 12 }} justify="center">
           <Card
-            heading={"Desk scheduling"}
+            heading={t("deskScheduling")}
             icon={<Icon as={FcCalendar} w={10} h={10} />}
-            description={
-              "Ever had too many people in the office? We got you covered."
-            }
+            description={t("deskSchedulingDescription")}
             href={"#"}
           />
           <Card
-            heading={"Office management"}
+            heading={t("officeManagement")}
             icon={<Icon as={FcOrganization} w={10} h={10} />}
-            description={
-              "Manage multiple offices, with multiple floors. Perfect for growing companies."
-            }
+            description={t("officeManagementDescription")}
             href={"#"}
           />
           <Card
-            heading={"Office analytics"}
+            heading={t("officeAnalytics")}
             icon={<Icon as={FcBullish} w={10} h={10} />}
-            description={
-              "Want to save costs on office space? Our analytic tools will help you do just that."
-            }
+            description={t("officeAnalyticsDescription")}
             href={"#"}
           />
           <Card
-            heading={"Floor planning"}
+            heading={t("floorPlanning")}
             icon={<Icon as={FcGenealogy} w={10} h={10} />}
-            description={
-              "Assign desks to your floors and create outstanding floor maps."
-            }
+            description={t("floorPlanningDescription")}
             href={"#"}
           />
           <Card
-            heading={"Open-source"}
+            heading={t("openSource")}
             icon={<Icon as={FcLike} w={10} h={10} />}
-            description={
-              "Self-host our software and customize it to your needs. We are open-source!"
-            }
+            description={t("openSourceDescription")}
             href={"#"}
           />
         </Flex>

@@ -1,8 +1,12 @@
+import { useTranslations } from "next-intl";
+
 import { useMenuStore } from "../../chakra-starter/application-ui/sidebar-with-header/menuStore";
 import { GetStartedBadge } from "./GetStartedBadge";
 import { GetStartedButtonLink } from "./GetStartedButtonLink";
 
 export const GetStartedChooseOffice = () => {
+  const t = useTranslations("GetStartedModule");
+
   const {
     setIsOfficeSelectorOpen,
     setIsOfficeSelectorHighlighted,
@@ -17,10 +21,10 @@ export const GetStartedChooseOffice = () => {
 
   return (
     <GetStartedButtonLink
-      badges={<GetStartedBadge>new</GetStartedBadge>}
-      heading={"Choose your office"}
+      badges={<GetStartedBadge>{t("chooseOfficeBadgeNew")}</GetStartedBadge>}
+      heading={t("chooseOfficeHeading")}
       imageSource={"/get-started-select-office.png"}
-      imageAlt={"A preview on how it looks like to select an office"}
+      imageAlt={t("chooseOfficeImageAlt")}
       onClick={openSidebarAndOfficeSelector}
     />
   );

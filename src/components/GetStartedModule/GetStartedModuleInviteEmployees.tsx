@@ -1,17 +1,23 @@
+import { useTranslations } from "next-intl";
+
 import { GetStartedBadge } from "./GetStartedBadge";
 import { GetStartedLink } from "./GetStartedLink";
 
 export const GetStartedModuleInviteEmployees = () => {
+  const t = useTranslations("GetStartedModule");
+
   return (
     <GetStartedLink
       href={"/app/organization-settings"}
-      heading={"Invite your colleagues"}
+      heading={t("inviteEmployeesHeading")}
       imageSource={"/get-started-invite-colleagues.png"}
-      imageAlt={"A preview on how it looks like to invite colleagues"}
+      imageAlt={t("inviteEmployeesImageAlt")}
       badges={
         <>
-          <GetStartedBadge colorScheme="green">recommended</GetStartedBadge>
-          <GetStartedBadge>new</GetStartedBadge>
+          <GetStartedBadge colorScheme="green">
+            {t("inviteEmployeesBadgeRecommended")}
+          </GetStartedBadge>
+          <GetStartedBadge>{t("inviteEmployeesBadgeNew")}</GetStartedBadge>
         </>
       }
     />

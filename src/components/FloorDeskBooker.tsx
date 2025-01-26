@@ -17,6 +17,7 @@ import {
 } from "@chakra-ui/react";
 import { Prisma } from "@prisma/client";
 import { formatISO } from "date-fns";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { FiMinus, FiPlus, FiX } from "react-icons/fi";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
@@ -37,6 +38,7 @@ type FloorDeskBookerProps = {
 };
 
 export const FloorDeskBooker = (props: FloorDeskBookerProps) => {
+  const t = useTranslations("SchedulePages");
   const { floor, deskSchedulesMapped, userId, day } = props;
   const [selectedDeskWithPeriods, setSelectedDeskWithPeriods] =
     useState<DeskWithPeriods | null>(null);
@@ -91,7 +93,6 @@ export const FloorDeskBooker = (props: FloorDeskBookerProps) => {
   }
 
   const onDeskClick = (deskWithPeriod: DeskWithPeriods) => {
-    console.log({ deskWithPeriod });
     if (!deskWithPeriod.wholeDayFree) {
       return;
     }
@@ -99,6 +100,12 @@ export const FloorDeskBooker = (props: FloorDeskBookerProps) => {
 
     setIsBookingDrawerOpen(true);
   };
+
+  const deskName =
+    selectedDeskWithPeriods?.desk.name ||
+    t("deskName", {
+      deskId: selectedDeskWithPeriods?.desk.publicDeskId,
+    });
 
   return (
     <Box>
@@ -112,13 +119,9 @@ export const FloorDeskBooker = (props: FloorDeskBookerProps) => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>
-            Book{" "}
-            {selectedDeskWithPeriods?.desk.name ||
-              "Desk #" + selectedDeskWithPeriods?.desk.publicDeskId}
-          </DrawerHeader>
+          <DrawerHeader>{t("bookDeskWithName", { deskName })}</DrawerHeader>
 
-          <DrawerBody>Do you want to book it?</DrawerBody>
+          <DrawerBody>{t("doYouWantToBookIt")}</DrawerBody>
 
           <DrawerFooter>
             <Button
@@ -128,7 +131,7 @@ export const FloorDeskBooker = (props: FloorDeskBookerProps) => {
                 setIsBookingDrawerOpen(false);
               }}
             >
-              Cancel
+              {t("close")}
             </Button>
             <Button
               colorScheme="blue"
@@ -136,7 +139,6 @@ export const FloorDeskBooker = (props: FloorDeskBookerProps) => {
                 if (!selectedDeskWithPeriods) {
                   return;
                 }
-                console.log({ selectedDeskWithPeriods });
 
                 try {
                   await bookDeskMutation.mutateAsync({
@@ -148,9 +150,8 @@ export const FloorDeskBooker = (props: FloorDeskBookerProps) => {
                   setIsBookingDrawerOpen(false);
                 } catch (e) {
                   toast({
-                    title: "Error while booking a desk",
-                    description:
-                      "You have booked a desk already in this office for this day.",
+                    title: t("errorTitleWhileBooking"),
+                    description: t("errorDescriptionWhileBooking"),
                     status: "error",
                     duration: 5000,
                     isClosable: true,
@@ -158,7 +159,7 @@ export const FloorDeskBooker = (props: FloorDeskBookerProps) => {
                 }
               }}
             >
-              Book for the day
+              {t("bookDeskForDay")}
             </Button>
           </DrawerFooter>
         </DrawerContent>
@@ -185,7 +186,7 @@ export const FloorDeskBooker = (props: FloorDeskBookerProps) => {
                       flexDirection={"column"}
                     >
                       <FormLabel htmlFor="zoom-controls" mb="0">
-                        Zoom controls
+                        {t("zoomControls")}
                       </FormLabel>
                       <HStack id={"zoom-controls"} paddingTop={1}>
                         <IconButton
@@ -238,7 +239,6 @@ export const FloorDeskBooker = (props: FloorDeskBookerProps) => {
                       let borderColor = "green.500";
                       if (!deskObject.wholeDayFree) {
                         borderColor = "red.500";
-                        console.log({ deskObject, day });
                       }
                       if (canCancelReservation) {
                         borderColor = "blue.500";

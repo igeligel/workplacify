@@ -1,5 +1,6 @@
 import { Link } from "@chakra-ui/next-js";
 import { Box, Heading, Text, VStack } from "@chakra-ui/react";
+import { useTranslations } from "next-intl";
 import { IconType } from "react-icons";
 
 // import { FiStar } from "react-icons/fi";
@@ -12,6 +13,7 @@ type SubItem = {
 };
 
 export const SidebarActiveItems = () => {
+  const t = useTranslations("AppMenu");
   // const currentItems = [
   //   { id: 1, title: "SubItem 1", icon: FiStar },
   //   { id: 2, title: "SubItem 2", icon: FiStar },
@@ -27,7 +29,7 @@ export const SidebarActiveItems = () => {
         textTransform="uppercase"
         w="100%"
       >
-        Submenu
+        {t("labelSubmenu")}
       </Heading>
       <VStack spacing={"0.5"} marginTop={"2"}>
         {noCurrentItems && (
@@ -37,7 +39,7 @@ export const SidebarActiveItems = () => {
             color="gray.500"
             width="100%"
           >
-            There are currently no active items.
+            {t("noActiveItems")}
           </Text>
         )}
         {currentItems.map((item) => {

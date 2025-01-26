@@ -11,14 +11,17 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import { FiChevronLeft, FiPlus } from "react-icons/fi";
 
 import { DisplayFloors } from "../../../../components/DisplayFloors";
+import { getMessages } from "../../../../messages/getMessages";
 import { appAuthRedirect } from "../../../../server/nextMiddleware/appAuthRedirect";
 import { trpc } from "../../../../utils/trpc";
 
 const OfficePage = () => {
+  const t = useTranslations("OfficePages");
   const router = useRouter();
 
   const officeId = router.query.officeId;
@@ -38,7 +41,7 @@ const OfficePage = () => {
   if (!getOfficeQuery.data) {
     return (
       <VStack>
-        <Text>Office not found</Text>
+        <Text>{t("labelOfficeNotFound")}</Text>
         <Button
           as={Link}
           backgroundColor={"orange.400"}
@@ -50,7 +53,7 @@ const OfficePage = () => {
           }}
           href={"/app/offices/new"}
         >
-          Add office
+          {t("buttonAddOffice")}
         </Button>
       </VStack>
     );
@@ -70,14 +73,18 @@ const OfficePage = () => {
           color: "orange.600",
         }}
       >
-        Offices
+        {t("buttonBackToOffices")}
       </Button>
       <Box display={"flex"} justifyContent={"space-between"}>
         <VStack paddingTop={4} alignItems={"flex-start"}>
           <Heading as={"h1"} fontSize={"lg"} color={"gray.700"}>
-            Name: {getOfficeQuery.data.name}
+            {t("headingOfficeName", { officeName: getOfficeQuery.data.name })}
           </Heading>
-          <Text>Description: {getOfficeQuery.data.description}</Text>
+          <Text>
+            {t("officeDescription", {
+              officeDescription: getOfficeQuery.data.description,
+            })}
+          </Text>
         </VStack>
         <Box>
           <Button
@@ -90,7 +97,7 @@ const OfficePage = () => {
             textDecoration={"none"}
             _hover={{ backgroundColor: "orange.500", textDecoration: "none" }}
           >
-            Add floor
+            {t("buttonAddFloor")}
           </Button>
         </Box>
       </Box>
@@ -101,7 +108,7 @@ const OfficePage = () => {
         spacing={4}
       >
         <Heading as={"h2"} fontSize={"md"} color={"gray.700"}>
-          Floors
+          {t("headingFloors")}
         </Heading>
         <DisplayFloors
           office={getOfficeQuery.data}
@@ -118,9 +125,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   });
   if (redirect) return { redirect };
 
+  const messages = await getMessages(context);
+
   return {
     props: {
       session,
+      messages,
     },
   };
 };

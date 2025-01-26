@@ -11,6 +11,7 @@ import {
   createIcon,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { useTranslations } from "next-intl";
 import { Caveat } from "next/font/google";
 import { useRouter } from "next/router";
 import posthog from "posthog-js";
@@ -38,6 +39,7 @@ const Arrow = createIcon({
 });
 
 export const CallToActionWithAnnotation: React.FC = () => {
+  const t = useTranslations("IndexPage");
   const router = useRouter();
   const user = trpc.user.get.useQuery();
   return (
@@ -65,17 +67,16 @@ export const CallToActionWithAnnotation: React.FC = () => {
             lineHeight={{ base: "140%", md: "120%" }}
             maxWidth={{ base: "100%", md: "100%" }}
           >
-            Elevate Workspace Efficiency
+            {t("cta1")}
             <br />
             <Text as={"span"} color={"orange.400"}>
-              Your Desk Scheduling Solution
+              {t("cta2")}
             </Text>
           </Heading>
         </Box>
         <Box paddingBottom={12}>
           <Text color={"gray.500"} as="span">
-            Optimize desk usage effortlessly for enhanced workplace productivity
-            and collaboration.
+            {t("ctaSubtitle")}
             {/* Save time organizing and deliver a great
             experience. */}
           </Text>
@@ -111,10 +112,10 @@ export const CallToActionWithAnnotation: React.FC = () => {
                   router.push(user ? "/app" : "/api/auth/signin");
                 }}
               >
-                Upload floor & schedule desks
+                {t("ctaAction")}
               </Button>
               <Text fontSize={"sm"} color={"gray.400"}>
-                Free trial available; no credit card required
+                {t("ctaSubtitle2")}
               </Text>
             </VStack>
             <Box className={caveat.className}>
@@ -146,7 +147,7 @@ export const CallToActionWithAnnotation: React.FC = () => {
                   fontFamily: "var(--font-caveat)",
                 }}
               >
-                Invite your team and get started
+                {t("ctaActionAnnotation")}
               </Text>
             </Box>
           </Stack>

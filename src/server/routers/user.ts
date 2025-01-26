@@ -8,11 +8,15 @@ import { publicProcedure, router } from "../trpc";
 export const userRouter = router({
   get: publicProcedure.query(async (resolverProps) => {
     const { ctx } = resolverProps;
-    const user = await getUserFromSession(ctx.session, {
-      includeOrganization: false,
-    });
+    try {
+      const user = await getUserFromSession(ctx.session, {
+        includeOrganization: false,
+      });
 
-    return user;
+      return user;
+    } catch (error) {
+      return null;
+    }
   }),
   selectCurrentOffice: publicProcedure
     .input(z.object({ id: z.string() }))

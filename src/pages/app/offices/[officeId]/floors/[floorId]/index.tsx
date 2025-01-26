@@ -17,13 +17,18 @@ import {
   Tr,
   useDisclosure,
 } from "@chakra-ui/react";
+import { GetServerSideProps } from "next";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
 import { DrawerDeskEdit } from "../../../../../../components/DrawerDeskEdit";
+import { getMessages } from "../../../../../../messages/getMessages";
+import { appAuthRedirect } from "../../../../../../server/nextMiddleware/appAuthRedirect";
 import { trpc } from "../../../../../../utils/trpc";
 
 const FloorPage = () => {
+  const t = useTranslations("OfficePages");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [activeDeskId, setActiveDeskId] = useState<string | null>(null);
 
@@ -65,7 +70,7 @@ const FloorPage = () => {
       <Box>
         <Tabs colorScheme="orange">
           <TabList>
-            <Tab>Desk list</Tab>
+            <Tab>{t("tabTitleDeskList")}</Tab>
           </TabList>
 
           <TabPanels>
@@ -74,9 +79,9 @@ const FloorPage = () => {
                 <Table variant="simple">
                   <Thead>
                     <Tr>
-                      <Th>Id</Th>
-                      <Th>Name</Th>
-                      <Th>Actions</Th>
+                      <Th>{t("deskTableHeaderDeskId")}</Th>
+                      <Th>{t("deskTableHeaderDeskName")}</Th>
+                      <Th>{t("deskTableHeaderDeskActions")}</Th>
                     </Tr>
                   </Thead>
                   <Tbody>
@@ -97,7 +102,7 @@ const FloorPage = () => {
                                 onOpen();
                               }}
                             >
-                              Edit
+                              {t("deskTableButtonEdit")}
                             </Button>
                           </Td>
                         </Tr>
@@ -111,6 +116,22 @@ const FloorPage = () => {
       </Box>
     </div>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { redirect, session } = await appAuthRedirect({
+    context,
+  });
+  if (redirect) return { redirect };
+
+  const messages = await getMessages(context);
+
+  return {
+    props: {
+      session,
+      messages,
+    },
+  };
 };
 
 export default FloorPage;

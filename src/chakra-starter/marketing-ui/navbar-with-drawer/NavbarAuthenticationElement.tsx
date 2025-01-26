@@ -1,10 +1,12 @@
 import { Link } from "@chakra-ui/next-js";
 import { Button } from "@chakra-ui/react";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 
 export const NavbarAuthenticationElement = () => {
   const { status } = useSession();
+  const t = useTranslations("Menu");
 
   const router = useRouter();
 
@@ -25,7 +27,7 @@ export const NavbarAuthenticationElement = () => {
           }}
           width={{ base: "100%", md: "auto" }}
         >
-          To the app
+          {t("labelToTheApp")}
         </Button>
       ) : (
         <>

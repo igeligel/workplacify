@@ -1,4 +1,5 @@
 import { FiSettings } from "react-icons/fi";
+import { useTranslations } from "use-intl";
 
 import { trpc } from "../../../utils/trpc";
 import { MenuItemPopover } from "./MenuItemPopover";
@@ -6,6 +7,7 @@ import { UserMenuOfficeSelectorList } from "./UserMenuOfficeSelectorList";
 import { useMenuStore } from "./menuStore";
 
 export const UserMenuOfficeSelector = () => {
+  const t = useTranslations("AppMenu");
   const {
     isOfficeSelectorOpen,
     setIsOfficeSelectorOpen,
@@ -40,13 +42,13 @@ export const UserMenuOfficeSelector = () => {
     return null;
   }
 
+  const title = officeQuery.data?.name
+    ? t("selectedOffice", { officeName: officeQuery.data.name })
+    : t("selectOffice");
+
   return (
     <MenuItemPopover
-      title={
-        officeQuery.data?.name
-          ? `Selected Office: ${officeQuery.data.name}`
-          : `Select Office`
-      }
+      title={title}
       controlled={{
         isOpen: isOfficeSelectorOpen,
         setIsOpen: (newOpenStatus) => {

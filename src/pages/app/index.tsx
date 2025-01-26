@@ -21,14 +21,17 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { MdOutlineFeedback, MdOutlineTry } from "react-icons/md";
 
 import { useGetStartedModules } from "../../hooks/useGetStartedModules";
+import { getMessages } from "../../messages/getMessages";
 import { appAuthRedirect } from "../../server/nextMiddleware/appAuthRedirect";
 import { trpc } from "../../utils/trpc";
 
 const AppPage = () => {
+  const t = useTranslations("AppPage");
   const sendFeedbackMutation = trpc.discord.sendFeedback.useMutation();
   const [isFeedbackDrawerOpen, setIsFeedbackDrawerOpen] = useState(false);
   const [feedbackText, setFeedbackText] = useState("");
@@ -49,7 +52,7 @@ const AppPage = () => {
             fontSize={{ base: "lg", lg: "2xl" }}
             color={"gray.700"}
           >
-            Get started with workplacify
+            {t("startBoxHeading")}
           </Heading>
         </Box>
         <Box paddingTop={4}>
@@ -92,8 +95,13 @@ const AppPage = () => {
                     as={MdOutlineTry}
                   />
                   <Box>
-                    <Badge colorScheme="yellow">Trial</Badge>
-                    <Text>90/90 days left</Text>
+                    <Badge colorScheme="yellow">{t("trialLabel")}</Badge>
+                    <Text>
+                      {t("trialDaysLeft", {
+                        daysLeft: 90,
+                        trialDuration: 90,
+                      })}
+                    </Text>
                   </Box>
                 </HStack>
                 <HStack spacing={{ base: 2, lg: 4 }} alignItems={"flex-start"}>
@@ -107,7 +115,7 @@ const AppPage = () => {
                     alignItems={"flex-start"}
                   >
                     <Heading as={"h3"} fontSize={"sm"} color={"gray.700"}>
-                      Missing something?
+                      {t("feedbackHeading")}
                     </Heading>
                     <Button
                       size={"sm"}
@@ -123,7 +131,7 @@ const AppPage = () => {
                         setIsFeedbackDrawerOpen(true);
                       }}
                     >
-                      Request feature
+                      {t("feedbackButton")}
                     </Button>
                   </VStack>
                 </HStack>
@@ -194,9 +202,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   });
   if (redirect) return { redirect };
 
+  const messages = await getMessages(context);
+
   return {
     props: {
       session,
+      messages,
     },
   };
 };

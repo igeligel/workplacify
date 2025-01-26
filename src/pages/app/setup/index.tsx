@@ -31,6 +31,7 @@ import { useEffect, useState } from "react";
 import { PiChartLineFill, PiDesktopTowerFill } from "react-icons/pi";
 import { useDebounce } from "react-use";
 
+import { getMessages } from "../../../messages/getMessages";
 import { appAuthRedirect } from "../../../server/nextMiddleware/appAuthRedirect";
 import { trpc } from "../../../utils/trpc";
 
@@ -392,9 +393,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   });
   if (redirect) return { redirect };
 
+  const messages = await getMessages(context);
+
   return {
     props: {
       session,
+      messages,
     },
   };
 };

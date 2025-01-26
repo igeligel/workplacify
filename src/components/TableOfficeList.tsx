@@ -12,11 +12,13 @@ import {
   Tr,
   VStack,
 } from "@chakra-ui/react";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 
 import { trpc } from "../utils/trpc";
 
 export const TableOfficeList = () => {
+  const t = useTranslations("OfficePages");
   const router = useRouter();
   const officesQuery = trpc.office.list.useQuery();
 
@@ -30,7 +32,7 @@ export const TableOfficeList = () => {
   ) {
     return (
       <VStack>
-        <Text>No offices there yet</Text>
+        <Text>{t("displayNoOffices")}</Text>
         <Button
           as={Link}
           href={"/app/offices/new"}
@@ -43,7 +45,7 @@ export const TableOfficeList = () => {
             textDecoration: "none",
           }}
         >
-          Add office
+          {t("labelAddOffice")}
         </Button>
       </VStack>
     );
@@ -55,9 +57,9 @@ export const TableOfficeList = () => {
         <Table size={{ base: "sm", lg: "md" }} variant="simple">
           <Thead>
             <Tr>
-              <Th>Name</Th>
-              <Th>Number of Desks</Th>
-              <Th>Occupancy past 7d</Th>
+              <Th>{t("tableHeaderName")}</Th>
+              <Th>{t("tableHeaderNumberOfDesks")}</Th>
+              <Th>{t("tableHeaderOccupancy")}</Th>
             </Tr>
           </Thead>
           <Tbody>
@@ -73,8 +75,8 @@ export const TableOfficeList = () => {
                 }}
               >
                 <Td>{office.name}</Td>
-                <Td>{"N/A"}</Td>
-                <Td>{"N/A"}</Td>
+                <Td>{"-/-"}</Td>
+                <Td>{"-/-"}</Td>
               </Tr>
             ))}
           </Tbody>

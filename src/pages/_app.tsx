@@ -1,5 +1,6 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { SessionProvider } from "next-auth/react";
+import { NextIntlClientProvider } from "next-intl";
 import type { AppProps, AppType } from "next/app";
 import posthog from "posthog-js";
 import { useEffect } from "react";
@@ -38,9 +39,14 @@ const MyApp = ((props: AppProps) => {
   return (
     <SessionProvider session={session}>
       <ChakraProvider>
-        <LayoutWrapper>
-          <Component {...pageProps} />
-        </LayoutWrapper>
+        <NextIntlClientProvider
+          locale={router.locale || "en-US"}
+          messages={pageProps.messages}
+        >
+          <LayoutWrapper>
+            <Component {...pageProps} />
+          </LayoutWrapper>
+        </NextIntlClientProvider>
       </ChakraProvider>
     </SessionProvider>
   );
