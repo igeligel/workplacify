@@ -5,8 +5,8 @@
   "scripts": {
     "generate": "prisma generate",
     "prisma-studio": "prisma studio",
-    "db-nuke": "docker-compose down --volumes --remove-orphans",
-    "db-up": "docker-compose up -d",
+    "db-nuke": "docker compose down --volumes --remove-orphans",
+    "db-up": "docker compose up -d",
     "db-seed": "prisma db seed",
     "db-reset": "prisma migrate dev reset",
     "dx:next": "run-s db-up migrate-dev db-seed && next dev --experimental-https",

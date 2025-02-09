@@ -19,7 +19,9 @@ export const onboardingSelectionRouter = router({
   }),
   submit: publicProcedure.mutation(async (resolveProps) => {
     const { ctx } = resolveProps;
-    const user = await getUserFromSession(ctx.session, {});
+    const user = await getUserFromSession(ctx.session, {
+      includeOrganization: false,
+    });
     const onboardingSelection = await prisma.onboardingSelection.findFirst({
       where: {
         userId: user.id,

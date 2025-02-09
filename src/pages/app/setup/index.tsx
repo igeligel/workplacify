@@ -67,7 +67,7 @@ const SetupPage = () => {
         inviteCode: inviteCode,
       });
     },
-    1000,
+    100,
     [inviteCode],
   );
 
@@ -184,8 +184,10 @@ const SetupPage = () => {
   const submitForm = async () => {
     try {
       await submitOnboardingSelectionMutation.mutateAsync();
+      console.log({ HERE: 1 });
       router.push("/app");
     } catch (error) {
+      debugger;
       toast({
         title: "Error",
         description: "Please try again",
