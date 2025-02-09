@@ -52,7 +52,76 @@ export const organizationRouter = router({
         organizationId: user.organizationId,
       },
     });
-    return members;
+
+    // Check how often they came to the office this year
+    const deskSchedulesThisYear = await prisma.deskSchedule.findMany({
+      where: {
+        userId: {
+          in: members.map((member) => member.id),
+        },
+        startTime: {
+          gte: new Date(new Date().getFullYear(), 0, 1),
+        },
+      },
+    });
+    // Transform deskSchedules into Hash<UserId, DeskSchedule[]>
+    const deskSchedulesThisYearByUserId = deskSchedulesThisYear.reduce(
+      (acc, deskSchedule) => {
+        if (!deskSchedule) {
+          return acc;
+        }
+        if (!deskSchedule.userId) {
+          return acc;
+        }
+        if (!acc[deskSchedule.userId]) {
+          acc[deskSchedule.userId] = [];
+        }
+        acc[deskSchedule.userId]!.push(deskSchedule);
+        return acc;
+      },
+      {} as Record<string, typeof deskSchedulesThisYear>,
+    );
+
+    // Previous year
+    const deskSchedulesPreviousYear = await prisma.deskSchedule.findMany({
+      where: {
+        userId: {
+          in: members.map((member) => member.id),
+        },
+        startTime: {
+          gte: new Date(new Date().getFullYear() - 1, 0, 1),
+          lt: new Date(new Date().getFullYear(), 0, 1),
+        },
+      },
+    });
+
+    const deskSchedulesPreviousYearByUserId = deskSchedulesPreviousYear.reduce(
+      (acc, deskSchedule) => {
+        if (!deskSchedule) {
+          return acc;
+        }
+        if (!deskSchedule.userId) {
+          return acc;
+        }
+        if (!acc[deskSchedule.userId]) {
+          acc[deskSchedule.userId] = [];
+        }
+        acc[deskSchedule.userId]!.push(deskSchedule);
+        return acc;
+      },
+      {} as Record<string, typeof deskSchedulesThisYear>,
+    );
+
+    const mappedMembers = members.map((member) => {
+      return {
+        ...member,
+        deskSchedulesThisYear: deskSchedulesThisYearByUserId[member.id] || [],
+        deskSchedulesPreviousYear:
+          deskSchedulesPreviousYearByUserId[member.id] || [],
+      };
+    });
+
+    return mappedMembers;
   }),
   changeUserRole: publicProcedure
     .input(

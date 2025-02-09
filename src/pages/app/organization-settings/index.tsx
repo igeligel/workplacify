@@ -253,6 +253,18 @@ const OrganizationSettingsPage = () => {
                   <Tr>
                     <Th>Name</Th>
                     <Th>Role</Th>
+                    <Th>
+                      Office stats{" "}
+                      {new Date(new Date().getFullYear(), 0, 1).getFullYear()}
+                    </Th>
+                    <Th>
+                      Office stats{" "}
+                      {new Date(
+                        new Date().getFullYear() - 1,
+                        0,
+                        1,
+                      ).getFullYear()}
+                    </Th>
                     <Th>Actions</Th>
                   </Tr>
                 </Thead>
@@ -268,6 +280,8 @@ const OrganizationSettingsPage = () => {
                         <Tr key={member.id}>
                           <Td>{member.name}</Td>
                           <Td>{member.userRole}</Td>
+                          <Td>{member.deskSchedulesThisYear.length}</Td>
+                          <Td>{member.deskSchedulesPreviousYear.length}</Td>
                           <Td>
                             <Button
                               onClick={async () => {
