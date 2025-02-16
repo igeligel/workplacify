@@ -155,7 +155,7 @@ export const DisplayFloors = (props: DisplayFloorsProps) => {
             {t("floorRemoveModalHeader", { floorName: floorToRemove?.name })}
           </DrawerHeader>
 
-          <DrawerBody />
+          <DrawerBody>{t("floorRemovalDescription")}</DrawerBody>
 
           <DrawerFooter>
             <Button

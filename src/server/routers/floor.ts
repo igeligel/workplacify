@@ -93,6 +93,20 @@ export const floorRouter = router({
           message: "Something went wrong, the administrator has been notified.",
         });
       }
+      const desksToBeRemoved = await prisma.desk.findMany({
+        where: {
+          floorId: id,
+        },
+      });
+      // Remove schedules first.
+      await prisma.deskSchedule.deleteMany({
+        where: {
+          deskId: {
+            in: desksToBeRemoved.map((desk) => desk.id),
+          },
+        },
+      });
+
       // Remove desks first.
       await prisma.desk.deleteMany({
         where: {

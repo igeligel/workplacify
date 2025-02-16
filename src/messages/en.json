@@ -120,7 +120,12 @@
     "labelZoomControls": "Zoom controls",
     "labelToggleMarkerMode": "Marker mode enabled?",
     "labelDeskNameWithId": "Current desk: #{id}",
-    "buttonRemoveDesk": "Remove"
+    "buttonRemoveDesk": "Remove",
+    "floorRemovalDescription": "Removing a floor will remove all the linked schedules as well.",
+    "labelRemoveOffice": "Remove office: {officeName}",
+    "confirmRemoveOffice": "Removing an office cannot be undone. It will remove all schedules and all floors from the office.",
+    "buttonLabelRemoveOffice": "Remove office",
+    "buttonLabelRemove": "Remove"
   },
   "SchedulePages": {
     "notLoggedIn": "Not logged in",

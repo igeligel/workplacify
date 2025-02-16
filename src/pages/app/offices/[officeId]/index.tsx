@@ -86,7 +86,7 @@ const OfficePage = () => {
             })}
           </Text>
         </VStack>
-        <Box>
+        <VStack>
           <Button
             as={Link}
             href={`/app/offices/${getOfficeQuery.data.id}/floors/new`}
@@ -99,7 +99,7 @@ const OfficePage = () => {
           >
             {t("buttonAddFloor")}
           </Button>
-        </Box>
+        </VStack>
       </Box>
       <VStack
         marginTop={4}

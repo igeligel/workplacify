@@ -120,7 +120,12 @@
     "labelZoomControls": "Zoom-Steuerung",
     "labelToggleMarkerMode": "Markierungsmodus aktiviert?",
     "labelDeskNameWithId": "Aktueller Schreibtisch: #{id}",
-    "buttonRemoveDesk": "Entfernen"
+    "buttonRemoveDesk": "Entfernen",
+    "floorRemovalDescription": "Durch das Entfernen einer Etage werden auch alle damit verbundenen Zeitpläne entfernt.",
+    "confirmRemoveOffice": "Das Entfernen eines Büros kann nicht rückgängig gemacht werden. Es werden alle Zeitpläne und alle Etagen aus dem Büro entfernt.",
+    "labelRemoveOffice": "Büro entfernen: {officeName}",
+    "buttonLabelRemoveOffice": "Büro entfernen",
+    "buttonLabelRemove": "Entfernen"
   },
   "SchedulePages": {
     "notLoggedIn": "Nicht angemeldet",

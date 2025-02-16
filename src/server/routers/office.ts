@@ -95,4 +95,56 @@ export const officeRouter = router({
       });
       return office;
     }),
+  remove: publicProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async (resolverProps) => {
+      const { ctx, input } = resolverProps;
+      const user = await getUserFromSession(ctx.session, {
+        includeOrganization: true,
+      });
+      if (user.userRole !== "ADMIN") {
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: "You are not allowed to access this resource",
+        });
+      }
+      const office = await prisma.office.findFirst({
+        where: {
+          id: input.id,
+          organizationId: user.organizationId,
+        },
+      });
+
+      if (!office) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Office not found",
+        });
+      }
+
+      // Remove all schedules
+      await prisma.deskSchedule.deleteMany({
+        where: {
+          desk: {
+            floor: {
+              officeId: office.id,
+            },
+          },
+        },
+      });
+
+      // Remove all floors
+      await prisma.floor.deleteMany({
+        where: {
+          officeId: office.id,
+        },
+      });
+
+      // Remove office
+      await prisma.office.delete({
+        where: {
+          id: office.id,
+        },
+      });
+    }),
 });
