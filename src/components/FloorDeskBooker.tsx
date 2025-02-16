@@ -13,6 +13,7 @@ import {
   HStack,
   Icon,
   IconButton,
+  Tooltip,
   useToast,
 } from "@chakra-ui/react";
 import { Prisma } from "@prisma/client";
@@ -244,32 +245,88 @@ export const FloorDeskBooker = (props: FloorDeskBookerProps) => {
                         borderColor = "blue.500";
                       }
 
-                      return (
-                        <Box
-                          cursor={
-                            deskObject.wholeDayFree ? "pointer" : "default"
+                      const names = deskObject.usedPeriods
+                        .map((period) => period.name)
+                        .filter(Boolean);
+
+                      const mappedNames = names
+                        .map((fullName) => {
+                          if (!fullName) {
+                            return "";
                           }
-                          key={desk.publicDeskId}
-                          position={"absolute"}
-                          borderRadius={"100%"}
-                          display={"flex"}
-                          borderWidth={3}
-                          borderColor={borderColor}
-                          justifyContent={"center"}
-                          alignItems={"center"}
-                          transform={`translate(${desk.x / scale}px, ${
-                            desk.y / scale
-                          }px)`}
-                          height={`20px`}
-                          width={`20px`}
-                          backgroundColor={"white.500"}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            onDeskClick(deskObject);
-                          }}
-                        >
-                          {desk.publicDeskId}
-                        </Box>
+                          const nameParts = fullName.split(" ");
+                          let nameRepresentation = "";
+
+                          // Get first the last namePart
+                          const lastNamePart = nameParts[nameParts.length - 1];
+
+                          // Get all others
+                          const otherNameParts = nameParts.slice(
+                            0,
+                            nameParts.length - 1,
+                          );
+
+                          nameRepresentation += lastNamePart?.slice(0, 2);
+                          nameRepresentation += otherNameParts
+                            .map((part) => part.slice(0, 1))
+                            .join("");
+                          return nameRepresentation;
+                        })
+                        .join(";");
+
+                      const transform = `translate(calc(${desk.x / scale}px - 2px), calc(${
+                        desk.y / scale
+                      }px - 2px))`;
+
+                      const transformForMapped = `translate(calc(${desk.x / scale}px - 14px), calc(${
+                        desk.y / scale
+                      }px - 14px))`;
+
+                      type WrapperProps = {
+                        children: React.ReactNode;
+                      };
+                      const Wrapper = (props: WrapperProps) => {
+                        if (!mappedNames) {
+                          return <>{props.children}</>;
+                        }
+                        return (
+                          <Tooltip label={names.join("; ")}>
+                            {props.children}
+                          </Tooltip>
+                        );
+                      };
+
+                      return (
+                        <Wrapper key={desk.publicDeskId}>
+                          <Box
+                            cursor={
+                              deskObject.wholeDayFree ? "pointer" : "default"
+                            }
+                            key={desk.publicDeskId}
+                            position={"absolute"}
+                            borderRadius={"100%"}
+                            display={"flex"}
+                            borderWidth={3}
+                            borderColor={borderColor}
+                            justifyContent={"center"}
+                            alignItems={"center"}
+                            transform={
+                              mappedNames ? transformForMapped : transform
+                            }
+                            height={mappedNames ? `40px` : `20px`}
+                            width={mappedNames ? `40px` : `20px`}
+                            backgroundColor={
+                              deskObject.wholeDayFree ? "green.50" : "red.50"
+                            }
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onDeskClick(deskObject);
+                            }}
+                            fontWeight={mappedNames ? "bold" : "normal"}
+                          >
+                            {mappedNames || desk.publicDeskId}
+                          </Box>
+                        </Wrapper>
                       );
                     })}
                   {floor.floorPlan && (
