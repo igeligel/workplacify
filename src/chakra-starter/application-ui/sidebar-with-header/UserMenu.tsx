@@ -8,8 +8,10 @@ import { FiBriefcase, FiSettings, FiUsers } from "react-icons/fi";
 import { MenuItem } from "./MenuItem";
 import { MenuItemPopover } from "./MenuItemPopover";
 import { UserMenuOfficeSelector } from "./UserMenuOfficeSelector";
+import { useMenuStore } from "./menuStore";
 
 const AccountSubMenu = () => {
+  const { setIsAccountMenuOpen } = useMenuStore();
   const t = useTranslations("AppMenu");
   const onLogoutClick = async () => {
     signOut({
@@ -24,6 +26,9 @@ const AccountSubMenu = () => {
         width={"100%"}
         textDecoration={"none"}
         _hover={{ textDecoration: "none" }}
+        onClick={() => {
+          setIsAccountMenuOpen(false);
+        }}
       >
         <MenuItem title={t("labelSettings")} icon={FiBriefcase} />
       </Link>
@@ -43,6 +48,9 @@ type Props = {
 
 export const UserMenu = ({ isUserAdmin }: Props) => {
   const t = useTranslations("AppMenu");
+
+  const { isAccountMenuOpen, setIsAccountMenuOpen } = useMenuStore();
+
   return (
     <Box width={"100%"}>
       <VStack spacing={"0.5"} marginTop={"2"}>
@@ -63,6 +71,10 @@ export const UserMenu = ({ isUserAdmin }: Props) => {
           title={t("labelAccount")}
           icon={FiSettings}
           submenu={<AccountSubMenu />}
+          controlled={{
+            isOpen: isAccountMenuOpen,
+            setIsOpen: setIsAccountMenuOpen,
+          }}
         />
       </VStack>
     </Box>

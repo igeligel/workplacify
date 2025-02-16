@@ -9,6 +9,8 @@ interface MenuState {
   setIsOfficeSelectorHighlighted: (
     newIsOfficeSelectorHighlighted: boolean,
   ) => void;
+  isAccountMenuOpen: boolean;
+  setIsAccountMenuOpen: (newIsAccountMenuOpen: boolean) => void;
 }
 
 export const useMenuStore = create<MenuState>((set) => ({
@@ -30,4 +32,7 @@ export const useMenuStore = create<MenuState>((set) => ({
         isOfficeSelectorHighlighted: newIsOfficeSelectorHighlighted,
       };
     }),
+  isAccountMenuOpen: false,
+  setIsAccountMenuOpen: (newIsAccountMenuOpen) =>
+    set({ isAccountMenuOpen: newIsAccountMenuOpen }),
 }));

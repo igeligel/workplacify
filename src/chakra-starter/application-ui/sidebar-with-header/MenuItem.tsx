@@ -9,6 +9,7 @@ import { MenuItemWrapper } from "./MenuItemWrapper";
 export type MenuItemProps = {
   title: string;
   icon: IconType;
+  isIconSelected?: boolean;
   onClick?: () => void;
   href?: string;
   isActive?: boolean;
@@ -22,7 +23,11 @@ const MenuItemContent: React.FC<MenuItemProps> = (props) => {
       color={"gray.500"}
     >
       <Box display={"flex"} alignItems={"center"}>
-        <Icon as={props.icon} strokeWidth={"3px"} />
+        <Icon
+          as={props.icon}
+          color={props.isIconSelected ? "green.500" : undefined}
+          strokeWidth={"3px"}
+        />
         <Text fontSize="sm" marginLeft={"2"} fontWeight={"semibold"}>
           {props.title}
         </Text>
