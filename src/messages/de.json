@@ -148,7 +148,8 @@
     "doYouWantToBookIt": "Möchten Sie diesen Schreibtisch reservieren?",
     "close": "Schließen",
     "bookDeskForDay": "Für den Tag buchen",
-    "zoomControls": "Zoom-Kontrollen"
+    "zoomControls": "Zoom-Kontrollen",
+    "floorDeskNameSoloFloor": "Schreibtisch {deskId}"
   },
   "UserSettings": {
     "toastTitleAccountUpdated": "Konto aktualisiert.",

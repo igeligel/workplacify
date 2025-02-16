@@ -148,7 +148,8 @@
     "doYouWantToBookIt": "Do you want to book it?",
     "close": "Close",
     "bookDeskForDay": "Book for the day",
-    "zoomControls": "Zoom controls"
+    "zoomControls": "Zoom controls",
+    "floorDeskNameSoloFloor": "Desk {deskId}"
   },
   "UserSettings": {
     "toastTitleAccountUpdated": "Account updated.",

@@ -176,6 +176,20 @@ const SchedulePage = () => {
                             (period) => period.id === userQuery.data?.id,
                           );
 
+                        const numberOfFloors =
+                          getFloorsForCurrentOfficeQuery.data?.length || 0;
+
+                        let floorDeskName = t("floorDeskNameSoloFloor", {
+                          deskId: freeDeskSchedules.desk.publicDeskId,
+                        });
+
+                        if (numberOfFloors >= 2) {
+                          floorDeskName = t("floorDeskName", {
+                            floorName: freeDeskSchedules.desk.floor.name,
+                            deskId: freeDeskSchedules.desk.publicDeskId,
+                          });
+                        }
+
                         return (
                           <VStack
                             spacing={1}
@@ -192,11 +206,7 @@ const SchedulePage = () => {
                                   fontWeight={500}
                                   color={"gray.700"}
                                 >
-                                  {t("floorDeskName", {
-                                    floorName:
-                                      freeDeskSchedules.desk.floor.name,
-                                    deskId: freeDeskSchedules.desk.publicDeskId,
-                                  })}
+                                  {floorDeskName}
                                   {freeDeskSchedules.usedPeriods.map(
                                     (usedPeriod) => {
                                       const isOccupiedWholeDay =
