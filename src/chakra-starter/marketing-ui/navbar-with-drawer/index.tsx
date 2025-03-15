@@ -47,6 +47,17 @@ export const NavbarWithDrawer = () => {
       label: t("pricing"),
       href: "/#pricing",
     },
+    {
+      label: t("freeTools"),
+      subLabel: t("freeToolsDescription"),
+      children: [
+        {
+          label: t("hybridWorkplacePolicyGenerator"),
+          subLabel: t("hybridWorkplacePolicyGeneratorDescription"),
+          href: "/free-tools/hybrid-workplace-policy-generator",
+        },
+      ],
+    },
   ];
 
   const { isOpen, onToggle } = useDisclosure();

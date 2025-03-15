@@ -1,7 +1,11 @@
 {
   "Menu": {
     "pricing": "Pricing",
-    "labelToTheApp": "To the app"
+    "labelToTheApp": "To the app",
+    "freeTools": "Free Tools",
+    "freeToolsDescription": "Explore our collection of free workplace management tools",
+    "hybridWorkplacePolicyGenerator": "Hybrid Workplace Policy Generator",
+    "hybridWorkplacePolicyGeneratorDescription": "Create professional hybrid workplace policies"
   },
   "IndexPage": {
     "cta1": "Elevate Workspace Efficiency",
@@ -160,5 +164,162 @@
     "labelOfficeName": "Name",
     "helperTextOfficeName": "Use your real name so coworkers can identify you",
     "exampleName": "Joe Doe"
+  },
+  "HybridWorkplacePolicyGenerator": {
+    "meta": {
+      "title": "Hybrid Workplace Policy Generator - Free Tool",
+      "description": "Create professional hybrid workplace policies with our user-friendly generator. Establish clear guidelines for your organization effortlessly for free!",
+      "imageAlt": "A screenshot of the hybrid workplace policy generator tool"
+    },
+    "hero": {
+      "heading": "Free Hybrid Workplace Policy Generator",
+      "text": "Generate a professional hybrid workplace policy for your organization in minutes"
+    },
+    "form": {
+      "companyName": {
+        "label": "Company Name",
+        "placeholder": "Enter your company name"
+      },
+      "workHours": {
+        "label": "Work Hours",
+        "placeholder": "e.g., 9 AM - 5 PM"
+      },
+      "remoteWorkDays": {
+        "label": "Remote Work Days"
+      },
+      "officeWorkDays": {
+        "label": "Office Work Days"
+      },
+      "communicationTools": {
+        "label": "Communication Tools",
+        "placeholder": "e.g., Slack, Zoom, Microsoft Teams"
+      },
+      "performanceExpectations": {
+        "label": "Performance Expectations",
+        "placeholder": "Describe performance expectations for hybrid work..."
+      },
+      "contactInformation": {
+        "label": "Contact Information",
+        "placeholder": "e.g., HR Manager: hr@company.com"
+      },
+      "generateButton": "Generate Policy",
+      "generatingButton": "Generating...",
+      "weekDays": {
+        "monday": "Monday",
+        "tuesday": "Tuesday",
+        "wednesday": "Wednesday",
+        "thursday": "Thursday",
+        "friday": "Friday"
+      }
+    },
+    "toast": {
+      "missingInformation": {
+        "title": "Missing Information",
+        "description": "Please fill in all required fields"
+      }
+    },
+    "preview": {
+      "title": "Hybrid Work Policy",
+      "companyName": "Company Name",
+      "workHours": "Work Hours",
+      "remoteWork": {
+        "title": "Remote Work Days",
+        "description": "Employees are permitted to work remotely on the following days:"
+      },
+      "officeWork": {
+        "title": "Office Work Days",
+        "description": "Employees are required to be present in the office on the following days:"
+      },
+      "communication": {
+        "title": "Communication Tools",
+        "primaryTools": "Primary Communication Tools",
+        "expectations": "Team members are expected to maintain regular communication and be responsive during work hours, regardless of their work location."
+      },
+      "expectations": {
+        "title": "Performance Expectations",
+        "description": "Performance standards and expectations for hybrid work:"
+      },
+      "contact": {
+        "title": "Contact Information",
+        "description": "For questions or concerns regarding this policy, please contact:"
+      },
+      "loading": "Loading document...",
+      "downloadMessage": "Download policy now! For a preview open this link on your browser.",
+      "introduction": {
+        "title": "Introduction",
+        "description": "This policy outlines {companyName}'s approach to hybrid work, combining remote and office-based work to maximize productivity, work-life balance, and team collaboration."
+      },
+      "workSchedule": {
+        "title": "Work Schedule",
+        "standardHours": "Standard Work Hours"
+      },
+      "footer": "Generated with Workplacify - www.workplacify.com"
+    },
+    "faq": {
+      "isFree": {
+        "question": "Is the Hybrid Workplace Policy Generator really free?",
+        "answer": "Yes, it's completely free! You can generate and download your policy without any cost."
+      },
+      "customization": {
+        "question": "Can I customize the policy after generating it?",
+        "answer": "Yes, the generated policy is fully editable. You can download it and make any additional changes needed for your organization."
+      },
+      "dataSecurity": {
+        "question": "Is my data secure?",
+        "answer": "We don't store any of the information you enter. The policy is generated client-side and the data remains on your device."
+      },
+      "workHours": {
+        "question": "What should I include in the work hours section?",
+        "answer": "You should specify your company's core working hours, including any flexibility windows. For example: '9 AM - 5 PM with flexible start times between 8-10 AM'."
+      },
+      "timeZones": {
+        "question": "How do I handle different time zones in the policy?",
+        "answer": "You can specify the primary time zone for your company and include guidelines for cross-time zone collaboration in the communication tools section."
+      },
+      "multiplePolicies": {
+        "question": "Can I generate multiple policies for different departments?",
+        "answer": "Yes, you can generate separate policies for different departments or teams with their specific requirements and schedules."
+      },
+      "legalCompliance": {
+        "question": "Is the generated policy legally compliant?",
+        "answer": "While our generator provides a solid foundation, we recommend having your legal team review the policy to ensure it meets your jurisdiction's specific requirements."
+      },
+      "updateFrequency": {
+        "question": "How often should I update the hybrid workplace policy?",
+        "answer": "It's recommended to review and update your policy every 6-12 months or whenever there are significant changes in your workplace structure or requirements."
+      }
+    },
+    "sections": {
+      "createPolicies": {
+        "heading": "Create Professional Policies",
+        "description": "Discover a comprehensive tool for creating well-structured hybrid workplace policies. Our generator helps you establish clear guidelines that promote productivity and work-life balance in the modern workplace."
+      },
+      "noTechnicalSkills": {
+        "heading": "No Technical Skills Required",
+        "description": "Whether you are a seasoned workplace policy organizer or just starting out, our user-friendly tool simplifies the process of creating captivating policy designs. You do not need any specialized technical knowledge to craft policies that make a lasting impression."
+      },
+      "generateFree": {
+        "heading": "Generate for Free",
+        "description": "Enjoy the freedom of generating workplace policies at no cost and without the need for sign-ups. Our tool empowers you to effortlessly create policies from your computer, iPad, or iPhone, anytime and anywhere you choose.",
+        "callToAction": "Enhance your workplace management with policies that are clear, comprehensive, and professional. Try the Hybrid Workplace Policy Generator today and establish effective guidelines for your hybrid workforce."
+      }
+    },
+    "cta": {
+      "heading": "Ready to take your workplace management to the next level?",
+      "description": "Get access to our complete suite of workplace management tools. Streamline your organization's policies, procedures, and communications with our professional platform.",
+      "button": "Explore premium features"
+    },
+    "features": {
+      "tag": "Free tool",
+      "title": "Generate Professional Hybrid Workplace Policies",
+      "description": "Create a comprehensive hybrid workplace policy tailored to your organization's needs. Our generator helps you establish clear guidelines for remote and office work.",
+      "benefits": {
+        "first": "Customizable templates for different organizational needs",
+        "second": "Clear guidelines for remote and office work schedules",
+        "third": "Professional formatting and structure",
+        "fourth": "Instant PDF generation"
+      },
+      "imageAlt": "Preview of a generated hybrid workplace policy document"
+    }
   }
 }

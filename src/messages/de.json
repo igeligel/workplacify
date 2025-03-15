@@ -1,7 +1,11 @@
 {
   "Menu": {
     "pricing": "Preise",
-    "labelToTheApp": "Zur Anwendung"
+    "labelToTheApp": "Zur Anwendung",
+    "freeTools": "Kostenlose Tools",
+    "freeToolsDescription": "Entdecken Sie unsere Sammlung kostenloser Arbeitsplatz-Management-Tools",
+    "hybridWorkplacePolicyGenerator": "Hybrid-Arbeitsplatz-Richtlinien Generator",
+    "hybridWorkplacePolicyGeneratorDescription": "Erstellen Sie professionelle Hybrid-Arbeitsplatz-Richtlinien"
   },
   "IndexPage": {
     "cta1": "Höhere Effizienz im Arbeitsbereich",
@@ -160,5 +164,162 @@
     "labelOfficeName": "Name",
     "helperTextOfficeName": "Verwenden Sie Ihren echten Namen, damit Ihre Kollegen Sie identifizieren können.",
     "exampleName": "Max Mustermann"
+  },
+  "HybridWorkplacePolicyGenerator": {
+    "meta": {
+      "title": "Hybrid-Arbeitsplatz-Richtlinien Generator - Kostenloses Tool",
+      "description": "Erstellen Sie professionelle Hybrid-Arbeitsplatz-Richtlinien mit unserem benutzerfreundlichen Generator. Legen Sie mühelos klare Richtlinien für Ihre Organisation fest!",
+      "imageAlt": "Ein Screenshot des Hybrid-Arbeitsplatz-Richtlinien Generators"
+    },
+    "hero": {
+      "heading": "Kostenloser Hybrid-Arbeitsplatz-Richtlinien Generator",
+      "text": "Erstellen Sie in wenigen Minuten eine professionelle Hybrid-Arbeitsplatz-Richtlinie für Ihre Organisation"
+    },
+    "form": {
+      "companyName": {
+        "label": "Firmenname",
+        "placeholder": "Geben Sie Ihren Firmennamen ein"
+      },
+      "workHours": {
+        "label": "Arbeitszeiten",
+        "placeholder": "z.B. 9:00 - 17:00 Uhr"
+      },
+      "remoteWorkDays": {
+        "label": "Home-Office Tage"
+      },
+      "officeWorkDays": {
+        "label": "Büro-Tage"
+      },
+      "communicationTools": {
+        "label": "Kommunikationstools",
+        "placeholder": "z.B. Slack, Zoom, Microsoft Teams"
+      },
+      "performanceExpectations": {
+        "label": "Leistungserwartungen",
+        "placeholder": "Beschreiben Sie die Leistungserwartungen für hybrides Arbeiten..."
+      },
+      "contactInformation": {
+        "label": "Kontaktinformationen",
+        "placeholder": "z.B. HR Manager: hr@firma.de"
+      },
+      "generateButton": "Richtlinie generieren",
+      "generatingButton": "Wird generiert...",
+      "weekDays": {
+        "monday": "Montag",
+        "tuesday": "Dienstag",
+        "wednesday": "Mittwoch",
+        "thursday": "Donnerstag",
+        "friday": "Freitag"
+      }
+    },
+    "toast": {
+      "missingInformation": {
+        "title": "Fehlende Informationen",
+        "description": "Bitte füllen Sie alle erforderlichen Felder aus"
+      }
+    },
+    "preview": {
+      "title": "Hybrid-Arbeitsplatz-Richtlinie",
+      "companyName": "Firmenname",
+      "workHours": "Arbeitszeiten",
+      "remoteWork": {
+        "title": "Home-Office Tage",
+        "description": "Mitarbeiter dürfen an folgenden Tagen von zu Hause aus arbeiten:"
+      },
+      "officeWork": {
+        "title": "Büro-Tage",
+        "description": "Mitarbeiter müssen an folgenden Tagen im Büro anwesend sein:"
+      },
+      "communication": {
+        "title": "Kommunikationstools",
+        "primaryTools": "Primäre Kommunikationstools",
+        "expectations": "Von Teammitgliedern wird erwartet, dass sie während der Arbeitszeiten regelmäßig kommunizieren und reaktionsbereit sind, unabhängig von ihrem Arbeitsort."
+      },
+      "expectations": {
+        "title": "Leistungserwartungen",
+        "description": "Leistungsstandards und Erwartungen für hybrides Arbeiten:"
+      },
+      "contact": {
+        "title": "Kontaktinformationen",
+        "description": "Bei Fragen oder Anliegen zu dieser Richtlinie wenden Sie sich bitte an:"
+      },
+      "loading": "Dokument wird geladen...",
+      "downloadMessage": "Richtlinie jetzt herunterladen! Für eine Vorschau öffnen Sie diesen Link in Ihrem Browser.",
+      "introduction": {
+        "title": "Einführung",
+        "description": "Diese Richtlinie beschreibt den Ansatz von {companyName} für hybrides Arbeiten, der Remote- und Büroarbeit kombiniert, um Produktivität, Work-Life-Balance und Teamzusammenarbeit zu maximieren."
+      },
+      "workSchedule": {
+        "title": "Arbeitszeiten",
+        "standardHours": "Standardarbeitszeiten"
+      },
+      "footer": "Erstellt mit Workplacify - www.workplacify.com"
+    },
+    "faq": {
+      "isFree": {
+        "question": "Ist der Hybrid-Arbeitsplatz-Richtlinien Generator wirklich kostenlos?",
+        "answer": "Ja, er ist komplett kostenlos! Sie können Ihre Richtlinie ohne jegliche Kosten generieren und herunterladen."
+      },
+      "customization": {
+        "question": "Kann ich die Richtlinie nach der Generierung anpassen?",
+        "answer": "Ja, die generierte Richtlinie ist vollständig bearbeitbar. Sie können sie herunterladen und alle erforderlichen Änderungen für Ihre Organisation vornehmen."
+      },
+      "dataSecurity": {
+        "question": "Sind meine Daten sicher?",
+        "answer": "Wir speichern keine der von Ihnen eingegebenen Informationen. Die Richtlinie wird clientseitig generiert und die Daten bleiben auf Ihrem Gerät."
+      },
+      "workHours": {
+        "question": "Was sollte ich im Abschnitt Arbeitszeiten angeben?",
+        "answer": "Sie sollten die Kernarbeitszeiten Ihres Unternehmens angeben, einschließlich möglicher Flexibilitätsfenster. Zum Beispiel: '9:00 - 17:00 Uhr mit flexiblen Startzeiten zwischen 8:00-10:00 Uhr'."
+      },
+      "timeZones": {
+        "question": "Wie gehe ich mit verschiedenen Zeitzonen in der Richtlinie um?",
+        "answer": "Sie können die primäre Zeitzone für Ihr Unternehmen festlegen und Richtlinien für die zeitzonenübergreifende Zusammenarbeit im Abschnitt Kommunikationstools aufnehmen."
+      },
+      "multiplePolicies": {
+        "question": "Kann ich mehrere Richtlinien für verschiedene Abteilungen erstellen?",
+        "answer": "Ja, Sie können separate Richtlinien für verschiedene Abteilungen oder Teams mit ihren spezifischen Anforderungen und Zeitplänen erstellen."
+      },
+      "legalCompliance": {
+        "question": "Ist die generierte Richtlinie rechtskonform?",
+        "answer": "Während unser Generator eine solide Grundlage bietet, empfehlen wir, die Richtlinie von Ihrem Rechtsteam prüfen zu lassen, um sicherzustellen, dass sie die spezifischen Anforderungen Ihrer Jurisdiktion erfüllt."
+      },
+      "updateFrequency": {
+        "question": "Wie oft sollte ich die Hybrid-Arbeitsplatz-Richtlinie aktualisieren?",
+        "answer": "Es wird empfohlen, die Richtlinie alle 6-12 Monate oder bei wesentlichen Änderungen in Ihrer Arbeitsplatzstruktur oder den Anforderungen zu überprüfen und zu aktualisieren."
+      }
+    },
+    "sections": {
+      "createPolicies": {
+        "heading": "Erstellen Sie professionelle Richtlinien",
+        "description": "Entdecken Sie ein umfassendes Tool zur Erstellung gut strukturierter Hybrid-Arbeitsplatz-Richtlinien. Unser Generator hilft Ihnen dabei, klare Richtlinien zu erstellen, die Produktivität und Work-Life-Balance am modernen Arbeitsplatz fördern."
+      },
+      "noTechnicalSkills": {
+        "heading": "Keine technischen Kenntnisse erforderlich",
+        "description": "Egal ob Sie ein erfahrener Richtlinien-Organisator sind oder gerade erst anfangen, unser benutzerfreundliches Tool vereinfacht den Prozess der Erstellung ansprechender Richtlinien. Sie benötigen keine speziellen technischen Kenntnisse, um Richtlinien zu erstellen, die einen bleibenden Eindruck hinterlassen."
+      },
+      "generateFree": {
+        "heading": "Kostenlos generieren",
+        "description": "Genießen Sie die Freiheit, Arbeitsplatz-Richtlinien kostenlos und ohne Anmeldung zu erstellen. Unser Tool ermöglicht es Ihnen, mühelos Richtlinien von Ihrem Computer, iPad oder iPhone aus zu erstellen, wann und wo Sie möchten.",
+        "callToAction": "Verbessern Sie Ihr Arbeitsplatz-Management mit klaren, umfassenden und professionellen Richtlinien. Probieren Sie den Hybrid-Arbeitsplatz-Richtlinien Generator noch heute aus und etablieren Sie effektive Richtlinien für Ihre hybride Belegschaft."
+      }
+    },
+    "cta": {
+      "heading": "Bereit, Ihr Arbeitsplatz-Management auf die nächste Stufe zu heben?",
+      "description": "Erhalten Sie Zugang zu unserer kompletten Suite von Arbeitsplatz-Management-Tools. Optimieren Sie die Richtlinien, Prozesse und Kommunikation Ihrer Organisation mit unserer professionellen Plattform.",
+      "button": "Premium-Funktionen entdecken"
+    },
+    "features": {
+      "tag": "Kostenloses Tool",
+      "title": "Generieren Sie professionelle Hybrid-Arbeitsplatz-Richtlinien",
+      "description": "Erstellen Sie eine umfassende Hybrid-Arbeitsplatz-Richtlinie, die auf die Bedürfnisse Ihrer Organisation zugeschnitten ist. Unser Generator hilft Ihnen dabei, klare Richtlinien für Remote- und Büroarbeit zu erstellen.",
+      "benefits": {
+        "first": "Anpassbare Vorlagen für verschiedene organisatorische Bedürfnisse",
+        "second": "Klare Richtlinien für Remote- und Büroarbeitszeiten",
+        "third": "Professionelle Formatierung und Struktur",
+        "fourth": "Sofortige PDF-Generierung"
+      },
+      "imageAlt": "Vorschau eines generierten Hybrid-Arbeitsplatz-Richtlinien-Dokuments"
+    }
   }
 }
