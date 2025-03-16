@@ -58,8 +58,7 @@ export const ThreeTierPricing = () => {
           anytime.
         </Text>
         <Text fontSize="lg" color={"gray.500"}>
-          Predictable pricing. No hidden fees. No usage fees or pricing per
-          employee.
+          Simple, transparent pricing with no hidden fees.
         </Text>
       </VStack>
       <Stack
@@ -87,7 +86,7 @@ export const ThreeTierPricing = () => {
                 fontWeight="600"
                 rounded="xl"
               >
-                Easiest to start
+                Most popular
               </Text>
             </Box>
             <Box py={4} px={12}>
@@ -99,14 +98,14 @@ export const ThreeTierPricing = () => {
                   $
                 </Text>
                 <Text fontSize="5xl" fontWeight="900">
-                  10
+                  1
                 </Text>
                 <Box fontSize="xl" color="gray.500">
-                  per 10 users/month
+                  <Text>per user/month</Text>
                 </Box>
               </HStack>
-              <Text color={"gray.300"} fontSize={"sm"}>
-                Taxes might apply additionally
+              <Text color={"gray.500"} fontSize={"sm"}>
+                Billed monthly • Save 20% with annual billing
               </Text>
             </Box>
             <VStack
@@ -187,24 +186,45 @@ export const ThreeTierPricing = () => {
 
         <PriceWrapper>
           <Box position="relative">
+            <Box
+              position="absolute"
+              top="-16px"
+              left="50%"
+              style={{ transform: "translate(-50%)" }}
+            >
+              <Text
+                textTransform="uppercase"
+                bg={useColorModeValue("orange.300", "orange.700")}
+                px={3}
+                py={1}
+                color={useColorModeValue("gray.900", "gray.300")}
+                fontSize="sm"
+                fontWeight="600"
+                rounded="xl"
+              >
+                Best value
+              </Text>
+            </Box>
             <Box py={4} px={12}>
               <Text fontWeight="500" fontSize="2xl">
                 Large companies
               </Text>
-              <Text fontWeight="500">{">"} 200 employees</Text>
+              <Text fontWeight="500" color="gray.500">
+                {">"} 200 employees
+              </Text>
               <HStack justifyContent="center">
                 <Text fontSize="3xl" fontWeight="600">
                   $
                 </Text>
                 <Text fontSize="5xl" fontWeight="900">
-                  5
+                  0.50
                 </Text>
-                <Text fontSize="xl" color="gray.500">
-                  per 10 users/month
-                </Text>
+                <Box fontSize="xl" color="gray.500">
+                  <Text>per user/month</Text>
+                </Box>
               </HStack>
-              <Text color={"gray.300"} fontSize={"sm"}>
-                Taxes might apply additionally
+              <Text color={"gray.500"} fontSize={"sm"}>
+                Billed monthly • Save 20% with annual billing
               </Text>
             </Box>
             <VStack
@@ -245,6 +265,23 @@ export const ThreeTierPricing = () => {
                 </PricingFeatureListItem>
               </List>
               <VStack w="80%" pt={4}>
+                <Box w={"full"}>
+                  <Button
+                    href={"/api/auth/signin"}
+                    as={Link}
+                    w="full"
+                    colorScheme="orange"
+                    textDecoration={"none"}
+                    _hover={{
+                      textDecoration: "none",
+                    }}
+                  >
+                    Start a free trial
+                  </Button>
+                  <Text fontSize={"xs"} color={"gray.500"}>
+                    Limited capabilities, no credit card required
+                  </Text>
+                </Box>
                 <Button
                   href={"https://calendar.app.google/N3vdeHJkt452xi2XA"}
                   as={Link}
@@ -260,19 +297,6 @@ export const ThreeTierPricing = () => {
                   }}
                 >
                   Schedule a demo
-                </Button>
-
-                <Button
-                  href={"/api/auth/signin"}
-                  as={Link}
-                  w="full"
-                  colorScheme="orange"
-                  textDecoration={"none"}
-                  _hover={{
-                    textDecoration: "none",
-                  }}
-                >
-                  Subscribe
                 </Button>
               </VStack>
             </VStack>
