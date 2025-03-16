@@ -56,6 +56,11 @@ export const NavbarWithDrawer = () => {
           subLabel: t("hybridWorkplacePolicyGeneratorDescription"),
           href: "/free-tools/hybrid-workplace-policy-generator",
         },
+        {
+          label: t("deskSchedulingEfficiencyCalculator"),
+          subLabel: t("deskSchedulingEfficiencyCalculatorDescription"),
+          href: "/free-tools/desk-scheduling-efficiency-calculator",
+        },
       ],
     },
   ];

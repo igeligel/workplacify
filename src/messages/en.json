@@ -5,7 +5,9 @@
     "freeTools": "Free Tools",
     "freeToolsDescription": "Explore our collection of free workplace management tools",
     "hybridWorkplacePolicyGenerator": "Hybrid Workplace Policy Generator",
-    "hybridWorkplacePolicyGeneratorDescription": "Create professional hybrid workplace policies"
+    "hybridWorkplacePolicyGeneratorDescription": "Create professional hybrid workplace policies",
+    "deskSchedulingEfficiencyCalculator": "Desk Scheduling Efficiency Calculator",
+    "deskSchedulingEfficiencyCalculatorDescription": "Calculate potential savings from optimizing desk usage"
   },
   "IndexPage": {
     "cta1": "Elevate Workspace Efficiency",
@@ -320,6 +322,114 @@
         "fourth": "Instant PDF generation"
       },
       "imageAlt": "Preview of a generated hybrid workplace policy document"
+    }
+  },
+  "DeskSchedulingEfficiencyCalculator": {
+    "meta": {
+      "title": "Desk Scheduling Efficiency Calculator | Workplacify",
+      "description": "Calculate potential time and cost savings from optimizing desk usage in your hybrid workplace.",
+      "imageAlt": "Desk Scheduling Efficiency Calculator Preview"
+    },
+    "hero": {
+      "heading": "Calculate Your Desk Scheduling Efficiency",
+      "text": "Discover how much time and money you could save by optimizing your desk usage with Workplacify."
+    },
+    "form": {
+      "numEmployees": {
+        "label": "Number of Employees",
+        "placeholder": "e.g., 100"
+      },
+      "numDesks": {
+        "label": "Number of Desks",
+        "placeholder": "e.g., 80"
+      },
+      "deskUtilization": {
+        "label": "Current Desk Utilization (%)",
+        "placeholder": "e.g., 60"
+      },
+      "avgSalary": {
+        "label": "Average Employee Salary (per year)",
+        "placeholder": "e.g., 50000"
+      },
+      "officeSpaceCost": {
+        "label": "Office Space Cost (per month)",
+        "placeholder": "e.g., 10000"
+      },
+      "calculateButton": "Calculate Savings",
+      "calculatingButton": "Calculating...",
+      "errors": {
+        "missingFields": {
+          "title": "Missing Information",
+          "description": "Please fill in all required fields to calculate savings."
+        }
+      }
+    },
+    "results": {
+      "heading": "Your Potential Savings",
+      "timeSaved": "Time Saved: {value} hours per year",
+      "costSaved": "Cost Saved: ${value} per year",
+      "ctaButton": "Start Optimizing Now",
+      "timeEfficiency": {
+        "title": "Time Efficiency",
+        "perYear": "per year",
+        "hours": "hours"
+      },
+      "costEfficiency": {
+        "title": "Cost Efficiency",
+        "perYear": "per year"
+      }
+    },
+    "features": {
+      "tag": "Features",
+      "title": "Why Use Our Calculator?",
+      "description": "Make data-driven decisions about your workplace optimization with our easy-to-use calculator.",
+      "benefits": {
+        "first": "Estimate time savings from efficient desk allocation",
+        "second": "Calculate potential cost reductions",
+        "third": "Optimize your hybrid workplace setup",
+        "fourth": "Make informed decisions about office space"
+      }
+    },
+    "cta": {
+      "heading": "Ready to Optimize Your Workplace?",
+      "description": "Start your free trial today and see the difference Workplacify can make.",
+      "button": "Try Workplacify Free"
+    },
+    "sections": {
+      "dataDecisions": {
+        "heading": "Make Data-Driven Decisions",
+        "description": "Transform your workplace management with comprehensive data-driven insights. Our sophisticated calculator helps you quantify the real impact of desk optimization, showing you exactly how much time and money you could save. By analyzing your current setup and utilization patterns, you can make informed decisions about office space allocation and resource management based on concrete metrics and real-world calculations. Stop guessing and start optimizing with actionable data that drives meaningful workplace improvements."
+      },
+      "easyToUse": {
+        "heading": "Easy to Use",
+        "description": "No complex spreadsheets, confusing formulas, or technical expertise needed. Our intuitive calculator guides you through each step with clear, straightforward inputs and instant, easy-to-understand results. Simply enter basic information about your workplace, such as employee count and current desk utilization, and let our sophisticated tool do the heavy lifting. Within seconds, you'll receive detailed insights about your optimization potential, presented in a clear, actionable format that helps you make informed decisions about your workplace setup."
+      },
+      "freeToUse": {
+        "heading": "Free to Use",
+        "description": "Access powerful workplace optimization insights without any cost barriers. Our professional-grade calculator is completely free to use, with absolutely no hidden fees, subscriptions, or usage limits. Calculate your potential savings as many times as you need, experiment with different workplace scenarios, and share the detailed results with your team - all at zero cost. Whether you're managing a small office or a large enterprise, you can start optimizing your workplace efficiency today without any financial commitment. Experience the full power of data-driven workplace optimization without spending a dime."
+      }
+    },
+    "faq": {
+      "isFree": {
+        "question": "Is this calculator free to use?",
+        "answer": "Yes, our desk scheduling efficiency calculator is completely free to use. You can calculate your potential savings as many times as you'd like."
+      },
+      "accuracy": {
+        "question": "How accurate are the calculations?",
+        "answer": "The calculations are based on industry standards and common workplace metrics. However, actual savings may vary depending on your specific situation and implementation."
+      },
+      "metrics": {
+        "question": "What metrics are used in the calculations?",
+        "answer": "We consider factors such as the number of employees, available desks, current utilization rate, average salary, and office space costs to estimate both time and cost savings."
+      },
+      "export": {
+        "question": "Can I save or export my results?",
+        "answer": "Currently, you can take a screenshot or note down your results. For more detailed analysis and reporting, consider signing up for a Workplacify account."
+      },
+      "recalculate": {
+        "question": "How often should I recalculate?",
+        "answer": "We recommend recalculating whenever there are significant changes in your workplace setup, such as changes in employee count, desk numbers, or costs."
+      }
     }
   }
 }
