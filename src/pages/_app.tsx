@@ -42,6 +42,7 @@ const MyApp = ((props: AppProps) => {
         <NextIntlClientProvider
           locale={router.locale || "en-US"}
           messages={pageProps.messages}
+          timeZone={Intl.DateTimeFormat().resolvedOptions().timeZone}
         >
           <LayoutWrapper>
             <Component {...pageProps} />
