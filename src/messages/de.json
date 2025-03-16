@@ -5,7 +5,9 @@
     "freeTools": "Kostenlose Tools",
     "freeToolsDescription": "Entdecken Sie unsere Sammlung kostenloser Arbeitsplatz-Management-Tools",
     "hybridWorkplacePolicyGenerator": "Hybrid-Arbeitsplatz-Richtlinien Generator",
-    "hybridWorkplacePolicyGeneratorDescription": "Erstellen Sie professionelle Hybrid-Arbeitsplatz-Richtlinien"
+    "hybridWorkplacePolicyGeneratorDescription": "Erstellen Sie professionelle Hybrid-Arbeitsplatz-Richtlinien",
+    "deskSchedulingEfficiencyCalculator": "Schreibtisch-Planungseffizienz-Rechner",
+    "deskSchedulingEfficiencyCalculatorDescription": "Berechnen Sie potenzielle Einsparungen durch optimierte Schreibtischnutzung"
   },
   "IndexPage": {
     "cta1": "Höhere Effizienz im Arbeitsbereich",
@@ -320,6 +322,115 @@
         "fourth": "Sofortige PDF-Generierung"
       },
       "imageAlt": "Vorschau eines generierten Hybrid-Arbeitsplatz-Richtlinien-Dokuments"
+    }
+  },
+  "DeskSchedulingEfficiencyCalculator": {
+    "meta": {
+      "title": "Schreibtisch-Planungseffizienz-Rechner | Workplacify",
+      "description": "Berechnen Sie potenzielle Zeit- und Kosteneinsparungen durch optimierte Schreibtischnutzung in Ihrem hybriden Arbeitsplatz.",
+      "imageAlt": "Vorschau des Schreibtisch-Planungseffizienz-Rechners"
+    },
+    "hero": {
+      "heading": "Berechnen Sie Ihre Schreibtisch-Planungseffizienz",
+      "text": "Entdecken Sie, wie viel Zeit und Geld Sie durch die Optimierung Ihrer Schreibtischnutzung mit Workplacify sparen können."
+    },
+    "form": {
+      "numEmployees": {
+        "label": "Anzahl der Mitarbeiter",
+        "placeholder": "z.B. 100"
+      },
+      "numDesks": {
+        "label": "Anzahl der Schreibtische",
+        "placeholder": "z.B. 80"
+      },
+      "deskUtilization": {
+        "label": "Aktuelle Schreibtischauslastung (%)",
+        "placeholder": "z.B. 60"
+      },
+      "avgSalary": {
+        "label": "Durchschnittliches Mitarbeitergehalt (pro Jahr)",
+        "placeholder": "z.B. 50000"
+      },
+      "officeSpaceCost": {
+        "label": "Büroraumkosten (pro Monat)",
+        "placeholder": "z.B. 10000"
+      },
+      "calculateButton": "Einsparungen berechnen",
+      "calculatingButton": "Berechne...",
+      "errors": {
+        "missingFields": {
+          "title": "Fehlende Informationen",
+          "description": "Bitte füllen Sie alle erforderlichen Felder aus, um die Einsparungen zu berechnen."
+        }
+      }
+    },
+    "results": {
+      "heading": "Ihre potenziellen Einsparungen",
+      "timeSaved": "Zeitersparnis: {value} Stunden pro Jahr",
+      "costSaved": "Kostenersparnis: ${value} pro Jahr",
+      "ctaButton": "Jetzt mit der Optimierung beginnen",
+      "timeEfficiency": {
+        "title": "Zeiteffizienz",
+        "perYear": "pro Jahr",
+        "hours": "Stunden"
+      },
+      "costEfficiency": {
+        "title": "Kosteneffizienz",
+        "perYear": "pro Jahr"
+      }
+    },
+    "features": {
+      "tag": "Funktionen",
+      "title": "Warum unseren Rechner nutzen?",
+      "description": "Treffen Sie datengestützte Entscheidungen zur Optimierung Ihres Arbeitsplatzes mit unserem benutzerfreundlichen Rechner.",
+      "benefits": {
+        "first": "Schätzen Sie die Zeitersparnis durch effiziente Schreibtischzuweisung",
+        "second": "Berechnen Sie potenzielle Kosteneinsparungen",
+        "third": "Optimieren Sie Ihre hybride Arbeitsplatzeinrichtung",
+        "fourth": "Treffen Sie fundierte Entscheidungen über Büroflächen"
+      },
+      "imageAlt": "Vorschau des Schreibtisch-Planungseffizienz-Rechners"
+    },
+    "cta": {
+      "heading": "Bereit, Ihren Arbeitsplatz zu optimieren?",
+      "description": "Starten Sie noch heute Ihre kostenlose Testversion und erleben Sie den Unterschied, den Workplacify ausmachen kann.",
+      "button": "Workplacify kostenlos testen"
+    },
+    "sections": {
+      "dataDecisions": {
+        "heading": "Treffen Sie datengestützte Entscheidungen",
+        "description": "Transformieren Sie Ihr Arbeitsplatzmanagement mit umfassenden, datengestützten Erkenntnissen. Unser ausgereifter Rechner hilft Ihnen, die tatsächlichen Auswirkungen der Schreibtischoptimierung zu quantifizieren und zeigt Ihnen genau, wie viel Zeit und Geld Sie einsparen können. Durch die Analyse Ihrer aktuellen Einrichtung und Nutzungsmuster können Sie fundierte Entscheidungen über die Zuweisung von Büroflächen und Ressourcenmanagement auf der Grundlage konkreter Kennzahlen und realer Berechnungen treffen. Hören Sie auf zu raten und beginnen Sie mit der Optimierung anhand von umsetzbaren Daten, die zu bedeutenden Verbesserungen am Arbeitsplatz führen."
+      },
+      "easyToUse": {
+        "heading": "Einfach zu bedienen",
+        "description": "Keine komplexen Tabellenkalkulationen, verwirrende Formeln oder technisches Fachwissen erforderlich. Unser intuitiver Rechner führt Sie mit klaren, unkomplizierten Eingaben und sofortigen, leicht verständlichen Ergebnissen durch jeden Schritt. Geben Sie einfach grundlegende Informationen über Ihren Arbeitsplatz ein, wie zum Beispiel die Anzahl der Mitarbeiter und die aktuelle Schreibtischauslastung, und lassen Sie unser ausgereiftes Tool die schwere Arbeit erledigen. Innerhalb von Sekunden erhalten Sie detaillierte Einblicke in Ihr Optimierungspotenzial, präsentiert in einem klaren, handlungsorientierten Format, das Ihnen hilft, fundierte Entscheidungen über Ihre Arbeitsplatzeinrichtung zu treffen."
+      },
+      "freeToUse": {
+        "heading": "Kostenlos nutzbar",
+        "description": "Greifen Sie ohne Kostenhürden auf leistungsstarke Erkenntnisse zur Arbeitsplatzoptimierung zu. Unser professioneller Rechner ist völlig kostenlos nutzbar, ohne versteckte Gebühren, Abonnements oder Nutzungsbeschränkungen. Berechnen Sie Ihre potenziellen Einsparungen so oft Sie möchten, experimentieren Sie mit verschiedenen Arbeitsplatzszenarien und teilen Sie die detaillierten Ergebnisse mit Ihrem Team - alles kostenlos. Egal ob Sie ein kleines Büro oder ein großes Unternehmen leiten, Sie können heute ohne finanzielle Verpflichtung mit der Optimierung Ihrer Arbeitsplatzeffizienz beginnen. Erleben Sie die volle Leistungsfähigkeit der datengesteuerten Arbeitsplatzoptimierung, ohne einen Cent auszugeben."
+      }
+    },
+    "faq": {
+      "isFree": {
+        "question": "Ist dieser Rechner kostenlos nutzbar?",
+        "answer": "Ja, unser Schreibtisch-Planungseffizienz-Rechner ist völlig kostenlos nutzbar. Sie können Ihre potenziellen Einsparungen so oft berechnen, wie Sie möchten."
+      },
+      "accuracy": {
+        "question": "Wie genau sind die Berechnungen?",
+        "answer": "Die Berechnungen basieren auf Branchenstandards und gängigen Arbeitsplatzmetriken. Die tatsächlichen Einsparungen können jedoch je nach Ihrer spezifischen Situation und Umsetzung variieren."
+      },
+      "metrics": {
+        "question": "Welche Kennzahlen werden bei den Berechnungen verwendet?",
+        "answer": "Wir berücksichtigen Faktoren wie die Anzahl der Mitarbeiter, verfügbare Schreibtische, aktuelle Auslastungsrate, durchschnittliches Gehalt und Büroraumkosten, um sowohl Zeit- als auch Kosteneinsparungen zu schätzen."
+      },
+      "export": {
+        "question": "Kann ich meine Ergebnisse speichern oder exportieren?",
+        "answer": "Derzeit können Sie einen Screenshot erstellen oder sich Ihre Ergebnisse notieren. Für eine detailliertere Analyse und Berichterstattung empfehlen wir, sich für ein Workplacify-Konto zu registrieren."
+      },
+      "recalculate": {
+        "question": "Wie oft sollte ich neu berechnen?",
+        "answer": "Wir empfehlen eine Neuberechnung, wenn sich wesentliche Änderungen in Ihrer Arbeitsplatzstruktur ergeben, wie zum Beispiel Änderungen in der Mitarbeiterzahl, der Anzahl der Schreibtische oder der Kosten."
+      }
     }
   }
 }
