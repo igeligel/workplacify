@@ -4,7 +4,7 @@ import {
   Collapse,
   Container,
   Flex,
-  Icon, // Icon,
+  Icon,
   IconButton,
   Stack,
   Text,
