@@ -72,7 +72,7 @@
     "next-seo": "^6.6.0",
     "next-sitemap": "^4.2.3",
     "posthog-js": "^1.231.0",
-    "prisma": "^6.5.0",
+    "prisma": "^6.6.0",
     "react": "^18.3.1",
     "react-day-picker": "^9.6.2",
     "react-device-detect": "^2.2.3",
