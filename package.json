@@ -111,7 +111,7 @@
     "tsx": "^4.19.3",
     "typescript": "^5.8.2",
     "vite": "^5.4.14",
-    "vitest": "^1.6.1"
+    "vitest": "^3.2.0"
   },
   "publishConfig": {
     "access": "restricted"
