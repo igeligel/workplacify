@@ -52,7 +52,7 @@
     "@trpc/client": "^10.45.2",
     "@trpc/next": "^10.45.2",
     "@trpc/react-query": "^10.45.2",
-    "@trpc/server": "^10.45.2",
+    "@trpc/server": "^11.3.1",
     "@uidotdev/usehooks": "^2.4.1",
     "change-case": "^5.4.4",
     "cloudinary": "^2.6.0",
