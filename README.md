@@ -46,6 +46,7 @@ Meet us on [Discord](https://discord.gg/m6EQptpj) or [schedule a meeting](https:
    - Duplicate `.env.example` to `.env`
    - Create a new `NEXTAUTH_SECRET`, for example via: https://bitwarden.com/password-generator/
    - Generate the `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` via https://console.cloud.google.com/apis/credentials
+   - If you want to use Microsoft as a login method, generate the `MICROSOFT_ENTRA_CLIENT_ID`, `MICROSOFT_ENTRA_CLIENT_SECRET`, and `MICROSOFT_ENTRA_TENANT_ID` via https://portal.azure.com/
    - Generate the `CLOUDINARY_API_SECRET`, `CLOUDINARY_API_KEY`, and `CLOUDINARY_NAME` via https://cloudinary.com/console
 1. Setup Node If your Node version does not meet the project's requirements as instructed by the docs, "[nvm](https://github.com/nvm-sh/nvm)" (Node Version Manager) allows using Node at the version required by the project. You can also use [nvm-windows](https://github.com/coreybutler/nvm-windows). We are currently using Node.js 20.
 1. Start the database & development server:
@@ -65,9 +66,9 @@ Deployment is done via [render.com](https://render.com). You can deploy your own
 
 We are still working on our contributing guide but feel free to open a PR or issue if you see something or want to request a feature.
 
-### Hacktoberfest
+<!-- ### Hacktoberfest
 
-We will be active maintainers during the [Hacktoberfest](https://hacktoberfest.com/). In 2024 we will focus on this.
+We will be active maintainers during the [Hacktoberfest](https://hacktoberfest.com/). In 2024 we will focus on this. -->
 
 ## Integrations
 
@@ -76,6 +77,29 @@ We are having some integrations of which some are necessary to run the applicati
 ### Google OAuth
 
 We use Google as the main auth provider. You can create your own OAuth credentials via https://console.cloud.google.com/apis/credentials. These credential can be then added to the `.env` file.
+
+### Microsoft Entra OAuth
+
+You can use Microsoft Entra as an auth provider.
+
+You can create all the necessary credentials via the [Azure Portal](https://portal.azure.com). Check for `Microsoft Entra ID` in the search bar and select it.
+
+![Entra id search in the Azure Portal](./docs/entra-id-search.png)
+
+On the next page, select "Add" and then "App Registrations" and then fill out the details. In the "Supported account types" section, choose:
+
+- Accounts in this organizational directory only (Standardverzeichnis only - Single tenant) or
+- Accounts in any organizational directory (Any Microsoft Entra ID tenant - Multitenant) and personal Microsoft accounts (e.g. Skype, Xbox)
+
+For the "Redirect URI (optional)", select "Web" and enter the following URL: `https://127.0.0.1:3000/api/auth/callback/microsoft-entra-id`. Or when you self-host: `https://your-domain.com/api/auth/callback/microsoft-entra-id`. The path is the important part here: `/api/auth/callback/microsoft-entra-id`.
+
+Once created you need to find certain values and add them to the `.env` file:
+
+| Environment Variable            | Microsoft Entra ID lookup                                                                                                                   |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `MICROSOFT_ENTRA_CLIENT_ID`     | `Application (client) ID`                                                                                                                   |
+| `MICROSOFT_ENTRA_CLIENT_SECRET` | Under `Client credentials`, you will see `0 certificate, 1 secret` or similar. If not click on it and get a client secret.                  |
+| `MICROSOFT_ENTRA_ISSUER`        | This is an URL that includes your `Directory (tenant) ID`. Its the format `https://login.microsoftonline.com/{Directory (tenant) ID}/wsfed` |
 
 ### Cloudinary
 
