@@ -31,7 +31,7 @@ import { FreeToolHeroHeading } from "../../components/FreeToolHeroHeading";
 import { FreeToolHeroText } from "../../components/FreeToolHeroText";
 import { getMessages } from "../../messages/getMessages";
 
-const baseUrl = "https://www.workplacify.camp";
+const baseUrl = "https://www.workplacify.com";
 const url = `${baseUrl}/free-tools/desk-scheduling-efficiency-calculator`;
 
 const DeskSchedulingEfficiencyCalculator = () => {

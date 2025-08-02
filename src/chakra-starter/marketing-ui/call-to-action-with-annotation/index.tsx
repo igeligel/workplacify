@@ -163,7 +163,7 @@ export const CallToActionWithAnnotation: React.FC = () => {
           borderRadius={"md"}
           src={"/landing-page-banner.png"}
           alt={
-            "Image showing the Hackathon Camp dashboard with multiple hackathons that are planned."
+            "Image showing the Workplacify dashboard with multiple desk reservations that are planned."
           }
         />
       </Box>

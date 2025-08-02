@@ -353,7 +353,7 @@ export const ThreeTierPricing = () => {
               <Button
                 textDecoration={"none"}
                 href={
-                  "mailto :hello@hackathon.camp?subject=Hackathon.camp enterprise"
+                  "mailto:workplacify@gmail.com?subject=Workplacify inquiry"
                 }
                 target={"_blank"}
                 as={Link}

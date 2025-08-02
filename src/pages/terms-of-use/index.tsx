@@ -13,7 +13,7 @@ const TermsOfUsePage = () => {
     <>
       <NextSeo
         title={`Terms of use of ${companyName}`}
-        description={`Terms of use of ${companyName}. Here we describe the rules of using hackathon.camp. Using this tool comes with requirements for your business to consider.`}
+        description={`Terms of use of ${companyName}. Here we describe the rules of using workplacify.com. Using this tool comes with requirements for your business to consider.`}
         canonical={`${process.env.NEXT_PUBLIC_BASE_URL}/terms-of-use`}
         noindex
       />
