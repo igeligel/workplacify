@@ -10,6 +10,8 @@
     "deskSchedulingEfficiencyCalculatorDescription": "Berechnen Sie potenzielle Einsparungen durch optimierte Schreibtischnutzung"
   },
   "IndexPage": {
+    "IndexPageTitle": "Workplacify: Arbeitsplatzplanung & Arbeitsplatzoptimierung",
+    "IndexPageDescription": "Workplacify: Die Open-Source-Plattform für die Planung von Arbeitsplätzen, die selbst gehostet werden kann. Optimieren Sie Ihren hybriden Büroplan und verwalten Sie mehrere Standorte einfach und effizient. Fördern Sie die Zusammenarbeit mit unseren innovativen Arbeitsplatz-Management-Tools.",
     "cta1": "Höhere Effizienz im Arbeitsbereich",
     "cta2": "Ihre Lösung für die Schreibtischplanung",
     "ctaSubtitle": "Optimieren Sie mühelos die Nutzung Ihres Büros, um die Produktivität am Arbeitsplatz und die Zusammenarbeit zu verbessern.",
@@ -327,7 +329,7 @@
   "DeskSchedulingEfficiencyCalculator": {
     "meta": {
       "title": "Schreibtisch-Planungseffizienz-Rechner | Workplacify",
-      "description": "Berechnen Sie potenzielle Zeit- und Kosteneinsparungen durch optimierte Schreibtischnutzung in Ihrem hybriden Arbeitsplatz.",
+      "description": "Berechnen Sie Ihre potenziellen Zeit- und Kosteneinsparungen durch die Optimierung der Schreibtischnutzung in Ihrem hybriden Arbeitsplatz mit unserem kostenlosen, benutzerfreundlichen Arbeitsplatzoptimierungsrechner.",
       "imageAlt": "Vorschau des Schreibtisch-Planungseffizienz-Rechners"
     },
     "hero": {

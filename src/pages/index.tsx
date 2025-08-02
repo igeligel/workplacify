@@ -1,5 +1,6 @@
 import { Box, Container } from "@chakra-ui/react";
 import { GetStaticProps } from "next";
+import { useTranslations } from "next-intl";
 import { NextSeo } from "next-seo";
 
 import { CallToActionWithAnnotation } from "../chakra-starter/marketing-ui/call-to-action-with-annotation";
@@ -8,18 +9,21 @@ import { SimpleCardWrapper } from "../components/SimpleCardWrapper";
 import { getMessages } from "../messages/getMessages";
 
 const IndexPage = () => {
+  const t = useTranslations("IndexPage");
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}`;
-  const description =
-    "Optimize your hybrid office schedule with Workplacify - the first open-source, self-hostable desk scheduling platform. Elevate workspace efficiency, manage multiple offices effortlessly, and enhance collaboration with our innovative workplace apps. Start a free trial now and experience the power of desk reservation, floor planning, and advanced workplace analytics. No credit card required.";
+
+  const title = t("IndexPageTitle");
+  const description = t("IndexPageDescription");
+
   return (
     <>
       <NextSeo
-        title="workplacify"
+        title={title}
         description={description}
         canonical={`${url}/`}
         openGraph={{
           url,
-          title: "workplacify - Hybrid Office Scheduling Platform",
+          title: "workplacify: Hybrid Office Scheduling Platform",
           description,
           images: [
             {

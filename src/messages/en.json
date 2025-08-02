@@ -10,6 +10,8 @@
     "deskSchedulingEfficiencyCalculatorDescription": "Calculate potential savings from optimizing desk usage"
   },
   "IndexPage": {
+    "IndexPageTitle": "Workplacify: Desk Scheduling & Workplace Optimization",
+    "IndexPageDescription": "Workplacify: The open-source, self-hostable desk scheduling platform. Optimize your hybrid office, manage multiple locations, and boost collaboration.",
     "cta1": "Elevate Workspace Efficiency",
     "cta2": "Your Desk Scheduling Solution",
     "ctaSubtitle": "Optimize desk usage effortlessly for enhanced workplace productivity and collaboration.",
@@ -327,7 +329,7 @@
   "DeskSchedulingEfficiencyCalculator": {
     "meta": {
       "title": "Desk Scheduling Efficiency Calculator | Workplacify",
-      "description": "Calculate potential time and cost savings from optimizing desk usage in your hybrid workplace.",
+      "description": "Calculate your potential time and cost savings from optimizing desk usage in your hybrid workplace with our free, easy-to-use workplace optimization calculator.",
       "imageAlt": "Desk Scheduling Efficiency Calculator Preview"
     },
     "hero": {
