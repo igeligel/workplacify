@@ -12,7 +12,7 @@ The open-source desk scheduling app for your office. [Learn more](https://workpl
 
 ## About the Project
 
-We are the first open-source desk scheduling app for your office. Ever had conflicting desk schedules or an employee not getting their favorite desk? Tracking your desks in an Excel sheet? Use workplacify to manage your office desks and make your employees happy. A perfect alternative to Envoy, UnSpot, or desk.ly.
+We are the first open-source desk scheduling app for your office. Ever had conflicting desk schedules or an employee not getting their favorite desk? Tracking your desks in an Excel sheet? Use workplacify to manage your office desks and make your employees happy. A perfect alternative to Envoy, UnSpot, Flexopus or desk.ly.
 
 ### Built With
 
