@@ -1,25 +1,22 @@
-import { Link } from "@chakra-ui/next-js";
 import {
   Box,
   Button,
   Container,
-  FormControl,
-  FormLabel,
+  Field,
   Heading,
   Icon,
   Input,
   InputGroup,
-  InputLeftAddon,
   Stack,
   Text,
   VStack,
-  useToast,
 } from "@chakra-ui/react";
 import * as htmlToImage from "html-to-image";
 import { GetServerSideProps } from "next";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { NextSeo } from "next-seo";
+import NextLink from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { FiCopy } from "react-icons/fi";
 
@@ -29,6 +26,7 @@ import { FeatureSplitted } from "../../components/FeatureSplitted";
 import { FreeToolHero } from "../../components/FreeToolHero";
 import { FreeToolHeroHeading } from "../../components/FreeToolHeroHeading";
 import { FreeToolHeroText } from "../../components/FreeToolHeroText";
+import { toaster } from "../../components/ui/toaster";
 import { getMessages } from "../../messages/getMessages";
 
 const baseUrl = "https://www.workplacify.com";
@@ -38,7 +36,6 @@ const DeskSchedulingEfficiencyCalculator = () => {
   const { status } = useSession();
   const [isInitialLoading, setIsInitialLoading] = useState(true);
   const t = useTranslations("DeskSchedulingEfficiencyCalculator");
-  const toast = useToast();
 
   // Effect to handle loading state
   useEffect(() => {
@@ -97,12 +94,12 @@ const DeskSchedulingEfficiencyCalculator = () => {
                   }),
                 ]);
                 setCopySuccess(true);
-                toast({
+                toaster.create({
                   title: "Success",
                   description: "Image copied to clipboard!",
-                  status: "success",
+                  type: "success",
                   duration: 3000,
-                  isClosable: true,
+                  closable: true,
                 });
               } catch (err) {
                 console.error("Failed to copy to clipboard:", err);
@@ -111,13 +108,13 @@ const DeskSchedulingEfficiencyCalculator = () => {
                 link.download = "desk-scheduling-savings.png";
                 link.href = canvas.toDataURL("image/png");
                 link.click();
-                toast({
+                toaster.create({
                   title: "Notice",
                   description:
                     "Image downloaded instead of copied to clipboard",
-                  status: "info",
+                  type: "info",
                   duration: 3000,
-                  isClosable: true,
+                  closable: true,
                 });
               }
             }
@@ -128,19 +125,19 @@ const DeskSchedulingEfficiencyCalculator = () => {
       } catch (err) {
         console.error("Failed to generate image:", err);
         setIsGeneratingImage(false); // Make sure to show buttons if there's an error
-        toast({
+        toaster.create({
           title: "Error",
           description:
             "Failed to generate image. Please try downloading instead.",
-          status: "error",
+          type: "error",
           duration: 3000,
-          isClosable: true,
+          closable: true,
         });
       } finally {
         setIsCopying(false);
       }
     }
-  }, [toast]);
+  }, []);
 
   const calculateSavings = () => {
     // Validate required fields
@@ -151,12 +148,12 @@ const DeskSchedulingEfficiencyCalculator = () => {
       !avgSalary ||
       !officeSpaceCost
     ) {
-      toast({
+      toaster.create({
         title: t("form.errors.missingFields.title"),
         description: t("form.errors.missingFields.description"),
-        status: "error",
+        type: "error",
         duration: 3000,
-        isClosable: true,
+        closable: true,
       });
       return;
     }
@@ -227,44 +224,42 @@ const DeskSchedulingEfficiencyCalculator = () => {
         />
 
         <Container maxW={"3xl"} paddingTop={8} paddingX={0}>
-          <Stack spacing={6}>
-            <FormControl isRequired>
-              <FormLabel>{t("form.numEmployees.label")}</FormLabel>
+          <Stack gap={6}>
+            <Field.Root>
+              <Field.Label>{t("form.numEmployees.label")}</Field.Label>
               <Input
                 type="number"
                 value={numEmployees}
                 onChange={(e) => setNumEmployees(e.target.value)}
                 placeholder={t("form.numEmployees.placeholder")}
               />
-            </FormControl>
+            </Field.Root>
 
-            <FormControl isRequired>
-              <FormLabel>{t("form.numDesks.label")}</FormLabel>
+            <Field.Root>
+              <Field.Label>{t("form.numDesks.label")}</Field.Label>
               <Input
                 type="number"
                 value={numDesks}
                 onChange={(e) => setNumDesks(e.target.value)}
                 placeholder={t("form.numDesks.placeholder")}
               />
-            </FormControl>
+            </Field.Root>
 
-            <FormControl isRequired>
-              <FormLabel>{t("form.deskUtilization.label")}</FormLabel>
-              <InputGroup>
+            <Field.Root>
+              <Field.Label>{t("form.deskUtilization.label")}</Field.Label>
+              <InputGroup startElement="%">
                 <Input
                   type="number"
                   value={deskUtilization}
                   onChange={(e) => setDeskUtilization(e.target.value)}
                   placeholder={t("form.deskUtilization.placeholder")}
                 />
-                <InputLeftAddon>%</InputLeftAddon>
               </InputGroup>
-            </FormControl>
+            </Field.Root>
 
-            <FormControl isRequired>
-              <FormLabel>{t("form.avgSalary.label")}</FormLabel>
-              <InputGroup>
-                <InputLeftAddon>$</InputLeftAddon>
+            <Field.Root>
+              <Field.Label>{t("form.avgSalary.label")}</Field.Label>
+              <InputGroup startElement="$">
                 <Input
                   type="number"
                   value={avgSalary}
@@ -272,12 +267,11 @@ const DeskSchedulingEfficiencyCalculator = () => {
                   placeholder={t("form.avgSalary.placeholder")}
                 />
               </InputGroup>
-            </FormControl>
+            </Field.Root>
 
-            <FormControl isRequired>
-              <FormLabel>{t("form.officeSpaceCost.label")}</FormLabel>
-              <InputGroup>
-                <InputLeftAddon>$</InputLeftAddon>
+            <Field.Root>
+              <Field.Label>{t("form.officeSpaceCost.label")}</Field.Label>
+              <InputGroup startElement="$">
                 <Input
                   type="number"
                   value={officeSpaceCost}
@@ -285,13 +279,13 @@ const DeskSchedulingEfficiencyCalculator = () => {
                   placeholder={t("form.officeSpaceCost.placeholder")}
                 />
               </InputGroup>
-            </FormControl>
+            </Field.Root>
 
             <Button
-              colorScheme="orange"
+              colorPalette="orange"
               size="lg"
               onClick={calculateSavings}
-              isLoading={isInitialLoading}
+              loading={isInitialLoading}
               loadingText={t("form.calculatingButton")}
             >
               {t("form.calculateButton")}
@@ -325,7 +319,7 @@ const DeskSchedulingEfficiencyCalculator = () => {
                     Powered by Workplacify
                   </Text>
                 </Box>
-                <VStack spacing={6} align="stretch">
+                <VStack gap={6} align="stretch">
                   <Heading size="lg" color="orange.700" textAlign="center">
                     {t("results.heading")}
                   </Heading>
@@ -336,7 +330,7 @@ const DeskSchedulingEfficiencyCalculator = () => {
                     border="1px"
                     borderColor="orange.100"
                   >
-                    <VStack spacing={4} align="stretch">
+                    <VStack gap={4} align="stretch">
                       <Box>
                         <Text
                           fontSize="xl"
@@ -380,29 +374,27 @@ const DeskSchedulingEfficiencyCalculator = () => {
                       </Box>
                     </VStack>
                   </Box>
-                  <VStack
-                    spacing={3}
-                    display={isGeneratingImage ? "none" : "flex"}
-                  >
+                  <VStack gap={3} display={isGeneratingImage ? "none" : "flex"}>
                     <Button
-                      as={Link}
-                      href="/api/auth/signin"
-                      colorScheme="orange"
+                      asChild
+                      colorPalette="orange"
                       size="lg"
                       width="full"
                     >
-                      {t("results.ctaButton")}
+                      <NextLink href="/api/auth/signin">
+                        {t("results.ctaButton")}
+                      </NextLink>
                     </Button>
                     <Button
                       onClick={copyToClipboard}
                       variant="outline"
-                      colorScheme="orange"
+                      colorPalette="orange"
                       size="md"
                       width="full"
-                      leftIcon={<Icon as={FiCopy} />}
-                      isLoading={isCopying}
+                      loading={isCopying}
                       loadingText="Copying..."
                     >
+                      <Icon as={FiCopy} />
                       Copy as Image
                     </Button>
                     {copySuccess && (
@@ -427,7 +419,7 @@ const DeskSchedulingEfficiencyCalculator = () => {
               <Text as="p" fontSize={"xl"}>
                 {t("features.description")}
               </Text>
-              <Stack spacing={2} mt={4}>
+              <Stack gap={2} mt={4}>
                 <Text as="p" fontSize={"xl"}>
                   • {t("features.benefits.first")}
                 </Text>
@@ -487,10 +479,10 @@ const DeskSchedulingEfficiencyCalculator = () => {
                 justifyContent={"center"}
               >
                 <Button
-                  as={Link}
-                  href={"/api/auth/signin"}
+                  asChild
                   variant={"solid"}
-                  colorScheme={"orange"}
+                  color={"white"}
+                  colorPalette={"orange"}
                   background={"orange.400"}
                   textDecoration={"none"}
                   _hover={{
@@ -501,7 +493,9 @@ const DeskSchedulingEfficiencyCalculator = () => {
                   borderRadius={"full"}
                   size={"sm"}
                 >
-                  {t("cta.button")}
+                  <NextLink href={"/api/auth/signin"}>
+                    {t("cta.button")}
+                  </NextLink>
                 </Button>
               </Box>
             </Box>
@@ -509,8 +503,8 @@ const DeskSchedulingEfficiencyCalculator = () => {
         </Box>
 
         <Container maxW="5xl">
-          <VStack mt={{ base: 12, lg: 24 }} spacing={{ base: 5, lg: 10 }}>
-            <VStack spacing={4}>
+          <VStack mt={{ base: 12, lg: 24 }} gap={{ base: 5, lg: 10 }}>
+            <VStack gap={4}>
               <Heading textAlign={"center"} color={"gray.800"} as="h3">
                 {t("sections.dataDecisions.heading")}
               </Heading>
@@ -523,7 +517,7 @@ const DeskSchedulingEfficiencyCalculator = () => {
                 {t("sections.dataDecisions.description")}
               </Text>
             </VStack>
-            <VStack spacing={4}>
+            <VStack gap={4}>
               <Heading textAlign={"center"} color={"gray.800"} as="h3">
                 {t("sections.easyToUse.heading")}
               </Heading>
@@ -536,7 +530,7 @@ const DeskSchedulingEfficiencyCalculator = () => {
                 {t("sections.easyToUse.description")}
               </Text>
             </VStack>
-            <VStack spacing={4}>
+            <VStack gap={4}>
               <Heading textAlign={"center"} color={"gray.800"} as="h3">
                 {t("sections.freeToUse.heading")}
               </Heading>

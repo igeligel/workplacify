@@ -1,15 +1,15 @@
-import { Link } from "@chakra-ui/next-js";
 import {
   Box,
-  Button,
   HStack,
   Heading,
   Icon,
   Image,
+  Link,
   Text,
   VStack,
 } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
+import NextLink from "next/link";
 import { useState } from "react";
 import { FiChevronRight } from "react-icons/fi";
 
@@ -28,7 +28,6 @@ export const GetStartedLink = (props: GetStartedLinkProps) => {
 
   return (
     <Link
-      href={href}
       textDecoration={"none"}
       _hover={{
         textDecoration: "none",
@@ -40,66 +39,65 @@ export const GetStartedLink = (props: GetStartedLinkProps) => {
         setIsElementHovered(false);
       }}
     >
-      <VStack alignItems={"flex-start"} spacing={{ base: 0.5, lg: 3 }}>
-        <HStack>{badges}</HStack>
-        <VStack
-          spacing={{ base: 0.5, lg: 1 }}
-          alignItems={"flex-start"}
-          justifyContent={"center"}
-        >
-          <Heading
-            as={"h3"}
-            fontSize={{ base: "sm", lg: "md" }}
-            color={"gray.700"}
+      <NextLink href={href}>
+        <VStack alignItems={"flex-start"} gap={{ base: 0.5, lg: 3 }}>
+          <HStack>{badges}</HStack>
+          <VStack
+            gap={{ base: 0.5, lg: 1 }}
+            alignItems={"flex-start"}
+            justifyContent={"center"}
           >
-            {heading}
-          </Heading>
-          <Text
-            as={"span"}
-            colorScheme="orange"
-            color={"orange.400"}
-            _hover={{
-              textDecoration: "none",
-              color: "orange.600",
-            }}
-          >
-            <Button
+            <Heading
+              as={"h3"}
+              fontSize={{ base: "sm", lg: "md" }}
+              color={"gray.700"}
+            >
+              {heading}
+            </Heading>
+            <Text
+              as={"span"}
+              colorPalette="orange"
               color={"orange.400"}
               _hover={{
                 textDecoration: "none",
                 color: "orange.600",
               }}
-              as={Text}
-              variant={"link"}
             >
-              {t("getStartedLink")}
-            </Button>
-            <Icon
-              marginInlineStart={"0px !important"}
-              boxSize={4}
-              as={FiChevronRight}
-              transform={"translateY(3px)"}
+              <Link
+                color={"orange.400"}
+                _hover={{
+                  textDecoration: "none",
+                  color: "orange.600",
+                }}
+              >
+                {t("getStartedLink")}
+              </Link>
+              <Icon
+                marginInlineStart={"0px !important"}
+                boxSize={4}
+                as={FiChevronRight}
+              />
+            </Text>
+          </VStack>
+          <Box
+            maxWidth={{ base: "100%", lg: "80%" }}
+            maxHeight={{ base: "125px", lg: "none" }}
+            overflow={{ base: "hidden", lg: "visible" }}
+          >
+            <Image
+              borderTopLeftRadius={"lg"}
+              borderTopRightRadius={"lg"}
+              boxShadow={"lg"}
+              src={imageSource}
+              alt={imageAlt}
+              transition={"transform 0.25s ease-in-out"}
+              transform={
+                isElementHovered ? "translateY(0px)" : "translateY(10px)"
+              }
             />
-          </Text>
+          </Box>
         </VStack>
-        <Box
-          maxWidth={{ base: "100%", lg: "80%" }}
-          maxHeight={{ base: "125px", lg: "none" }}
-          overflow={{ base: "hidden", lg: "visible" }}
-        >
-          <Image
-            borderTopLeftRadius={"lg"}
-            borderTopRightRadius={"lg"}
-            boxShadow={"lg"}
-            src={imageSource}
-            alt={imageAlt}
-            transition={"transform 0.25s ease-in-out"}
-            transform={
-              isElementHovered ? "translateY(0px)" : "translateY(10px)"
-            }
-          />
-        </Box>
-      </VStack>
+      </NextLink>
     </Link>
   );
 };

@@ -67,10 +67,10 @@ export const JoinOurTeam = () => {
         as={SimpleGrid}
         maxW={"7xl"}
         columns={{ base: 1, md: 2 }}
-        spacing={{ base: 10, lg: 32 }}
+        gap={{ base: 10, lg: 32 }}
         py={{ base: 10, sm: 20, lg: 32 }}
       >
-        <Stack spacing={{ base: 10, md: 20 }}>
+        <Stack gap={{ base: 10, md: 20 }}>
           <Heading
             lineHeight={1.1}
             fontSize={{ base: "3xl", sm: "4xl", md: "5xl", lg: "6xl" }}
@@ -85,15 +85,12 @@ export const JoinOurTeam = () => {
             </Text>{" "}
             Full-Stack Developers */}
           </Heading>
-          <Stack direction={"row"} spacing={4} align={"center"}>
+          <Stack direction={"row"} gap={4} align={"center"}>
             <AvatarGroup>
               {avatars.map((avatar) => (
-                <Avatar
+                <Avatar.Root
                   key={avatar.name}
-                  name={avatar.name}
-                  src={avatar.url}
-                  // eslint-disable-next-line react-hooks/rules-of-hooks
-                  size={useBreakpointValue({ base: "md", md: "lg" })}
+                  size={{ base: "md", md: "lg" }}
                   position={"relative"}
                   zIndex={2}
                   _before={{
@@ -108,7 +105,9 @@ export const JoinOurTeam = () => {
                     top: 0,
                     left: 0,
                   }}
-                />
+                >
+                  <Avatar.Image src={avatar.url} />
+                </Avatar.Root>
               ))}
             </AvatarGroup>
             <Text fontFamily={"heading"} fontSize={{ base: "4xl", md: "6xl" }}>
@@ -146,10 +145,10 @@ export const JoinOurTeam = () => {
           bg={"gray.50"}
           rounded={"xl"}
           p={{ base: 4, sm: 6, md: 8 }}
-          spacing={{ base: 8 }}
+          gap={{ base: 8 }}
           maxW={{ lg: "lg" }}
         >
-          <Stack spacing={4}>
+          <Stack gap={4}>
             <Heading
               color={"gray.800"}
               lineHeight={1.1}
@@ -170,7 +169,7 @@ export const JoinOurTeam = () => {
             </Text>
           </Stack>
           <Box as={"form"} mt={10}>
-            <Stack spacing={4}>
+            <Stack gap={4}>
               <Input
                 placeholder="Firstname"
                 bg={"gray.100"}

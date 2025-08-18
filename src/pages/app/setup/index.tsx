@@ -3,26 +3,14 @@ import {
   Button,
   Center,
   Container,
-  FormControl,
-  FormHelperText,
-  FormLabel,
+  Field,
   Grid,
   GridItem,
   Icon,
   Input,
-  Step,
-  StepDescription,
-  StepIcon,
-  StepIndicator,
-  StepNumber,
-  StepSeparator,
-  StepStatus,
-  StepTitle,
-  Stepper,
+  Steps,
   Text,
   VStack,
-  useSteps,
-  useToast,
 } from "@chakra-ui/react";
 import { WorkplacifyPreference } from "@prisma/client";
 import { GetServerSideProps } from "next";
@@ -31,13 +19,13 @@ import { useEffect, useState } from "react";
 import { PiChartLineFill, PiDesktopTowerFill } from "react-icons/pi";
 import { useDebounce } from "react-use";
 
+import { toaster } from "../../../components/ui/toaster";
 import { getMessages } from "../../../messages/getMessages";
 import { appAuthRedirect } from "../../../server/nextMiddleware/appAuthRedirect";
 import { trpc } from "../../../utils/trpc";
 
 const SetupPage = () => {
   const router = useRouter();
-  const toast = useToast();
   const [isCreated, setIsCreated] = useState<boolean>(false);
   const [initialLoadComplete, isInitialLoadComplete] = useState<boolean>(false);
   const [inviteCode, setInviteCode] = useState<string>("");
@@ -71,10 +59,7 @@ const SetupPage = () => {
     [inviteCode],
   );
 
-  const { activeStep, setActiveStep } = useSteps({
-    index: 1,
-    count: steps.length,
-  });
+  const [step, setStep] = useState(1);
 
   useEffect(() => {
     const createOnboardingSelectionAction = async () => {
@@ -188,12 +173,12 @@ const SetupPage = () => {
       router.push("/app");
     } catch (error) {
       debugger;
-      toast({
+      toaster.create({
         title: "Error",
         description: "Please try again",
-        status: "error",
+        type: "error",
         duration: 9000,
-        isClosable: true,
+        closable: true,
       });
     }
   };
@@ -207,13 +192,13 @@ const SetupPage = () => {
 
     isInitialLoadComplete(true);
     if (onboardingSelection.data.submitted) {
-      setActiveStep(2);
+      setStep(2);
     }
   }, [
     initialLoadComplete,
     onboardingSelection.isFetched,
     onboardingSelection.data,
-    setActiveStep,
+    setStep,
   ]);
 
   return (
@@ -224,28 +209,31 @@ const SetupPage = () => {
       flexDirection={"column"}
     >
       <Container maxW={"container.md"}>
-        <Stepper index={activeStep} colorScheme="orange">
+        {/* <Steps.Root defaultStep={1} count={steps.length}>
+
+        </Steps.Root> */}
+        <Steps.Root defaultStep={1} count={steps.length} colorPalette="orange">
+          <Steps.List>
+            {steps.map((step, index) => (
+              <Steps.Item key={index} index={index} title={step.title}>
+                <Steps.Indicator />
+                <Steps.Title>{step.title}</Steps.Title>
+                <Steps.Separator />
+              </Steps.Item>
+            ))}
+          </Steps.List>
+
           {steps.map((step, index) => (
-            <Step key={index}>
-              <StepIndicator>
-                <StepStatus
-                  complete={<StepIcon />}
-                  incomplete={<StepNumber />}
-                  active={<StepNumber />}
-                />
-              </StepIndicator>
-
-              <Box flexShrink="0">
-                <StepTitle>{step.title}</StepTitle>
-                <StepDescription>{step.description}</StepDescription>
-              </Box>
-
-              <StepSeparator />
-            </Step>
+            <Steps.Content key={index} index={index}>
+              {step.description}
+            </Steps.Content>
           ))}
-        </Stepper>
+          <Steps.CompletedContent>
+            All steps are complete!
+          </Steps.CompletedContent>
+        </Steps.Root>
       </Container>
-      {activeStep === 1 && (
+      {step === 1 && (
         <Box
           paddingTop={12}
           flex={1}
@@ -253,7 +241,7 @@ const SetupPage = () => {
           flexDirection={"column"}
           justifyContent={"center"}
         >
-          <VStack spacing={1}>
+          <VStack gap={1}>
             <Text textAlign={"center"} fontSize={"xl"} fontWeight={600}>
               Hi, what brings you to workplacify?
             </Text>
@@ -352,8 +340,8 @@ const SetupPage = () => {
           </Grid>
           {selectedOptions.includes("JOIN_ORGANIZATION") ? (
             <Box paddingTop={4}>
-              <FormControl>
-                <FormLabel>Invite code</FormLabel>
+              <Field.Root>
+                <Field.Label>Invite code</Field.Label>
                 <Input
                   value={inviteCode}
                   placeholder={""}
@@ -362,17 +350,17 @@ const SetupPage = () => {
                     setInviteCode(e.target.value);
                   }}
                 />
-                <FormHelperText>
+                <Field.HelperText>
                   Paste the code sent by your administrator
-                </FormHelperText>
-              </FormControl>
+                </Field.HelperText>
+              </Field.Root>
             </Box>
           ) : (
             <></>
           )}
           <Button
             marginTop={4}
-            colorScheme={"orange"}
+            colorPalette={"orange"}
             backgroundColor={"orange.400"}
             onClick={() => {
               submitForm();

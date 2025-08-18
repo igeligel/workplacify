@@ -1,9 +1,9 @@
-import { Box, ColorProps } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 
 type MenuItemWrapperProps = {
   isActive?: boolean;
   onClick?: () => void;
-  color: ColorProps["color"];
+  color: React.ComponentProps<typeof Box>["color"];
   children: React.ReactNode;
 };
 

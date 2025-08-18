@@ -1,19 +1,18 @@
-import { Link } from "@chakra-ui/next-js";
 import {
   Box,
   Button,
-  Divider,
   HStack,
   Heading,
   List,
-  ListItem,
+  Separator,
   Stack,
   Text,
   VStack,
-  useColorModeValue,
 } from "@chakra-ui/react";
+import NextLink from "next/link";
 import { ReactNode } from "react";
 
+import { useWorkplacifyTheme } from "../../../hooks/useWorkplacifyTheme";
 import { PricingFeatureListItem } from "./PricingFeatureListItem";
 
 type PriceWrapperProps = {
@@ -23,8 +22,10 @@ type PriceWrapperProps = {
 const PriceWrapper = (props: PriceWrapperProps) => {
   const { children, isHighlighted } = props;
 
-  const borderColorHighlighted = useColorModeValue("orange.200", "orange.500");
-  const borderColorNotHighlighted = useColorModeValue("gray.200", "gray.500");
+  const { theme } = useWorkplacifyTheme();
+
+  const borderColorHighlighted = theme === "dark" ? "orange.500" : "orange.200";
+  const borderColorNotHighlighted = theme === "dark" ? "gray.500" : "gray.200";
 
   const borderColor = isHighlighted
     ? borderColorHighlighted
@@ -47,9 +48,15 @@ const PriceWrapper = (props: PriceWrapperProps) => {
 };
 
 export const ThreeTierPricing = () => {
+  const { theme } = useWorkplacifyTheme();
+  const textBackgroundColor = theme === "dark" ? "orange.700" : "orange.300";
+  const textColor = theme === "dark" ? "gray.300" : "gray.900";
+  const highlightedBgColor = theme === "dark" ? "orange.700" : "orange.50";
+  const notHighlightedBgColor = theme === "dark" ? "gray.800" : "gray.50";
+
   return (
     <Box>
-      <VStack spacing={2} textAlign="center">
+      <VStack gap={2} textAlign="center">
         <Heading as="h2" fontSize="4xl" id="pricing">
           Plans that fit your organization
         </Heading>
@@ -66,7 +73,7 @@ export const ThreeTierPricing = () => {
         direction={{ base: "column", md: "row" }}
         textAlign="center"
         justify="center"
-        spacing={{ base: 4, lg: 10 }}
+        gap={{ base: 4, lg: 10 }}
         py={10}
       >
         <PriceWrapper isHighlighted={true}>
@@ -79,10 +86,10 @@ export const ThreeTierPricing = () => {
             >
               <Text
                 textTransform="uppercase"
-                bg={useColorModeValue("orange.300", "orange.700")}
+                bg={textBackgroundColor}
                 px={3}
                 py={1}
-                color={useColorModeValue("gray.900", "gray.300")}
+                color={textColor}
                 fontSize="sm"
                 fontWeight="600"
                 rounded="xl"
@@ -109,46 +116,57 @@ export const ThreeTierPricing = () => {
                 Taxes might apply additionally
               </Text>
             </Box>
-            <VStack
-              bg={useColorModeValue("orange.50", "gray.700")}
-              py={4}
-              borderBottomRadius={"xl"}
-            >
-              <List spacing={2.5} textAlign="start" px={8} minWidth={"100%"}>
-                <PricingFeatureListItem>
-                  Create up to 10 offices
-                </PricingFeatureListItem>
-                <PricingFeatureListItem>
-                  Upload up to 50 floors
-                </PricingFeatureListItem>
-                <PricingFeatureListItem>
-                  Invite up to 200 colleagues
-                </PricingFeatureListItem>
-                <PricingFeatureListItem>Desk scheduling</PricingFeatureListItem>
-                <PricingFeatureListItem>
-                  Invitation templates
-                </PricingFeatureListItem>
-                <Divider role="presentation" />
-                <ListItem role="listitem">
-                  <Heading
-                    as={"h3"}
-                    fontSize={"sm"}
-                    color={"gray.400"}
-                    fontWeight={"semibold"}
+            <VStack bg={highlightedBgColor} py={4} borderBottomRadius={"xl"}>
+              <List.Root asChild>
+                <Box
+                  as={"ul"}
+                  gap={2.5}
+                  textAlign="start"
+                  px={8}
+                  minWidth={"100%"}
+                  listStyleType="circle"
+                >
+                  <PricingFeatureListItem>
+                    Create up to 10 offices
+                  </PricingFeatureListItem>
+                  <PricingFeatureListItem>
+                    Upload up to 50 floors
+                  </PricingFeatureListItem>
+                  <PricingFeatureListItem>
+                    Invite up to 200 colleagues
+                  </PricingFeatureListItem>
+                  <PricingFeatureListItem>
+                    Desk scheduling
+                  </PricingFeatureListItem>
+                  <PricingFeatureListItem>
+                    Invitation templates
+                  </PricingFeatureListItem>
+                  <Separator role="presentation" />
+                  <Box
+                    as={"li"}
+                    role="listitem"
+                    display={"flex"}
+                    alignItems={"center"}
                   >
-                    Coming soon
-                  </Heading>
-                </ListItem>
-                <PricingFeatureListItem mode={"coming-soon"}>
-                  Basic Workplace Analytics
-                </PricingFeatureListItem>
-              </List>
-              <VStack w="80%" pt={4} spacing={2}>
+                    <Heading
+                      as={"h3"}
+                      fontSize={"sm"}
+                      color={"gray.400"}
+                      fontWeight={"semibold"}
+                    >
+                      Coming soon
+                    </Heading>
+                  </Box>
+                  <PricingFeatureListItem mode={"coming-soon"}>
+                    Basic Workplace Analytics
+                  </PricingFeatureListItem>
+                </Box>
+              </List.Root>
+              <VStack w="80%" pt={4} gap={2}>
                 <Button
-                  href={"/api/auth/signin"}
-                  as={Link}
+                  asChild
                   w="full"
-                  colorScheme="orange"
+                  colorPalette="orange"
                   variant="outline"
                   textDecoration={"none"}
                   backgroundColor={"white"}
@@ -160,26 +178,29 @@ export const ThreeTierPricing = () => {
                   //   router.push("/signup");
                   // }}
                 >
-                  Start desk scheduling
+                  <NextLink href={"/api/auth/signin"}>
+                    Start desk scheduling
+                  </NextLink>
                 </Button>
 
-                <Box w={"full"}>
+                <VStack w={"full"} gap={1}>
                   <Button
-                    href={"/api/auth/signin"}
-                    as={Link}
+                    asChild
                     w="full"
-                    colorScheme="orange"
+                    colorPalette="orange"
                     textDecoration={"none"}
                     _hover={{
                       textDecoration: "none",
                     }}
                   >
-                    Start a free trial
+                    <NextLink href={"/api/auth/signin"}>
+                      Start a free trial
+                    </NextLink>
                   </Button>
                   <Text fontSize={"xs"} color={"gray.500"}>
                     Limited capabilities, no credit card required
                   </Text>
-                </Box>
+                </VStack>
               </VStack>
             </VStack>
           </Box>
@@ -207,72 +228,86 @@ export const ThreeTierPricing = () => {
                 Taxes might apply additionally
               </Text>
             </Box>
-            <VStack
-              bg={useColorModeValue("gray.50", "gray.700")}
-              py={4}
-              borderBottomRadius={"xl"}
-            >
-              <List spacing={2.5} textAlign="start" px={8} minWidth={"100%"}>
-                <PricingFeatureListItem>
-                  Create unlimited offices
-                </PricingFeatureListItem>
-                <PricingFeatureListItem>
-                  Upload unlimited floors
-                </PricingFeatureListItem>
-                <PricingFeatureListItem>
-                  Invite unlimited colleagues
-                </PricingFeatureListItem>
-                <PricingFeatureListItem>Desk scheduling</PricingFeatureListItem>
-                <Divider role="presentation" />
-                <ListItem role="listitem">
-                  <Heading
-                    as={"h3"}
-                    fontSize={"sm"}
-                    color={"gray.400"}
-                    fontWeight={"semibold"}
+            <VStack bg={notHighlightedBgColor} py={4} borderBottomRadius={"xl"}>
+              <List.Root asChild>
+                <Box
+                  as={"ul"}
+                  gap={2.5}
+                  textAlign="start"
+                  px={8}
+                  minWidth={"100%"}
+                  listStyleType="circle"
+                >
+                  <PricingFeatureListItem>
+                    Create unlimited offices
+                  </PricingFeatureListItem>
+                  <PricingFeatureListItem>
+                    Upload unlimited floors
+                  </PricingFeatureListItem>
+                  <PricingFeatureListItem>
+                    Invite unlimited colleagues
+                  </PricingFeatureListItem>
+                  <PricingFeatureListItem>
+                    Desk scheduling
+                  </PricingFeatureListItem>
+                  <Separator role="presentation" />
+                  <Box
+                    as={"li"}
+                    role="listitem"
+                    display={"flex"}
+                    alignItems={"center"}
                   >
-                    Coming soon
-                  </Heading>
-                </ListItem>
-                <PricingFeatureListItem mode={"coming-soon"} comingSoon>
-                  Advanced workplace analytics
-                </PricingFeatureListItem>
-                <PricingFeatureListItem mode={"coming-soon"} comingSoon>
-                  Slack integration
-                </PricingFeatureListItem>
-                <PricingFeatureListItem mode={"coming-soon"} comingSoon>
-                  Monthly email reports
-                </PricingFeatureListItem>
-              </List>
+                    <Heading
+                      as={"h3"}
+                      fontSize={"sm"}
+                      color={"gray.400"}
+                      fontWeight={"semibold"}
+                    >
+                      Coming soon
+                    </Heading>
+                  </Box>
+                  <PricingFeatureListItem mode={"coming-soon"} comingSoon>
+                    Advanced workplace analytics
+                  </PricingFeatureListItem>
+                  <PricingFeatureListItem mode={"coming-soon"} comingSoon>
+                    Slack integration
+                  </PricingFeatureListItem>
+                  <PricingFeatureListItem mode={"coming-soon"} comingSoon>
+                    Monthly email reports
+                  </PricingFeatureListItem>
+                </Box>
+              </List.Root>
               <VStack w="80%" pt={4}>
                 <Button
-                  href={"https://calendar.app.google/N3vdeHJkt452xi2XA"}
-                  as={Link}
+                  asChild
                   w="full"
-                  colorScheme="orange"
+                  colorPalette="orange"
                   variant={"outline"}
                   background={"white"}
-                  target={"_blank"}
                   textDecoration={"none"}
                   _hover={{
                     textDecoration: "none",
                     background: "orange.100",
                   }}
                 >
-                  Schedule a demo
+                  <NextLink
+                    target="_blank"
+                    href={"https://calendar.app.google/N3vdeHJkt452xi2XA"}
+                  >
+                    Schedule a demo
+                  </NextLink>
                 </Button>
 
                 <Button
-                  href={"/api/auth/signin"}
-                  as={Link}
+                  asChild
                   w="full"
-                  colorScheme="orange"
+                  colorPalette="orange"
                   textDecoration={"none"}
                   _hover={{
                     textDecoration: "none",
                   }}
                 >
-                  Subscribe
+                  <NextLink href={"/api/auth/signin"}>Subscribe</NextLink>
                 </Button>
               </VStack>
             </VStack>
@@ -295,75 +330,91 @@ export const ThreeTierPricing = () => {
                 </Text>
               </Box>
               <Button
-                href={
-                  "mailto:kevinigeligeligel@gmail.com?subject=workplacify enterprise"
-                }
-                as={Link}
-                colorScheme={"orange"}
+                asChild
+                colorPalette={"orange"}
                 variant={"outline"}
-                target="_blank"
                 textDecoration={"none"}
                 _hover={{
                   backgroundColor: "orange.100",
                   textDecoration: "none",
                 }}
               >
-                Contact us
+                <NextLink
+                  target="_blank"
+                  href={
+                    "mailto:kevinigeligeligel@gmail.com?subject=workplacify enterprise"
+                  }
+                >
+                  Contact us
+                </NextLink>
               </Button>
             </VStack>
           </Box>
-          <VStack
-            bg={useColorModeValue("gray.50", "gray.700")}
-            py={4}
-            borderBottomRadius={"xl"}
-          >
-            <List spacing={2.5} textAlign="start" px={8} minWidth={"100%"}>
-              <PricingFeatureListItem>
-                Create unlimited offices
-              </PricingFeatureListItem>
-              <PricingFeatureListItem>
-                Upload unlimited floors
-              </PricingFeatureListItem>
-              <PricingFeatureListItem>SSO</PricingFeatureListItem>
-              <PricingFeatureListItem>
-                Self-Hosting support
-              </PricingFeatureListItem>
-              <PricingFeatureListItem>
-                Workplacify creates your floor plans
-              </PricingFeatureListItem>
-              <Divider role="presentation" />
-              <ListItem role="listitem">
-                <Heading
-                  as={"h3"}
-                  fontSize={"sm"}
-                  color={"gray.400"}
-                  fontWeight={"semibold"}
+          <VStack bg={notHighlightedBgColor} py={4} borderBottomRadius={"xl"}>
+            <List.Root asChild>
+              <Box
+                as={"ul"}
+                gap={2.5}
+                textAlign="start"
+                px={8}
+                minWidth={"100%"}
+                listStyleType="circle"
+              >
+                <PricingFeatureListItem>
+                  Create unlimited offices
+                </PricingFeatureListItem>
+                <PricingFeatureListItem>
+                  Upload unlimited floors
+                </PricingFeatureListItem>
+                <PricingFeatureListItem>SSO</PricingFeatureListItem>
+                <PricingFeatureListItem>
+                  Self-Hosting support
+                </PricingFeatureListItem>
+                <PricingFeatureListItem>
+                  Workplacify creates your floor plans
+                </PricingFeatureListItem>
+                <Separator role="presentation" />
+                <Box
+                  as={"li"}
+                  role="listitem"
+                  display={"flex"}
+                  alignItems={"center"}
                 >
-                  Coming soon
-                </Heading>
-              </ListItem>
-              <PricingFeatureListItem mode={"coming-soon"} comingSoon>
-                25+ communication templates
-              </PricingFeatureListItem>
-              <PricingFeatureListItem mode={"coming-soon"} comingSoon>
-                custom SSO providers
-              </PricingFeatureListItem>
-            </List>
+                  <Heading
+                    as={"h3"}
+                    fontSize={"sm"}
+                    color={"gray.400"}
+                    fontWeight={"semibold"}
+                  >
+                    Coming soon
+                  </Heading>
+                </Box>
+                <PricingFeatureListItem mode={"coming-soon"} comingSoon>
+                  25+ communication templates
+                </PricingFeatureListItem>
+                <PricingFeatureListItem mode={"coming-soon"} comingSoon>
+                  custom SSO providers
+                </PricingFeatureListItem>
+              </Box>
+            </List.Root>
             <Box w="80%" pt={7}>
               <Button
                 textDecoration={"none"}
-                href={
-                  "mailto:workplacify@gmail.com?subject=Workplacify inquiry"
-                }
-                target={"_blank"}
-                as={Link}
+                asChild
                 w="full"
-                colorScheme="orange"
+                colorPalette="orange"
                 _hover={{
                   textDecoration: "none",
                 }}
               >
-                Contact Us
+                <NextLink
+                  target="_blank"
+                  href={
+                    "mailto:workplacify@gmail.com?subject=Workplacify inquiry"
+                  }
+                >
+                  Contact Us
+                </NextLink>
               </Button>
             </Box>
           </VStack>

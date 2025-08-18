@@ -1,4 +1,3 @@
-import { ChakraProvider } from "@chakra-ui/react";
 import { SessionProvider } from "next-auth/react";
 import { NextIntlClientProvider } from "next-intl";
 import type { AppProps, AppType } from "next/app";
@@ -8,6 +7,8 @@ import "react-day-picker/dist/style.css";
 
 import { SidebarBrandWithHeader } from "../chakra-starter/application-ui/sidebar-with-header";
 import { BaseLayout } from "../components/BaseLayout";
+import { Provider } from "../components/ui/provider";
+import { Toaster } from "../components/ui/toaster";
 import { trpc } from "../utils/trpc";
 
 type LandingPageWrapperProps = {
@@ -38,16 +39,17 @@ const MyApp = ((props: AppProps) => {
 
   return (
     <SessionProvider session={session}>
-      <ChakraProvider>
+      <Provider>
         <NextIntlClientProvider
           locale={router.locale || "en-US"}
           messages={pageProps.messages}
         >
           <LayoutWrapper>
             <Component {...pageProps} />
+            <Toaster />
           </LayoutWrapper>
         </NextIntlClientProvider>
-      </ChakraProvider>
+      </Provider>
     </SessionProvider>
   );
 }) as AppType;

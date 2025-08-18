@@ -1,10 +1,10 @@
 import {
   Box,
-  Button,
   HStack,
   Heading,
   Icon,
   Image,
+  Link,
   Text,
   VStack,
 } from "@chakra-ui/react";
@@ -26,8 +26,7 @@ export const GetStartedButtonLink = (props: GetStartedButtonLinkProps) => {
   const t = useTranslations("GetStartedModule");
 
   return (
-    <Button
-      variant={"link"}
+    <Link
       textDecoration={"none"}
       onClick={onClick}
       _hover={{
@@ -40,10 +39,10 @@ export const GetStartedButtonLink = (props: GetStartedButtonLinkProps) => {
         setIsElementHovered(false);
       }}
     >
-      <VStack alignItems={"flex-start"} spacing={{ base: 0.5, lg: 3 }}>
+      <VStack alignItems={"flex-start"} gap={{ base: 0.5, lg: 3 }}>
         <HStack>{badges}</HStack>
         <VStack
-          spacing={{ base: 0.5, lg: 1 }}
+          gap={{ base: 0.5, lg: 1 }}
           alignItems={"flex-start"}
           justifyContent={"center"}
         >
@@ -56,29 +55,27 @@ export const GetStartedButtonLink = (props: GetStartedButtonLinkProps) => {
           </Heading>
           <Text
             as={"span"}
-            colorScheme="orange"
+            colorPalette="orange"
             color={"orange.400"}
             _hover={{
               textDecoration: "none",
               color: "orange.600",
             }}
           >
-            <Button
+            <Link
               color={"orange.400"}
               _hover={{
                 textDecoration: "none",
                 color: "orange.600",
               }}
               as={Text}
-              variant={"link"}
             >
               {t("getStartedButtonLinkStart")}
-            </Button>
+            </Link>
             <Icon
               marginInlineStart={"0px !important"}
               boxSize={4}
               as={FiChevronRight}
-              transform={"translateY(3px)"}
             />
           </Text>
         </VStack>
@@ -100,6 +97,6 @@ export const GetStartedButtonLink = (props: GetStartedButtonLinkProps) => {
           />
         </Box>
       </VStack>
-    </Button>
+    </Link>
   );
 };

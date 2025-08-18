@@ -1,6 +1,6 @@
-import { Link } from "@chakra-ui/next-js";
-import { Box, Heading, Text, VStack } from "@chakra-ui/react";
+import { Box, Heading, Link, Text, VStack } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
+import NextLink from "next/link";
 import { IconType } from "react-icons";
 
 // import { FiStar } from "react-icons/fi";
@@ -31,7 +31,7 @@ export const SidebarActiveItems = () => {
       >
         {t("labelSubmenu")}
       </Heading>
-      <VStack spacing={"0.5"} marginTop={"2"}>
+      <VStack gap={"0.5"} marginTop={"2"}>
         {noCurrentItems && (
           <Text
             fontSize={"xs"}
@@ -45,18 +45,20 @@ export const SidebarActiveItems = () => {
         {currentItems.map((item) => {
           return (
             <Link
-              href={`#`}
+              asChild
               key={item.id}
               width={"100%"}
               textDecoration={"none"}
               _hover={{ textDecoration: "none" }}
             >
-              <GroupedMenuItem
-                isActive={false}
-                title={item.title}
-                icon={item.icon}
-                iconColor={`gray.600`}
-              />
+              <NextLink href={`#`}>
+                <GroupedMenuItem
+                  isActive={false}
+                  title={item.title}
+                  icon={item.icon}
+                  iconColor={`gray.600`}
+                />
+              </NextLink>
             </Link>
           );
         })}

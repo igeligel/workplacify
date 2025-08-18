@@ -1,17 +1,18 @@
-import { Link } from "@chakra-ui/next-js";
 import {
   Box,
   Container,
   Icon,
+  Link,
   SimpleGrid,
   Stack,
   Text,
   useBreakpointValue,
-  useColorModeValue,
 } from "@chakra-ui/react";
+import NextLink from "next/link";
 import { ReactNode } from "react";
 
 import { WorkplacifyIcon } from "../../../components/WorkplacifyIcon";
+import { useWorkplacifyTheme } from "../../../hooks/useWorkplacifyTheme";
 
 type ListHeaderProps = {
   children: ReactNode;
@@ -26,17 +27,20 @@ const ListHeader = ({ children }: ListHeaderProps) => {
 };
 
 export const Footer = () => {
+  const { theme } = useWorkplacifyTheme();
+
+  const bgColor = theme === "dark" ? "gray.900" : "gray.50";
+  const color = theme === "dark" ? "gray.200" : "gray.700";
+  const labelColor = theme === "dark" ? "gray.800" : "white";
+
   return (
-    <Box
-      bg={useColorModeValue("gray.50", "gray.900")}
-      color={useColorModeValue("gray.700", "gray.200")}
-    >
+    <Box bg={bgColor} color={color}>
       <Container as={Stack} maxW={"6xl"} py={10}>
         <SimpleGrid
           templateColumns={{ sm: "1fr 1fr", md: "2fr 1fr 1fr 1fr 1fr" }}
-          spacing={8}
+          gap={8}
         >
-          <Stack spacing={6}>
+          <Stack gap={6}>
             <Box display="flex" alignItems="center">
               <Box maxWidth={"50px"}>
                 <Icon h={2} w={2} as={WorkplacifyIcon} />
@@ -45,7 +49,7 @@ export const Footer = () => {
                 paddingLeft={2}
                 textAlign={useBreakpointValue({ base: "center", md: "left" })}
                 fontFamily={"heading"}
-                color={useColorModeValue("gray.800", "white")}
+                color={labelColor}
                 fontWeight="600"
               >
                 workplacify
@@ -75,10 +79,20 @@ export const Footer = () => {
           </Stack> */}
           <Stack align={"flex-start"}>
             <ListHeader>Support</ListHeader>
-            <Link href={"mailto:kevinigeligeligel@gmail.com"}>Email</Link>
-            <Link href="/terms-of-use">Terms of Service</Link>
-            <Link href="/legal">Legal</Link>
-            <Link href="/privacy-policy">Privacy Policy</Link>
+            <Link asChild>
+              <NextLink href={"mailto:kevinigeligeligel@gmail.com"}>
+                Email
+              </NextLink>
+            </Link>
+            <Link asChild href="/terms-of-use">
+              <NextLink href="/terms-of-use">Terms of Service</NextLink>
+            </Link>
+            <Link asChild href="/legal">
+              <NextLink href="/legal">Legal</NextLink>
+            </Link>
+            <Link asChild href="/privacy-policy">
+              <NextLink href="/privacy-policy">Privacy Policy</NextLink>
+            </Link>
           </Stack>
           <Stack align={"flex-start"}>
             <ListHeader>Find Us</ListHeader>
@@ -100,7 +114,7 @@ export const Footer = () => {
               LinkedIn
             </Link>
             <Link
-              href={"https://twitter.com/HackathonCamp"}
+            href={"https://twitter.com/HackathonCamp"}
               target="_blank"
               rel="noopener noreferrer nofollow"
             >

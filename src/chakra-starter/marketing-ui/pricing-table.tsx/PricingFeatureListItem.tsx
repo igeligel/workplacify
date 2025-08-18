@@ -1,4 +1,4 @@
-import { ListIcon, ListItem, Text } from "@chakra-ui/react";
+import { HStack, Icon, Text } from "@chakra-ui/react";
 import { IconType } from "react-icons";
 import { FaCheckCircle } from "react-icons/fa";
 import { FiAlertTriangle, FiZap } from "react-icons/fi";
@@ -26,10 +26,14 @@ export const PricingFeatureListItem = (props: PricingFeatureListItemProps) => {
     disabled: "gray.500",
   };
 
+  const IconComponent = iconMap[mode];
+
   return (
-    <ListItem role="listitem" display={"flex"} alignItems={"center"}>
-      <ListIcon strokeWidth={"3px"} as={iconMap[mode]} color={colorMap[mode]} />
+    <HStack as={"li"} display={"flex"} alignItems={"center"} gap={2}>
+      <Icon strokeWidth={"3px"} color={colorMap[mode]}>
+        <IconComponent />
+      </Icon>
       <Text>{children}</Text>
-    </ListItem>
+    </HStack>
   );
 };

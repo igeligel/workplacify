@@ -1,14 +1,10 @@
 import {
   Button,
-  DrawerBody,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerFooter,
-  DrawerHeader,
-  FormControl,
-  FormLabel,
+  CloseButton,
+  Drawer,
+  Field,
   Input,
-  useToast,
+  Portal,
 } from "@chakra-ui/react";
 import { Prisma } from "@prisma/client";
 import { useTranslations } from "next-intl";
@@ -17,6 +13,7 @@ import { useEffect } from "react";
 
 import { useOfficeFloorDeskFormStore } from "../stores/officeFloorDeskFormStore";
 import { trpc } from "../utils/trpc";
+import { toaster } from "./ui/toaster";
 
 type Desk = Prisma.FloorGetPayload<{
   include: {
@@ -33,7 +30,6 @@ export const DrawerDeskEdit = (props: DrawerDeskEditProps) => {
   const t = useTranslations("OfficePages");
   const { onCloseDrawer, selectedDesk } = props;
   const router = useRouter();
-  const toast = useToast();
   const utils = trpc.useUtils();
   const updateFloorDeskMutation = trpc.floorDesk.updateFloorDesk.useMutation();
   const officeId = router.query.officeId;
@@ -67,40 +63,46 @@ export const DrawerDeskEdit = (props: DrawerDeskEditProps) => {
     });
     utils.floor.getFloor.invalidate();
     utils.office.invalidate();
-    toast({
+    toaster.create({
       title: "Desk updated",
-      status: "success",
+      type: "success",
       duration: 5000,
-      isClosable: true,
+      closable: true,
     });
     onCloseDrawer();
   };
 
   return (
-    <DrawerContent>
-      <DrawerCloseButton />
-      <DrawerHeader>{t("HeaderDeskEdit")}</DrawerHeader>
+    <Portal>
+      <Drawer.Backdrop />
+      <Drawer.Positioner>
+        <Drawer.Content>
+          <Drawer.Header>{t("HeaderDeskEdit")}</Drawer.Header>
+          <Drawer.Body>
+            <Field.Root>
+              <Field.Label>{t("labelDeskName")}</Field.Label>
+              <Input
+                value={name}
+                onChange={(event) => {
+                  setName(event.target.value);
+                }}
+              />
+            </Field.Root>
+          </Drawer.Body>
 
-      <DrawerBody>
-        <FormControl>
-          <FormLabel>{t("labelDeskName")}</FormLabel>
-          <Input
-            value={name}
-            onChange={(event) => {
-              setName(event.target.value);
-            }}
-          />
-        </FormControl>
-      </DrawerBody>
-
-      <DrawerFooter>
-        <Button variant="outline" mr={3} onClick={onCloseDrawer}>
-          {t("buttonClose")}
-        </Button>
-        <Button colorScheme="orange" onClick={onSave}>
-          {t("buttonSave")}
-        </Button>
-      </DrawerFooter>
-    </DrawerContent>
+          <Drawer.Footer>
+            <Button variant="outline" mr={3} onClick={onCloseDrawer}>
+              {t("buttonClose")}
+            </Button>
+            <Button colorPalette="orange" onClick={onSave}>
+              {t("buttonSave")}
+            </Button>
+          </Drawer.Footer>
+          <Drawer.CloseTrigger asChild>
+            <CloseButton />
+          </Drawer.CloseTrigger>
+        </Drawer.Content>
+      </Drawer.Positioner>
+    </Portal>
   );
 };

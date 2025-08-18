@@ -1,26 +1,25 @@
 // import { FiCheck, FiChevronDown, FiChevronUp } from 'react-icons/fi';
-import { Link } from "@chakra-ui/next-js";
 import {
   Box,
   Button,
   Checkbox,
   CheckboxGroup,
   Container,
-  FormControl,
-  FormLabel,
+  Field,
+  Fieldset,
   Heading,
   Input,
   Stack,
   Text,
   Textarea,
   VStack,
-  useToast,
 } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { NextSeo } from "next-seo";
 import dynamic from "next/dynamic";
+import NextLink from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { isMobile } from "react-device-detect";
 
@@ -30,6 +29,7 @@ import { FeatureSplitted } from "../../components/FeatureSplitted";
 import { FreeToolHero } from "../../components/FreeToolHero";
 import { FreeToolHeroHeading } from "../../components/FreeToolHeroHeading";
 import { FreeToolHeroText } from "../../components/FreeToolHeroText";
+import { toaster } from "../../components/ui/toaster";
 import { getMessages } from "../../messages/getMessages";
 
 const baseUrl = "https://www.workplacify.com";
@@ -56,8 +56,6 @@ const HybridWorkplacePolicyGenerator = () => {
   const [communicationTools, setCommunicationTools] = useState("");
   const [performanceExpectations, setPerformanceExpectations] = useState("");
   const [contactInformation, setContactInformation] = useState("");
-
-  const toast = useToast();
 
   const getExistingCertificateGenerations = () => {
     const workplacePolicyGeneratedV1 = localStorage.getItem(
@@ -121,13 +119,14 @@ const HybridWorkplacePolicyGenerator = () => {
       remoteWorkDays.length === 0 ||
       officeWorkDays.length === 0
     ) {
-      toast({
+      toaster.create({
         title: t("toast.missingInformation.title"),
         description: t("toast.missingInformation.description"),
-        status: "error",
+        type: "error",
         duration: 3000,
-        isClosable: true,
+        closable: true,
       });
+
       return;
     }
 
@@ -193,110 +192,275 @@ const HybridWorkplacePolicyGenerator = () => {
           text={<FreeToolHeroText>{t("hero.text")}</FreeToolHeroText>}
         />
         <Container maxW={"3xl"} paddingTop={8} paddingX={0}>
-          <Stack spacing={6}>
-            <FormControl isRequired>
-              <FormLabel>{t("form.companyName.label")}</FormLabel>
+          <Stack gap={6}>
+            <Field.Root>
+              <Field.Label>
+                <Field.RequiredIndicator />
+                {t("form.companyName.label")}
+              </Field.Label>
               <Input
                 value={companyName}
                 onChange={(e) => setCompanyName(e.target.value)}
                 placeholder={t("form.companyName.placeholder")}
               />
-            </FormControl>
+            </Field.Root>
 
-            <FormControl isRequired>
-              <FormLabel>{t("form.workHours.label")}</FormLabel>
+            <Field.Root>
+              <Field.Label>
+                <Field.RequiredIndicator />
+                {t("form.workHours.label")}
+              </Field.Label>
               <Input
                 value={workHours}
                 onChange={(e) => setWorkHours(e.target.value)}
                 placeholder={t("form.workHours.placeholder")}
               />
-            </FormControl>
+            </Field.Root>
 
-            <FormControl isRequired>
-              <FormLabel>{t("form.remoteWorkDays.label")}</FormLabel>
-              <CheckboxGroup
-                value={remoteWorkDays}
-                onChange={(values) => setRemoteWorkDays(values as string[])}
-              >
-                <Stack spacing={2}>
-                  <Checkbox value="Monday">
-                    {t("form.weekDays.monday")}
-                  </Checkbox>
-                  <Checkbox value="Tuesday">
-                    {t("form.weekDays.tuesday")}
-                  </Checkbox>
-                  <Checkbox value="Wednesday">
-                    {t("form.weekDays.wednesday")}
-                  </Checkbox>
-                  <Checkbox value="Thursday">
-                    {t("form.weekDays.thursday")}
-                  </Checkbox>
-                  <Checkbox value="Friday">
-                    {t("form.weekDays.friday")}
-                  </Checkbox>
-                </Stack>
-              </CheckboxGroup>
-            </FormControl>
+            <Fieldset.Root>
+              <Fieldset.Legend fontSize="sm" mb="2">
+                {t("form.remoteWorkDays.label")}
+              </Fieldset.Legend>
+              <Fieldset.Content>
+                <CheckboxGroup value={remoteWorkDays}>
+                  <Stack gap={2}>
+                    <Checkbox.Root
+                      key="Monday"
+                      value="Monday"
+                      onCheckedChange={(e) => {
+                        e.checked
+                          ? setRemoteWorkDays([...remoteWorkDays, "Monday"])
+                          : setRemoteWorkDays(
+                              remoteWorkDays.filter((day) => day !== "Monday"),
+                            );
+                      }}
+                    >
+                      <Checkbox.HiddenInput />
+                      <Checkbox.Control />
+                      <Checkbox.Label>
+                        {t("form.weekDays.monday")}
+                      </Checkbox.Label>
+                    </Checkbox.Root>
+                    <Checkbox.Root
+                      key="Tuesday"
+                      value="Tuesday"
+                      onCheckedChange={(e) => {
+                        e.checked
+                          ? setRemoteWorkDays([...remoteWorkDays, "Tuesday"])
+                          : setRemoteWorkDays(
+                              remoteWorkDays.filter((day) => day !== "Tuesday"),
+                            );
+                      }}
+                    >
+                      <Checkbox.HiddenInput />
+                      <Checkbox.Control />
+                      <Checkbox.Label>
+                        {t("form.weekDays.tuesday")}
+                      </Checkbox.Label>
+                    </Checkbox.Root>
+                    <Checkbox.Root
+                      key="Wednesday"
+                      value="Wednesday"
+                      onCheckedChange={(e) => {
+                        e.checked
+                          ? setRemoteWorkDays([...remoteWorkDays, "Wednesday"])
+                          : setRemoteWorkDays(
+                              remoteWorkDays.filter(
+                                (day) => day !== "Wednesday",
+                              ),
+                            );
+                      }}
+                    >
+                      <Checkbox.HiddenInput />
+                      <Checkbox.Control />
+                      <Checkbox.Label>
+                        {t("form.weekDays.wednesday")}
+                      </Checkbox.Label>
+                    </Checkbox.Root>
+                    <Checkbox.Root
+                      key="Thursday"
+                      value="Thursday"
+                      onCheckedChange={(e) => {
+                        e.checked
+                          ? setRemoteWorkDays([...remoteWorkDays, "Thursday"])
+                          : setRemoteWorkDays(
+                              remoteWorkDays.filter(
+                                (day) => day !== "Thursday",
+                              ),
+                            );
+                      }}
+                    >
+                      <Checkbox.HiddenInput />
+                      <Checkbox.Control />
+                      <Checkbox.Label>
+                        {t("form.weekDays.thursday")}
+                      </Checkbox.Label>
+                    </Checkbox.Root>
+                    <Checkbox.Root
+                      key="Friday"
+                      value="Friday"
+                      onCheckedChange={(e) => {
+                        e.checked
+                          ? setRemoteWorkDays([...remoteWorkDays, "Friday"])
+                          : setRemoteWorkDays(
+                              remoteWorkDays.filter((day) => day !== "Friday"),
+                            );
+                      }}
+                    >
+                      <Checkbox.HiddenInput />
+                      <Checkbox.Control />
+                      <Checkbox.Label>
+                        {t("form.weekDays.friday")}
+                      </Checkbox.Label>
+                    </Checkbox.Root>
+                  </Stack>
+                </CheckboxGroup>
+              </Fieldset.Content>
+            </Fieldset.Root>
 
-            <FormControl isRequired>
-              <FormLabel>{t("form.officeWorkDays.label")}</FormLabel>
-              <CheckboxGroup
-                value={officeWorkDays}
-                onChange={(values) => setOfficeWorkDays(values as string[])}
-              >
-                <Stack spacing={2}>
-                  <Checkbox value="Monday">
-                    {t("form.weekDays.monday")}
-                  </Checkbox>
-                  <Checkbox value="Tuesday">
-                    {t("form.weekDays.tuesday")}
-                  </Checkbox>
-                  <Checkbox value="Wednesday">
-                    {t("form.weekDays.wednesday")}
-                  </Checkbox>
-                  <Checkbox value="Thursday">
-                    {t("form.weekDays.thursday")}
-                  </Checkbox>
-                  <Checkbox value="Friday">
-                    {t("form.weekDays.friday")}
-                  </Checkbox>
-                </Stack>
-              </CheckboxGroup>
-            </FormControl>
+            <Fieldset.Root>
+              <Fieldset.Legend fontSize="sm" mb="2">
+                {t("form.officeWorkDays.label")}
+              </Fieldset.Legend>
+              <Fieldset.Content>
+                <CheckboxGroup value={officeWorkDays}>
+                  <Stack gap={2}>
+                    <Checkbox.Root
+                      key="Monday"
+                      value="Monday"
+                      onCheckedChange={(e) => {
+                        e.checked
+                          ? setOfficeWorkDays([...officeWorkDays, "Monday"])
+                          : setOfficeWorkDays(
+                              officeWorkDays.filter((day) => day !== "Monday"),
+                            );
+                      }}
+                    >
+                      <Checkbox.HiddenInput />
+                      <Checkbox.Control />
+                      <Checkbox.Label>
+                        {t("form.weekDays.monday")}
+                      </Checkbox.Label>
+                    </Checkbox.Root>
+                    <Checkbox.Root
+                      key="Tuesday"
+                      value="Tuesday"
+                      onCheckedChange={(e) => {
+                        e.checked
+                          ? setOfficeWorkDays([...officeWorkDays, "Tuesday"])
+                          : setOfficeWorkDays(
+                              officeWorkDays.filter((day) => day !== "Tuesday"),
+                            );
+                      }}
+                    >
+                      <Checkbox.HiddenInput />
+                      <Checkbox.Control />
+                      <Checkbox.Label>
+                        {t("form.weekDays.tuesday")}
+                      </Checkbox.Label>
+                    </Checkbox.Root>
+                    <Checkbox.Root
+                      key="Wednesday"
+                      value="Wednesday"
+                      onCheckedChange={(e) => {
+                        e.checked
+                          ? setOfficeWorkDays([...officeWorkDays, "Wednesday"])
+                          : setOfficeWorkDays(
+                              officeWorkDays.filter(
+                                (day) => day !== "Wednesday",
+                              ),
+                            );
+                      }}
+                    >
+                      <Checkbox.HiddenInput />
+                      <Checkbox.Control />
+                      <Checkbox.Label>
+                        {t("form.weekDays.wednesday")}
+                      </Checkbox.Label>
+                    </Checkbox.Root>
+                    <Checkbox.Root
+                      key="Thursday"
+                      value="Thursday"
+                      onCheckedChange={(e) => {
+                        e.checked
+                          ? setOfficeWorkDays([...officeWorkDays, "Thursday"])
+                          : setOfficeWorkDays(
+                              officeWorkDays.filter(
+                                (day) => day !== "Thursday",
+                              ),
+                            );
+                      }}
+                    >
+                      <Checkbox.HiddenInput />
+                      <Checkbox.Control />
+                      <Checkbox.Label>
+                        {t("form.weekDays.thursday")}
+                      </Checkbox.Label>
+                    </Checkbox.Root>
+                    <Checkbox.Root
+                      key="Friday"
+                      value="Friday"
+                      onCheckedChange={(e) => {
+                        e.checked
+                          ? setOfficeWorkDays([...officeWorkDays, "Friday"])
+                          : setOfficeWorkDays(
+                              officeWorkDays.filter((day) => day !== "Friday"),
+                            );
+                      }}
+                    >
+                      <Checkbox.HiddenInput />
+                      <Checkbox.Control />
+                      <Checkbox.Label>
+                        {t("form.weekDays.friday")}
+                      </Checkbox.Label>
+                    </Checkbox.Root>
+                  </Stack>
+                </CheckboxGroup>
+              </Fieldset.Content>
+            </Fieldset.Root>
 
-            <FormControl>
-              <FormLabel>{t("form.communicationTools.label")}</FormLabel>
+            <Field.Root>
+              <Field.Label>
+                <Field.RequiredIndicator />
+                {t("form.communicationTools.label")}
+              </Field.Label>
               <Input
                 value={communicationTools}
                 onChange={(e) => setCommunicationTools(e.target.value)}
                 placeholder={t("form.communicationTools.placeholder")}
               />
-            </FormControl>
+            </Field.Root>
 
-            <FormControl>
-              <FormLabel>{t("form.performanceExpectations.label")}</FormLabel>
+            <Field.Root>
+              <Field.Label>
+                <Field.RequiredIndicator />
+                {t("form.performanceExpectations.label")}
+              </Field.Label>
               <Textarea
                 value={performanceExpectations}
                 onChange={(e) => setPerformanceExpectations(e.target.value)}
                 placeholder={t("form.performanceExpectations.placeholder")}
                 rows={4}
               />
-            </FormControl>
+            </Field.Root>
 
-            <FormControl>
-              <FormLabel>{t("form.contactInformation.label")}</FormLabel>
+            <Field.Root>
+              <Field.Label>
+                <Field.RequiredIndicator />
+                {t("form.contactInformation.label")}
+              </Field.Label>
               <Input
                 value={contactInformation}
                 onChange={(e) => setContactInformation(e.target.value)}
                 placeholder={t("form.contactInformation.placeholder")}
               />
-            </FormControl>
+            </Field.Root>
 
             <Button
-              colorScheme="orange"
+              colorPalette="orange"
               size="lg"
               onClick={onGenerateClick}
-              isLoading={isInitialLoading}
+              loading={isInitialLoading}
               loadingText={t("form.generatingButton")}
             >
               {t("form.generateButton")}
@@ -331,7 +495,7 @@ const HybridWorkplacePolicyGenerator = () => {
               <Text as="p" fontSize={"xl"}>
                 {t("features.description")}
               </Text>
-              <Stack spacing={2} mt={4}>
+              <Stack gap={2} mt={4}>
                 <Text as="p" fontSize={"xl"}>
                   • {t("features.benefits.first")}
                 </Text>
@@ -390,10 +554,9 @@ const HybridWorkplacePolicyGenerator = () => {
                 justifyContent={"center"}
               >
                 <Button
-                  as={Link}
-                  href={"/app"}
+                  asChild
                   variant={"solid"}
-                  colorScheme={"orange"}
+                  colorPalette={"orange"}
                   background={"orange.400"}
                   textDecoration={"none"}
                   _hover={{
@@ -404,15 +567,15 @@ const HybridWorkplacePolicyGenerator = () => {
                   borderRadius={"full"}
                   size={"sm"}
                 >
-                  {t("cta.button")}
+                  <NextLink href={"/app"}>{t("cta.button")}</NextLink>
                 </Button>
               </Box>
             </Box>
           </CtaActionContainer>
         </Box>
         <Container maxW="5xl">
-          <VStack mt={{ base: 12, lg: 24 }} spacing={{ base: 5, lg: 10 }}>
-            <VStack spacing={4}>
+          <VStack mt={{ base: 12, lg: 24 }} gap={{ base: 5, lg: 10 }}>
+            <VStack gap={4}>
               <Heading textAlign={"center"} color={"gray.800"} as="h3">
                 {t("sections.createPolicies.heading")}
               </Heading>
@@ -425,7 +588,7 @@ const HybridWorkplacePolicyGenerator = () => {
                 {t("sections.createPolicies.description")}
               </Text>
             </VStack>
-            <VStack spacing={4}>
+            <VStack gap={4}>
               <Heading textAlign={"center"} color={"gray.800"} as="h3">
                 {t("sections.noTechnicalSkills.heading")}
               </Heading>
@@ -438,7 +601,7 @@ const HybridWorkplacePolicyGenerator = () => {
                 {t("sections.noTechnicalSkills.description")}
               </Text>
             </VStack>
-            <VStack spacing={4}>
+            <VStack gap={4}>
               <Heading textAlign={"center"} color={"gray.800"} as="h3">
                 {t("sections.generateFree.heading")}
               </Heading>

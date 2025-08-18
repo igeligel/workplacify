@@ -1,7 +1,7 @@
-import { Link } from "@chakra-ui/next-js";
-import { Box, VStack } from "@chakra-ui/react";
+import { Box, Link, VStack } from "@chakra-ui/react";
 import { signOut } from "next-auth/react";
 import { useTranslations } from "next-intl";
+import NextLink from "next/link";
 import React from "react";
 import { FiBriefcase, FiSettings, FiUsers } from "react-icons/fi";
 
@@ -20,9 +20,9 @@ const AccountSubMenu = () => {
   };
 
   return (
-    <VStack width={"100%"} spacing={"0.5"}>
+    <VStack width={"100%"} gap={"0.5"}>
       <Link
-        href={"/app/account/settings"}
+        asChild
         width={"100%"}
         textDecoration={"none"}
         _hover={{ textDecoration: "none" }}
@@ -30,7 +30,9 @@ const AccountSubMenu = () => {
           setIsAccountMenuOpen(false);
         }}
       >
-        <MenuItem title={t("labelSettings")} icon={FiBriefcase} />
+        <NextLink href={"/app/account/settings"}>
+          <MenuItem title={t("labelSettings")} icon={FiBriefcase} />
+        </NextLink>
       </Link>
 
       <MenuItem
@@ -53,7 +55,7 @@ export const UserMenu = ({ isUserAdmin }: Props) => {
 
   return (
     <Box width={"100%"}>
-      <VStack spacing={"0.5"} marginTop={"2"}>
+      <VStack gap={"0.5"} marginTop={"2"}>
         {isUserAdmin ? (
           <Link
             href={"/app/organization-settings"}

@@ -1,17 +1,18 @@
-import { Link } from "@chakra-ui/next-js";
 import {
   Box,
   Button,
   Container,
-  Divider,
   HStack,
   Heading,
   Icon,
   IconButton,
+  Link,
+  Separator,
   VStack,
 } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
 import { useTranslations } from "next-intl";
+import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { FiX } from "react-icons/fi";
 
@@ -46,17 +47,21 @@ const FloorAddPage = () => {
     <VStack alignItems={"flex-start"}>
       <Box width={"100%"}>
         <Box display={"flex"} justifyContent={"space-between"}>
-          <HStack spacing={"3"}>
+          <HStack gap={"3"}>
             <IconButton
               size={"sm"}
               variant={"ghost"}
               aria-label={"close"}
-              icon={<Icon as={FiX} />}
               as={Link}
-              href={`/app/offices/${officeId}`}
-            />
+              asChild
+            >
+              <NextLink href={`/app/offices/${officeId}`}>
+                <Icon as={FiX} />
+              </NextLink>
+            </IconButton>
+
             <Box height={"100%"} paddingY={"2"}>
-              <Divider orientation="vertical" />
+              <Separator orientation="vertical" />
             </Box>
             <Heading
               as={"h1"}
@@ -70,9 +75,9 @@ const FloorAddPage = () => {
           <HStack>
             {/* <Button variant={"outline"}>Save and add more</Button> */}
             <Button
-              colorScheme="orange"
+              colorPalette="orange"
               backgroundColor={"orange.400"}
-              textColor={"white"}
+              color={"white"}
               _hover={{
                 backgroundColor: "orange.500",
               }}
@@ -83,14 +88,14 @@ const FloorAddPage = () => {
           </HStack>
         </Box>
       </Box>
-      <Divider />
+      <Separator />
       <Container maxW={"container.xl"} paddingTop={4}>
-        <VStack width={"100%"} alignItems={"flex-start"} spacing={4}>
+        <VStack width={"100%"} alignItems={"flex-start"} gap={4}>
           <Heading as={"h1"} fontSize={"lg"} color={"gray.700"}>
             {t("headingFloorInformation")}
           </Heading>
 
-          <VStack width={"100%"} alignItems={"flex-start"} spacing={3}>
+          <VStack width={"100%"} alignItems={"flex-start"} gap={3}>
             <FormFloorAdd />
           </VStack>
         </VStack>

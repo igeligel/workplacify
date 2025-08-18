@@ -1,4 +1,4 @@
-import { Heading, ListItem, Text, UnorderedList } from "@chakra-ui/react";
+import { Box, Heading, ListItem, Text } from "@chakra-ui/react";
 
 type LegalProps = {
   companyName: string;
@@ -18,7 +18,7 @@ export const Legal = (props: LegalProps) => {
       <Text as="p" fontSize="xl" marginTop="0.6rem">
         Angaben gemäß § 5 TMG
       </Text>
-      <UnorderedList marginLeft="1em" marginTop="0.6rem">
+      <Box listStyleType="circle" marginLeft="1em" marginTop="0.6rem">
         <ListItem>
           <Text>Kevin Peters</Text>
           <Text>Sprengelstr. 12</Text>
@@ -41,7 +41,7 @@ export const Legal = (props: LegalProps) => {
         </ListItem>
         <ListItem>Wirtschafts-ID: -/-</ListItem>
         <ListItem>Aufsichtsbehörde: -/-</ListItem>
-      </UnorderedList>
+      </Box>
       <Heading as="h2" fontSize="3xl" marginTop="1rem">
         Haftungsausschluss
       </Heading>

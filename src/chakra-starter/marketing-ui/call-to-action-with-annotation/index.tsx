@@ -1,4 +1,3 @@
-import { Link } from "@chakra-ui/next-js";
 import {
   Box,
   Button,
@@ -9,13 +8,14 @@ import {
   Text,
   VStack,
   createIcon,
-  useColorModeValue,
 } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 import { Caveat } from "next/font/google";
+import NextLink from "next/link";
 import { useRouter } from "next/router";
 import posthog from "posthog-js";
 
+import { useWorkplacifyTheme } from "../../../hooks/useWorkplacifyTheme";
 import { trpc } from "../../../utils/trpc";
 
 const caveat = Caveat({
@@ -39,9 +39,13 @@ const Arrow = createIcon({
 });
 
 export const CallToActionWithAnnotation: React.FC = () => {
+  const { theme } = useWorkplacifyTheme();
   const t = useTranslations("IndexPage");
   const router = useRouter();
   const user = trpc.user.get.useQuery();
+
+  const iconColor = theme === "dark" ? "gray.300" : "gray.800";
+
   return (
     <Box
       display="flex"
@@ -56,7 +60,7 @@ export const CallToActionWithAnnotation: React.FC = () => {
     >
       <Stack
         textAlign={"center"}
-        spacing={{ base: 4 }}
+        gap={{ base: 4 }}
         paddingTop={{ base: 4, md: 12 }}
         maxWidth="lg"
       >
@@ -84,18 +88,17 @@ export const CallToActionWithAnnotation: React.FC = () => {
         <Box>
           <Stack
             direction={"column"}
-            spacing={3}
+            gap={3}
             align={"center"}
             alignSelf={"center"}
             position={"relative"}
             display={"inline-flex"}
             paddingTop={{ base: "30px", md: "30px", lg: "0" }}
           >
-            <VStack spacing={"0.5"}>
+            <VStack gap={"0.5"}>
               <Button
-                href={user ? "/app" : "/api/auth/signin"}
-                as={Link}
-                colorScheme={"orange"}
+                asChild
+                colorPalette={"orange"}
                 bg={"orange.400"}
                 rounded={"full"}
                 px={10}
@@ -112,7 +115,10 @@ export const CallToActionWithAnnotation: React.FC = () => {
                   router.push(user ? "/app" : "/api/auth/signin");
                 }}
               >
-                {t("ctaAction")}
+                <NextLink href={user ? "/app" : "/api/auth/signin"}>
+                  {t("ctaAction")}
+                </NextLink>
+                {/* ... asChild */}
               </Button>
               <Text fontSize={"sm"} color={"gray.400"}>
                 {t("ctaSubtitle2")}
@@ -121,7 +127,7 @@ export const CallToActionWithAnnotation: React.FC = () => {
             <Box className={caveat.className}>
               <Icon
                 as={Arrow}
-                color={useColorModeValue("gray.800", "gray.300")}
+                color={iconColor}
                 w={71}
                 position={"absolute"}
                 right={{ base: 2, md: 2, lg: -71 }}

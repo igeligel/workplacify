@@ -1,25 +1,17 @@
 import {
   Alert,
-  AlertIcon,
   Box,
   Button,
+  CloseButton,
   Drawer,
-  DrawerBody,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  FormControl,
-  FormHelperText,
-  FormLabel,
+  Field,
   HStack,
   Icon,
   IconButton,
   Input,
+  Portal,
   Switch,
   Textarea,
-  useToast,
 } from "@chakra-ui/react";
 import { ChangeEventHandler, useRef, useState } from "react";
 import { FiMinus, FiPlus, FiX } from "react-icons/fi";
@@ -28,6 +20,7 @@ import { useTranslations } from "use-intl";
 
 import { useOfficeFloorFormStore } from "../stores/officeFloorFormStore";
 import { DeskFormState } from "../stores/types";
+import { toaster } from "./ui/toaster";
 
 const getExtension = (filename: string) => {
   const parts = filename.split(".");
@@ -85,7 +78,6 @@ export const FormFloorAdd = () => {
     setDescription,
   } = useOfficeFloorFormStore();
 
-  const toast = useToast();
   const [image, setImage] = useState<null | File>(null);
   const [scale, setScale] = useState<number>(1);
   const [currentSelectedDesk, setCurrentSelectedDesk] =
@@ -102,23 +94,23 @@ export const FormFloorAdd = () => {
         body: formData,
       });
     } catch (error) {
-      toast({
+      toaster.create({
         title: t("errorTitleUploadingFloorPlan"),
         description: t("errorDescriptionUploadingFloorPlan"),
-        status: "error",
+        type: "error",
         duration: 9000,
-        isClosable: true,
+        closable: true,
       });
     }
     if (!res) return;
     const uploadUrl = ((await res.json()) as { url: string }).url;
     if (!uploadUrl) {
-      toast({
+      toaster.create({
         title: t("errorTitleUploadingFloorPlan"),
         description: t("errorDescriptionUploadingFloorPlan"),
-        status: "error",
+        type: "error",
         duration: 9000,
-        isClosable: true,
+        closable: true,
       });
       return;
     }
@@ -138,22 +130,22 @@ export const FormFloorAdd = () => {
     // check if image
     const result = isImage(img.name);
     if (!result) {
-      toast({
+      toaster.create({
         title: t("errorTitleFileShouldBeImage"),
-        status: "error",
+        type: "error",
         duration: 9000,
-        isClosable: true,
+        closable: true,
       });
       return;
     }
     const isImageLarge = validateSize(img);
     if (isImageLarge) {
       const error = t("errorFileMustBeLessOrEqual5MB");
-      toast({
+      toaster.create({
         title: error,
-        status: "error",
+        type: "error",
         duration: 9000,
-        isClosable: true,
+        closable: true,
       });
       return;
     }
@@ -169,29 +161,29 @@ export const FormFloorAdd = () => {
 
   return (
     <>
-      <FormControl>
-        <FormLabel>{t("labelFloorName")}</FormLabel>
+      <Field.Root>
+        <Field.Label>{t("labelFloorName")}</Field.Label>
         <Input
           value={name}
           placeholder={"BER-001"}
           type="text"
           onChange={(e) => setName(e.target.value)}
         />
-        <FormHelperText>
+        <Field.HelperText>
           {t("helperTextFloorNameUniqueIdentifier")}
-        </FormHelperText>
-      </FormControl>
-      <FormControl>
-        <FormLabel>{t("labelFloorDescription")}</FormLabel>
+        </Field.HelperText>
+      </Field.Root>
+      <Field.Root>
+        <Field.Label>{t("labelFloorDescription")}</Field.Label>
         <Textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           rows={3}
         />
-        <FormHelperText>
+        <Field.HelperText>
           {t("helperTextFloorDescriptionOptional")}
-        </FormHelperText>
-      </FormControl>
+        </Field.HelperText>
+      </Field.Root>
       {!imageUrl && (
         <>
           <Box>
@@ -220,66 +212,75 @@ export const FormFloorAdd = () => {
                 <>
                   <Box display={"flex"} flexDirection={"column"}>
                     {isAddMarkerMode && (
-                      <Alert status="info" marginBottom={4}>
-                        <AlertIcon />
-                        {t("alertMarkerModeEnabled")}
-                      </Alert>
+                      <Alert.Root
+                        status="info"
+                        title={t("alertMarkerModeEnabled")}
+                      >
+                        <Alert.Indicator />
+                        <Alert.Title>{t("alertMarkerModeEnabled")}</Alert.Title>
+                      </Alert.Root>
                     )}
                     <Box display={"flex"} justifyContent={"space-between"}>
                       <Box>
-                        <FormControl
+                        <Field.Root
                           display="flex"
                           alignItems="flex-start"
                           flexDirection={"column"}
                         >
-                          <FormLabel htmlFor="zoom-controls" mb="0">
+                          <Field.Label htmlFor="zoom-controls" mb="0">
                             {t("labelZoomControls")}
-                          </FormLabel>
+                          </Field.Label>
                           <HStack id={"zoom-controls"} paddingTop={1}>
                             <IconButton
-                              colorScheme="blue"
+                              colorPalette="blue"
                               aria-label="zoom in"
-                              icon={<Icon as={FiPlus} />}
                               onClick={() => {
                                 setIsAddMarkerMode(false);
                                 zoomIn();
                               }}
-                            />
+                            >
+                              <Icon as={FiPlus} />
+                            </IconButton>
                             <IconButton
-                              colorScheme="blue"
+                              colorPalette="blue"
                               aria-label="zoom out"
-                              icon={<Icon as={FiMinus} />}
                               onClick={() => {
                                 setIsAddMarkerMode(false);
                                 zoomOut();
                               }}
-                            />
+                            >
+                              <Icon as={FiMinus} />
+                            </IconButton>
                             <IconButton
-                              colorScheme="blue"
+                              colorPalette="blue"
                               aria-label="reset zoom"
-                              icon={<Icon as={FiX} />}
                               onClick={() => {
                                 setIsAddMarkerMode(false);
                                 resetTransform();
                               }}
-                            />
+                            >
+                              <Icon as={FiX} />
+                            </IconButton>
                           </HStack>
-                        </FormControl>
+                        </Field.Root>
                       </Box>
                       <Box>
                         <Box>
-                          <FormControl display="flex" alignItems="center">
-                            <FormLabel htmlFor="toggle-marker-mode" mb="0">
-                              {t("labelToggleMarkerMode")}
-                            </FormLabel>
-                            <Switch
+                          <Field.Root display="flex" alignItems="center">
+                            <Switch.Root
                               id="toggle-marker-mode"
-                              isChecked={isAddMarkerMode}
-                              onChange={(e) => {
-                                setIsAddMarkerMode(e.target.checked);
+                              checked={isAddMarkerMode}
+                              onCheckedChange={(details) => {
+                                setIsAddMarkerMode(details.checked);
                               }}
-                            />
-                          </FormControl>
+                            >
+                              <Switch.HiddenInput />
+                              <Switch.Control />
+                              <Switch.Label>
+                                {t("labelToggleMarkerMode")}
+                              </Switch.Label>
+                            </Switch.Root>
+                          </Field.Root>
                         </Box>
                       </Box>
                     </Box>
@@ -379,48 +380,55 @@ export const FormFloorAdd = () => {
           </TransformWrapper>
         </Box>
       )}
-      <Drawer
-        isOpen={!!currentSelectedDesk}
-        placement="right"
-        onClose={() => {
-          setCurrentSelectedDesk(null);
+      <Drawer.Root
+        open={!!currentSelectedDesk}
+        placement="end"
+        onOpenChange={(details) => {
+          if (!details.open) {
+            setCurrentSelectedDesk(null);
+          }
         }}
-        // finalFocusRef={btnRef}
       >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton
-            onClick={() => {
-              setCurrentSelectedDesk(null);
-            }}
-          />
-          <DrawerHeader>{t("HeaderDeskEdit")}</DrawerHeader>
+        <Portal>
+          <Drawer.Backdrop />
+          <Drawer.Positioner>
+            <Drawer.Content>
+              <Drawer.Header>{t("HeaderDeskEdit")}</Drawer.Header>
 
-          <DrawerBody>
-            {t("labelDeskNameWithId", {
-              id: currentSelectedDesk?.publicDeskId,
-            })}
-          </DrawerBody>
+              <Drawer.Body>
+                {t("labelDeskNameWithId", {
+                  id: currentSelectedDesk?.publicDeskId,
+                })}
+              </Drawer.Body>
 
-          <DrawerFooter>
-            <Button
-              colorScheme="red"
-              mr={3}
-              onClick={() => {
-                if (!currentSelectedDesk) return;
-                const filteredDesks = desks.filter(
-                  (desk) =>
-                    desk.publicDeskId !== currentSelectedDesk.publicDeskId,
-                );
-                setDesks(filteredDesks);
-                setCurrentSelectedDesk(null);
-              }}
-            >
-              {t("buttonRemoveDesk")}
-            </Button>
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
+              <Drawer.Footer>
+                <Button
+                  colorPalette="red"
+                  mr={3}
+                  onClick={() => {
+                    if (!currentSelectedDesk) return;
+                    const filteredDesks = desks.filter(
+                      (desk) =>
+                        desk.publicDeskId !== currentSelectedDesk.publicDeskId,
+                    );
+                    setDesks(filteredDesks);
+                    setCurrentSelectedDesk(null);
+                  }}
+                >
+                  {t("buttonRemoveDesk")}
+                </Button>
+              </Drawer.Footer>
+              <Drawer.CloseTrigger asChild>
+                <CloseButton
+                  onClick={() => {
+                    setCurrentSelectedDesk(null);
+                  }}
+                />
+              </Drawer.CloseTrigger>
+            </Drawer.Content>
+          </Drawer.Positioner>
+        </Portal>
+      </Drawer.Root>
     </>
   );
 };

@@ -1,7 +1,7 @@
-import { Link } from "@chakra-ui/next-js";
-import { Button } from "@chakra-ui/react";
+import { Button, Link } from "@chakra-ui/react";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
+import NextLink from "next/link";
 import { useRouter } from "next/router";
 
 export const NavbarAuthenticationElement = () => {
@@ -13,11 +13,9 @@ export const NavbarAuthenticationElement = () => {
   return (
     <>
       {status === "authenticated" ? (
-        <Button
-          href={"/app"}
-          as={Link}
+        <Link
+          asChild
           fontSize={"sm"}
-          variant={"link"}
           color={"gray.600"}
           fontWeight={"semibold"}
           textDecoration={"none"}
@@ -25,20 +23,18 @@ export const NavbarAuthenticationElement = () => {
             textDecoration: "none",
             color: "gray.800",
           }}
-          width={{ base: "100%", md: "auto" }}
+          width={"max-content"}
         >
-          {t("labelToTheApp")}
-        </Button>
+          <NextLink href={"/app"}>{t("labelToTheApp")}</NextLink>
+        </Link>
       ) : (
         <>
-          <Button
-            href={"/api/auth/signin"}
+          <Link
             cursor={"pointer"}
-            as={Link}
+            asChild
             fontSize={"sm"}
             fontWeight={400}
-            variant={"link"}
-            width={{ base: "100%", md: "auto" }}
+            width={"max-content"}
             textDecoration={"none"}
             _hover={{
               textDecoration: "none",
@@ -49,12 +45,11 @@ export const NavbarAuthenticationElement = () => {
               router.push("/api/auth/signin");
             }}
           >
-            Sign In
-          </Button>
+            <NextLink href={"/api/auth/signin"}>Sign In</NextLink>
+          </Link>
           <Button
-            href={"/api/auth/signin"}
+            asChild
             cursor={"pointer"}
-            as={Link}
             fontSize={"sm"}
             fontWeight={600}
             color={"white"}
@@ -70,7 +65,7 @@ export const NavbarAuthenticationElement = () => {
               router.push("/api/auth/signin");
             }}
           >
-            Sign up
+            <NextLink href={"/api/auth/signin"}>Sign up</NextLink>
           </Button>
         </>
       )}

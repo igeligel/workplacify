@@ -22,7 +22,7 @@ export const UserMenuOfficeSelectorList = (
     trpc.user.selectCurrentOffice.useMutation();
 
   return (
-    <VStack width={"100%"} spacing={"0.5"}>
+    <VStack width={"100%"} gap={"0.5"}>
       {offices.map((office) => {
         const updateSelectedOffice = async () => {
           await updateSelectedOfficeMutation.mutateAsync({

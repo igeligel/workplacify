@@ -1,20 +1,13 @@
 import {
   Box,
   Button,
+  CloseButton,
   Drawer,
-  DrawerBody,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  FormControl,
-  FormLabel,
+  Field,
   HStack,
   Icon,
   IconButton,
-  Tooltip,
-  useToast,
+  Portal,
 } from "@chakra-ui/react";
 import { Prisma } from "@prisma/client";
 import { formatISO } from "date-fns";
@@ -28,6 +21,8 @@ import {
   FreeDesksWithTime,
 } from "../server/scheduling/getFreeDesksPerDay";
 import { trpc } from "../utils/trpc";
+import { toaster } from "./ui/toaster";
+import { Tooltip } from "./ui/tooltip";
 
 type Floor = Prisma.FloorGetPayload<undefined>;
 
@@ -46,7 +41,6 @@ export const FloorDeskBooker = (props: FloorDeskBookerProps) => {
   const bookDeskMutation = trpc.schedule.bookDeskForDay.useMutation({});
   const [isImageLoaded, setIsImageLoaded] = useState<boolean>(false);
   const utils = trpc.useUtils();
-  const toast = useToast();
   const [isBookingDrawerOpen, setIsBookingDrawerOpen] =
     useState<boolean>(false);
   // const
@@ -110,61 +104,70 @@ export const FloorDeskBooker = (props: FloorDeskBookerProps) => {
 
   return (
     <Box>
-      <Drawer
-        isOpen={isBookingDrawerOpen}
-        placement="right"
-        onClose={() => {
-          setIsBookingDrawerOpen(false);
+      <Drawer.Root
+        open={isBookingDrawerOpen}
+        placement="end"
+        onOpenChange={(details) => {
+          if (!details.open) {
+            setIsBookingDrawerOpen(false);
+          }
         }}
       >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader>{t("bookDeskWithName", { deskName })}</DrawerHeader>
+        <Portal>
+          <Drawer.Backdrop />
+          <Drawer.Positioner>
+            <Drawer.Content>
+              <Drawer.Header>
+                {t("bookDeskWithName", { deskName })}
+              </Drawer.Header>
+              <Drawer.Body>{t("doYouWantToBookIt")}</Drawer.Body>
+              <Drawer.Footer>
+                <Button
+                  variant="outline"
+                  mr={3}
+                  onClick={() => {
+                    setIsBookingDrawerOpen(false);
+                  }}
+                >
+                  {t("close")}
+                </Button>
+                <Button
+                  colorPalette="blue"
+                  onClick={async () => {
+                    if (!selectedDeskWithPeriods) {
+                      return;
+                    }
 
-          <DrawerBody>{t("doYouWantToBookIt")}</DrawerBody>
+                    try {
+                      await bookDeskMutation.mutateAsync({
+                        deskId: selectedDeskWithPeriods.desk.id,
+                        day: formattedDate,
+                      });
+                      utils.schedule.getDeskSchedulesForDay.invalidate();
+                      setSelectedDeskWithPeriods(null);
+                      setIsBookingDrawerOpen(false);
+                    } catch (e) {
+                      toaster.create({
+                        title: t("errorTitleWhileBooking"),
+                        description: t("errorDescriptionWhileBooking"),
+                        type: "error",
+                        duration: 5000,
+                        closable: true,
+                      });
+                    }
+                  }}
+                >
+                  {t("bookDeskForDay")}
+                </Button>
+              </Drawer.Footer>
+              <Drawer.CloseTrigger asChild>
+                <CloseButton />
+              </Drawer.CloseTrigger>
+            </Drawer.Content>
+          </Drawer.Positioner>
+        </Portal>
+      </Drawer.Root>
 
-          <DrawerFooter>
-            <Button
-              variant="outline"
-              mr={3}
-              onClick={() => {
-                setIsBookingDrawerOpen(false);
-              }}
-            >
-              {t("close")}
-            </Button>
-            <Button
-              colorScheme="blue"
-              onClick={async () => {
-                if (!selectedDeskWithPeriods) {
-                  return;
-                }
-
-                try {
-                  await bookDeskMutation.mutateAsync({
-                    deskId: selectedDeskWithPeriods.desk.id,
-                    day: formattedDate,
-                  });
-                  utils.schedule.getDeskSchedulesForDay.invalidate();
-                  setSelectedDeskWithPeriods(null);
-                  setIsBookingDrawerOpen(false);
-                } catch (e) {
-                  toast({
-                    title: t("errorTitleWhileBooking"),
-                    description: t("errorDescriptionWhileBooking"),
-                    status: "error",
-                    duration: 5000,
-                    isClosable: true,
-                  });
-                }
-              }}
-            >
-              {t("bookDeskForDay")}
-            </Button>
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
       <TransformWrapper
         initialScale={1}
         initialPositionX={0}
@@ -181,41 +184,44 @@ export const FloorDeskBooker = (props: FloorDeskBookerProps) => {
               <Box display={"flex"} flexDirection={"column"}>
                 <Box display={"flex"} justifyContent={"space-between"}>
                   <Box>
-                    <FormControl
+                    <Field.Root
                       display="flex"
                       alignItems="flex-start"
                       flexDirection={"column"}
                     >
-                      <FormLabel htmlFor="zoom-controls" mb="0">
+                      <Field.Label htmlFor="zoom-controls" mb="0">
                         {t("zoomControls")}
-                      </FormLabel>
+                      </Field.Label>
                       <HStack id={"zoom-controls"} paddingTop={1}>
                         <IconButton
-                          colorScheme="blue"
+                          colorPalette="blue"
                           aria-label="zoom in"
-                          icon={<Icon as={FiPlus} />}
                           onClick={() => {
                             zoomIn();
                           }}
-                        />
+                        >
+                          <Icon as={FiPlus} />
+                        </IconButton>
                         <IconButton
-                          colorScheme="blue"
+                          colorPalette="blue"
                           aria-label="zoom out"
-                          icon={<Icon as={FiMinus} />}
                           onClick={() => {
                             zoomOut();
                           }}
-                        />
+                        >
+                          <Icon as={FiMinus} />
+                        </IconButton>
                         <IconButton
-                          colorScheme="blue"
+                          colorPalette="blue"
                           aria-label="reset zoom"
-                          icon={<Icon as={FiX} />}
                           onClick={() => {
                             resetTransform();
                           }}
-                        />
+                        >
+                          <Icon as={FiX} />
+                        </IconButton>
                       </HStack>
-                    </FormControl>
+                    </Field.Root>
                   </Box>
                 </Box>
               </Box>
@@ -290,7 +296,7 @@ export const FloorDeskBooker = (props: FloorDeskBookerProps) => {
                           return <>{props.children}</>;
                         }
                         return (
-                          <Tooltip label={names.join("; ")}>
+                          <Tooltip content={names.join("; ")}>
                             {props.children}
                           </Tooltip>
                         );

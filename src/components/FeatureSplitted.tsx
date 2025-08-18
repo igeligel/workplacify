@@ -1,27 +1,23 @@
-import {
-  As,
-  Box,
-  Heading,
-  Image,
-  SpaceProps,
-  Text,
-  useColorMode,
-} from "@chakra-ui/react";
+import { Box, Heading, Image, Text } from "@chakra-ui/react";
 import { ReactNode } from "react";
+
+import { useWorkplacifyTheme } from "../hooks/useWorkplacifyTheme";
 
 type FeatureSplittedProps = {
   tag: string;
   heading: string;
-  headingAs?: As;
+  headingAs?: React.ComponentProps<typeof Heading>["as"];
   description: ReactNode;
   image: string;
   alt: string;
   reverse?: boolean;
-  marginTop?: SpaceProps["marginTop"];
+  marginTop?: React.ComponentProps<typeof Box>["marginTop"];
 };
 
 export const FeatureSplitted: React.FC<FeatureSplittedProps> = (props) => {
-  const { colorMode } = useColorMode();
+  const { theme } = useWorkplacifyTheme();
+
+  const textColor = theme === "dark" ? "gray.300" : "gray.700";
 
   const { reverse = false } = props;
 
@@ -57,10 +53,7 @@ export const FeatureSplitted: React.FC<FeatureSplittedProps> = (props) => {
         <Heading as={props.headingAs || "h3"} marginTop="0.5rem">
           {props.heading}
         </Heading>
-        <Box
-          marginTop="0.5rem"
-          color={colorMode === "dark" ? "gray.300" : "gray.700"}
-        >
+        <Box marginTop="0.5rem" color={textColor}>
           {props.description}
         </Box>
       </Box>

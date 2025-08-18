@@ -16,7 +16,7 @@ export const SidebarMainPaths = () => {
   const t = useTranslations("AppMenu");
 
   return (
-    <VStack spacing={"0.5"} marginTop={"2"}>
+    <VStack gap={"0.5"} marginTop={"2"}>
       <MenuItem
         title={t("labelHome")}
         icon={FiHome}

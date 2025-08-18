@@ -1,13 +1,4 @@
-import {
-  Box,
-  Drawer,
-  DrawerBody,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerHeader,
-  DrawerOverlay,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, Drawer, Portal, VStack } from "@chakra-ui/react";
 
 import { SidebarActiveItems } from "./SidebarActiveItems";
 import { SidebarMainPaths } from "./SidebarMainPaths";
@@ -43,7 +34,7 @@ const SidebarContent = (props: SidebarContentProps) => {
             <Box width={"100%"}>
               <SidebarMainPaths />
             </Box>
-            <VStack spacing={"8"} width={"100%"} paddingTop={"8"}>
+            <VStack gap={"8"} width={"100%"} paddingTop={"8"}>
               <SidebarActiveItems />
             </VStack>
           </VStack>
@@ -78,20 +69,32 @@ export const Sidebar = ({
       />
     </Box>
   ) : (
-    <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
-      <DrawerOverlay>
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader>workplacify.com</DrawerHeader>
-          <DrawerBody>
-            <SidebarContent
-              isUserAdmin={isUserAdmin}
-              isUserSetup={isUserSetup}
-              onClick={onClose}
-            />
-          </DrawerBody>
-        </DrawerContent>
-      </DrawerOverlay>
-    </Drawer>
+    <>
+      <Drawer.Root
+        open={isOpen}
+        placement="start"
+        onOpenChange={(details) => {
+          if (!details.open) {
+            onClose;
+          }
+        }}
+      >
+        <Portal>
+          <Drawer.Backdrop />
+          <Drawer.Positioner>
+            <Drawer.Content>
+              <Drawer.Header>workplacify.com</Drawer.Header>
+              <Drawer.Body>
+                <SidebarContent
+                  isUserAdmin={isUserAdmin}
+                  isUserSetup={isUserSetup}
+                  onClick={onClose}
+                />
+              </Drawer.Body>
+            </Drawer.Content>
+          </Drawer.Positioner>
+        </Portal>
+      </Drawer.Root>
+    </>
   );
 };
