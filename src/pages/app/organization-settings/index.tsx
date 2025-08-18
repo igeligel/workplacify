@@ -227,7 +227,7 @@ const OrganizationSettingsPage = () => {
             </Box>
           </Box>
         </Tabs.Content>
-        <Tabs.Content value="projects">
+        <Tabs.Content value="manage-users">
           <Table.Root>
             <Table.Header>
               <Table.Row>
