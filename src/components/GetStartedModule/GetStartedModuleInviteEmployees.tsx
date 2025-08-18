@@ -14,7 +14,7 @@ export const GetStartedModuleInviteEmployees = () => {
       imageAlt={t("inviteEmployeesImageAlt")}
       badges={
         <>
-          <GetStartedBadge colorScheme="green">
+          <GetStartedBadge colorPalette="green">
             {t("inviteEmployeesBadgeRecommended")}
           </GetStartedBadge>
           <GetStartedBadge>{t("inviteEmployeesBadgeNew")}</GetStartedBadge>

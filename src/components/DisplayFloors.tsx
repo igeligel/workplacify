@@ -1,26 +1,16 @@
-import { Link } from "@chakra-ui/next-js";
 import {
   Box,
   Button,
+  CloseButton,
   Drawer,
-  DrawerBody,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
   Icon,
+  Portal,
   Table,
-  TableContainer,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
   VStack,
 } from "@chakra-ui/react";
 import { Office, Prisma } from "@prisma/client";
 import { useTranslations } from "next-intl";
+import NextLink from "next/link";
 import router from "next/router";
 import { useState } from "react";
 import { FiCheck, FiX } from "react-icons/fi";
@@ -52,15 +42,16 @@ export const DisplayFloors = (props: DisplayFloorsProps) => {
           {t("noFloorsThereYet")}
 
           <Button
-            as={Link}
-            href={`/app/offices/${props.office.id}/floors/new`}
-            colorScheme="orange"
+            asChild
+            colorPalette="orange"
             backgroundColor={"orange.400"}
-            textColor={"white"}
+            color={"white"}
             textDecoration={"none"}
             _hover={{ backgroundColor: "orange.500", textDecoration: "none" }}
           >
-            {t("addFloor")}
+            <NextLink href={`/app/offices/${props.office.id}/floors/new`}>
+              {t("addFloor")}
+            </NextLink>
           </Button>
         </VStack>
       </Box>
@@ -73,111 +64,127 @@ export const DisplayFloors = (props: DisplayFloorsProps) => {
 
   return (
     <Box width={"100%"}>
-      <TableContainer width={"100%"}>
-        <Table variant="simple" width={"100%"}>
-          <Thead>
-            <Tr>
-              <Th>{t("floorTableHeaderName")}</Th>
-              <Th>{t("floorTableHeaderDescription")}</Th>
-              <Th>{t("floorTableHeaderHasFloorPlan")}</Th>
-              <Th>{t("floorTableHeaderNumberOfDesks")}</Th>
-              <Th>{t("floorTableHeaderOccupancyPast7d")}</Th>
-              <Th></Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {props.floors.map((floor) => (
-              <Tr
-                key={floor.id}
-                cursor={"pointer"}
-                _hover={{
-                  backgroundColor: "gray.100",
-                }}
-                onClick={() => {
-                  router.push(
-                    `/app/offices/${props.office.id}/floors/${floor.id}`,
-                  );
-                }}
-              >
-                <Td>{floor.name}</Td>
-                <Td maxW={"500px"}>
-                  <Box
-                    overflowWrap={"break-word"}
-                    wordBreak={"break-all"}
-                    // overflow={"clip"}
-                    style={{
-                      textOverflow: "ellipsis",
-                    }}
-                    maxW={"500px"}
-                    overflowX={"auto"}
-                  >
-                    {floor.description}
-                  </Box>
-                </Td>
-                <Td>
-                  {floor.floorPlan ? <Icon as={FiCheck} /> : <Icon as={FiX} />}
-                </Td>
-                <Th>{floor.desks?.length || "N/A"}</Th>
-                <Th>-/-</Th>
-                <Th>
-                  <Button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setRemoveFloorId(floor.id);
-                      setRemoveModalOpen(true);
-                    }}
-                    colorScheme="red"
-                  >
-                    {t("floorTableButtonRemove")}
-                  </Button>
-                </Th>
-              </Tr>
-            ))}
-          </Tbody>
-        </Table>
-      </TableContainer>
-      <Drawer
-        isOpen={removeModalOpen}
-        placement="right"
-        onClose={() => {
-          setRemoveModalOpen(false);
-        }}
-        // finalFocusRef={btnRef}
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton
-            onClick={() => {
-              setRemoveModalOpen(false);
-            }}
-          />
-          <DrawerHeader>
-            {t("floorRemoveModalHeader", { floorName: floorToRemove?.name })}
-          </DrawerHeader>
-
-          <DrawerBody>{t("floorRemovalDescription")}</DrawerBody>
-
-          <DrawerFooter>
-            <Button
-              variant="outline"
-              mr={3}
-              isLoading={deleteFloorMutation.isLoading}
-              colorScheme="red"
-              onClick={async () => {
-                if (!floorToRemove?.id) return;
-
-                await deleteFloorMutation.mutateAsync({
-                  id: floorToRemove.id,
-                });
-                utils.office.get.invalidate();
-                setRemoveModalOpen(false);
+      <Table.Root width={"100%"}>
+        <Table.Header>
+          <Table.Row>
+            <Table.ColumnHeader>{t("floorTableHeaderName")}</Table.ColumnHeader>
+            <Table.ColumnHeader>
+              {t("floorTableHeaderDescription")}
+            </Table.ColumnHeader>
+            <Table.ColumnHeader>
+              {t("floorTableHeaderHasFloorPlan")}
+            </Table.ColumnHeader>
+            <Table.ColumnHeader>
+              {t("floorTableHeaderNumberOfDesks")}
+            </Table.ColumnHeader>
+            <Table.ColumnHeader>
+              {t("floorTableHeaderOccupancyPast7d")}
+            </Table.ColumnHeader>
+            <Table.ColumnHeader></Table.ColumnHeader>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {props.floors.map((floor) => (
+            <Table.Row
+              key={floor.id}
+              cursor={"pointer"}
+              _hover={{
+                backgroundColor: "gray.100",
+              }}
+              onClick={() => {
+                router.push(
+                  `/app/offices/${props.office.id}/floors/${floor.id}`,
+                );
               }}
             >
-              {t("floorRemoveModalButtonRemove")}
-            </Button>
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
+              <Table.Cell>{floor.name}</Table.Cell>
+              <Table.Cell maxW={"500px"}>
+                <Box
+                  overflowWrap={"break-word"}
+                  wordBreak={"break-all"}
+                  // overflow={"clip"}
+                  style={{
+                    textOverflow: "ellipsis",
+                  }}
+                  maxW={"500px"}
+                  overflowX={"auto"}
+                >
+                  {floor.description}
+                </Box>
+              </Table.Cell>
+              <Table.Cell>
+                {floor.floorPlan ? <Icon as={FiCheck} /> : <Icon as={FiX} />}
+              </Table.Cell>
+              <Table.Cell>{floor.desks?.length || "N/A"}</Table.Cell>
+              <Table.Cell>-/-</Table.Cell>
+              <Table.Cell>
+                <Button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setRemoveFloorId(floor.id);
+                    setRemoveModalOpen(true);
+                  }}
+                  colorPalette="red"
+                >
+                  {t("floorTableButtonRemove")}
+                </Button>
+              </Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table.Root>
+
+      <Drawer.Root
+        open={removeModalOpen}
+        placement="end"
+        onOpenChange={(details) => {
+          if (!details.open) {
+            setRemoveModalOpen(false);
+          }
+        }}
+      >
+        <Portal>
+          <Drawer.Backdrop />
+          <Drawer.Positioner>
+            <Drawer.Content>
+              <Drawer.Header>
+                {t("floorRemoveModalHeader", {
+                  floorName: floorToRemove?.name,
+                })}
+              </Drawer.Header>
+
+              <Drawer.Body>{t("floorRemovalDescription")}</Drawer.Body>
+
+              <Drawer.Footer>
+                <Button
+                  variant="outline"
+                  mr={3}
+                  loading={deleteFloorMutation.isLoading}
+                  colorPalette="red"
+                  onClick={async () => {
+                    if (!floorToRemove?.id) return;
+
+                    await deleteFloorMutation.mutateAsync({
+                      id: floorToRemove.id,
+                    });
+                    utils.office.get.invalidate();
+                    setRemoveModalOpen(false);
+                  }}
+                >
+                  {t("floorRemoveModalButtonRemove")}
+                </Button>
+              </Drawer.Footer>
+              <Drawer.CloseTrigger asChild>
+                <CloseButton
+                  onClick={() => {
+                    setRemoveModalOpen(false);
+                  }}
+                />
+              </Drawer.CloseTrigger>
+            </Drawer.Content>
+          </Drawer.Positioner>
+        </Portal>
+      </Drawer.Root>
     </Box>
   );
 };

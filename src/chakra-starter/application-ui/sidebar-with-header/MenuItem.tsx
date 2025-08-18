@@ -1,5 +1,4 @@
-import { Link } from "@chakra-ui/next-js";
-import { Box, Icon, Text } from "@chakra-ui/react";
+import { Box, Icon, Link, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
 import React from "react";
 import { IconType } from "react-icons";
@@ -39,15 +38,16 @@ const MenuItemContent: React.FC<MenuItemProps> = (props) => {
 export const MenuItem: React.FC<MenuItemProps> = (props) => {
   return props.href ? (
     <Link
-      as={NextLink}
-      href={props.href}
+      asChild
       width={"100%"}
       textDecoration={"none"}
       _hover={{
         textDecoration: "none",
       }}
     >
-      <MenuItemContent {...props} />
+      <NextLink href={props.href}>
+        <MenuItemContent {...props} />
+      </NextLink>
     </Link>
   ) : (
     <MenuItemContent {...props} />

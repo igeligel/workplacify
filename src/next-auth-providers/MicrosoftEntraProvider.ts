@@ -1,4 +1,4 @@
-import { Provider } from "next-auth/providers";
+import { Provider } from "next-auth/providers/index";
 
 type MicrosoftEntraConfig = {
   clientId: string;

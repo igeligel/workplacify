@@ -6,7 +6,6 @@ import {
   Icon,
   Stack,
   Text,
-  useColorModeValue,
 } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 import { ReactElement } from "react";
@@ -18,6 +17,8 @@ import {
   FcOrganization,
 } from "react-icons/fc";
 
+import { useWorkplacifyTheme } from "../../hooks/useWorkplacifyTheme";
+
 interface CardProps {
   heading: string;
   description: string;
@@ -26,6 +27,8 @@ interface CardProps {
 }
 
 const Card = ({ heading, description, icon }: CardProps) => {
+  const { theme } = useWorkplacifyTheme();
+  const bgColor = theme === "dark" ? "gray.700" : "gray.100";
   return (
     <Box
       maxW={{ base: "full", md: "275px" }}
@@ -35,7 +38,7 @@ const Card = ({ heading, description, icon }: CardProps) => {
       overflow="hidden"
       p={5}
     >
-      <Stack align={"start"} spacing={2}>
+      <Stack align={"start"} gap={2}>
         <Flex
           w={16}
           h={16}
@@ -43,7 +46,7 @@ const Card = ({ heading, description, icon }: CardProps) => {
           justify={"center"}
           color={"white"}
           rounded={"full"}
-          bg={useColorModeValue("gray.100", "gray.700")}
+          bg={bgColor}
         >
           {icon}
         </Flex>
@@ -56,7 +59,7 @@ const Card = ({ heading, description, icon }: CardProps) => {
         {/* <Button
           as={Link}
           variant={"link"}
-          colorScheme={"orange"}
+          colorPalette={"orange"}
           size={"sm"}
           href={href}
         >
@@ -71,7 +74,7 @@ export const SimpleCardWrapper = () => {
   const t = useTranslations("IndexPage");
   return (
     <Box p={{ base: 0, lg: 4 }}>
-      <Stack spacing={4} as={Container} maxW={"3xl"} textAlign={"center"}>
+      <Stack gap={4} as={Container} maxW={"3xl"} textAlign={"center"}>
         <Heading fontSize={{ base: "2xl", sm: "4xl" }} fontWeight={"bold"}>
           {t("whyWorkplacify")}
         </Heading>

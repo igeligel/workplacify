@@ -1,20 +1,9 @@
 import {
   Box,
-  Button,
   Drawer,
-  DrawerOverlay,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
+  Link,
   Table,
-  TableContainer,
   Tabs,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
   useDisclosure,
 } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
@@ -29,7 +18,7 @@ import { trpc } from "../../../../../../utils/trpc";
 
 const FloorPage = () => {
   const t = useTranslations("OfficePages");
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { open, onOpen, onClose } = useDisclosure();
   const [activeDeskId, setActiveDeskId] = useState<string | null>(null);
 
   const router = useRouter();
@@ -58,61 +47,71 @@ const FloorPage = () => {
 
   return (
     <div>
-      <Drawer isOpen={isOpen} placement="right" onClose={onCloseDrawer}>
-        <DrawerOverlay />
+      <Drawer.Root
+        open={open}
+        placement="end"
+        onOpenChange={(details) => {
+          if (!details.open) {
+            onCloseDrawer();
+          }
+        }}
+      >
         {selectedDesk && (
           <DrawerDeskEdit
             onCloseDrawer={onCloseDrawer}
             selectedDesk={selectedDesk}
           />
         )}
-      </Drawer>
+      </Drawer.Root>
       <Box>
-        <Tabs colorScheme="orange">
-          <TabList>
-            <Tab>{t("tabTitleDeskList")}</Tab>
-          </TabList>
+        <Tabs.Root colorPalette="orange" defaultValue={"desk-list"}>
+          <Tabs.List>
+            <Tabs.Trigger value="desk-list">
+              {t("tabTitleDeskList")}
+            </Tabs.Trigger>
+          </Tabs.List>
 
-          <TabPanels>
-            <TabPanel>
-              <TableContainer>
-                <Table variant="simple">
-                  <Thead>
-                    <Tr>
-                      <Th>{t("deskTableHeaderDeskId")}</Th>
-                      <Th>{t("deskTableHeaderDeskName")}</Th>
-                      <Th>{t("deskTableHeaderDeskActions")}</Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                    {floor?.desks
-                      .sort((a, b) => {
-                        return a.id.localeCompare(b.id);
-                      })
-                      .map((desk) => (
-                        <Tr key={desk.id}>
-                          <Td>{desk.publicDeskId || "-/-"}</Td>
-                          <Td>{desk.name || "-/-"}</Td>
-                          <Td>
-                            <Button
-                              variant={"link"}
-                              colorScheme="orange"
-                              onClick={() => {
-                                setActiveDeskId(desk.id);
-                                onOpen();
-                              }}
-                            >
-                              {t("deskTableButtonEdit")}
-                            </Button>
-                          </Td>
-                        </Tr>
-                      ))}
-                  </Tbody>
-                </Table>
-              </TableContainer>
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
+          <Tabs.Content value="desk-list">
+            <Table.Root>
+              <Table.Header>
+                <Table.Row>
+                  <Table.ColumnHeader>
+                    {t("deskTableHeaderDeskId")}
+                  </Table.ColumnHeader>
+                  <Table.ColumnHeader>
+                    {t("deskTableHeaderDeskName")}
+                  </Table.ColumnHeader>
+                  <Table.ColumnHeader>
+                    {t("deskTableHeaderDeskActions")}
+                  </Table.ColumnHeader>
+                </Table.Row>
+              </Table.Header>
+              <Table.Body>
+                {floor?.desks
+                  .sort((a, b) => {
+                    return a.id.localeCompare(b.id);
+                  })
+                  .map((desk) => (
+                    <Table.Row key={desk.id}>
+                      <Table.Cell>{desk.publicDeskId || "-/-"}</Table.Cell>
+                      <Table.Cell>{desk.name || "-/-"}</Table.Cell>
+                      <Table.Cell>
+                        <Link
+                          colorPalette="orange"
+                          onClick={() => {
+                            setActiveDeskId(desk.id);
+                            onOpen();
+                          }}
+                        >
+                          {t("deskTableButtonEdit")}
+                        </Link>
+                      </Table.Cell>
+                    </Table.Row>
+                  ))}
+              </Table.Body>
+            </Table.Root>
+          </Tabs.Content>
+        </Tabs.Root>
       </Box>
     </div>
   );

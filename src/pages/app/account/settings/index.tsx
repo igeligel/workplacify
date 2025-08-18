@@ -2,26 +2,24 @@ import {
   Box,
   Button,
   Container,
-  Divider,
-  FormControl,
-  FormHelperText,
-  FormLabel,
+  Field,
   HStack,
   Heading,
   Icon,
   IconButton,
   Input,
-  Link,
+  Separator,
   Spinner,
   VStack,
-  useToast,
 } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
 import { useTranslations } from "next-intl";
+import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { FiX } from "react-icons/fi";
 
+import { toaster } from "../../../../components/ui/toaster";
 import { getMessages } from "../../../../messages/getMessages";
 import { appAuthRedirect } from "../../../../server/nextMiddleware/appAuthRedirect";
 import { trpc } from "../../../../utils/trpc";
@@ -35,7 +33,6 @@ const AccountSettings = () => {
   const isLoading = userQuery.isLoading;
 
   const [userName, setUserName] = useState<null | string>(null);
-  const toast = useToast();
 
   useEffect(() => {
     if (userName === null) {
@@ -48,12 +45,12 @@ const AccountSettings = () => {
     await updateUserMutation.mutateAsync({
       name: userName,
     });
-    toast({
+    toaster.create({
       title: t("toastTitleAccountUpdated"),
       description: t("toastDescriptionAccountUpdated"),
-      status: "success",
+      type: "success",
       duration: 5000,
-      isClosable: true,
+      closable: true,
     });
     router.push("/app");
   };
@@ -63,17 +60,19 @@ const AccountSettings = () => {
       <VStack alignItems={"flex-start"}>
         <Box width={"100%"}>
           <Box display={"flex"} justifyContent={"space-between"}>
-            <HStack spacing={"3"}>
+            <HStack gap={"3"}>
               <IconButton
                 size={"sm"}
                 variant={"ghost"}
                 aria-label={"close"}
-                icon={<Icon as={FiX} />}
-                as={Link}
-                href={"/app"}
-              />
+                asChild
+              >
+                <NextLink href={"/app"}>
+                  <Icon as={FiX} />
+                </NextLink>
+              </IconButton>
               <Box height={"100%"} paddingY={"2"}>
-                <Divider orientation="vertical" />
+                <Separator orientation="vertical" />
               </Box>
               <Heading
                 as={"h1"}
@@ -88,9 +87,9 @@ const AccountSettings = () => {
               {/* <Button variant={"outline"}>Save and add more</Button> */}
               <Button
                 size={{ base: "sm", md: "md" }}
-                colorScheme="orange"
+                colorPalette="orange"
                 backgroundColor={"orange.400"}
-                textColor={"white"}
+                color={"white"}
                 _hover={{
                   backgroundColor: "orange.500",
                 }}
@@ -101,9 +100,9 @@ const AccountSettings = () => {
             </HStack>
           </Box>
         </Box>
-        <Divider />
+        <Separator />
         <Container maxW={"container.sm"} paddingTop={4}>
-          <VStack width={"100%"} alignItems={"flex-start"} spacing={4}>
+          <VStack width={"100%"} alignItems={"flex-start"} gap={4}>
             <Heading as={"h1"} fontSize={"lg"} color={"gray.700"}>
               {t("headingOfficeInformation")}
             </Heading>
@@ -112,8 +111,8 @@ const AccountSettings = () => {
               <Spinner />
             ) : (
               <>
-                <FormControl>
-                  <FormLabel>{t("labelOfficeName")}</FormLabel>
+                <Field.Root>
+                  <Field.Label>{t("labelOfficeName")}</Field.Label>
                   <Input
                     value={userName || ""}
                     placeholder={t("exampleName")}
@@ -121,8 +120,10 @@ const AccountSettings = () => {
                     onChange={(e) => setUserName(e.target.value)}
                     maxW={"500px"}
                   />
-                  <FormHelperText>{t("helperTextOfficeName")}</FormHelperText>
-                </FormControl>
+                  <Field.HelperText>
+                    {t("helperTextOfficeName")}
+                  </Field.HelperText>
+                </Field.Root>
               </>
             )}
           </VStack>

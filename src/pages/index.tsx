@@ -39,20 +39,19 @@ const IndexPage = () => {
           cardType: "summary_large_image",
         }}
       />
-      <Container maxW={"container.xl"}>
+      <Container maxW={"7xl"}>
         <CallToActionWithAnnotation />
       </Container>
-      <Container maxW={"container.xl"}>
+      <Container maxW={"7xl"}>
         <Box paddingTop={{ base: 4, lg: 16 }}>
           <SimpleCardWrapper />
         </Box>
       </Container>
-      <Container maxW={"container.xl"}>
+      <Container maxW={"7xl"}>
         <Box paddingTop={{ base: 8, lg: 16 }}>
           <ThreeTierPricing />
         </Box>
       </Container>
-      {/* Mention Excel list */}
     </>
   );
 };

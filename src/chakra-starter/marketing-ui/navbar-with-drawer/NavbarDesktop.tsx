@@ -1,13 +1,7 @@
-import { Link } from "@chakra-ui/next-js";
-import {
-  Box,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-  Stack,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Box, HoverCard, Link, Portal, Stack } from "@chakra-ui/react";
+import NextLink from "next/link";
 
+import { useWorkplacifyTheme } from "../../../hooks/useWorkplacifyTheme";
 import { NavbarDesktopSubMenu } from "./NavbarDesktopSubMenu";
 import { NavItems } from "./types";
 
@@ -16,19 +10,28 @@ type NavbarDesktopProps = {
 };
 
 export const NavbarDesktop: React.FC<NavbarDesktopProps> = (props) => {
-  const linkColor = useColorModeValue("gray.600", "gray.200");
-  const hoverColor = useColorModeValue("gray.800", "white");
-  const popoverColor = useColorModeValue("white", "gray.800");
+  const { theme } = useWorkplacifyTheme();
+  const linkColor = theme === "dark" ? "gray.200" : "gray.600";
+  const hoverColor = theme === "dark" ? "white" : "gray.800";
+  const popoverColor = theme === "dark" ? "gray.800" : "white";
 
   return (
-    <Stack direction={"row"} spacing={4}>
+    <Stack direction={"row"} gap={4}>
       {props.navItems.map((navItem) => (
-        <Box key={navItem.label}>
-          <Popover trigger={"hover"} placement={"bottom-start"}>
-            <PopoverTrigger>
+        <HoverCard.Root
+          positioning={{
+            placement: "bottom-start",
+            overlap: true,
+          }}
+          openDelay={50}
+          closeDelay={50}
+          key={navItem.label}
+        >
+          <Box>
+            <HoverCard.Trigger>
               <Box>
                 <Link
-                  href={navItem.href || "#"}
+                  asChild
                   p={2}
                   fontSize={"sm"}
                   fontWeight={500}
@@ -38,29 +41,35 @@ export const NavbarDesktop: React.FC<NavbarDesktopProps> = (props) => {
                     color: hoverColor,
                   }}
                 >
-                  {navItem.label}
+                  <NextLink href={navItem.href || "#"}>
+                    {navItem.label}
+                  </NextLink>
                 </Link>
               </Box>
-            </PopoverTrigger>
+            </HoverCard.Trigger>
 
             {navItem.children && (
-              <PopoverContent
-                border={0}
-                boxShadow={"xl"}
-                bg={popoverColor}
-                p={4}
-                rounded={"xl"}
-                minW={"sm"}
-              >
-                <Stack>
-                  {navItem.children.map((child) => (
-                    <NavbarDesktopSubMenu key={child.label} {...child} />
-                  ))}
-                </Stack>
-              </PopoverContent>
+              <Portal>
+                <HoverCard.Positioner>
+                  <HoverCard.Content
+                    border={0}
+                    boxShadow={"xl"}
+                    bg={popoverColor}
+                    p={4}
+                    rounded={"xl"}
+                    minW={"sm"}
+                  >
+                    <Stack>
+                      {navItem.children.map((child) => (
+                        <NavbarDesktopSubMenu key={child.label} {...child} />
+                      ))}
+                    </Stack>
+                  </HoverCard.Content>
+                </HoverCard.Positioner>
+              </Portal>
             )}
-          </Popover>
-        </Box>
+          </Box>
+        </HoverCard.Root>
       ))}
     </Stack>
   );

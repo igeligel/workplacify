@@ -1,10 +1,4 @@
-import {
-  FormControl,
-  FormHelperText,
-  FormLabel,
-  Input,
-  Textarea,
-} from "@chakra-ui/react";
+import { Box, Field, Input, Textarea } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 import TimezoneSelect from "react-timezone-select";
 
@@ -17,37 +11,42 @@ export const FormOfficeAdd = () => {
 
   return (
     <>
-      <FormControl>
-        <FormLabel>{t("formLabelOfficeName")}</FormLabel>
+      <Field.Root>
+        <Field.Label>{t("formLabelOfficeName")}</Field.Label>
         <Input
           value={name}
           placeholder={"Berlin, Unter den Linden"}
           type="text"
           onChange={(e) => setName(e.target.value)}
         />
-        <FormHelperText>{t("formHelperTextOfficeName")}</FormHelperText>
-      </FormControl>
-      <FormControl>
-        <FormLabel>{t("formLabelOfficeDescription")}</FormLabel>
+        <Field.HelperText>{t("formHelperTextOfficeName")}</Field.HelperText>
+        <Field.ErrorText />
+      </Field.Root>
+      <Field.Root>
+        <Field.Label>{t("formLabelOfficeDescription")}</Field.Label>
         <Textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           rows={10}
         />
-        <FormHelperText>{t("formHelperTextOfficeDescription")}</FormHelperText>
-      </FormControl>
-      <FormControl>
-        <FormLabel>{t("formLabelOfficeTimezone")}</FormLabel>
-        <TimezoneSelect
-          value={timezone}
-          onChange={(timezone) => {
-            const parsedTimezone =
-              typeof timezone === "string" ? timezone : timezone.value;
+        <Field.HelperText>
+          {t("formHelperTextOfficeDescription")}
+        </Field.HelperText>
+      </Field.Root>
+      <Field.Root>
+        <Field.Label>{t("formLabelOfficeTimezone")}</Field.Label>
+        <Box minW={{ base: "100%", md: "500px" }}>
+          <TimezoneSelect
+            value={timezone}
+            onChange={(timezone) => {
+              const parsedTimezone =
+                typeof timezone === "string" ? timezone : timezone.value;
 
-            setTimezone(parsedTimezone);
-          }}
-        ></TimezoneSelect>
-      </FormControl>
+              setTimezone(parsedTimezone);
+            }}
+          />
+        </Box>
+      </Field.Root>
     </>
   );
 };

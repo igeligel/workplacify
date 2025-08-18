@@ -31,7 +31,7 @@ export const ScheduleNoOfficeSelected = () => {
       </Heading>
       <Box>You are not assigned to any office.</Box>
       <Button
-        colorScheme="orange"
+        colorPalette="orange"
         backgroundColor={"orange.400"}
         _hover={{
           backgroundColor: "orange.500",

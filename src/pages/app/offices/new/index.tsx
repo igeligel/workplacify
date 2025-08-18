@@ -1,22 +1,22 @@
-import { Link } from "@chakra-ui/next-js";
 import {
   Box,
   Button,
   Container,
-  Divider,
   HStack,
   Heading,
   Icon,
   IconButton,
+  Separator,
   VStack,
-  useToast,
 } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
 import { useTranslations } from "next-intl";
+import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { FiX } from "react-icons/fi";
 
 import { FormOfficeAdd } from "../../../../components/FormOfficeAdd";
+import { toaster } from "../../../../components/ui/toaster";
 import { getMessages } from "../../../../messages/getMessages";
 import { appAuthRedirect } from "../../../../server/nextMiddleware/appAuthRedirect";
 import { useOfficeFormStore } from "../../../../stores/officeFormStore";
@@ -26,7 +26,6 @@ const OfficesNewPage = () => {
   const t = useTranslations("OfficePages");
   const addOfficeMutation = trpc.office.add.useMutation();
   const { name, description, timezone } = useOfficeFormStore();
-  const toast = useToast();
   const router = useRouter();
 
   const onSaveClick = async () => {
@@ -35,12 +34,12 @@ const OfficesNewPage = () => {
       description,
       timezone,
     });
-    toast({
+    toaster.create({
       title: t("toastTitleOfficeAdded"),
       description: t("toastDescriptionOfficeAdded"),
-      status: "success",
+      type: "success",
       duration: 5000,
-      isClosable: true,
+      closable: true,
     });
     router.push("/app/offices");
   };
@@ -49,17 +48,19 @@ const OfficesNewPage = () => {
     <VStack alignItems={"flex-start"}>
       <Box width={"100%"}>
         <Box display={"flex"} justifyContent={"space-between"}>
-          <HStack spacing={"3"}>
+          <HStack gap={"3"}>
             <IconButton
               size={"sm"}
               variant={"ghost"}
               aria-label={"close"}
-              icon={<Icon as={FiX} />}
-              as={Link}
-              href={"/app/offices"}
-            />
+              asChild
+            >
+              <NextLink href={"/app/offices"}>
+                <Icon as={FiX} />
+              </NextLink>
+            </IconButton>
             <Box height={"100%"} paddingY={"2"}>
-              <Divider orientation="vertical" />
+              <Separator orientation="vertical" />
             </Box>
             <Heading
               as={"h1"}
@@ -73,9 +74,9 @@ const OfficesNewPage = () => {
           <HStack>
             {/* <Button variant={"outline"}>Save and add more</Button> */}
             <Button
-              colorScheme="orange"
+              colorPalette="orange"
               backgroundColor={"orange.400"}
-              textColor={"white"}
+              color={"white"}
               _hover={{
                 backgroundColor: "orange.500",
               }}
@@ -86,14 +87,14 @@ const OfficesNewPage = () => {
           </HStack>
         </Box>
       </Box>
-      <Divider />
+      <Separator size={"lg"} />
       <Container maxW={"container.sm"} paddingTop={4}>
-        <VStack width={"100%"} alignItems={"flex-start"} spacing={4}>
+        <VStack width={"100%"} alignItems={"flex-start"} gap={4}>
           <Heading as={"h1"} fontSize={"lg"} color={"gray.700"}>
             {t("headingOfficeInformation")}
           </Heading>
 
-          <VStack width={"100%"} alignItems={"flex-start"} spacing={3}>
+          <VStack width={"100%"} alignItems={"flex-start"} gap={3}>
             <FormOfficeAdd />
           </VStack>
         </VStack>

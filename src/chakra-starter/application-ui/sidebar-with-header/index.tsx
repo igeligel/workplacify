@@ -1,4 +1,4 @@
-import { Box, Button, IconButton, useBreakpointValue } from "@chakra-ui/react";
+import { Box, IconButton, Link, useBreakpointValue } from "@chakra-ui/react";
 import { UserRole } from "@prisma/client";
 import { FiMenu } from "react-icons/fi";
 
@@ -46,20 +46,20 @@ export const SidebarBrandWithHeader = (props: SideNavigationProps) => {
           <Box paddingLeft={3} paddingTop={2} onClick={toggleSidebar}>
             <IconButton
               aria-label="Toggle sidebar"
-              icon={<FiMenu />}
-              colorScheme="blackAlpha"
+              colorPalette="blackAlpha"
               variant="ghost"
-            />
-            <Button
-              variant={"link"}
-              colorScheme="gray"
+            >
+              <FiMenu />
+            </IconButton>
+            <Link
+              colorPalette="gray"
               textDecoration={"none"}
               _hover={{
                 textDecoration: "none",
               }}
             >
               Menu
-            </Button>
+            </Link>
           </Box>
         )}
         <Box

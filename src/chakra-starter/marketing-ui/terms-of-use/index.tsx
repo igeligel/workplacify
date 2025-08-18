@@ -1,4 +1,4 @@
-import { Divider, Heading, Text } from "@chakra-ui/react";
+import { Heading, Separator, Text } from "@chakra-ui/react";
 
 type TermsOfUseProps = {
   companyName: string;
@@ -16,7 +16,7 @@ export const TermsOfUse = (props: TermsOfUseProps) => {
       <Text as="p" fontSize="xl" marginTop="0.6rem">
         Version 1.0 of this agreement was created on May 22, 2022
       </Text>
-      <Divider marginTop="0.6rem" />
+      <Separator marginTop="0.6rem" />
       <Text as="p" fontSize="xl" marginTop="0.6rem">
         When using the {companyName} service (here in after “Service”), you
         agree to the following Terms of Use.
@@ -224,7 +224,7 @@ export const TermsOfUse = (props: TermsOfUseProps) => {
         including but not limited to credit card information, medical files or
         anything deemed confidential.
       </Text>
-      <Divider />
+      <Separator />
       <Text as="p" fontSize="xl" marginTop="0.6rem">
         Questions about the Terms of Use may be directed to the email address
         {": "}

@@ -1,4 +1,4 @@
-import { Box, ColorProps, Icon, Text } from "@chakra-ui/react";
+import { Box, Icon, Text } from "@chakra-ui/react";
 import { IconType } from "react-icons";
 import { FiMoreHorizontal } from "react-icons/fi";
 
@@ -8,7 +8,7 @@ type DictionaryMenuItemProps = {
   isActive?: boolean;
   title: string;
   icon: IconType;
-  iconColor: ColorProps["color"];
+  iconColor: React.ComponentProps<typeof Icon>["color"];
   showMenu?: boolean;
 };
 

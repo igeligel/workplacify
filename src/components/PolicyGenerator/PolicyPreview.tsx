@@ -72,7 +72,7 @@ const Wrapper = (props: WrapperProps) => {
     return (
       <Box width={"100%"} display={"flex"} justifyContent={"center"}>
         <ChakraLink
-          colorScheme="orange"
+          colorPalette="orange"
           color={"orange.500"}
           textAlign={"center"}
         >

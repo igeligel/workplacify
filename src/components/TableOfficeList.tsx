@@ -1,35 +1,24 @@
-import { Link } from "@chakra-ui/next-js";
 import {
   Button,
+  CloseButton,
   Drawer,
-  DrawerBody,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
+  Portal,
   Spinner,
   Table,
-  TableContainer,
-  Tbody,
-  Td,
   Text,
-  Th,
-  Thead,
-  Tr,
   VStack,
   useDisclosure,
-  useToast,
 } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
+import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
 import { trpc } from "../utils/trpc";
+import { toaster } from "./ui/toaster";
 
 export const TableOfficeList = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const toast = useToast();
+  const { open, onOpen, onClose } = useDisclosure();
   const utils = trpc.useUtils();
   const officesQuery = trpc.office.list.useQuery();
   const removeOfficeMutation = trpc.office.remove.useMutation();
@@ -53,18 +42,17 @@ export const TableOfficeList = () => {
       <VStack>
         <Text>{t("displayNoOffices")}</Text>
         <Button
-          as={Link}
-          href={"/app/offices/new"}
-          colorScheme="orange"
+          asChild
+          colorPalette="orange"
           backgroundColor={"orange.400"}
-          textColor={"white"}
+          color={"white"}
           textDecoration={"none"}
           _hover={{
             backgroundColor: "orange.500",
             textDecoration: "none",
           }}
         >
-          {t("labelAddOffice")}
+          <NextLink href={"/app/offices/new"}>{t("labelAddOffice")}</NextLink>
         </Button>
       </VStack>
     );
@@ -72,19 +60,22 @@ export const TableOfficeList = () => {
 
   return (
     <>
-      <TableContainer>
-        <Table size={{ base: "sm", lg: "md" }} variant="simple">
-          <Thead>
-            <Tr>
-              <Th>{t("tableHeaderName")}</Th>
-              <Th>{t("tableHeaderNumberOfDesks")}</Th>
-              <Th>{t("tableHeaderOccupancy")}</Th>
-              <Th />
-            </Tr>
-          </Thead>
-          <Tbody>
-            {officesQuery.data?.map((office) => (
-              <Tr
+      <Table.Root size={{ base: "sm", lg: "md" }}>
+        <Table.Header>
+          <Table.Row>
+            <Table.ColumnHeader>{t("tableHeaderName")}</Table.ColumnHeader>
+            <Table.ColumnHeader>
+              {t("tableHeaderNumberOfDesks")}
+            </Table.ColumnHeader>
+            <Table.ColumnHeader>{t("tableHeaderOccupancy")}</Table.ColumnHeader>
+            <Table.ColumnHeader />
+          </Table.Row>
+        </Table.Header>
+
+        <Table.Body>
+          {officesQuery.data?.map((office) => {
+            return (
+              <Table.Row
                 key={office.id}
                 cursor={"pointer"}
                 _hover={{
@@ -94,12 +85,12 @@ export const TableOfficeList = () => {
                   router.push(`/app/offices/${office.id}`);
                 }}
               >
-                <Td>{office.name}</Td>
-                <Td>{"-/-"}</Td>
-                <Td>{"-/-"}</Td>
-                <Td>
+                <Table.Cell>{office.name}</Table.Cell>
+                <Table.Cell>{"-/-"}</Table.Cell>
+                <Table.Cell>{"-/-"}</Table.Cell>
+                <Table.Cell>
                   <Button
-                    colorScheme="red"
+                    colorPalette="red"
                     size="sm"
                     onClick={(e) => {
                       e.stopPropagation();
@@ -109,51 +100,67 @@ export const TableOfficeList = () => {
                   >
                     {t("buttonLabelRemove")}
                   </Button>
-                </Td>
-              </Tr>
-            ))}
-          </Tbody>
-        </Table>
-      </TableContainer>
-      <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader>
-            {t("labelRemoveOffice", { officeName: officeToBeRemoved?.name })}
-          </DrawerHeader>
+                </Table.Cell>
+              </Table.Row>
+            );
+          })}
+        </Table.Body>
+      </Table.Root>
+      <Drawer.Root
+        open={open}
+        placement={"end"}
+        onOpenChange={(details) => {
+          if (!details.open) {
+            onClose();
+          }
+        }}
+      >
+        <Portal>
+          <Drawer.Backdrop />
+          <Drawer.Positioner>
+            <Drawer.Content>
+              <Drawer.Header>
+                {t("labelRemoveOffice", {
+                  officeName: officeToBeRemoved?.name,
+                })}
+              </Drawer.Header>
 
-          <DrawerBody>{t("confirmRemoveOffice")}</DrawerBody>
+              <Drawer.Body>{t("confirmRemoveOffice")}</Drawer.Body>
 
-          <DrawerFooter>
-            <Button variant="outline" mr={3} onClick={onClose}>
-              Cancel
-            </Button>
-            <Button
-              colorScheme="red"
-              onClick={async () => {
-                if (!officeToBeRemoved) {
-                  return;
-                }
-                // remove
-                await removeOfficeMutation.mutateAsync({
-                  id: officeToBeRemoved.id,
-                });
-                toast({
-                  title: "Office removed",
-                  status: "success",
-                  duration: 5000,
-                  isClosable: true,
-                });
-                utils.office.invalidate();
-                onClose();
-              }}
-            >
-              {t("buttonLabelRemoveOffice")}
-            </Button>
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
+              <Drawer.Footer>
+                <Button variant="outline" mr={3} onClick={onClose}>
+                  Cancel
+                </Button>
+                <Button
+                  colorPalette="red"
+                  onClick={async () => {
+                    if (!officeToBeRemoved) {
+                      return;
+                    }
+                    // remove
+                    await removeOfficeMutation.mutateAsync({
+                      id: officeToBeRemoved.id,
+                    });
+                    toaster.create({
+                      title: "Office removed",
+                      type: "success",
+                      duration: 5000,
+                      closable: true,
+                    });
+                    utils.office.invalidate();
+                    onClose();
+                  }}
+                >
+                  {t("buttonLabelRemoveOffice")}
+                </Button>
+              </Drawer.Footer>
+              <Drawer.CloseTrigger asChild>
+                <CloseButton size="sm" />
+              </Drawer.CloseTrigger>
+            </Drawer.Content>
+          </Drawer.Positioner>
+        </Portal>
+      </Drawer.Root>
     </>
   );
 };

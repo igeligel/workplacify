@@ -1,17 +1,18 @@
-import { Link } from "@chakra-ui/next-js";
 import {
   Box,
   Button,
   Container,
-  Divider,
   Heading,
   Icon,
+  Link,
+  Separator,
   Spinner,
   Text,
   VStack,
 } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
 import { useTranslations } from "next-intl";
+import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { FiChevronLeft, FiPlus } from "react-icons/fi";
 
@@ -43,17 +44,16 @@ const OfficePage = () => {
       <VStack>
         <Text>{t("labelOfficeNotFound")}</Text>
         <Button
-          as={Link}
+          asChild
           backgroundColor={"orange.400"}
-          textColor={"white"}
+          color={"white"}
           textDecoration={"none"}
           _hover={{
             textDecoration: "none",
             backgroundColor: "orange.500",
           }}
-          href={"/app/offices/new"}
         >
-          {t("buttonAddOffice")}
+          <NextLink href={"/app/offices/new"}>{t("buttonAddOffice")}</NextLink>
         </Button>
       </VStack>
     );
@@ -61,11 +61,8 @@ const OfficePage = () => {
 
   return (
     <Container maxW={"container.2xl"}>
-      <Button
-        as={Link}
-        href={"/app/offices"}
-        variant={"link"}
-        leftIcon={<Icon as={FiChevronLeft} />}
+      <Link
+        asChild
         textDecoration={"none"}
         color={"orange.400"}
         _hover={{
@@ -73,8 +70,11 @@ const OfficePage = () => {
           color: "orange.600",
         }}
       >
-        {t("buttonBackToOffices")}
-      </Button>
+        <NextLink href={"/app/offices"}>
+          <Icon as={FiChevronLeft} />
+          {t("buttonBackToOffices")}
+        </NextLink>
+      </Link>
       <Box display={"flex"} justifyContent={"space-between"}>
         <VStack paddingTop={4} alignItems={"flex-start"}>
           <Heading as={"h1"} fontSize={"lg"} color={"gray.700"}>
@@ -88,28 +88,27 @@ const OfficePage = () => {
         </VStack>
         <VStack>
           <Button
-            as={Link}
-            href={`/app/offices/${getOfficeQuery.data.id}/floors/new`}
-            colorScheme="orange"
-            leftIcon={<Icon as={FiPlus} />}
+            asChild
+            colorPalette="orange"
             backgroundColor={"orange.400"}
-            textColor={"white"}
+            color={"white"}
             textDecoration={"none"}
             _hover={{ backgroundColor: "orange.500", textDecoration: "none" }}
           >
-            {t("buttonAddFloor")}
+            <NextLink
+              href={`/app/offices/${getOfficeQuery.data.id}/floors/new`}
+            >
+              <Icon as={FiPlus} />
+              {t("buttonAddFloor")}
+            </NextLink>
           </Button>
         </VStack>
       </Box>
-      <VStack
-        marginTop={4}
-        divider={<Divider />}
-        alignItems={"flex-start"}
-        spacing={4}
-      >
+      <VStack marginTop={4} alignItems={"flex-start"} gap={4}>
         <Heading as={"h2"} fontSize={"md"} color={"gray.700"}>
           {t("headingFloors")}
         </Heading>
+        <Separator />
         <DisplayFloors
           office={getOfficeQuery.data}
           floors={getOfficeQuery.data.floors}

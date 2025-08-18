@@ -1,4 +1,3 @@
-import { Link } from "@chakra-ui/next-js";
 import {
   Box,
   Button,
@@ -6,14 +5,11 @@ import {
   HStack,
   Heading,
   Icon,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
   Tabs,
 } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
 import { useTranslations } from "next-intl";
+import NextLink from "next/link";
 import { FiPlus } from "react-icons/fi";
 
 import { TableOfficeList } from "../../../components/TableOfficeList";
@@ -36,12 +32,10 @@ const OfficesPage = () => {
 
         <HStack>
           <Button
-            as={Link}
-            leftIcon={<Icon as={FiPlus} />}
-            href={"/app/offices/new"}
-            colorScheme="orange"
+            asChild
+            colorPalette="orange"
             backgroundColor={"orange.400"}
-            textColor={"white"}
+            color={"white"}
             textDecoration={"none"}
             _hover={{
               backgroundColor: "orange.500",
@@ -49,28 +43,24 @@ const OfficesPage = () => {
             }}
             size={{ base: "sm", md: "md" }}
           >
-            {t("labelAddOffice")}
+            <NextLink href={"/app/offices/new"}>
+              <Icon as={FiPlus} />
+              {t("labelAddOffice")}
+            </NextLink>
           </Button>
         </HStack>
       </Box>
       <Box>
-        <Tabs
-          colorScheme="orange"
-          size={{
-            base: "sm",
-            md: "md",
-          }}
-        >
-          <TabList>
-            <Tab>{t("labelAllOffices")}</Tab>
-          </TabList>
-
-          <TabPanels>
-            <TabPanel paddingX={{ base: 0, lg: 4 }}>
-              <TableOfficeList />
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
+        <Tabs.Root defaultValue="all-offices" colorPalette={"orange"}>
+          <Tabs.List>
+            <Tabs.Trigger value="all-offices">
+              {t("labelAllOffices")}
+            </Tabs.Trigger>
+          </Tabs.List>
+          <Tabs.Content value="all-offices" paddingX={{ base: 0, lg: 4 }}>
+            <TableOfficeList />
+          </Tabs.Content>
+        </Tabs.Root>
       </Box>
     </Container>
   );

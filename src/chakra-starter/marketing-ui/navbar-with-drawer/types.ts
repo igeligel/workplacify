@@ -5,7 +5,7 @@ export interface NavItem {
   href?: string;
   tags?: {
     label: string;
-    colorScheme: string;
+    colorPalette: string;
   }[];
 }
 
