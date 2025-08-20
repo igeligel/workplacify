@@ -59,6 +59,10 @@ export const NavbarWithDrawer = () => {
       href: "/#pricing",
     },
     {
+      label: t("blog"),
+      href: "/blog",
+    },
+    {
       label: t("freeTools"),
       subLabel: t("freeToolsDescription"),
       children: [
