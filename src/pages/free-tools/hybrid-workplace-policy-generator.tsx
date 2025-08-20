@@ -629,34 +629,42 @@ const HybridWorkplacePolicyGenerator = () => {
           <Faq
             questionsAndAnswers={[
               {
+                questionId: "1",
                 question: t("faq.isFree.question"),
                 answer: t("faq.isFree.answer"),
               },
               {
+                questionId: "2",
                 question: t("faq.customization.question"),
                 answer: t("faq.customization.answer"),
               },
               {
+                questionId: "3",
                 question: t("faq.dataSecurity.question"),
                 answer: t("faq.dataSecurity.answer"),
               },
               {
+                questionId: "4",
                 question: t("faq.workHours.question"),
                 answer: t("faq.workHours.answer"),
               },
               {
+                questionId: "5",
                 question: t("faq.timeZones.question"),
                 answer: t("faq.timeZones.answer"),
               },
               {
+                questionId: "6",
                 question: t("faq.multiplePolicies.question"),
                 answer: t("faq.multiplePolicies.answer"),
               },
               {
+                questionId: "7",
                 question: t("faq.legalCompliance.question"),
                 answer: t("faq.legalCompliance.answer"),
               },
               {
+                questionId: "8",
                 question: t("faq.updateFrequency.question"),
                 answer: t("faq.updateFrequency.answer"),
               },

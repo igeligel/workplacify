@@ -74,6 +74,10 @@ export const NavbarWithDrawer = () => {
         },
       ],
     },
+    {
+      label: t("blog"),
+      href: "/blog",
+    },
   ];
 
   const { open, onToggle } = useDisclosure();

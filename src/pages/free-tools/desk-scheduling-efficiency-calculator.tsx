@@ -550,22 +550,27 @@ const DeskSchedulingEfficiencyCalculator = () => {
           <Faq
             questionsAndAnswers={[
               {
+                questionId: "1",
                 question: t("faq.isFree.question"),
                 answer: t("faq.isFree.answer"),
               },
               {
+                questionId: "2",
                 question: t("faq.accuracy.question"),
                 answer: t("faq.accuracy.answer"),
               },
               {
+                questionId: "3",
                 question: t("faq.metrics.question"),
                 answer: t("faq.metrics.answer"),
               },
               {
+                questionId: "4",
                 question: t("faq.export.question"),
                 answer: t("faq.export.answer"),
               },
               {
+                questionId: "5",
                 question: t("faq.recalculate.question"),
                 answer: t("faq.recalculate.answer"),
               },
