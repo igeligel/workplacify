@@ -1,19 +1,19 @@
-import { SpaceProps, Tag, Wrap, WrapItem } from '@chakra-ui/react';
+import { Tag, Wrap, WrapItem } from "@chakra-ui/react";
 
 type TBlogTags = {
-  tags: Array<{ text: string; color: string }>;
-  marginTop?: SpaceProps['marginTop'];
+  tags: { text: string; color: string }[];
+  marginTop?: string | number;
 };
 
 export const BlogTags = (props: TBlogTags) => {
   return (
-    <Wrap spacing={2} marginTop={props.marginTop}>
+    <Wrap gap={2} marginTop={props.marginTop}>
       {props.tags.map((tag) => {
         return (
           <WrapItem key={tag.text}>
-            <Tag size={'md'} colorScheme={tag.color} variant="subtle">
-              {tag.text}
-            </Tag>
+            <Tag.Root size={"md"} colorPalette={tag.color} variant="subtle">
+              <Tag.Label>{tag.text}</Tag.Label>
+            </Tag.Root>
           </WrapItem>
         );
       })}

@@ -1,5 +1,6 @@
 import { Container, Text, VStack } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
+import { NextSeo } from "next-seo";
 
 import { blogArticles, featuredBlogArticle } from "../../blogs/blogArticles";
 import { BlogArticles } from "../../chakra-starter/marketing-ui/BlogArticles";
@@ -10,8 +11,32 @@ import { BlogArticlesListItem } from "../../chakra-starter/marketing-ui/BlogArti
 import { getMessages } from "../../messages/getMessages";
 
 const BlogArticlesPage = () => {
+  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/blog`;
+
   return (
     <>
+      <NextSeo
+        title="Insights for the Modern Workplace"
+        description="The modern workplace is more than just a physical space; it's an ecosystem of people, technology, and culture. Here, we decode the trends and share actionable insights that empower you to build more efficient, engaging, and data-driven work environments."
+        canonical={url}
+        openGraph={{
+          url,
+          title: "Insights for the Modern Workplace",
+          description:
+            "The modern workplace is more than just a physical space; it's an ecosystem of people, technology, and culture. Here, we decode the trends and share actionable insights that empower you to build more efficient, engaging, and data-driven work environments.",
+          images: [
+            {
+              url: "/og-images/blog-articles.png",
+              width: 1200,
+              height: 630,
+            },
+          ],
+          site_name: "workplacify",
+        }}
+        twitter={{
+          cardType: "summary_large_image",
+        }}
+      />
       <Container maxW={"6xl"} paddingTop={{ base: 2, lg: 8 }}>
         <BlogArticles
           heading={"Stories by Workplacify"}
@@ -37,10 +62,16 @@ const BlogArticlesPage = () => {
           }
           blogArticlesFooter={
             <BlogArticlesFooter
-              heading={"Hallo"}
+              heading={"Insights for the Modern Workplace"}
               description={
                 <VStack>
-                  <Text>awdwadadw</Text>
+                  <Text>
+                    The modern workplace is more than just a physical space;
+                    it&apos;s an ecosystem of people, technology, and culture.
+                    Here, we decode the trends and share actionable insights
+                    that empower you to build more efficient, engaging, and
+                    data-driven work environments.
+                  </Text>
                 </VStack>
               }
             />

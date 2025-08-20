@@ -1,5 +1,6 @@
-import { Heading } from '@chakra-ui/react';
-import { AnchorLink } from './AnchorLink';
+import { Heading } from "@chakra-ui/react";
+
+import { AnchorLink } from "./AnchorLink";
 
 type BlogHeadingSecondaryProps = {
   slug: string;
@@ -12,12 +13,12 @@ export const BlogHeadingSecondary = (props: BlogHeadingSecondaryProps) => {
   return (
     <Heading
       as="h2"
-      fontSize={'3xl'}
-      position={'relative'}
+      fontSize={"3xl"}
+      position={"relative"}
       data-sidebarheading={true}
       data-sidebartitle={title}
       data-sidebarslug={slug}
-      fontWeight={'semibold'}
+      fontWeight={"semibold"}
     >
       <AnchorLink id={slug} />
       {title}

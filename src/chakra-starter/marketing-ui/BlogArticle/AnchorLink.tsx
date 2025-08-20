@@ -1,5 +1,5 @@
-import React from 'react';
-import { Text } from '@chakra-ui/react';
+import { Text } from "@chakra-ui/react";
+import React from "react";
 
 type AnchorLinkProps = {
   id: string;
@@ -7,5 +7,5 @@ type AnchorLinkProps = {
 
 export const AnchorLink = (props: AnchorLinkProps) => {
   const { id } = props;
-  return <Text as={'span'} id={id} position={'absolute'} top={'-60px'} />;
+  return <Text as={"span"} id={id} position={"absolute"} top={"-60px"} />;
 };
