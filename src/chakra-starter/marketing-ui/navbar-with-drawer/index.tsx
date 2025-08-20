@@ -59,10 +59,6 @@ export const NavbarWithDrawer = () => {
       href: "/#pricing",
     },
     {
-      label: t("blog"),
-      href: "/blog",
-    },
-    {
       label: t("freeTools"),
       subLabel: t("freeToolsDescription"),
       children: [
@@ -77,6 +73,10 @@ export const NavbarWithDrawer = () => {
           href: "/free-tools/desk-scheduling-efficiency-calculator",
         },
       ],
+    },
+    {
+      label: t("blog"),
+      href: "/blog",
     },
   ];
 

@@ -10,7 +10,7 @@ export const blogArticles: BlogArticle[] = [
     url: "/blog/desk-scheduling-the-hidden-costs-of-your-spreadsheet",
     image:
       "/og-images/desk-scheduling-the-hidden-costs-of-your-spreadsheet.png",
-    imageAlt: "Design system components and tokens visualization",
+    imageAlt: "The Hidden Costs of Your Spreadsheet",
     tags: [
       {
         text: "workspace-management",
@@ -30,7 +30,7 @@ export const blogArticles: BlogArticle[] = [
       jobTitle: "CEO of Workplacify",
       image: "/profile-kevin-peters.png",
     },
-    datePublished: new Date("2024-05-26T16:00:00.000Z"),
+    datePublished: new Date("2025-08-20T18:00:00.000Z"),
   },
 ];
 
