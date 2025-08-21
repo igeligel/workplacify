@@ -133,7 +133,7 @@ export const BlogArticle = (props: BlogArticleProps) => {
               />
               <BlogText>
                 One of the key factors in achieving these results is the ease of
-                implementation. Chakra Starter&apos;s components are designed to
+                implementation. Chakra Starter's components are designed to
                 integrate seamlessly with existing React applications. Companies
                 reported an average onboarding time of just 2-3 days for
                 experienced React developers, with comprehensive documentation
