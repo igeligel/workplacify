@@ -1,4 +1,5 @@
 import { GetServerSideProps } from "next";
+import { NextSeo } from "next-seo";
 
 import { JoinOurTeam } from "../../components/BringWorkplaceTogetherForm";
 import { getMessages } from "../../messages/getMessages";
@@ -6,6 +7,7 @@ import { getMessages } from "../../messages/getMessages";
 const SigninPage = () => {
   return (
     <>
+      <NextSeo noindex />
       <JoinOurTeam />
     </>
   );

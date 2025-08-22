@@ -1,4 +1,4 @@
-import { Box, Heading, ListItem, Text } from "@chakra-ui/react";
+import { Heading, List, Text } from "@chakra-ui/react";
 
 type PrivacyPolicyProps = {
   companyName: string;
@@ -19,36 +19,46 @@ export const PrivacyPolicy = (props: PrivacyPolicyProps) => {
       <Text as="p" fontSize="xl" marginTop="0.6rem">
         Topics:
       </Text>
-      <Box as="ul" listStyleType="circle" marginLeft="1em" marginTop="0.6rem">
-        <ListItem>What data do we collect?</ListItem>
-        <ListItem>How do we collect your data?</ListItem>
-        <ListItem>How will we use your data?</ListItem>
-        <ListItem>How do we store your data?</ListItem>
-        <ListItem>Marketing</ListItem>
-        <ListItem>What are your data protection rights?</ListItem>
-        <ListItem>What are cookies?</ListItem>
-        <ListItem>How do we use cookies?</ListItem>
-        <ListItem>What types of cookies do we use?</ListItem>
-        <ListItem>How to manage your cookies</ListItem>
-        <ListItem>Privacy policies of other websites</ListItem>
-        <ListItem>Changes to our privacy policy</ListItem>
-        <ListItem>How to contact us</ListItem>
-        <ListItem>How to contact the appropriate authorities</ListItem>
-      </Box>
+      <List.Root
+        as="ul"
+        listStyleType="circle"
+        marginLeft="1em"
+        marginTop="0.6rem"
+      >
+        <List.Item>What data do we collect?</List.Item>
+        <List.Item>How do we collect your data?</List.Item>
+        <List.Item>How will we use your data?</List.Item>
+        <List.Item>How do we store your data?</List.Item>
+        <List.Item>Marketing</List.Item>
+        <List.Item>What are your data protection rights?</List.Item>
+        <List.Item>What are cookies?</List.Item>
+        <List.Item>How do we use cookies?</List.Item>
+        <List.Item>What types of cookies do we use?</List.Item>
+        <List.Item>How to manage your cookies</List.Item>
+        <List.Item>Privacy policies of other websites</List.Item>
+        <List.Item>Changes to our privacy policy</List.Item>
+        <List.Item>How to contact us</List.Item>
+        <List.Item>How to contact the appropriate authorities</List.Item>
+      </List.Root>
       <Heading as="h2" fontSize="3xl" marginTop="1rem">
         What data do we collect?
       </Heading>
       <Text as="p" fontSize="xl" marginTop="0.6rem">
         {companyName} collects the following data:
       </Text>
-      <Box as="ul" listStyleType="circle" marginLeft="1em" marginTop="0.6rem">
-        <ListItem>
+      <List.Root
+        as="ul"
+        listStyleType="circle"
+        marginLeft="1em"
+        marginTop="0.6rem"
+      >
+        <List.Item>
           Personal identification information (Name, email address, phone
           number,etc.)
-        </ListItem>
-        <ListItem>All words entered into the tracking functionality</ListItem>
-        <ListItem>Analytics data of Google Analytics</ListItem>
-      </Box>
+        </List.Item>
+        <List.Item>All words entered into the tracking functionality</List.Item>
+        <List.Item>Analytics data of Google Analytics</List.Item>
+      </List.Root>
       <Heading as="h2" fontSize="3xl" marginTop="1rem">
         How do we collect your data?
       </Heading>
@@ -56,49 +66,71 @@ export const PrivacyPolicy = (props: PrivacyPolicyProps) => {
         You directly provide {companyName} with most of the data we collect. We
         collect data and process data when you:
       </Text>
-      <Box as="ul" listStyleType="circle" marginLeft="1em" marginTop="0.6rem">
-        <ListItem>
+      <List.Root
+        as="ul"
+        listStyleType="circle"
+        marginLeft="1em"
+        marginTop="0.6rem"
+      >
+        <List.Item>
           Register online or subscribe to any of our products or services.
-        </ListItem>
-        <ListItem>
+        </List.Item>
+        <List.Item>
           Voluntarily complete a customer survey or provide feedback on any of
           our message boards or via email.
-        </ListItem>
-        <ListItem>Use or view our website via your browser’s cookies.</ListItem>
-        <ListItem>Enter data into the application.</ListItem>
-      </Box>
+        </List.Item>
+        <List.Item>
+          Use or view our website via your browser&apos;s cookies.
+        </List.Item>
+        <List.Item>Enter data into the application.</List.Item>
+      </List.Root>
       <Text as="p" fontSize="xl" marginTop="0.6rem">
         {companyName} may also receive your data indirectly from the following
         sources:
       </Text>
-      <Box as="ul" listStyleType="circle" marginLeft="1em" marginTop="0.6rem">
-        <ListItem>Google Analytics</ListItem>
-        <ListItem>Github, through the login</ListItem>
-      </Box>
+      <List.Root
+        as="ul"
+        listStyleType="circle"
+        marginLeft="1em"
+        marginTop="0.6rem"
+      >
+        <List.Item>Google Analytics</List.Item>
+        <List.Item>Github, through the login</List.Item>
+      </List.Root>
       <Heading as="h2" fontSize="3xl" marginTop="1rem">
         How will we use your data?
       </Heading>
       <Text as="p" fontSize="xl" marginTop="0.6rem">
         {companyName} collects your data so that we can:
       </Text>
-      <Box as="ul" listStyleType="circle" marginLeft="1em" marginTop="0.6rem">
-        <ListItem>Process your order, manage your account.</ListItem>
-        <ListItem>
+      <List.Root
+        as="ul"
+        listStyleType="circle"
+        marginLeft="1em"
+        marginTop="0.6rem"
+      >
+        <List.Item>Process your order, manage your account.</List.Item>
+        <List.Item>
           Email you with special offers on other products and services we think
           you mightlike.
-        </ListItem>
-        <ListItem>
+        </List.Item>
+        <List.Item>
           Analyze your tracked work achievements. This just happens throughout
           your account.
-        </ListItem>
-      </Box>
+        </List.Item>
+      </List.Root>
       <Text as="p" fontSize="xl" marginTop="0.6rem">
         If you agree, {companyName} will share your data with our partner
         companies so that they may offer you their products and services.
       </Text>
-      <Box as="ul" listStyleType="circle" marginLeft="1em" marginTop="0.6rem">
-        <ListItem>Stripe - for payments and subscriptions</ListItem>
-      </Box>
+      <List.Root
+        as="ul"
+        listStyleType="circle"
+        marginLeft="1em"
+        marginTop="0.6rem"
+      >
+        <List.Item>Stripe - for payments and subscriptions</List.Item>
+      </List.Root>
       <Text as="p" fontSize="xl" marginTop="0.6rem">
         When {companyName} processes your order, it may send your data to, and
         also use the resulting information from, credit reference agencies to
@@ -125,9 +157,14 @@ export const PrivacyPolicy = (props: PrivacyPolicyProps) => {
         services of ours that we think you might like, as well as those of our
         partner companies.
       </Text>
-      <Box as="ul" listStyleType="circle" marginLeft="1em" marginTop="0.6rem">
-        <ListItem>Stripe</ListItem>
-      </Box>
+      <List.Root
+        as="ul"
+        listStyleType="circle"
+        marginLeft="1em"
+        marginTop="0.6rem"
+      >
+        <List.Item>Stripe</List.Item>
+      </List.Root>
       <Text as="p" fontSize="xl" marginTop="0.6rem">
         If you have agreed to receive marketing, you may always opt out at a
         later date.
@@ -182,12 +219,17 @@ export const PrivacyPolicy = (props: PrivacyPolicyProps) => {
         If you make a request, we have one month to respond to you. If you would
         like to exercise any of these rights, please contact us
       </Text>
-      <Box as="ul" listStyleType="circle" marginLeft="1em" marginTop="0.6rem">
-        <ListItem>at our email: {companyEmail}</ListItem>
-        <ListItem>
+      <List.Root
+        as="ul"
+        listStyleType="circle"
+        marginLeft="1em"
+        marginTop="0.6rem"
+      >
+        <List.Item>at our email: {companyEmail}</List.Item>
+        <List.Item>
           Or write to us: Kevin Peters, Sprengelstr. 12, 13353 Berlin, Germany
-        </ListItem>
-      </Box>
+        </List.Item>
+      </List.Root>
       <Heading as="h2" fontSize="3xl" marginTop="1rem">
         What are cookies?
       </Heading>
@@ -207,10 +249,15 @@ export const PrivacyPolicy = (props: PrivacyPolicyProps) => {
         {companyName} uses cookies in a range of ways to improve your experience
         on our website, including:
       </Text>
-      <Box as="ul" listStyleType="circle" marginLeft="1em" marginTop="0.6rem">
-        <ListItem>Keeping you signed in</ListItem>
-        <ListItem>Understanding how you use our website</ListItem>
-      </Box>
+      <List.Root
+        as="ul"
+        listStyleType="circle"
+        marginLeft="1em"
+        marginTop="0.6rem"
+      >
+        <List.Item>Keeping you signed in</List.Item>
+        <List.Item>Understanding how you use our website</List.Item>
+      </List.Root>
       <Heading as="h2" fontSize="3xl" marginTop="1rem">
         What types of cookies do we use?
       </Heading>
@@ -218,14 +265,19 @@ export const PrivacyPolicy = (props: PrivacyPolicyProps) => {
         There are a numberof different types of cookies, however, our website
         uses:
       </Text>
-      <Box as="ul" listStyleType="circle" marginLeft="1em" marginTop="0.6rem">
-        <ListItem>
+      <List.Root
+        as="ul"
+        listStyleType="circle"
+        marginLeft="1em"
+        marginTop="0.6rem"
+      >
+        <List.Item>
           Functionality - {companyName} uses these cookies so that we recognize
           you on our website and remember your previously selected preferences.
           These could include what language you prefer and location you are in.
           A mix of first-party and third-party cookies are used.
-        </ListItem>
-        <ListItem>
+        </List.Item>
+        <List.Item>
           Advertising — {companyName} uses these cookies to collect information
           about your visit to our website, the content you viewed, the links you
           followed and information about your browser, device, and your IP
@@ -234,8 +286,8 @@ export const PrivacyPolicy = (props: PrivacyPolicyProps) => {
           online data collected through cookies with our advertising partners.
           This means that when you visit another website, you may be shown
           advertising based on your browsing patterns on our website.
-        </ListItem>
-      </Box>
+        </List.Item>
+      </List.Root>
       <Heading as="h2" fontSize="3xl" marginTop="1rem">
         How to manage cookies
       </Heading>
@@ -268,13 +320,18 @@ export const PrivacyPolicy = (props: PrivacyPolicyProps) => {
         we hold on you, or you would like to exercise one of your data
         protection rights, please do not hesitate to contact us.
       </Text>
-      <Box as="ul" listStyleType="circle" marginLeft="1em" marginTop="0.6rem">
-        <ListItem>Email us at: {companyEmail}</ListItem>
-        <ListItem>
+      <List.Root
+        as="ul"
+        listStyleType="circle"
+        marginLeft="1em"
+        marginTop="0.6rem"
+      >
+        <List.Item>Email us at: {companyEmail}</List.Item>
+        <List.Item>
           Or write to us at: Kevin Peters, Sprengelstr. 12, 13353 Berlin,
           Germany
-        </ListItem>
-      </Box>
+        </List.Item>
+      </List.Root>
       <Heading as="h2" fontSize="3xl" marginTop="1rem">
         How to contact the appropriate authority
       </Heading>
@@ -283,12 +340,17 @@ export const PrivacyPolicy = (props: PrivacyPolicyProps) => {
         {companyName} has not addressed your concern in a satisfactory manner,
         you may contact the Information Commissioner’s Office.
       </Text>
-      <Box as="ul" listStyleType="circle" marginLeft="1em" marginTop="0.6rem">
-        <ListItem>Email: {companyEmail}</ListItem>
-        <ListItem>
+      <List.Root
+        as="ul"
+        listStyleType="circle"
+        marginLeft="1em"
+        marginTop="0.6rem"
+      >
+        <List.Item>Email: {companyEmail}</List.Item>
+        <List.Item>
           Kevin Peters, Sprengelstr. 12, 13353 Berlin, Germany
-        </ListItem>
-      </Box>
+        </List.Item>
+      </List.Root>
     </>
   );
 };

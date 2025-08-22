@@ -29,7 +29,7 @@ import { FreeToolHeroText } from "../../components/FreeToolHeroText";
 import { toaster } from "../../components/ui/toaster";
 import { getMessages } from "../../messages/getMessages";
 
-const baseUrl = "https://www.workplacify.com";
+const baseUrl = "https://workplacify.com";
 const url = `${baseUrl}/free-tools/desk-scheduling-efficiency-calculator`;
 
 const DeskSchedulingEfficiencyCalculator = () => {

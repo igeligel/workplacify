@@ -1,4 +1,4 @@
-import { Box, Heading, ListItem, Text } from "@chakra-ui/react";
+import { Heading, List, Text } from "@chakra-ui/react";
 
 type LegalProps = {
   companyName: string;
@@ -18,30 +18,30 @@ export const Legal = (props: LegalProps) => {
       <Text as="p" fontSize="xl" marginTop="0.6rem">
         Angaben gemäß § 5 TMG
       </Text>
-      <Box listStyleType="circle" marginLeft="1em" marginTop="0.6rem">
-        <ListItem>
+      <List.Root listStyleType="circle" marginLeft="1em" marginTop="0.6rem">
+        <List.Item>
           <Text>Kevin Peters</Text>
           <Text>Sprengelstr. 12</Text>
           <Text>13353 Berlin</Text>
-        </ListItem>
-        <ListItem>
+        </List.Item>
+        <List.Item>
           <Text>Vertreten durch: </Text>
           <Text>Kevin Peters</Text>
           <Text>Kontakt:</Text>
           <Text>Telefon: -/-</Text>
           <Text>Fax: -/-</Text>
           <Text>E-Mail: kevinigeligeligel@gmail.com</Text>
-        </ListItem>
-        <ListItem>
+        </List.Item>
+        <List.Item>
           <Text>Umsatzsteuer-ID:</Text>
           <Text>
             Umsatzsteuer-Identifikationsnummer gemäß §27a Umsatzsteuergesetz:
             -/-
           </Text>
-        </ListItem>
-        <ListItem>Wirtschafts-ID: -/-</ListItem>
-        <ListItem>Aufsichtsbehörde: -/-</ListItem>
-      </Box>
+        </List.Item>
+        <List.Item>Wirtschafts-ID: -/-</List.Item>
+        <List.Item>Aufsichtsbehörde: -/-</List.Item>
+      </List.Root>
       <Heading as="h2" fontSize="3xl" marginTop="1rem">
         Haftungsausschluss
       </Heading>
