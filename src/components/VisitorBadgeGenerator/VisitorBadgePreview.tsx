@@ -56,25 +56,27 @@ export function VisitorBadgePreview({
         top="50%"
         left="24px"
         transform="translateY(-50%)"
-        borderRadius="full"
-        overflow="hidden"
         boxSize="100px"
+        overflow="hidden"
+        borderRadius="full"
       >
-        {photoPreview ? (
-          <Image
-            src={photoPreview}
-            alt="Visitor photo"
-            boxSize="100px"
-            objectFit="cover"
-          />
-        ) : (
-          <Avatar
-            size={100}
-            name={formData.name || "Visitor"}
-            variant="beam"
-            colors={["#92A1C6", "#146A7C", "#F0AB3D", "#C271B4", "#C20D90"]}
-          />
-        )}
+        <Box id="visitor-badge-preview-photo">
+          {photoPreview ? (
+            <Image
+              src={photoPreview}
+              alt="Visitor photo"
+              boxSize="100px"
+              objectFit="cover"
+            />
+          ) : (
+            <Avatar
+              size={100}
+              name={formData.name || "Visitor"}
+              variant="beam"
+              colors={["#92A1C6", "#146A7C", "#F0AB3D", "#C271B4", "#C20D90"]}
+            />
+          )}
+        </Box>
       </Box>
 
       {/* Visitor Information */}
@@ -129,12 +131,14 @@ export function VisitorBadgePreview({
           borderRadius="md"
           boxSize="80px"
         >
-          <QRCode
-            value={qrValue}
-            size={64}
-            style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-            viewBox={`0 0 256 256`}
-          />
+          <Box id="qr-code-preview">
+            <QRCode
+              value={qrValue}
+              size={64}
+              style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+              viewBox={`0 0 256 256`}
+            />
+          </Box>
         </Box>
       )}
     </Box>

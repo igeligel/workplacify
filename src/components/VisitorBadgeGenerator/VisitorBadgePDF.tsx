@@ -8,24 +8,13 @@ import {
   View,
 } from "@react-pdf/renderer";
 import { format } from "date-fns";
-import { toPng } from "html-to-image";
+import { domToPng } from "modern-screenshot";
 
 // import QRCode from "react-qr-code";
 
 // Register fonts
-Font.register({
-  family: "Inter",
-  fonts: [
-    {
-      src: "https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfMZhrib2Bg-4.ttf",
-      fontWeight: 400,
-    },
-    {
-      src: "https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuFuYMZhrib2Bg-4.ttf",
-      fontWeight: 700,
-    },
-  ],
-});
+// Use system fonts instead of loading external ones
+Font.registerHyphenationCallback((word) => [word]);
 
 // Create styles
 const styles = StyleSheet.create({
@@ -39,50 +28,39 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   logo: {
-    width: 40,
-    height: 40,
-    marginBottom: 10,
+    width: 60,
+    height: 60,
+    marginBottom: 20,
   },
   title: {
-    fontSize: 24,
-    fontFamily: "Inter",
+    fontSize: 36,
+    fontFamily: "Helvetica",
     fontWeight: 700,
-    marginBottom: 20,
+    marginBottom: 30,
   },
   content: {
     flexDirection: "row",
-    marginTop: 20,
-  },
-  photo: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-    marginRight: 40,
+    marginTop: 30,
   },
   info: {
     flex: 1,
   },
   name: {
-    fontSize: 24,
-    fontFamily: "Inter",
-    fontWeight: 700,
-    marginBottom: 8,
+    fontSize: 36,
+    marginBottom: 16,
   },
   company: {
-    fontSize: 16,
-    fontFamily: "Inter",
+    fontSize: 24,
     color: "#4A5568",
-    marginBottom: 8,
+    marginBottom: 16,
   },
   host: {
-    fontSize: 14,
-    fontFamily: "Inter",
+    fontSize: 20,
     color: "#718096",
-    marginBottom: 8,
+    marginBottom: 16,
   },
   date: {
-    fontSize: 14,
-    fontFamily: "Inter",
+    fontSize: 20,
     color: "#718096",
     marginTop: "auto",
   },
@@ -90,8 +68,8 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 40,
     right: 40,
-    width: 100,
-    height: 100,
+    width: 150,
+    height: 150,
   },
 });
 
@@ -114,14 +92,35 @@ export function VisitorBadgePDF({
   qrCodeDataUrl,
   avatarDataUrl,
 }: VisitorBadgePDFProps) {
+  console.log({
+    photoPreview,
+    avatarDataUrl,
+  });
   return (
     <Document>
-      <Page size="A6" style={styles.page}>
-        <View style={styles.header}>
+      <Page size="A5" style={styles.page}>
+        <View>
+          <Text>VISITOR</Text>
           <Image
-            src="/logo-squared-transparent-background-500x.png"
-            style={styles.logo}
+            src={photoPreview || avatarDataUrl}
+            style={{
+              width: 100,
+              height: 100,
+            }}
           />
+          <Text style={styles.name}>{formData.name}</Text>
+          <Text style={styles.company}>{formData.company}</Text>
+          {formData.hostEmployee && (
+            <Text style={styles.host}>Host: {formData.hostEmployee}</Text>
+          )}
+          <Text style={styles.date}>
+            Date: {format(new Date(formData.date), "MMM dd, yyyy")}
+          </Text>
+
+          {formData.includeQR && <Image src={qrCodeDataUrl} />}
+        </View>
+        {/* <View style={styles.header}>
+
           <Text style={styles.title}>VISITOR</Text>
         </View>
 
@@ -129,51 +128,28 @@ export function VisitorBadgePDF({
           <Image src={photoPreview || avatarDataUrl} style={styles.photo} />
 
           <View style={styles.info}>
-            <Text style={styles.name}>{formData.name}</Text>
-            <Text style={styles.company}>{formData.company}</Text>
-            {formData.hostEmployee && (
-              <Text style={styles.host}>Host: {formData.hostEmployee}</Text>
-            )}
-            <Text style={styles.date}>
-              Date: {format(new Date(formData.date), "MMM dd, yyyy")}
-            </Text>
+
+
+
+
           </View>
         </View>
 
-        {formData.includeQR && (
-          <Image src={qrCodeDataUrl} style={styles.qrCode} />
-        )}
+         */}
       </Page>
     </Document>
   );
 }
 
 // Helper function to convert QR code to image
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export async function getQRCodeImage(_qrCodeValue: string): Promise<string> {
-  const qrCodeElement = document.createElement("div");
-  qrCodeElement.style.padding = "8px";
-  qrCodeElement.style.background = "white";
-
-  const qrCode = document.createElement("div");
-  qrCode.style.width = "256px";
-  qrCode.style.height = "256px";
-
-  qrCodeElement.appendChild(qrCode);
-  document.body.appendChild(qrCodeElement);
-
-  // const qrCodeComponent = (
-  //   <QRCode
-  //     value={qrCodeValue}
-  //     size={256}
-  //     style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-  //     viewBox="0 0 256 256"
-  //   />
-  // );
+export async function getQRCodeImage(): Promise<string> {
+  const qrCodeElement = document.getElementById("qr-code-preview");
+  if (!qrCodeElement) {
+    throw new Error("QR code element not found");
+  }
 
   // Convert QR code to PNG
-  const dataUrl = await toPng(qrCodeElement, { quality: 1.0 });
+  const dataUrl = await domToPng(qrCodeElement, { scale: 4, debug: true });
 
-  document.body.removeChild(qrCodeElement);
   return dataUrl;
 }

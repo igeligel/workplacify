@@ -155,6 +155,12 @@ Translations can be used via a hook `const t = useTranslations("AppMenu");`.
 
 Make sure to use Chakra V3. The component API might be a bit different. You can check in the code base for errors.
 
+Make sure to run prettier regularly:
+
+```sh
+npm run prettier
+```
+
 You can run the following commands to check for errors:
 
 ```sh

@@ -2,20 +2,40 @@ import {
   Box,
   Button,
   Field,
-  HStack,
   Input,
   Stack,
   Switch,
+  Tabs,
   VStack,
 } from "@chakra-ui/react";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { format } from "date-fns";
-import { toBlob, toPng } from "html-to-image";
-import { FormEventHandler, useState } from "react";
+import { toBlob } from "html-to-image";
+import { domToPng } from "modern-screenshot";
+import dynamic from "next/dynamic";
+import { useState } from "react";
+import { isMobile } from "react-device-detect";
 
 import { toaster } from "../ui/toaster";
 import { VisitorBadgePDF, getQRCodeImage } from "./VisitorBadgePDF";
 import { VisitorBadgePreview } from "./VisitorBadgePreview";
+
+const PDFViewer = dynamic(
+  () => import("@react-pdf/renderer").then((mod) => mod.PDFViewer),
+  {
+    ssr: false,
+    loading: () => (
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        height="500px"
+      >
+        Loading PDF viewer...
+      </Box>
+    ),
+  },
+);
 
 interface VisitorFormData {
   name: string;
@@ -37,20 +57,15 @@ const initialFormData: VisitorFormData = {
 export function VisitorBadgeForm() {
   const [formData, setFormData] = useState<VisitorFormData>(initialFormData);
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
+  const [qrCodeDataUrl, setQrCodeDataUrl] = useState<string>("");
+  const [avatarDataUrl, setAvatarDataUrl] = useState<string>("");
+  const [isGenerating, setIsGenerating] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
-    }));
-  };
-
-  const handleSwitchChange: FormEventHandler<HTMLLabelElement> = (e) => {
-    const { name, checked } = e.target as HTMLInputElement;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: checked,
     }));
   };
 
@@ -77,43 +92,33 @@ export function VisitorBadgeForm() {
     }
   };
 
-  const [qrCodeDataUrl, setQrCodeDataUrl] = useState<string>("");
-  const [avatarDataUrl, setAvatarDataUrl] = useState<string>("");
-  const [isGenerating, setIsGenerating] = useState(false);
-
   const generateDataUrls = async () => {
     setIsGenerating(true);
     try {
       // Generate QR code data URL if needed
       if (formData.includeQR) {
-        const qrValue = JSON.stringify({
-          name: formData.name,
-          company: formData.company,
-          date: formData.date,
-          host: formData.hostEmployee,
-        });
-        const qrDataUrl = await getQRCodeImage(qrValue);
+        // const qrValue = JSON.stringify({
+        //   name: formData.name,
+        //   company: formData.company,
+        //   date: formData.date,
+        //   host: formData.hostEmployee,
+        // });
+        const qrDataUrl = await getQRCodeImage();
         setQrCodeDataUrl(qrDataUrl);
       }
 
-      // Generate avatar data URL if no photo is provided
+      // Generate a simple colored rectangle as avatar if no photo is provided
       if (!photoPreview) {
-        const avatarElement = document.createElement("div");
-        avatarElement.style.width = "256px";
-        avatarElement.style.height = "256px";
-        document.body.appendChild(avatarElement);
-
-        avatarElement.innerHTML = `<div style="width: 256px; height: 256px;">
-          <svg width="256" height="256" viewBox="0 0 256 256">
-            <rect width="256" height="256" fill="#92A1C6" />
-          </svg>
-        </div>`;
-
-        const dataUrl = await toPng(avatarElement, { quality: 1.0 });
-        setAvatarDataUrl(dataUrl);
-        document.body.removeChild(avatarElement);
+        const badgePreviewPhoto = document.getElementById(
+          "visitor-badge-preview-photo",
+        );
+        if (badgePreviewPhoto) {
+          const dataUrl = await domToPng(badgePreviewPhoto, { scale: 4 });
+          setAvatarDataUrl(dataUrl);
+        }
       }
     } catch (error) {
+      debugger;
       toaster.create({
         title: "Error generating badge",
         description: "Please try again",
@@ -189,7 +194,7 @@ export function VisitorBadgeForm() {
       <Box flex="1">
         <form onSubmit={handleSubmit}>
           <VStack gap={4} align="stretch">
-            <Field.Root required>
+            <Field.Root required colorPalette="orange">
               <Field.Label>Visitor Name</Field.Label>
               <Input
                 name="name"
@@ -199,7 +204,7 @@ export function VisitorBadgeForm() {
               />
             </Field.Root>
 
-            <Field.Root required>
+            <Field.Root required colorPalette="orange">
               <Field.Label>Company</Field.Label>
               <Input
                 name="company"
@@ -209,7 +214,7 @@ export function VisitorBadgeForm() {
               />
             </Field.Root>
 
-            <Field.Root required>
+            <Field.Root required colorPalette="orange">
               <Field.Label>Visit Date</Field.Label>
               <Input
                 name="date"
@@ -219,7 +224,7 @@ export function VisitorBadgeForm() {
               />
             </Field.Root>
 
-            <Field.Root>
+            <Field.Root colorPalette="orange">
               <Field.Label>Host Employee</Field.Label>
               <Input
                 name="hostEmployee"
@@ -229,7 +234,7 @@ export function VisitorBadgeForm() {
               />
             </Field.Root>
 
-            <Field.Root>
+            <Field.Root colorPalette="orange">
               <Field.Label>Photo</Field.Label>
               <Input
                 name="photo"
@@ -240,65 +245,98 @@ export function VisitorBadgeForm() {
               />
             </Field.Root>
 
-            <Field.Root display="flex" alignItems="center">
-              <Field.Label htmlFor="include-qr" mb="0">
-                Include QR Code
-              </Field.Label>
+            <Field.Root
+              display="flex"
+              alignItems="center"
+              colorPalette="orange"
+            >
               <Switch.Root
                 id="include-qr"
                 name="includeQR"
                 checked={formData.includeQR}
-                onChange={handleSwitchChange}
-              />
+                onCheckedChange={(details) => {
+                  console.log({ details });
+                  setFormData((prev) => ({
+                    ...prev,
+                    includeQR: details.checked,
+                  }));
+                }}
+              >
+                <Switch.HiddenInput />
+                <Switch.Control>
+                  <Switch.Thumb />
+                </Switch.Control>
+                <Switch.Label>Include QR Code</Switch.Label>
+              </Switch.Root>
             </Field.Root>
 
-            <HStack gap={4}>
-              <Button
-                type="submit"
-                colorScheme="blue"
-                size="lg"
-                loading={isGenerating}
-                disabled={!formData.name || !formData.company || !formData.date}
-              >
-                Preview Badge
-              </Button>
-
-              {!isGenerating && (formData.name || formData.company) && (
-                <>
-                  <PDFDownloadLink
-                    document={
-                      <VisitorBadgePDF
-                        formData={formData}
-                        photoPreview={photoPreview}
-                        qrCodeDataUrl={qrCodeDataUrl}
-                        avatarDataUrl={avatarDataUrl}
-                      />
-                    }
-                    fileName={`visitor-badge-${formData.name.toLowerCase().replace(/\s+/g, "-")}.pdf`}
-                  >
-                    {({ loading }) => (
-                      <Button colorScheme="green" size="lg" loading={loading}>
-                        Download PDF
-                      </Button>
-                    )}
-                  </PDFDownloadLink>
-
-                  <Button
-                    colorScheme="teal"
-                    size="lg"
-                    onClick={handleDownloadPNG}
-                  >
-                    Download PNG
-                  </Button>
-                </>
-              )}
-            </HStack>
+            <Button
+              type="submit"
+              colorScheme="blue"
+              size="lg"
+              loading={isGenerating}
+              disabled={!formData.name || !formData.company || !formData.date}
+            >
+              Generate Badge
+            </Button>
           </VStack>
         </form>
       </Box>
 
       <Box flex="1">
-        <VisitorBadgePreview formData={formData} photoPreview={photoPreview} />
+        <Tabs.Root defaultValue="preview" colorPalette="orange">
+          <Tabs.List>
+            <Tabs.Trigger value="preview">Preview</Tabs.Trigger>
+            <Tabs.Trigger value="pdf">PDF</Tabs.Trigger>
+            <Tabs.Trigger value="png">PNG</Tabs.Trigger>
+          </Tabs.List>
+
+          <Tabs.Content value="preview" paddingTop={4}>
+            <VisitorBadgePreview
+              formData={formData}
+              photoPreview={photoPreview}
+            />
+          </Tabs.Content>
+
+          <Tabs.Content value="pdf" paddingTop={4}>
+            {isMobile ? (
+              <PDFDownloadLink
+                document={
+                  <VisitorBadgePDF
+                    formData={formData}
+                    photoPreview={photoPreview}
+                    qrCodeDataUrl={qrCodeDataUrl}
+                    avatarDataUrl={avatarDataUrl}
+                  />
+                }
+                fileName={`visitor-badge-${formData.name.toLowerCase().replace(/\s+/g, "-")}.pdf`}
+              >
+                {({ loading }) => (
+                  <Button colorScheme="green" size="lg" loading={loading}>
+                    Download PDF
+                  </Button>
+                )}
+              </PDFDownloadLink>
+            ) : (
+              <Box height="500px">
+                <PDFViewer style={{ width: "100%", height: "100%" }}>
+                  <VisitorBadgePDF
+                    formData={formData}
+                    photoPreview={photoPreview}
+                    qrCodeDataUrl={qrCodeDataUrl}
+                    avatarDataUrl={avatarDataUrl}
+                  />
+                </PDFViewer>
+              </Box>
+            )}
+          </Tabs.Content>
+
+          <Tabs.Content value="png" paddingTop={4}>
+            <Button colorScheme="teal" size="lg" onClick={handleDownloadPNG}>
+              Download PNG
+            </Button>
+          </Tabs.Content>
+        </Tabs.Root>
       </Box>
     </Stack>
   );
