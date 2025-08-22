@@ -72,6 +72,11 @@ export const NavbarWithDrawer = () => {
           subLabel: t("deskSchedulingEfficiencyCalculatorDescription"),
           href: "/free-tools/desk-scheduling-efficiency-calculator",
         },
+        {
+          label: t("visitorBadgeGenerator"),
+          subLabel: t("visitorBadgeGeneratorDescription"),
+          href: "/free-tools/visitor-badge-generator",
+        },
       ],
     },
     {

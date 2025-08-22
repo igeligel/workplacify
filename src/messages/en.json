@@ -8,7 +8,9 @@
     "hybridWorkplacePolicyGenerator": "Hybrid Workplace Policy Generator",
     "hybridWorkplacePolicyGeneratorDescription": "Create professional hybrid workplace policies",
     "deskSchedulingEfficiencyCalculator": "Desk Scheduling Efficiency Calculator",
-    "deskSchedulingEfficiencyCalculatorDescription": "Calculate potential savings from optimizing desk usage"
+    "deskSchedulingEfficiencyCalculatorDescription": "Calculate potential savings from optimizing desk usage",
+    "visitorBadgeGenerator": "Visitor Badge Generator",
+    "visitorBadgeGeneratorDescription": "Create professional visitor badges with QR codes"
   },
   "IndexPage": {
     "IndexPageTitle": "Workplacify: Desk Scheduling & Workplace Optimization",
