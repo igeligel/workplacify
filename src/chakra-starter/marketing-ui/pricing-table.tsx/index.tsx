@@ -1,18 +1,25 @@
 import {
   Box,
   Button,
+  Container,
   HStack,
   Heading,
+  Icon,
+  Link,
   List,
   Separator,
   Stack,
   Text,
   VStack,
 } from "@chakra-ui/react";
+import { useTranslations } from "next-intl";
 import NextLink from "next/link";
 import { ReactNode } from "react";
+import { FiGithub } from "react-icons/fi";
 
 import { useWorkplacifyTheme } from "../../../hooks/useWorkplacifyTheme";
+import { CtaActionContainer } from "../BlogArticle/CtaActionContainer";
+import { CtaActionContainerContent } from "../BlogArticle/CtaActionContainerContent";
 import { PricingFeatureListItem } from "./PricingFeatureListItem";
 
 type PriceWrapperProps = {
@@ -48,6 +55,7 @@ const PriceWrapper = (props: PriceWrapperProps) => {
 };
 
 export const ThreeTierPricing = () => {
+  const t = useTranslations("IndexPage");
   const { theme } = useWorkplacifyTheme();
   const textBackgroundColor = theme === "dark" ? "orange.700" : "orange.300";
   const textColor = theme === "dark" ? "gray.300" : "gray.900";
@@ -420,6 +428,32 @@ export const ThreeTierPricing = () => {
           </VStack>
         </PriceWrapper>
       </Stack>
+      <Container maxW={"5xl"}>
+        <CtaActionContainer
+          ctaContent={
+            <CtaActionContainerContent
+              title={t("openSourceCtaTitle")}
+              description={t("openSourceCtaDescription")}
+            />
+          }
+          ctaAction={
+            <Button asChild>
+              <NextLink
+                href={"https://github.com/igeligel/workplacify"}
+                target="_blank"
+              >
+                {t.rich("openSourceCtaButton", {
+                  githubIcon: () => (
+                    <Icon>
+                      <FiGithub />
+                    </Icon>
+                  ),
+                })}
+              </NextLink>
+            </Button>
+          }
+        />
+      </Container>
     </Box>
   );
 };

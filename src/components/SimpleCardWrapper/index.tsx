@@ -4,6 +4,7 @@ import {
   Flex,
   Heading,
   Icon,
+  Link,
   Stack,
   Text,
 } from "@chakra-ui/react";
@@ -21,7 +22,7 @@ import { useWorkplacifyTheme } from "../../hooks/useWorkplacifyTheme";
 
 interface CardProps {
   heading: string;
-  description: string;
+  description: React.ReactNode;
   icon: ReactElement;
   href: string;
 }
@@ -112,7 +113,17 @@ export const SimpleCardWrapper = () => {
           <Card
             heading={t("openSource")}
             icon={<Icon as={FcLike} w={10} h={10} />}
-            description={t("openSourceDescription")}
+            description={t.rich("openSourceDescription", {
+              githubLink: (chunks: any) => (
+                <Link
+                  href={"https://github.com/igeligel/workplacify"}
+                  colorPalette={"orange"}
+                  target="_blank"
+                >
+                  {chunks}
+                </Link>
+              ),
+            })}
             href={"#"}
           />
         </Flex>

@@ -30,7 +30,10 @@
     "floorPlanning": "Floor planning",
     "floorPlanningDescription": "Assign desks to your floors and create outstanding floor maps.",
     "openSource": "Open-source",
-    "openSourceDescription": "Self-host our software and customize it to your needs. We are open-source!"
+    "openSourceDescription": "Self-host our software and customize it to your needs. We are <githubLink>on GitHub</githubLink>!",
+    "openSourceCtaTitle": "Or self-host Workplacify",
+    "openSourceCtaDescription": "We are open-source and self-hostable. Check out our GitHub repository.",
+    "openSourceCtaButton": "To the <githubIcon></githubIcon> GitHub repository"
   },
   "AppPage": {
     "startBoxHeading": "Get started with workplacify",

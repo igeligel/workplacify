@@ -29,8 +29,11 @@
     "officeAnalyticsDescription": "Sie möchten Kosten für Büroflächen sparen? Unsere Analysetools helfen Ihnen dabei.",
     "floorPlanning": "Etagenplanung",
     "floorPlanningDescription": "Weisen Sie Ihren Etagen Schreibtische zu und erstellen Sie hervorragende Etagenpläne.",
-    "openSourceDescription": "Hosten Sie unsere Software selbst und passen Sie sie an Ihre Bedürfnisse an. Wir sind quelloffen!",
-    "openSource": "Open-Source"
+    "openSourceDescription": "Hosten Sie unsere Software selbst und passen Sie sie an Ihre Bedürfnisse an. Wir sind <githubLink>auf GitHub</githubLink>!",
+    "openSource": "Open-Source",
+    "openSourceCtaTitle": "Oder hosten Sie Workplacify selbst",
+    "openSourceCtaDescription": "Wir sind Open-Source und selbst hostbar. Sehen Sie sich unser GitHub-Repository an.",
+    "openSourceCtaButton": "Zum <githubIcon></githubIcon> GitHub-Repository"
   },
   "AppPage": {
     "startBoxHeading": "Starten Sie mit workplacify",
