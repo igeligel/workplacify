@@ -147,6 +147,18 @@ export function VisitorBadgeForm() {
       const blob = await toBlob(previewElement as HTMLElement, {
         quality: 1.0,
         pixelRatio: 2,
+        skipFonts: true, // Skip embedding fonts to avoid CORS issues
+        filter: (node) => {
+          // Remove any font-family styles that might cause issues
+          if (node instanceof HTMLElement) {
+            const style = window.getComputedStyle(node);
+            const fontFamily = style.getPropertyValue("font-family");
+            if (fontFamily.includes("Inter")) {
+              node.style.fontFamily = "system-ui, -apple-system, sans-serif";
+            }
+          }
+          return true;
+        },
       });
 
       if (!blob) {

@@ -15,12 +15,16 @@ import { toPng } from "html-to-image";
 // Register fonts
 Font.register({
   family: "Inter",
-  src: "https://rsms.me/inter/font-files/Inter-Regular.woff2",
-});
-
-Font.register({
-  family: "Inter-Bold",
-  src: "https://rsms.me/inter/font-files/Inter-Bold.woff2",
+  fonts: [
+    {
+      src: "https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfMZhrib2Bg-4.ttf",
+      fontWeight: 400,
+    },
+    {
+      src: "https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuFuYMZhrib2Bg-4.ttf",
+      fontWeight: 700,
+    },
+  ],
 });
 
 // Create styles
@@ -41,7 +45,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontFamily: "Inter-Bold",
+    fontFamily: "Inter",
+    fontWeight: 700,
     marginBottom: 20,
   },
   content: {
@@ -59,7 +64,8 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 24,
-    fontFamily: "Inter-Bold",
+    fontFamily: "Inter",
+    fontWeight: 700,
     marginBottom: 8,
   },
   company: {
