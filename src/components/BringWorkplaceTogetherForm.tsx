@@ -106,7 +106,10 @@ export const JoinOurTeam = () => {
                     left: 0,
                   }}
                 >
-                  <Avatar.Image src={avatar.url} />
+                  <Avatar.Image
+                    src={avatar.url}
+                    alt={`${avatar.name} avatar`}
+                  />
                 </Avatar.Root>
               ))}
             </AvatarGroup>
