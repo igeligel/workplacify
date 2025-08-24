@@ -1,144 +1,107 @@
-import { Box, Heading, Image, Text, VStack } from "@chakra-ui/react";
-import Avatar from "boring-avatars";
-import QRCode from "react-qr-code";
+import { Box, Heading, Text } from "@chakra-ui/react";
+import { format } from "date-fns";
 
-interface VisitorBadgePreviewProps {
-  formData: {
-    name: string;
-    company: string;
-    date: string;
-    hostEmployee: string;
-    includeQR: boolean;
-  };
-  photoPreview: string | null;
-}
+import { QrCodePreview } from "./QrCodePreview";
+import { VisitorBadgeAvatar } from "./VisitorBadgeAvatar";
+import { useVisitorBadgeFormStore } from "./formDataStore";
 
-export function VisitorBadgePreview({
-  formData,
-  photoPreview,
-}: VisitorBadgePreviewProps) {
-  const qrValue = JSON.stringify({
-    name: formData.name,
-    company: formData.company,
-    date: formData.date,
-    host: formData.hostEmployee,
-  });
-
+export function VisitorBadgePreview() {
+  const { formData } = useVisitorBadgeFormStore();
   return (
-    <Box
-      id="badge-preview"
-      borderWidth="1px"
-      borderRadius="lg"
-      p={6}
-      bg="white"
-      boxShadow="lg"
-      width="100%"
-      maxW="400px"
-      mx="auto"
-      position="relative"
-      aspectRatio="1.4"
-    >
-      {/* Header */}
-      <VStack gap={4} align="center" mb={6}>
-        {/* <Icon>
-          <WorkplacifyIcon />
-        </Icon> */}
-        <Heading size="md" textAlign="center">
-          VISITOR
-        </Heading>
-      </VStack>
-
-      {/* Photo/Avatar */}
+    <Box id="visitor-badge-preview-png">
       <Box
-        position="absolute"
-        top="50%"
-        left="24px"
-        transform="translateY(-50%)"
-        boxSize="100px"
+        id="badge-preview"
+        borderWidth="1px"
+        borderRadius="lg"
+        bg="white"
+        boxShadow="lg"
+        width="100%"
+        maxW="300px"
+        mx="auto"
+        position="relative"
+        aspectRatio="0.63"
         overflow="hidden"
-        borderRadius="full"
+        display={"flex"}
+        flexDirection={"column"}
       >
-        <Box id="visitor-badge-preview-photo">
-          {photoPreview ? (
-            <Image
-              src={photoPreview}
-              alt="Visitor photo"
-              boxSize="100px"
-              objectFit="cover"
-            />
-          ) : (
-            <Avatar
-              size={100}
-              name={formData.name || "Visitor"}
-              variant="beam"
-              colors={["#92A1C6", "#146A7C", "#F0AB3D", "#C271B4", "#C20D90"]}
-            />
+        <Box flex={1}>
+          {/* Header */}
+          <Box
+            backgroundColor="orange.200"
+            width={"100%"}
+            display={"flex"}
+            justifyContent={"center"}
+            paddingY={"10px"}
+          >
+            <Text fontWeight={"bold"}>VISITOR</Text>
+          </Box>
+          <Box display={"flex"} justifyContent={"center"} paddingTop={"18px"}>
+            <VisitorBadgeAvatar />
+          </Box>
+          <Box
+            display={"flex"}
+            justifyContent={"center"}
+            flexDirection={"column"}
+            alignItems={"center"}
+            paddingTop={"18px"}
+          >
+            <Heading
+              size="md"
+              style={{
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {formData.name || "Visitor Name"}
+            </Heading>
+            <Text
+              fontSize="md"
+              color="gray.600"
+              style={{
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {formData.company || "Company Name"}
+            </Text>
+            <Text fontSize="sm" color="gray.500" mt="auto">
+              Date: {format(new Date(formData.date), "MMM dd, yyyy")}
+            </Text>
+          </Box>
+        </Box>
+
+        <Box
+          backgroundColor="orange.200"
+          width={"100%"}
+          display={"flex"}
+          flexDirection={"column"}
+          justifyContent={"center"}
+          alignItems={"center"}
+          paddingBottom={"18px"}
+          flex={0}
+          paddingTop={"12px"}
+        >
+          {formData.hostEmployee && (
+            <Text fontSize="sm" color="gray.500">
+              Host: {formData.hostEmployee}
+            </Text>
+          )}
+          {formData.includeQR && (
+            <Box
+              bg="white"
+              p={2}
+              borderRadius="md"
+              boxSize="80px"
+              marginTop={"12px"}
+            >
+              {/* No id to not override the picture taking functionality */}
+              <QrCodePreview />
+            </Box>
           )}
         </Box>
       </Box>
-
-      {/* Visitor Information */}
-      <VStack gap={2} align="flex-start" ml="140px" flex={1}>
-        <Heading
-          size="md"
-          style={{
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            whiteSpace: "nowrap",
-          }}
-        >
-          {formData.name || "Visitor Name"}
-        </Heading>
-        <Text
-          fontSize="md"
-          color="gray.600"
-          style={{
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            whiteSpace: "nowrap",
-          }}
-        >
-          {formData.company || "Company Name"}
-        </Text>
-        {formData.hostEmployee && (
-          <Text
-            fontSize="sm"
-            color="gray.500"
-            style={{
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              whiteSpace: "nowrap",
-            }}
-          >
-            Host: {formData.hostEmployee}
-          </Text>
-        )}
-        <Text fontSize="sm" color="gray.500" mt="auto">
-          Date: {formData.date}
-        </Text>
-      </VStack>
-
-      {/* QR Code */}
-      {formData.includeQR && (
-        <Box
-          position="absolute"
-          bottom="24px"
-          right="24px"
-          bg="white"
-          p={2}
-          borderRadius="md"
-          boxSize="80px"
-        >
-          <Box id="qr-code-preview">
-            <QRCode
-              value={qrValue}
-              size={64}
-              style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-              viewBox={`0 0 256 256`}
-            />
-          </Box>
-        </Box>
-      )}
     </Box>
   );
 }
