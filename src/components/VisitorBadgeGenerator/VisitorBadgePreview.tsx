@@ -1,8 +1,6 @@
-import { Box, Heading, Icon, Image, Text, VStack } from "@chakra-ui/react";
+import { Box, Heading, Image, Text, VStack } from "@chakra-ui/react";
 import Avatar from "boring-avatars";
 import QRCode from "react-qr-code";
-
-import { WorkplacifyIcon } from "../WorkplacifyIcon";
 
 interface VisitorBadgePreviewProps {
   formData: {
@@ -42,9 +40,9 @@ export function VisitorBadgePreview({
     >
       {/* Header */}
       <VStack gap={4} align="center" mb={6}>
-        <Icon>
+        {/* <Icon>
           <WorkplacifyIcon />
-        </Icon>
+        </Icon> */}
         <Heading size="md" textAlign="center">
           VISITOR
         </Heading>

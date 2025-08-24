@@ -98,9 +98,19 @@ export function VisitorBadgePDF({
   });
   return (
     <Document>
-      <Page size="A5" style={styles.page}>
-        <View>
+      <Page size="A4" style={styles.page}>
+        <View
+          style={{
+            width: "53.98mm",
+            height: "85.6mm",
+            borderWidth: "1px",
+            borderStyle: "dashed",
+            borderColor: "gray",
+          }}
+        >
           <Text>VISITOR</Text>
+        </View>
+        <View>
           <Image
             src={photoPreview || avatarDataUrl}
             style={{
