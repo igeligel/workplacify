@@ -2,6 +2,36 @@ import { BlogArticle } from "../chakra-starter/marketing-ui/BlogArticle/types";
 
 export const blogArticles: BlogArticle[] = [
   {
+    uuid: "9ee34256-8c5c-4428-b5c8-764d74167a97",
+    title: "5 Signs You've Outgrown Your Office Spreadsheet",
+    description:
+      "Is your office spreadsheet becoming a bottleneck? Discover the 5 telltale signs that indicate it's time to upgrade your workplace management tools, and learn how to transition to a more efficient solution.",
+    readingTime: "8 min",
+    url: "/blog/signs-outgrown-office-spreadsheet",
+    image: "/og-images/signs-outgrown-office-spreadsheet.png",
+    imageAlt: "5 Signs You've Outgrown Your Office Spreadsheet",
+    tags: [
+      {
+        text: "workspace-management",
+        color: "purple",
+      },
+      {
+        text: "hybrid-work",
+        color: "blue",
+      },
+      {
+        text: "workplace-technology",
+        color: "green",
+      },
+    ],
+    author: {
+      name: "Kevin Peters",
+      jobTitle: "CEO of Workplacify",
+      image: "/profile-kevin-peters.png",
+    },
+    datePublished: new Date("2025-08-25T12:00:00.000Z"),
+  },
+  {
     uuid: "a08a4a54-a5e6-4a6b-a915-8ff273d465ba",
     title: "Desk Scheduling: The Hidden Costs of Your Spreadsheet",
     description:
