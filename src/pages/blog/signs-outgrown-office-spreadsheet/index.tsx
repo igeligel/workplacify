@@ -3,19 +3,14 @@ import {
   Button,
   Code,
   Container,
-  HStack,
-  Heading,
-  Image,
   Link,
   List,
   Stack,
-  Text,
   VStack,
 } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
 import { NextSeo } from "next-seo";
 import NextLink from "next/link";
-import { LuCircleCheck, LuCircleX } from "react-icons/lu";
 
 import { blogArticles } from "../../../blogs/blogArticles";
 import { BlogArticle } from "../../../chakra-starter/marketing-ui/BlogArticle";
@@ -26,6 +21,10 @@ import { BlogIntroductionText } from "../../../chakra-starter/marketing-ui/BlogA
 import { BlogText } from "../../../chakra-starter/marketing-ui/BlogArticle/BlogText";
 import { CtaActionContainer } from "../../../chakra-starter/marketing-ui/BlogArticle/CtaActionContainer";
 import { CtaActionContainerContent } from "../../../chakra-starter/marketing-ui/BlogArticle/CtaActionContainerContent";
+import ComparisonTile from "../../../chakra-starter/marketing-ui/ComparisonTile";
+import { ComparisonTileBox } from "../../../chakra-starter/marketing-ui/ComparisonTile/ComparisonTileBox";
+import { ComparisonTileCta } from "../../../chakra-starter/marketing-ui/ComparisonTile/ComparisonTileCta";
+import { ComparisonTileListItem } from "../../../chakra-starter/marketing-ui/ComparisonTile/ComparisonTileListItem";
 import { Faq } from "../../../components/Faq";
 import { WorkplacifyIcon } from "../../../components/WorkplacifyIcon";
 import { getMessages } from "../../../messages/getMessages";
@@ -161,179 +160,103 @@ const BlogContent = () => (
       sign that your tool is failing you.
     </BlogText>
 
-    <HStack display={"flex"} gap={4} alignItems={"stretch"}>
-      <Box
-        flex={1}
-        backgroundColor={"orange.50"}
-        borderColor={"orange.200"}
-        borderWidth={1}
-        borderRadius={"md"}
-        padding={4}
-      >
-        <Box
-          borderColor={"orange.200"}
-          borderWidth={1}
-          borderRadius={"md"}
-          overflow={"hidden"}
-        >
-          <Image
-            src={"/workplacify-comparison.png"}
-            alt="A visual comparison showing the chaos of an office spreadsheet versus the clarity of a Workplacify workplace management platform, illustrating the signs you've outgrown your office spreadsheet."
-          />
-        </Box>
-        <Heading display={"flex"} alignItems={"center"} marginTop={4}>
-          With{" "}
-          <Box maxW={"24px"} marginX={1}>
-            <WorkplacifyIcon />
-          </Box>
-          workplacify
-        </Heading>
-        <List.Root
-          gap="2"
-          variant="plain"
-          align="center"
-          as={"ol"}
-          fontSize={"md"}
-          marginTop={2}
-        >
-          <List.Item alignItems={"flex-start"}>
-            <List.Indicator asChild color="green.500">
-              <LuCircleCheck />
-            </List.Indicator>
-            <VStack alignItems={"flex-start"} gap={0}>
-              <Text fontWeight={"bold"}>1. Real-time Desk Booking</Text>
-              <Text>
-                Book desks instantly with automatic conflict prevention and live
-                floor maps
-              </Text>
-            </VStack>
-          </List.Item>
-          <List.Item alignItems={"flex-start"}>
-            <List.Indicator asChild color="green.500">
-              <LuCircleCheck />
-            </List.Indicator>
-            <VStack alignItems={"flex-start"} gap={0}>
-              <Text fontWeight={"bold"}>2. Centralized Management</Text>
-              <Text>
-                Single source of truth with automated analytics and reporting
-              </Text>
-            </VStack>
-          </List.Item>
-          <List.Item alignItems={"flex-start"}>
-            <List.Indicator asChild color="green.500">
-              <LuCircleCheck />
-            </List.Indicator>
-            <VStack alignItems={"flex-start"} gap={0}>
-              <Text fontWeight={"bold"}>3. Enterprise Security</Text>
-              <Text>
-                Role-based access control with audit trails and data protection
-              </Text>
-            </VStack>
-          </List.Item>
-        </List.Root>
-        <Box display={"flex"} justifyContent={"center"} marginTop={4}>
-          <Button asChild colorPalette={"orange"} paddingX={12}>
-            <NextLink href={"/"}>Explore Workplacify</NextLink>
-          </Button>
-        </Box>
-      </Box>
-      <Box
-        flexShrink={1}
-        display={"flex"}
-        alignItems={"stretch"}
-        height={"auto"}
-        flexDirection={"column"}
-        justifyContent={"center"}
-        alignContent={"center"}
-      >
-        <Box
-          alignSelf={"center"}
-          width={"1px"}
-          flex={1}
-          backgroundColor={"gray.200"}
+    <ComparisonTile
+      firstTile={
+        <ComparisonTileBox
+          colorPalette="orange"
+          image={{
+            source: "/workplacify-comparison.png",
+            alt: "A visual comparison showing the chaos of an office spreadsheet versus the clarity of a Workplacify workplace management platform, illustrating the signs you've outgrown your office spreadsheet.",
+          }}
+          heading={
+            <>
+              With{" "}
+              <Box maxW={"24px"} marginX={1}>
+                <WorkplacifyIcon />
+              </Box>
+              workplacify
+            </>
+          }
+          listItems={
+            <>
+              <ComparisonTileListItem
+                checked
+                title={<>1. Real-time Desk Booking</>}
+                description={
+                  <>
+                    Book desks instantly with automatic conflict prevention and
+                    live floor maps
+                  </>
+                }
+              />
+              <ComparisonTileListItem
+                checked
+                title={<>2. Centralized Management</>}
+                description={
+                  <>
+                    Single source of truth with automated analytics and
+                    reporting
+                  </>
+                }
+              />
+              <ComparisonTileListItem
+                checked
+                title={<>3. Enterprise Security</>}
+                description={
+                  <>
+                    Role-based access control with audit trails and data
+                    protection
+                  </>
+                }
+              />
+            </>
+          }
+          cta={
+            <ComparisonTileCta>
+              <NextLink href={"/"}>Get Started with Chakra Starter</NextLink>
+            </ComparisonTileCta>
+          }
         />
-        <Box
-          alignSelf={"center"}
-          paddingY={2}
-          color={"gray.400"}
-          fontSize={"md"}
-        >
-          vs
-        </Box>
-        <Box
-          alignSelf={"center"}
-          flex={1}
-          width={"1px"}
-          backgroundColor={"gray.200"}
+      }
+      secondTile={
+        <ComparisonTileBox
+          colorPalette="gray"
+          image={{
+            source: "/spreadsheet-comparison.png",
+            alt: "A visual comparison showing the chaos of an office spreadsheet versus the clarity of a Workplacify workplace management platform, illustrating the signs you've outgrown your office spreadsheet.",
+          }}
+          heading={<>Spreadsheets</>}
+          listItems={
+            <>
+              <ComparisonTileListItem
+                title={<>1. Constant Data Conflicts</>}
+                description={
+                  <>
+                    Multiple versions floating around causing booking conflicts
+                    and confusion
+                  </>
+                }
+              />
+              <ComparisonTileListItem
+                title={<>2. Manual Administrative Work</>}
+                description={
+                  <>
+                    Hours spent fixing formulas and resolving scheduling
+                    conflicts
+                  </>
+                }
+              />
+              <ComparisonTileListItem
+                title={<>3. No Security or Scalability</>}
+                description={
+                  <>Unsecured data sharing and limited growth potential</>
+                }
+              />
+            </>
+          }
         />
-        {/* </Box> */}
-      </Box>
-      <Box
-        flex={1}
-        backgroundColor={"gray.50"}
-        borderColor={"gray.200"}
-        borderWidth={1}
-        borderRadius={"md"}
-        padding={4}
-      >
-        <Box
-          borderColor={"gray.200"}
-          borderWidth={1}
-          borderRadius={"md"}
-          overflow={"hidden"}
-        >
-          <Image
-            borderRadius={"md"}
-            src={"/spreadsheet-comparison.png"}
-            alt="A visual comparison showing the chaos of an office spreadsheet versus the clarity of a Workplacify workplace management platform, illustrating the signs you've outgrown your office spreadsheet."
-          />
-        </Box>
-        <Heading display={"flex"} alignItems={"center"} marginTop={4}>
-          Spreadsheets
-        </Heading>
-        <List.Root
-          gap="2"
-          variant="plain"
-          align="center"
-          as={"ol"}
-          fontSize={"md"}
-          marginTop={2}
-        >
-          <List.Item alignItems={"flex-start"}>
-            <List.Indicator asChild color="red.500">
-              <LuCircleX />
-            </List.Indicator>
-            <VStack alignItems={"flex-start"} gap={0}>
-              <Text fontWeight={"bold"}>1. Constant Data Conflicts</Text>
-              <Text>
-                Multiple versions floating around causing booking conflicts and
-                confusion
-              </Text>
-            </VStack>
-          </List.Item>
-          <List.Item alignItems={"flex-start"}>
-            <List.Indicator asChild color="red.500">
-              <LuCircleX />
-            </List.Indicator>
-            <VStack alignItems={"flex-start"} gap={0}>
-              <Text fontWeight={"bold"}>2. Manual Administrative Work</Text>
-              <Text>
-                Hours spent fixing formulas and resolving scheduling conflicts
-              </Text>
-            </VStack>
-          </List.Item>
-          <List.Item alignItems={"flex-start"}>
-            <List.Indicator asChild color="red.500">
-              <LuCircleX />
-            </List.Indicator>
-            <VStack alignItems={"flex-start"} gap={0}>
-              <Text fontWeight={"bold"}>3. No Security or Scalability</Text>
-              <Text>Unsecured data sharing and limited growth potential</Text>
-            </VStack>
-          </List.Item>
-        </List.Root>
-      </Box>
-    </HStack>
+      }
+    />
 
     <BlogHeadingSecondary
       slug="time-management"
