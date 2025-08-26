@@ -27,7 +27,7 @@ const IndexPage = () => {
           description,
           images: [
             {
-              url: "/og-images/home.png",
+              url: `${url}/og-images/home.png`,
               width: 1200,
               height: 630,
               alt: "Home picture",

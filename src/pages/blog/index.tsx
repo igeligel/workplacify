@@ -26,7 +26,7 @@ const BlogArticlesPage = () => {
             "The modern workplace is more than just a physical space; it's an ecosystem of people, technology, and culture. Here, we decode the trends and share actionable insights that empower you to build more efficient, engaging, and data-driven work environments.",
           images: [
             {
-              url: "/og-images/blog-articles.png",
+              url: `${url}/og-images/blog-articles.png`,
               width: 1200,
               height: 630,
             },

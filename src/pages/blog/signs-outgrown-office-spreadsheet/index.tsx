@@ -768,7 +768,7 @@ const BlogArticleComponent = () => {
             "Is your office spreadsheet becoming a bottleneck? Discover the 5 telltale signs that indicate it's time to upgrade your workplace management tools, and learn how to transition to a more efficient solution.",
           images: [
             {
-              url: "/og-images/5-signs-youve-outgrown-your-office-spreadsheet.png",
+              url: `${url}/og-images/5-signs-youve-outgrown-your-office-spreadsheet.png`,
               width: 1200,
               height: 630,
             },

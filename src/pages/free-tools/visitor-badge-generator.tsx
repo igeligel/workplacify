@@ -38,7 +38,7 @@ export default function VisitorBadgeGenerator() {
           type: "website",
           images: [
             {
-              url: "/og-images/visitor-badge-generator.png",
+              url: `${baseUrl}/og-images/visitor-badge-generator.png`,
               width: 1200,
               height: 630,
               alt: "Visitor Badge Generator Preview",

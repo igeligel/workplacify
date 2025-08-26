@@ -591,7 +591,7 @@ const BlogArticleComponent = () => {
             "The hidden costs of your spreadsheet are real. Learn how a dedicated desk scheduling system can save you time, money, and headaches.",
           images: [
             {
-              url: "/og-images/desk-scheduling-the-hidden-costs-of-your-spreadsheet.png",
+              url: `${url}/og-images/desk-scheduling-the-hidden-costs-of-your-spreadsheet.png`,
               width: 1200,
               height: 630,
             },
