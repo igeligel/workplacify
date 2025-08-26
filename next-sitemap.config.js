@@ -2,5 +2,5 @@
 module.exports = {
   siteUrl: process.env.SITE_URL || "https://workplacify.com",
   generateRobotsTxt: true,
-  exclude: ["/app*", "/legal", "/privacy-policy", "/terms-of-use"],
+  exclude: ["/app*", "/legal", "/privacy-policy", "/terms-of-use", "/signin"],
 };
