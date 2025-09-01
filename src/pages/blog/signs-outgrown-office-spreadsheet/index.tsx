@@ -213,7 +213,7 @@ const BlogContent = () => (
           }
           cta={
             <ComparisonTileCta>
-              <NextLink href={"/"}>Get Started with Chakra Starter</NextLink>
+              <NextLink href={"/"}>Get Started with Workplacify</NextLink>
             </ComparisonTileCta>
           }
         />

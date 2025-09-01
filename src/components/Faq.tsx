@@ -21,7 +21,7 @@ export const Faq = (props: FaqProps) => {
         <Accordion.Root multiple>
           {props.questionsAndAnswers.map((qa, index) => (
             <Accordion.Item key={index} value={qa.questionId}>
-              <Accordion.ItemTrigger>
+              <Accordion.ItemTrigger cursor={"pointer"}>
                 <Box flex="1" textAlign="left" fontWeight="semibold">
                   {qa.question}
                 </Box>
