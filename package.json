@@ -51,7 +51,7 @@
     "@trpc/client": "^10.45.2",
     "@trpc/next": "^10.45.2",
     "@trpc/react-query": "^10.45.2",
-    "@trpc/server": "^10.45.2",
+    "@trpc/server": "^11.5.0",
     "@uidotdev/usehooks": "^2.4.1",
     "boring-avatars": "^2.0.1",
     "change-case": "^5.4.4",
