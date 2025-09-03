@@ -839,21 +839,20 @@ const BlogContent = () => (
 );
 
 const DeskSharingVsHotDeskingDifferencesBlogPage = () => {
-  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/blog/desk-sharing-vs-hot-desking-differences`;
+  const url = `${process.env.NEXT_PUBLIC_BASE_URL}${article.url}`;
   return (
     <>
       <NextSeo
-        title="Desk Sharing vs Hot Desking: What's the Difference?"
-        description="Confused about desk sharing vs hot desking? Learn the key differences, pros & cons, and discover which flexible seating model is the right choice for your business's culture and goals."
+        title={article.title}
+        description={article.description}
         canonical={url}
         openGraph={{
           url,
-          title: "Desk Sharing vs Hot Desking: What&apos;s the Difference?",
-          description:
-            "Confused about desk sharing vs hot desking? Learn the key differences, pros & cons, and discover which flexible seating model is the right choice for your business&apos;s culture and goals.",
+          title: article.title,
+          description: article.description,
           images: [
             {
-              url: `${url}/og-images/desk-sharing-vs-hot-desking-differences.png`,
+              url: `${process.env.NEXT_PUBLIC_BASE_URL}${article.image}`,
               width: 1200,
               height: 630,
             },
