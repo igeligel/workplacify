@@ -5,7 +5,7 @@ export const blogArticles: BlogArticle[] = [
     uuid: "eafce814-95ed-4755-b28c-5159df5548e3",
     title: "Desk Sharing vs Hot Desking: What's the Difference?",
     description:
-      "Confused about desk sharing vs hot desking? Learn the key differences, pros & cons, and discover which flexible seating model is the right choice for your business's culture and goals.",
+      "Discover the key differences between desk sharing and hot desking. Explore pros, cons, and tips to choose the right flexible workspace model for your business.",
     readingTime: "13 min",
     url: "/blog/desk-sharing-vs-hot-desking-differences",
     image: "/og-images/desk-sharing-vs-hot-desking-differences.png",
@@ -35,7 +35,7 @@ export const blogArticles: BlogArticle[] = [
     uuid: "cbc011d8-ba37-4aea-a126-135f87ba36ba",
     title: "Desk Sharing for Startups: Cut Costs & Boost Agility",
     description:
-      "Learn how desk sharing can help startups cut costs and boost agility by sharing desks with other companies.",
+      "Learn how desk sharing helps startups cut costs, boost collaboration, and attract top talent. Discover the financial and cultural benefits of flexible seating.",
     readingTime: "8 min",
     url: "/blog/desk-sharing-startups-cut-costs-boost-agility",
     image: "/og-images/desk-sharing-startups-cut-costs-boost-agility.png",
@@ -65,7 +65,7 @@ export const blogArticles: BlogArticle[] = [
     uuid: "9ee34256-8c5c-4428-b5c8-764d74167a97",
     title: "5 Signs You've Outgrown Your Office Spreadsheet",
     description:
-      "Is your office spreadsheet becoming a bottleneck? Discover the 5 telltale signs that indicate it's time to upgrade your workplace management tools, and learn how to transition to a more efficient solution.",
+      "Discover 5 signs you've outgrown your office spreadsheet, from errors to security risks, and learn when to upgrade to smarter workplace management tools.",
     readingTime: "8 min",
     url: "/blog/signs-outgrown-office-spreadsheet",
     image: "/og-images/signs-outgrown-office-spreadsheet.png",

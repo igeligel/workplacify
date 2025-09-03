@@ -17,14 +17,14 @@ const BlogArticlesPage = () => {
     <>
       <NextSeo
         title="Insights for the Modern Workplace"
-        description="The modern workplace is more than just a physical space; it's an ecosystem of people, technology, and culture. Here, we decode the trends and share actionable insights that empower you to build more efficient, engaging, and data-driven work environments."
+        description="Workplacify shares expert insights on office management, from cutting spreadsheet costs to smarter desk sharing and data-driven workplace strategies."
         canonical={url}
         openGraph={{
           url,
           type: "website",
           title: "Insights for the Modern Workplace",
           description:
-            "The modern workplace is more than just a physical space; it's an ecosystem of people, technology, and culture. Here, we decode the trends and share actionable insights that empower you to build more efficient, engaging, and data-driven work environments.",
+            "Workplacify shares expert insights on office management, from cutting spreadsheet costs to smarter desk sharing and data-driven workplace strategies.",
           images: [
             {
               url: `${url}/og-images/blog-articles.png`,

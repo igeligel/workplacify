@@ -23,17 +23,17 @@ import { getMessages } from "../../messages/getMessages";
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 export default function VisitorBadgeGenerator() {
+  const description = `Create free visitor badges online. Customize with names, photos & QR codes, then download as PDF or PNG for instant professional use.`;
   return (
     <>
       <NextSeo
         title="Free Visitor Badge Generator | Create Professional PDF Badges"
-        description="Generate professional visitor badges instantly. Create and download PDF badges with custom details, photos, and QR codes. Free visitor badge template for your workplace."
+        description={description}
         canonical={`${baseUrl}/free-tools/visitor-badge-generator`}
         openGraph={{
           title:
             "Free Visitor Badge Generator | Create Professional PDF Badges",
-          description:
-            "Generate professional visitor badges instantly. Create and download PDF badges with custom details, photos, and QR codes.",
+          description,
           url: `${baseUrl}/free-tools/visitor-badge-generator`,
           type: "website",
           images: [
