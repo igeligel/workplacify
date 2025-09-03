@@ -29,7 +29,7 @@ export const blogArticles: BlogArticle[] = [
       jobTitle: "CEO of Workplacify",
       image: "/profile-kevin-peters.png",
     },
-    datePublished: new Date("2025-09-02T12:00:00.000Z"),
+    datePublished: new Date("2025-09-03T19:26:00.000Z"),
   },
   {
     uuid: "cbc011d8-ba37-4aea-a126-135f87ba36ba",
