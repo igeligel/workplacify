@@ -23,6 +23,7 @@ const IndexPage = () => {
         canonical={`${url}/`}
         openGraph={{
           url,
+          type: "website",
           title: "workplacify: Hybrid Office Scheduling Platform",
           description,
           images: [
@@ -33,7 +34,7 @@ const IndexPage = () => {
               alt: "Home picture",
             },
           ],
-          site_name: "workplacify",
+          siteName: "workplacify",
         }}
         twitter={{
           cardType: "summary_large_image",

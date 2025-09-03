@@ -585,6 +585,7 @@ const BlogArticleComponent = () => {
         canonical={url}
         openGraph={{
           url,
+          type: "article",
           title:
             "The Hidden Costs of Your Spreadsheet: Why You Need a Dedicated Desk Scheduling System",
           description:
@@ -596,7 +597,15 @@ const BlogArticleComponent = () => {
               height: 630,
             },
           ],
-          site_name: "workplacify",
+          article: {
+            publishedTime: article.datePublished.toISOString(),
+            modifiedTime: article.datePublished.toISOString(),
+            expirationTime: article.datePublished.toISOString(),
+            authors: [article.author.name],
+            section: "Workspace Management",
+            tags: article.tags.map((tag) => tag.text),
+          },
+          siteName: "workplacify",
         }}
         twitter={{
           cardType: "summary_large_image",

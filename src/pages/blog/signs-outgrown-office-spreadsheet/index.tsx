@@ -686,6 +686,7 @@ const BlogArticleComponent = () => {
         canonical={url}
         openGraph={{
           url,
+          type: "article",
           title: "5 Signs You've Outgrown Your Office Spreadsheet",
           description:
             "Is your office spreadsheet becoming a bottleneck? Discover the 5 telltale signs that indicate it's time to upgrade your workplace management tools, and learn how to transition to a more efficient solution.",
@@ -696,7 +697,15 @@ const BlogArticleComponent = () => {
               height: 630,
             },
           ],
-          site_name: "workplacify",
+          article: {
+            publishedTime: article.datePublished.toISOString(),
+            modifiedTime: article.datePublished.toISOString(),
+            expirationTime: article.datePublished.toISOString(),
+            authors: [article.author.name],
+            section: "Workspace Management",
+            tags: article.tags.map((tag) => tag.text),
+          },
+          siteName: "workplacify",
         }}
         twitter={{
           cardType: "summary_large_image",

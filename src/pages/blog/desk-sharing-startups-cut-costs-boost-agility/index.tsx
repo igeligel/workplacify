@@ -710,6 +710,7 @@ const DeskSharingStartupsCutCostsBoostAgility = () => {
         openGraph={{
           url,
           title,
+          type: "article",
           description,
           images: [
             {
@@ -719,7 +720,15 @@ const DeskSharingStartupsCutCostsBoostAgility = () => {
               alt: "Desk sharing benefits for startups",
             },
           ],
-          site_name: "workplacify",
+          article: {
+            publishedTime: article.datePublished.toISOString(),
+            modifiedTime: article.datePublished.toISOString(),
+            expirationTime: article.datePublished.toISOString(),
+            authors: [article.author.name],
+            section: "Workspace Management",
+            tags: article.tags.map((tag) => tag.text),
+          },
+          siteName: "workplacify",
         }}
         twitter={{
           cardType: "summary_large_image",

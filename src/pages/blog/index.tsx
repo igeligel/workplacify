@@ -21,6 +21,7 @@ const BlogArticlesPage = () => {
         canonical={url}
         openGraph={{
           url,
+          type: "website",
           title: "Insights for the Modern Workplace",
           description:
             "The modern workplace is more than just a physical space; it's an ecosystem of people, technology, and culture. Here, we decode the trends and share actionable insights that empower you to build more efficient, engaging, and data-driven work environments.",
@@ -31,7 +32,7 @@ const BlogArticlesPage = () => {
               height: 630,
             },
           ],
-          site_name: "workplacify",
+          siteName: "workplacify",
         }}
         twitter={{
           cardType: "summary_large_image",

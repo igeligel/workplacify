@@ -848,6 +848,7 @@ const DeskSharingVsHotDeskingDifferencesBlogPage = () => {
         canonical={url}
         openGraph={{
           url,
+          type: "article",
           title: article.title,
           description: article.description,
           images: [
@@ -857,7 +858,15 @@ const DeskSharingVsHotDeskingDifferencesBlogPage = () => {
               height: 630,
             },
           ],
-          site_name: "workplacify",
+          article: {
+            publishedTime: article.datePublished.toISOString(),
+            modifiedTime: article.datePublished.toISOString(),
+            expirationTime: article.datePublished.toISOString(),
+            authors: [article.author.name],
+            section: "Workspace Management",
+            tags: article.tags.map((tag) => tag.text),
+          },
+          siteName: "workplacify",
         }}
         twitter={{
           cardType: "summary_large_image",
