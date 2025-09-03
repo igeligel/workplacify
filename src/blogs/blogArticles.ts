@@ -2,6 +2,36 @@ import { BlogArticle } from "../chakra-starter/marketing-ui/BlogArticle/types";
 
 export const blogArticles: BlogArticle[] = [
   {
+    uuid: "eafce814-95ed-4755-b28c-5159df5548e3",
+    title: "Desk Sharing vs Hot Desking: What's the Difference?",
+    description:
+      "Confused about desk sharing vs hot desking? Learn the key differences, pros & cons, and discover which flexible seating model is the right choice for your business's culture and goals.",
+    readingTime: "13 min",
+    url: "/blog/desk-sharing-vs-hot-desking-differences",
+    image: "/og-images/desk-sharing-vs-hot-desking-differences.png",
+    imageAlt: "Desk Sharing vs Hot Desking: What's the Difference?",
+    tags: [
+      {
+        text: "workspace-management",
+        color: "purple",
+      },
+      {
+        text: "hybrid-work",
+        color: "blue",
+      },
+      {
+        text: "workplace-technology",
+        color: "green",
+      },
+    ],
+    author: {
+      name: "Kevin Peters",
+      jobTitle: "CEO of Workplacify",
+      image: "/profile-kevin-peters.png",
+    },
+    datePublished: new Date("2025-09-02T12:00:00.000Z"),
+  },
+  {
     uuid: "cbc011d8-ba37-4aea-a126-135f87ba36ba",
     title: "Desk Sharing for Startups: Cut Costs & Boost Agility",
     description:

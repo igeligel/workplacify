@@ -5,10 +5,11 @@ import Zoom from "react-medium-image-zoom";
 type BlogImageProps = {
   alt: string;
   image: StaticImageData | string;
+  maxWidth?: React.ComponentProps<typeof Box>["maxWidth"];
 };
 
 export const BlogImage = (props: BlogImageProps) => {
-  const { alt, image } = props;
+  const { alt, image, maxWidth } = props;
 
   return (
     <Box
@@ -19,27 +20,29 @@ export const BlogImage = (props: BlogImageProps) => {
       alignItems={"center"}
       width={"100%"}
     >
-      <Zoom>
-        <img
-          src={typeof image === "string" ? image : image.src}
-          alt={alt}
-          style={{
-            borderRadius: "0.5rem",
-            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-            maxWidth: "100%",
-            width: "100%",
-          }}
-        />
-      </Zoom>
-      <Text
-        as="figcaption"
-        fontSize={"md"}
-        textAlign="center"
-        marginTop={"2"}
-        color={"gray.500"}
-      >
-        {alt}
-      </Text>
+      <Box maxWidth={maxWidth || "100%"}>
+        <Zoom>
+          <img
+            src={typeof image === "string" ? image : image.src}
+            alt={alt}
+            style={{
+              borderRadius: "0.5rem",
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+              maxWidth: "100%",
+              width: "100%",
+            }}
+          />
+        </Zoom>
+        <Text
+          as="figcaption"
+          fontSize={"md"}
+          textAlign="center"
+          marginTop={"2"}
+          color={"gray.500"}
+        >
+          {alt}
+        </Text>
+      </Box>
     </Box>
   );
 };
