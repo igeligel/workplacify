@@ -2,6 +2,36 @@ import { BlogArticle } from "../chakra-starter/marketing-ui/BlogArticle/types";
 
 export const blogArticles: BlogArticle[] = [
   {
+    uuid: "13fd086f-486f-496d-99b7-19182a71df9d",
+    title: "Why Do Companies Do Hot Desking?",
+    description:
+      "Learn why companies are adopting hot desking. Discover the benefits of this flexible workspace model and how it can benefit your business.",
+    readingTime: "6 min",
+    url: "/blog/why-companies-do-hot-desking",
+    image: "/og-images/why-companies-do-hot-desking.png",
+    imageAlt: "Why Do Companies Do Hot Desking?",
+    tags: [
+      {
+        text: "workspace-management",
+        color: "purple",
+      },
+      {
+        text: "hybrid-work",
+        color: "blue",
+      },
+      {
+        text: "workplace-technology",
+        color: "green",
+      },
+    ],
+    author: {
+      name: "Kevin Peters",
+      jobTitle: "CEO of Workplacify",
+      image: "/profile-kevin-peters.png",
+    },
+    datePublished: new Date("2025-09-05T18:26:00.000Z"),
+  },
+  {
     uuid: "eafce814-95ed-4755-b28c-5159df5548e3",
     title: "Desk Sharing vs Hot Desking: What's the Difference?",
     description:
