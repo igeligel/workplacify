@@ -2,6 +2,36 @@ import { BlogArticle } from "../chakra-starter/marketing-ui/BlogArticle/types";
 
 export const blogArticles: BlogArticle[] = [
   {
+    uuid: "f2a9b3c1-d4e5-4f6a-8b7c-9d0e1f2a3b4c",
+    title: "Free Hybrid Workplace Policy Generator: Create Yours Now",
+    description:
+      "Create a comprehensive hybrid work policy in minutes with our free generator. Learn why a formal policy is essential and how to implement it successfully.",
+    readingTime: "10 min",
+    url: "/blog/introducing-free-hybrid-workplace-policy-generator",
+    image: "/og-images/introducing-free-hybrid-workplace-policy-generator.png",
+    imageAlt: "Free Hybrid Workplace Policy Generator: Create Yours Now",
+    tags: [
+      {
+        text: "hybrid-work",
+        color: "blue",
+      },
+      {
+        text: "workplace-technology",
+        color: "green",
+      },
+      {
+        text: "hr-tools",
+        color: "orange",
+      },
+    ],
+    author: {
+      name: "Kevin Peters",
+      jobTitle: "CEO of Workplacify",
+      image: "/profile-kevin-peters.png",
+    },
+    datePublished: new Date("2025-09-07T20:10:00.000Z"),
+  },
+  {
     uuid: "13fd086f-486f-496d-99b7-19182a71df9d",
     title: "Why Do Companies Do Hot Desking?",
     description:
