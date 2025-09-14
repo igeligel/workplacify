@@ -2,6 +2,36 @@ import { BlogArticle } from "../chakra-starter/marketing-ui/BlogArticle/types";
 
 export const blogArticles: BlogArticle[] = [
   {
+    uuid: "e7b2c3d4-f5g6-7h8i-9j0k-l1m2n3o4p5q6",
+    title: "5 Hot Desking Problems & How to Solve Them",
+    description:
+      "Discover practical solutions to common hot desking challenges, from desk hunting to team culture. Learn how to create an efficient, collaborative flexible workspace.",
+    readingTime: "12 min",
+    url: "/blog/solve-hot-desking-problems",
+    image: "/og-images/five-hot-desking-problems-how-to-solve-them.png",
+    imageAlt: "5 Hot Desking Problems & How to Solve Them",
+    tags: [
+      {
+        text: "workspace-management",
+        color: "purple",
+      },
+      {
+        text: "hybrid-work",
+        color: "blue",
+      },
+      {
+        text: "workplace-technology",
+        color: "green",
+      },
+    ],
+    author: {
+      name: "Kevin Peters",
+      jobTitle: "CEO of Workplacify",
+      image: "/profile-kevin-peters.png",
+    },
+    datePublished: new Date("2025-09-13T17:00:00.000Z"),
+  },
+  {
     uuid: "f2a9b3c1-d4e5-4f6a-8b7c-9d0e1f2a3b4c",
     title: "Free Hybrid Workplace Policy Generator: Create Yours Now",
     description:
