@@ -2,6 +2,36 @@ import { BlogArticle } from "../chakra-starter/marketing-ui/BlogArticle/types";
 
 export const blogArticles: BlogArticle[] = [
   {
+    uuid: "b1c2d3e4-f5g6-7h8i-9j0k-l1m2n3o4p5q7",
+    title: "Empty Office? How to Improve Office Occupancy",
+    description:
+      "Learn practical strategies to improve office occupancy in your startup. From data-driven insights to creating a magnetic workplace, discover how to make your office a place where people want to be.",
+    readingTime: "15 min",
+    url: "/blog/empty-office-improve-occupancy",
+    image: "/og-images/empty-office-improve-occupancy.png",
+    imageAlt: "Empty Office? How to Improve Office Occupancy",
+    tags: [
+      {
+        text: "workspace-management",
+        color: "purple",
+      },
+      {
+        text: "hybrid-work",
+        color: "blue",
+      },
+      {
+        text: "workplace-technology",
+        color: "green",
+      },
+    ],
+    author: {
+      name: "Kevin Peters",
+      jobTitle: "CEO of Workplacify",
+      image: "/profile-kevin-peters.png",
+    },
+    datePublished: new Date("2025-09-21T12:00:00.000Z"),
+  },
+  {
     uuid: "e7b2c3d4-f5g6-7h8i-9j0k-l1m2n3o4p5q6",
     title: "5 Hot Desking Problems & How to Solve Them",
     description:
