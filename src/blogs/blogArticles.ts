@@ -2,6 +2,36 @@ import { BlogArticle } from "../chakra-starter/marketing-ui/BlogArticle/types";
 
 export const blogArticles: BlogArticle[] = [
   {
+    uuid: "d4e5f6g7-h8i9-j0k1-l2m3-n4o5p6q7r8s9",
+    title: "Why We Chose to Be Open-Source: The Workplacify Philosophy",
+    description:
+      "Discover why we built Workplacify as an open-source platform. Learn how transparency, community collaboration, and freedom to adapt are reshaping workplace technology.",
+    readingTime: "7 min",
+    url: "/blog/open-source-desk-booking-philosophy",
+    image: "/og-images/open-source-desk-booking-philosophy.png",
+    imageAlt: "Why We Chose to Be Open-Source: The Workplacify Philosophy",
+    tags: [
+      {
+        text: "workspace-management",
+        color: "purple",
+      },
+      {
+        text: "open-source",
+        color: "orange",
+      },
+      {
+        text: "workplace-technology",
+        color: "green",
+      },
+    ],
+    author: {
+      name: "Kevin Peters",
+      jobTitle: "CEO of Workplacify",
+      image: "/profile-kevin-peters.png",
+    },
+    datePublished: new Date("2025-09-29T10:00:00.000Z"),
+  },
+  {
     uuid: "b1c2d3e4-f5g6-7h8i-9j0k-l1m2n3o4p5q7",
     title: "Empty Office? How to Improve Office Occupancy",
     description:
