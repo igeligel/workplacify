@@ -11,7 +11,7 @@ import {
   Tag,
   VStack,
 } from "@chakra-ui/react";
-import { formatISO } from "date-fns";
+import { add, formatISO } from "date-fns";
 import { GetServerSideProps } from "next";
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
@@ -31,6 +31,12 @@ const css = `
     margin: 0 !important;
   }
 `;
+
+const disabledDays = (date: Date) => {
+  const currentDate = new Date();
+  const yesterday = add(currentDate, { days: -1 });
+  return date < yesterday;
+};
 
 const SchedulePage = () => {
   const t = useTranslations("SchedulePages");
@@ -90,6 +96,7 @@ const SchedulePage = () => {
           mode="single"
           selected={day}
           defaultMonth={day}
+          disabled={disabledDays}
           onSelect={(newDay) => {
             if (!newDay) return;
             setDay(newDay);
