@@ -169,10 +169,8 @@ const SetupPage = () => {
   const submitForm = async () => {
     try {
       await submitOnboardingSelectionMutation.mutateAsync();
-      console.log({ HERE: 1 });
       router.push("/app");
     } catch (error) {
-      debugger;
       toaster.create({
         title: "Error",
         description: "Please try again",

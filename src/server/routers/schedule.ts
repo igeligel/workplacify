@@ -5,6 +5,8 @@ import { z } from "zod";
 
 import { prisma } from "../../server/prisma";
 import { getUserFromSession } from "../queries/getUserFromSession";
+import { validateCurrentOfficeSet } from "../queries/validateCurrentOfficeSet";
+import { validateUserHasOrganization } from "../queries/validateUserHasOrganization";
 import { getFreeDesksPerDay } from "../scheduling/getFreeDesksPerDay";
 import { getHasConflictingReservation } from "../scheduling/getHasConflictingReservations";
 import { publicProcedure, router } from "../trpc";
@@ -17,26 +19,8 @@ export const scheduleRouter = router({
       const user = await getUserFromSession(ctx.session, {
         includeOrganization: true,
       });
-
-      if (!user.organizationId) {
-        throw new TRPCError({
-          code: "NOT_FOUND",
-          message: "You are not part of an organization",
-        });
-      }
-
-      await prisma.organization.findFirst({
-        where: {
-          id: user.organizationId,
-        },
-      });
-
-      if (!user.currentOfficeId) {
-        throw new TRPCError({
-          code: "NOT_FOUND",
-          message: "You are not part of an office. Select an office first.",
-        });
-      }
+      await validateUserHasOrganization(user);
+      await validateCurrentOfficeSet(user);
 
       const floors = await prisma.floor.findMany({
         where: {

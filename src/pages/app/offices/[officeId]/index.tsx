@@ -17,6 +17,7 @@ import { useRouter } from "next/router";
 import { FiChevronLeft, FiPlus } from "react-icons/fi";
 
 import { DisplayFloors } from "../../../../components/DisplayFloors";
+import { DisplayOfficeSettings } from "../../../../components/DisplayOfficeSettings";
 import { getMessages } from "../../../../messages/getMessages";
 import { appAuthRedirect } from "../../../../server/nextMiddleware/appAuthRedirect";
 import { trpc } from "../../../../utils/trpc";
@@ -104,7 +105,7 @@ const OfficePage = () => {
           </Button>
         </VStack>
       </Box>
-      <VStack marginTop={4} alignItems={"flex-start"} gap={4}>
+      <VStack marginTop={4} alignItems={"flex-start"} gap={1}>
         <Heading as={"h2"} fontSize={"md"} color={"gray.700"}>
           {t("headingFloors")}
         </Heading>
@@ -114,6 +115,10 @@ const OfficePage = () => {
           floors={getOfficeQuery.data.floors}
         />
       </VStack>
+      <Separator marginTop={4} />
+      <Box marginTop={8}>
+        <DisplayOfficeSettings />
+      </Box>
     </Container>
   );
 };

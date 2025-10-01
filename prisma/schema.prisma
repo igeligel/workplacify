@@ -45,20 +45,50 @@ model Organization {
 }
 
 model Office {
-  id             String        @id @default(cuid())
-  name           String
-  description    String?
-  longitude      Float?
-  latitude       Float?
-  timezone       String        @default("Etc/GMT")
-  createdAt      DateTime      @default(now()) @map("created_at")
-  updatedAt      DateTime      @updatedAt @map("updated_at")
-  organization   Organization? @relation(fields: [organizationId], references: [id])
-  organizationId String?       @map("organization_id")
-  floors         Floor[]
-  user           User[]
+  id              String         @id @default(cuid())
+  name            String
+  description     String?
+  longitude       Float?
+  latitude        Float?
+  timezone        String         @default("Etc/GMT")
+  createdAt       DateTime       @default(now()) @map("created_at")
+  updatedAt       DateTime       @updatedAt @map("updated_at")
+  organization    Organization?  @relation(fields: [organizationId], references: [id])
+  organizationId  String?        @map("organization_id")
+  floors          Floor[]
+  user            User[]
+  officeSetting   OfficeSetting? @relation(fields: [officeSettingId], references: [id])
+  officeSettingId String?        @map("office_setting_id")
 
   @@map("office")
+}
+
+model OfficeSetting {
+  id                             String                        @id @default(cuid())
+  allowSchedulingInThePast       Boolean                       @default(false) @map("allow_scheduling_in_the_past")
+  durationSchedulingFuture       Int?                          @map("duration_scheduling_future")
+  officeSettingWeekdaysAllowed   OfficeSettingWeekdaysAllowed? @relation(fields: [officeSettingWeekdaysAllowedId], references: [id])
+  officeSettingWeekdaysAllowedId String?                       @map("office_setting_weekdays_allowed_id")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  Office    Office[]
+
+  @@map("office_setting")
+}
+
+model OfficeSettingWeekdaysAllowed {
+  id             String          @id @default(cuid())
+  allowMonday    Boolean         @default(true) @map("allow_monday")
+  allowTuesday   Boolean         @default(true) @map("allow_tuesday")
+  allowWednesday Boolean         @default(true) @map("allow_wednesday")
+  allowThursday  Boolean         @default(true) @map("allow_thursday")
+  allowFriday    Boolean         @default(true) @map("allow_friday")
+  allowSaturday  Boolean         @default(true) @map("allow_saturday")
+  allowSunday    Boolean         @default(true) @map("allow_sunday")
+  OfficeSetting  OfficeSetting[]
+
+  @@map("office_setting_weekdays_allowed")
 }
 
 model Floor {
@@ -148,7 +178,7 @@ model Account {
   scope             String?
   id_token          String? @db.Text
   session_state     String?
-  ext_expires_in    Int?
+  extExpiresIn      Int?    @map("ext_expires_in")
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 

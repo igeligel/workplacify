@@ -11,7 +11,7 @@ import {
   Tag,
   VStack,
 } from "@chakra-ui/react";
-import { add, formatISO } from "date-fns";
+import { formatISO } from "date-fns";
 import { GetServerSideProps } from "next";
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
@@ -22,6 +22,7 @@ import { FloorDeskBooker } from "../../../components/FloorDeskBooker";
 import { ScheduleNoOfficeSelected } from "../../../components/ScheduleNoOfficeSelected";
 import { toaster } from "../../../components/ui/toaster";
 import { Tooltip } from "../../../components/ui/tooltip";
+import { useGetDisabledDays } from "../../../hooks/useGetDisabledDays";
 import { getMessages } from "../../../messages/getMessages";
 import { appAuthRedirect } from "../../../server/nextMiddleware/appAuthRedirect";
 import { trpc } from "../../../utils/trpc";
@@ -31,12 +32,6 @@ const css = `
     margin: 0 !important;
   }
 `;
-
-const disabledDays = (date: Date) => {
-  const currentDate = new Date();
-  const yesterday = add(currentDate, { days: -1 });
-  return date < yesterday;
-};
 
 const SchedulePage = () => {
   const t = useTranslations("SchedulePages");
@@ -59,10 +54,19 @@ const SchedulePage = () => {
   const getFloorsForCurrentOfficeQuery =
     trpc.schedule.getFloorsForCurrentOffice.useQuery({});
 
+  const getOfficeSettingQuery =
+    trpc.officeSetting.getForCurrentOffice.useQuery();
+
   const isLoading =
     userQuery.isLoading ||
     getDeskSchedulesForDayQuery.isLoading ||
-    getFloorsForCurrentOfficeQuery.isLoading;
+    getFloorsForCurrentOfficeQuery.isLoading ||
+    getOfficeSettingQuery.isLoading;
+
+  const { disabledDays } = useGetDisabledDays({
+    getOfficeSettingQueryData: getOfficeSettingQuery.data,
+    isLoading: getOfficeSettingQuery.isLoading,
+  });
 
   if (!userQuery.data) {
     return <div>{t("notLoggedIn")}</div>;
