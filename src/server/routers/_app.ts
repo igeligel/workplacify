@@ -7,6 +7,7 @@ import { discordRouter } from "./discord";
 import { floorRouter } from "./floor";
 import { floorDeskRouter } from "./floorDesk";
 import { officeRouter } from "./office";
+import { officeSettingRouter } from "./officeSetting";
 import { onboardingSelectionRouter } from "./onboardingSelection";
 import { organizationRouter } from "./organization";
 import { scheduleRouter } from "./schedule";
@@ -23,6 +24,7 @@ export const appRouter = router({
   schedule: scheduleRouter,
   discord: discordRouter,
   floorDesk: floorDeskRouter,
+  officeSetting: officeSettingRouter,
 });
 
 export type AppRouter = typeof appRouter;

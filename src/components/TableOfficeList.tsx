@@ -73,37 +73,41 @@ export const TableOfficeList = () => {
         </Table.Header>
 
         <Table.Body>
-          {officesQuery.data?.map((office) => {
-            return (
-              <Table.Row
-                key={office.id}
-                cursor={"pointer"}
-                _hover={{
-                  backgroundColor: "gray.100",
-                }}
-                onClick={() => {
-                  router.push(`/app/offices/${office.id}`);
-                }}
-              >
-                <Table.Cell>{office.name}</Table.Cell>
-                <Table.Cell>{"-/-"}</Table.Cell>
-                <Table.Cell>{"-/-"}</Table.Cell>
-                <Table.Cell>
-                  <Button
-                    colorPalette="red"
-                    size="sm"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setOfficeToBeRemoved(office);
-                      onOpen();
-                    }}
-                  >
-                    {t("buttonLabelRemove")}
-                  </Button>
-                </Table.Cell>
-              </Table.Row>
-            );
-          })}
+          {officesQuery.data
+            ?.sort((a, b) => {
+              return b.createdAt.getTime() - a.createdAt.getTime();
+            })
+            .map((office) => {
+              return (
+                <Table.Row
+                  key={office.id}
+                  cursor={"pointer"}
+                  _hover={{
+                    backgroundColor: "gray.100",
+                  }}
+                  onClick={() => {
+                    router.push(`/app/offices/${office.id}`);
+                  }}
+                >
+                  <Table.Cell>{office.name}</Table.Cell>
+                  <Table.Cell>{"-/-"}</Table.Cell>
+                  <Table.Cell>{"-/-"}</Table.Cell>
+                  <Table.Cell>
+                    <Button
+                      colorPalette="red"
+                      size="sm"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setOfficeToBeRemoved(office);
+                        onOpen();
+                      }}
+                    >
+                      {t("buttonLabelRemove")}
+                    </Button>
+                  </Table.Cell>
+                </Table.Row>
+              );
+            })}
         </Table.Body>
       </Table.Root>
       <Drawer.Root

@@ -38,7 +38,7 @@ export const DisplayFloors = (props: DisplayFloorsProps) => {
   if (props.floors.length === 0) {
     return (
       <Box>
-        <VStack>
+        <VStack alignItems={"flex-start"} gap={1}>
           {t("noFloorsThereYet")}
 
           <Button
