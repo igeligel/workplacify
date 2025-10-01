@@ -125,8 +125,6 @@ export const DisplayOfficeSettings = () => {
     });
   };
 
-  console.log({ durationSchedulingFuture });
-
   return (
     <Box colorPalette="orange">
       <Fieldset.Root size="lg" maxW="md">
@@ -172,7 +170,6 @@ export const DisplayOfficeSettings = () => {
                   min={1}
                   value={durationSchedulingFuture ?? ""}
                   onChange={(e) => {
-                    console.log({ e });
                     setDurationSchedulingFuture(Number(e.target.value));
                   }}
                 />
@@ -229,7 +226,6 @@ export const DisplayOfficeSettings = () => {
                 <CheckboxGroup
                   value={weekdaysAllowed ?? []}
                   onValueChange={(e) => {
-                    console.log({ e });
                     setWeekdaysAllowed(e);
                   }}
                 >

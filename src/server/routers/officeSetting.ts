@@ -35,10 +35,6 @@ export const officeSettingRouter = router({
       },
     });
 
-    console.log("OFFICE-SETTING-FOR-USER-START");
-    console.log(JSON.stringify(office?.officeSetting, null, 2));
-    console.log("OFFICE-SETTING-FOR-USER-END");
-
     return office?.officeSetting;
   }),
   get: publicProcedure
@@ -92,10 +88,6 @@ export const officeSettingRouter = router({
           },
         },
       });
-
-      console.log("OFFICE-START");
-      console.log(JSON.stringify(office, null, 2));
-      console.log("OFFICE-END");
 
       return office?.officeSetting;
     }),
@@ -164,8 +156,6 @@ export const officeSettingRouter = router({
       }
 
       const hasAnyDaysAllowed = (officeSettingWeekdaysAllowed?.length || 0) > 0;
-
-      console.log({ durationSchedulingFuture });
 
       const officeSetting = await prisma.officeSetting.upsert({
         where: {
