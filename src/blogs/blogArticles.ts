@@ -2,6 +2,36 @@ import { BlogArticle } from "../chakra-starter/marketing-ui/BlogArticle/types";
 
 export const blogArticles: BlogArticle[] = [
   {
+    uuid: "a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6",
+    title: "Master Your Office: Desk Booking Limitations with Workplacify",
+    description:
+      "Learn how to optimize your hybrid workspace with smart desk booking limitations. Discover how Workplacify's new Office Settings feature helps prevent ghost bookings, ensures fair access, and delivers real ROI through better space utilization.",
+    readingTime: "8 min",
+    url: "/blog/desk-booking-limitations",
+    image: "/og-images/desk-booking-limitations.png",
+    imageAlt: "Master Your Office: Desk Booking Limitations with Workplacify",
+    tags: [
+      {
+        text: "workspace-management",
+        color: "purple",
+      },
+      {
+        text: "hybrid-work",
+        color: "blue",
+      },
+      {
+        text: "workplace-technology",
+        color: "green",
+      },
+    ],
+    author: {
+      name: "Kevin Peters",
+      jobTitle: "CEO of Workplacify",
+      image: "/profile-kevin-peters.png",
+    },
+    datePublished: new Date("2025-10-02T10:00:00.000Z"),
+  },
+  {
     uuid: "d4e5f6g7-h8i9-j0k1-l2m3-n4o5p6q7r8s9",
     title: "Why We Chose to Be Open-Source: The Workplacify Philosophy",
     description:
