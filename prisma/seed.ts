@@ -5,7 +5,7 @@
  */
 import { faker } from "@faker-js/faker";
 import { PrismaClient, UserRole } from "@prisma/client";
-import { addHours, startOfDay } from "date-fns";
+import { add, addHours, startOfDay } from "date-fns";
 import { toZonedTime } from "date-fns-tz";
 
 const prisma = new PrismaClient();
@@ -104,6 +104,7 @@ async function main() {
       currentOfficeId: berlinOffice1.id,
     },
   });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const user6 = await prisma.user.create({
     data: {
       email: faker.internet.email(),
@@ -114,6 +115,7 @@ async function main() {
       currentOfficeId: berlinOffice1.id,
     },
   });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const user7 = await prisma.user.create({
     data: {
       email: faker.internet.email(),
@@ -173,7 +175,8 @@ async function main() {
       y: 326.372821514423,
     },
   });
-  const desk3 = await prisma.desk.create({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const floor1desk3 = await prisma.desk.create({
     data: {
       floorId: berlinOffice1Floor1.id,
       publicDeskId: "3",
@@ -181,7 +184,8 @@ async function main() {
       y: 159.6861227964743,
     },
   });
-  const desk4 = await prisma.desk.create({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const floor1desk4 = await prisma.desk.create({
     data: {
       floorId: berlinOffice1Floor1.id,
       publicDeskId: "4",
@@ -189,6 +193,7 @@ async function main() {
       y: 293.4601612580128,
     },
   });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const desk5 = await prisma.desk.create({
     data: {
       floorId: berlinOffice1Floor1.id,
@@ -197,6 +202,7 @@ async function main() {
       y: 294.5218599759615,
     },
   });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const desk6 = await prisma.desk.create({
     data: {
       floorId: berlinOffice1Floor1.id,
@@ -205,102 +211,102 @@ async function main() {
       y: 444.2213792067307,
     },
   });
-  const desk7 = await prisma.desk.create({
-    data: {
-      floorId: berlinOffice1Floor1.id,
-      publicDeskId: "7",
-      x: 1056.921073717949,
-      y: 164.9946163862179,
-    },
-  });
-  const desk8 = await prisma.desk.create({
-    data: {
-      floorId: berlinOffice1Floor1.id,
-      publicDeskId: "8",
-      x: 1048.427483974359,
-      y: 325.3111227964743,
-    },
-  });
-  const desk9 = await prisma.desk.create({
-    data: {
-      floorId: berlinOffice1Floor1.id,
-      publicDeskId: "9",
-      x: 371.0637019230769,
-      y: 848.7285907451923,
-    },
-  });
-  const desk10 = await prisma.desk.create({
-    data: {
-      floorId: berlinOffice1Floor1.id,
-      publicDeskId: "10",
-      x: 286.1278044871794,
-      y: 985.6877253605768,
-    },
-  });
-  const desk11 = await prisma.desk.create({
-    data: {
-      floorId: berlinOffice1Floor1.id,
-      publicDeskId: "11",
-      x: 445.3826121794871,
-      y: 983.5643279246793,
-    },
-  });
-  const desk12 = await prisma.desk.create({
-    data: {
-      floorId: berlinOffice1Floor1.id,
-      publicDeskId: "12",
-      x: 372.1254006410256,
-      y: 1133.263847155449,
-    },
-  });
-  const desk13 = await prisma.desk.create({
-    data: {
-      floorId: berlinOffice1Floor1.id,
-      publicDeskId: "13",
-      x: 713.9923878205127,
-      y: 844.4817958733973,
-    },
-  });
-  const desk14 = await prisma.desk.create({
-    data: {
-      floorId: berlinOffice1Floor1.id,
-      publicDeskId: "14",
-      x: 641.7968749999999,
-      y: 986.7494240785255,
-    },
-  });
-  const desk15 = await prisma.desk.create({
-    data: {
-      floorId: berlinOffice1Floor1.id,
-      publicDeskId: "15",
-      x: 806.3601762820512,
-      y: 983.5643279246793,
-    },
-  });
-  const desk16 = await prisma.desk.create({
-    data: {
-      floorId: berlinOffice1Floor1.id,
-      publicDeskId: "16",
-      x: 715.0540865384614,
-      y: 1131.140449719551,
-    },
-  });
-  const desk17 = await prisma.desk.create({
-    data: {
-      floorId: berlinOffice1Floor1.id,
-      publicDeskId: "17",
-      x: 1052.674278846154,
-      y: 957.0218599759614,
-    },
-  });
-  const desk18 = await prisma.desk.create({
-    data: {
-      floorId: berlinOffice1Floor1.id,
-      publicDeskId: "18",
-      x: 1051.612580128205,
-      y: 1114.153270232372,
-    },
-  });
+  // const desk7 = await prisma.desk.create({
+  //   data: {
+  //     floorId: berlinOffice1Floor1.id,
+  //     publicDeskId: "7",
+  //     x: 1056.921073717949,
+  //     y: 164.9946163862179,
+  //   },
+  // });
+  // const desk8 = await prisma.desk.create({
+  //   data: {
+  //     floorId: berlinOffice1Floor1.id,
+  //     publicDeskId: "8",
+  //     x: 1048.427483974359,
+  //     y: 325.3111227964743,
+  //   },
+  // });
+  // const desk9 = await prisma.desk.create({
+  //   data: {
+  //     floorId: berlinOffice1Floor1.id,
+  //     publicDeskId: "9",
+  //     x: 371.0637019230769,
+  //     y: 848.7285907451923,
+  //   },
+  // });
+  // const desk10 = await prisma.desk.create({
+  //   data: {
+  //     floorId: berlinOffice1Floor1.id,
+  //     publicDeskId: "10",
+  //     x: 286.1278044871794,
+  //     y: 985.6877253605768,
+  //   },
+  // });
+  // const desk11 = await prisma.desk.create({
+  //   data: {
+  //     floorId: berlinOffice1Floor1.id,
+  //     publicDeskId: "11",
+  //     x: 445.3826121794871,
+  //     y: 983.5643279246793,
+  //   },
+  // });
+  // const desk12 = await prisma.desk.create({
+  //   data: {
+  //     floorId: berlinOffice1Floor1.id,
+  //     publicDeskId: "12",
+  //     x: 372.1254006410256,
+  //     y: 1133.263847155449,
+  //   },
+  // });
+  // const desk13 = await prisma.desk.create({
+  //   data: {
+  //     floorId: berlinOffice1Floor1.id,
+  //     publicDeskId: "13",
+  //     x: 713.9923878205127,
+  //     y: 844.4817958733973,
+  //   },
+  // });
+  // const desk14 = await prisma.desk.create({
+  //   data: {
+  //     floorId: berlinOffice1Floor1.id,
+  //     publicDeskId: "14",
+  //     x: 641.7968749999999,
+  //     y: 986.7494240785255,
+  //   },
+  // });
+  // const desk15 = await prisma.desk.create({
+  //   data: {
+  //     floorId: berlinOffice1Floor1.id,
+  //     publicDeskId: "15",
+  //     x: 806.3601762820512,
+  //     y: 983.5643279246793,
+  //   },
+  // });
+  // const desk16 = await prisma.desk.create({
+  //   data: {
+  //     floorId: berlinOffice1Floor1.id,
+  //     publicDeskId: "16",
+  //     x: 715.0540865384614,
+  //     y: 1131.140449719551,
+  //   },
+  // });
+  // const desk17 = await prisma.desk.create({
+  //   data: {
+  //     floorId: berlinOffice1Floor1.id,
+  //     publicDeskId: "17",
+  //     x: 1052.674278846154,
+  //     y: 957.0218599759614,
+  //   },
+  // });
+  // const desk18 = await prisma.desk.create({
+  //   data: {
+  //     floorId: berlinOffice1Floor1.id,
+  //     publicDeskId: "18",
+  //     x: 1051.612580128205,
+  //     y: 1114.153270232372,
+  //   },
+  // });
 
   const berlinOffice1Floor2 = await prisma.floor.create({
     data: {
@@ -335,6 +341,7 @@ async function main() {
       y: 461.90625,
     },
   });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const floor2desk4 = await prisma.desk.create({
     data: {
       floorId: berlinOffice1Floor2.id,
@@ -343,6 +350,7 @@ async function main() {
       y: 464.90625,
     },
   });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const floor2desk5 = await prisma.desk.create({
     data: {
       floorId: berlinOffice1Floor2.id,
@@ -351,6 +359,7 @@ async function main() {
       y: 380.90625,
     },
   });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const floor2desk6 = await prisma.desk.create({
     data: {
       floorId: berlinOffice1Floor2.id,
@@ -359,6 +368,7 @@ async function main() {
       y: 472.90625,
     },
   });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const floor2desk7 = await prisma.desk.create({
     data: {
       floorId: berlinOffice1Floor2.id,
@@ -367,6 +377,7 @@ async function main() {
       y: 379.90625,
     },
   });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const floor2desk8 = await prisma.desk.create({
     data: {
       floorId: berlinOffice1Floor2.id,
@@ -375,6 +386,7 @@ async function main() {
       y: 476.90625,
     },
   });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const floor2desk9 = await prisma.desk.create({
     data: {
       floorId: berlinOffice1Floor2.id,
@@ -383,6 +395,7 @@ async function main() {
       y: 342.90625,
     },
   });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const floor2desk10 = await prisma.desk.create({
     data: {
       floorId: berlinOffice1Floor2.id,
@@ -391,6 +404,7 @@ async function main() {
       y: 207.90625,
     },
   });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const floor2desk11 = await prisma.desk.create({
     data: {
       floorId: berlinOffice1Floor2.id,
@@ -399,6 +413,7 @@ async function main() {
       y: 343.90625,
     },
   });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const floor2desk12 = await prisma.desk.create({
     data: {
       floorId: berlinOffice1Floor2.id,
@@ -407,6 +422,7 @@ async function main() {
       y: 460.90625,
     },
   });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const floor2desk13 = await prisma.desk.create({
     data: {
       floorId: berlinOffice1Floor2.id,
@@ -440,6 +456,50 @@ async function main() {
       wholeDay: true,
       startTime: zonedDate,
       endTime: addHours(zonedDate, 24),
+    },
+  });
+
+  // Analytics
+
+  const startOfDayDateTwoDaysAgo = startOfDay(add(new Date(), { days: -2 }));
+  // UTC
+  const zonedDateTwoDaysAgo = toZonedTime(
+    startOfDayDateTwoDaysAgo,
+    berlinOffice1.timezone,
+  );
+
+  await prisma.deskSchedule.create({
+    data: {
+      userId: user3.id,
+      deskId: floor2desk1.id,
+      date: zonedDateTwoDaysAgo,
+      timezone: berlinOffice1.timezone,
+      wholeDay: true,
+      startTime: zonedDateTwoDaysAgo,
+      endTime: addHours(zonedDateTwoDaysAgo, 24),
+    },
+  });
+
+  await prisma.deskSchedule.create({
+    data: {
+      userId: user4.id,
+      deskId: floor2desk2.id,
+      date: zonedDateTwoDaysAgo,
+      timezone: berlinOffice1.timezone,
+      wholeDay: true,
+      startTime: zonedDateTwoDaysAgo,
+      endTime: addHours(zonedDateTwoDaysAgo, 24),
+    },
+  });
+  await prisma.deskSchedule.create({
+    data: {
+      userId: user5.id,
+      deskId: floor2desk3.id,
+      date: zonedDateTwoDaysAgo,
+      timezone: berlinOffice1.timezone,
+      wholeDay: true,
+      startTime: zonedDateTwoDaysAgo,
+      endTime: addHours(zonedDateTwoDaysAgo, 24),
     },
   });
 

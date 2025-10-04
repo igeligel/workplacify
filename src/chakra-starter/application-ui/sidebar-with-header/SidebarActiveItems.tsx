@@ -1,7 +1,9 @@
 import { Box, Heading, Link, Text, VStack } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 import NextLink from "next/link";
+import { useRouter } from "next/router";
 import { IconType } from "react-icons";
+import { FiStar } from "react-icons/fi";
 
 // import { FiStar } from "react-icons/fi";
 import { GroupedMenuItem } from "./GroupedMenuItem";
@@ -13,12 +15,19 @@ type SubItem = {
 };
 
 export const SidebarActiveItems = () => {
+  const router = useRouter();
   const t = useTranslations("AppMenu");
-  // const currentItems = [
-  //   { id: 1, title: "SubItem 1", icon: FiStar },
-  //   { id: 2, title: "SubItem 2", icon: FiStar },
-  // ];
-  const currentItems: SubItem[] = [];
+  const analyticsSubItems = [
+    { id: 84824812000, title: "Base Analytics", icon: FiStar },
+    { id: 84824812001, title: "Area Analytics (Floors)", icon: FiStar },
+    { id: 84824812002, title: "People Analytics (Users)", icon: FiStar },
+  ];
+
+  const analyticsPath = "/app/analytics";
+
+  const currentItems: SubItem[] = [
+    ...(router.pathname.startsWith(analyticsPath) ? analyticsSubItems : []),
+  ];
   const noCurrentItems = currentItems.length === 0;
 
   return (

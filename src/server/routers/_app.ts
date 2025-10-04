@@ -2,6 +2,7 @@
  * This file contains the root router of your tRPC-backend
  */
 import { publicProcedure, router } from "../trpc";
+import { analyticsRouter } from "./analytics";
 import { cloudinaryRouter } from "./cloudinary";
 import { discordRouter } from "./discord";
 import { floorRouter } from "./floor";
@@ -25,6 +26,7 @@ export const appRouter = router({
   discord: discordRouter,
   floorDesk: floorDeskRouter,
   officeSetting: officeSettingRouter,
+  analytics: analyticsRouter,
 });
 
 export type AppRouter = typeof appRouter;
