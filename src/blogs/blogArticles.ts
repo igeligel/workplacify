@@ -2,6 +2,36 @@ import { BlogArticle } from "../chakra-starter/marketing-ui/BlogArticle/types";
 
 export const blogArticles: BlogArticle[] = [
   {
+    uuid: "f8e7d6c5-b4a3-9201-8765-432109876543",
+    title: "Create a Desk Sharing Policy That Works",
+    description:
+      "Learn how to create and implement a comprehensive desk sharing policy that your employees will embrace. Get step-by-step guidance on building a fair, efficient hot desking system with the right tools and communication strategy.",
+    readingTime: "12 min",
+    url: "/blog/working-desk-sharing-policy",
+    image: "/og-images/working-desk-sharing-policy.png",
+    imageAlt: "Create a Desk Sharing Policy That Works",
+    tags: [
+      {
+        text: "workspace-management",
+        color: "purple",
+      },
+      {
+        text: "hybrid-work",
+        color: "blue",
+      },
+      {
+        text: "workplace-technology",
+        color: "green",
+      },
+    ],
+    author: {
+      name: "Kevin Peters",
+      jobTitle: "CEO of Workplacify",
+      image: "/profile-kevin-peters.png",
+    },
+    datePublished: new Date("2025-10-04T10:00:00.000Z"),
+  },
+  {
     uuid: "a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6",
     title: "Master Your Office: Desk Booking Limitations with Workplacify",
     description:
