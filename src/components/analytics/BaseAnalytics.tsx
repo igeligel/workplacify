@@ -133,9 +133,11 @@ export const BaseAnalytics = () => {
           <Box>
             <Stat.Root>
               <Stat.Label>Peak Day</Stat.Label>
-              <Stat.ValueText>
-                {formattedPeakDay} ({formattedPeakDayUtilization} Utilization)
-              </Stat.ValueText>
+              <Skeleton asChild loading={getPeakDayQuery.isLoading}>
+                <Stat.ValueText>
+                  {formattedPeakDay} ({formattedPeakDayUtilization} Utilization)
+                </Stat.ValueText>
+              </Skeleton>
             </Stat.Root>
           </Box>
           {/* <Box>

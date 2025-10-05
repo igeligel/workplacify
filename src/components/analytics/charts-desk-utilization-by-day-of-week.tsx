@@ -1,7 +1,7 @@
 "use client";
 
 import { Chart, useChart } from "@chakra-ui/charts";
-import { Box } from "@chakra-ui/react";
+import { Box, Skeleton } from "@chakra-ui/react";
 import {
   Bar,
   BarChart,
@@ -145,57 +145,59 @@ export const ChartsDeskUtilizationByDayOfWeek = (
 
   return (
     <Box>
-      <Chart.Root maxH="md" chart={chart}>
-        <BarChart layout="vertical" data={chart.data}>
-          <CartesianGrid
-            stroke={chart.color("border.muted")}
-            vertical={false}
-          />
-          <XAxis
-            type="number"
-            axisLine={false}
-            tickLine={false}
-            domain={[0, 100]}
-          />
-          <YAxis
-            type="category"
-            dataKey={chart.key("month")}
-            orientation="left"
-            stroke={chart.color("border")}
-            tickFormatter={(value) =>
-              typeof value === "string" ? value.slice(0, 3) : value
-            }
-          />
-          <Tooltip
-            animationDuration={100}
-            cursor={{ fill: chart.color("bg.muted") }}
-            content={<Chart.Tooltip />}
-            // content={<CustomTooltip active={false} payload={[]} label={""} />}
-          />
-          <Legend content={<Chart.Legend />} />
-          <ReferenceLine
-            x={100}
-            stroke={chart.color("red.fg")}
-            strokeDasharray="3 3"
-          />
-          <ReferenceLine
-            x={80}
-            stroke={chart.color("red.fg")}
-            strokeDasharray="3 3"
-          />
-          {chart.series.map((item) => (
-            <Bar
-              barSize={30}
-              isAnimationActive={false}
-              key={item.name}
-              dataKey={chart.key(item.name)}
-              fill={chart.color(item.color)}
-              stroke={chart.color(item.color)}
-              stackId={item.stackId}
+      <Skeleton asChild loading={getDeskUtilizationByDayOfWeekQuery.isLoading}>
+        <Chart.Root maxH="md" chart={chart}>
+          <BarChart layout="vertical" data={chart.data}>
+            <CartesianGrid
+              stroke={chart.color("border.muted")}
+              vertical={false}
             />
-          ))}
-        </BarChart>
-      </Chart.Root>
+            <XAxis
+              type="number"
+              axisLine={false}
+              tickLine={false}
+              domain={[0, 100]}
+            />
+            <YAxis
+              type="category"
+              dataKey={chart.key("month")}
+              orientation="left"
+              stroke={chart.color("border")}
+              tickFormatter={(value) =>
+                typeof value === "string" ? value.slice(0, 3) : value
+              }
+            />
+            <Tooltip
+              animationDuration={100}
+              cursor={{ fill: chart.color("bg.muted") }}
+              content={<Chart.Tooltip />}
+              // content={<CustomTooltip active={false} payload={[]} label={""} />}
+            />
+            <Legend content={<Chart.Legend />} />
+            <ReferenceLine
+              x={100}
+              stroke={chart.color("red.fg")}
+              strokeDasharray="3 3"
+            />
+            <ReferenceLine
+              x={80}
+              stroke={chart.color("red.fg")}
+              strokeDasharray="3 3"
+            />
+            {chart.series.map((item) => (
+              <Bar
+                barSize={30}
+                isAnimationActive={false}
+                key={item.name}
+                dataKey={chart.key(item.name)}
+                fill={chart.color(item.color)}
+                stroke={chart.color(item.color)}
+                stackId={item.stackId}
+              />
+            ))}
+          </BarChart>
+        </Chart.Root>
+      </Skeleton>
     </Box>
   );
 };
