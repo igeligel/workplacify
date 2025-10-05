@@ -1,11 +1,25 @@
-import { Box, Stack, Table, Text } from "@chakra-ui/react";
+import { Box, Skeleton, Stack, Table, Text } from "@chakra-ui/react";
 
-import { WorkplacifyFilters } from "./WorkplacifyFilters";
+import { trpc } from "../../utils/trpc";
+import {
+  WorkplacifyFilters,
+  useAnalyticsQueryParams,
+} from "./WorkplacifyFilters";
 import { useAnalyticsFiltersStore } from "./useAnalyticsFiltersStore";
 
 export const PeopleAnalytics = () => {
   const officeValue = useAnalyticsFiltersStore((s) => s.officeValue);
   const dateRangeValue = useAnalyticsFiltersStore((s) => s.dateRangeValue);
+
+  const queryParams = useAnalyticsQueryParams();
+
+  const getPeopleAnalyticsQuery = trpc.analytics.getPeopleAnalytics.useQuery(
+    queryParams,
+    {
+      enabled: Boolean(officeValue?.[0] && dateRangeValue?.[0]),
+    },
+  );
+
   return (
     <Box>
       <Stack
@@ -20,41 +34,68 @@ export const PeopleAnalytics = () => {
         </Box>
         <WorkplacifyFilters />
       </Stack>
-      <Box mt={4}>
-        <Text color="fg.muted" fontSize="sm">
-          {officeValue?.[0]
-            ? `Office selected: ${officeValue[0]}`
-            : "Select an office"}
-          {dateRangeValue?.[0] ? ` · Range: ${dateRangeValue[0]}` : ""}
-        </Text>
-      </Box>
-      <Box>
-        {/* User                 Total Bookings   Avg. Weekly Visits   Favorite Day    │
-│ -------------------- --------------   --------------------   ------------    │
-│ Alice Johnson        18               4.5                    Wednesday       │
-│ Bob Williams         15               3.8                    Tuesday         │
-│ Charlie Brown        12               3.0                    Wednesday       │
-│ Diana Prince         5                1.2                    Friday   */}
+      <Box maxW={"900px"} marginTop={4}>
         <Table.Root size="sm">
-          <Table.Caption>
-            Product inventory and pricing information
-          </Table.Caption>
           <Table.Header>
             <Table.Row>
               <Table.ColumnHeader>User</Table.ColumnHeader>
-              <Table.ColumnHeader>Total Bookings</Table.ColumnHeader>
-              <Table.ColumnHeader>Avg. Weekly Visits</Table.ColumnHeader>
-              <Table.ColumnHeader>Favorite Day</Table.ColumnHeader>
+              <Table.ColumnHeader textAlign="center">
+                Total Bookings
+              </Table.ColumnHeader>
+              <Table.ColumnHeader textAlign="center">
+                Avg. Weekly Visits
+              </Table.ColumnHeader>
+              <Table.ColumnHeader textAlign="center">
+                Favorite Day
+              </Table.ColumnHeader>
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {/* {items.map((item) => (
-              <Table.Row key={item.id}>
-                <Table.Cell>{item.name}</Table.Cell>
-                <Table.Cell>{item.category}</Table.Cell>
-                <Table.Cell textAlign="end">{item.price}</Table.Cell>
+            {getPeopleAnalyticsQuery.isLoading ? (
+              // Loading skeleton rows
+              Array.from({ length: 3 }).map((_, index) => (
+                <Table.Row key={`skeleton-${index}`}>
+                  <Table.Cell>
+                    <Skeleton height="20px" width="150px" />
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Skeleton height="20px" width="80px" />
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Skeleton height="20px" width="80px" />
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Skeleton height="20px" width="100px" />
+                  </Table.Cell>
+                </Table.Row>
+              ))
+            ) : getPeopleAnalyticsQuery.data &&
+              getPeopleAnalyticsQuery.data.length > 0 ? (
+              getPeopleAnalyticsQuery.data.map((person) => (
+                <Table.Row key={person.userId}>
+                  <Table.Cell fontWeight="medium">{person.userName}</Table.Cell>
+                  <Table.Cell textAlign="center">
+                    {person.totalBookings}
+                  </Table.Cell>
+                  <Table.Cell textAlign="center">
+                    {person.avgWeeklyVisits}
+                  </Table.Cell>
+                  <Table.Cell textAlign="center">
+                    {person.favoriteDay}
+                  </Table.Cell>
+                </Table.Row>
+              ))
+            ) : (
+              <Table.Row>
+                <Table.Cell colSpan={4} textAlign="center" py={8}>
+                  <Text color="fg.muted">
+                    {officeValue?.[0] && dateRangeValue?.[0]
+                      ? "No booking data found for the selected criteria"
+                      : "Select an office and date range to view people analytics"}
+                  </Text>
+                </Table.Cell>
               </Table.Row>
-            ))} */}
+            )}
           </Table.Body>
         </Table.Root>
       </Box>

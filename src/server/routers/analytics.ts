@@ -308,7 +308,116 @@ export const analyticsRouter = router({
 
       return adjustedResult;
     }),
-  // getTopAttendant: publicProcedure.query(async (resolverProps) => {}),
+  getPeopleAnalytics: publicProcedure
+    .input(commonInput)
+    .query(async (resolverProps) => {
+      const { ctx, input } = resolverProps;
+      const user = await getUserFromSession(ctx.session, {
+        includeOrganization: true,
+      });
+      if (!user.organizationId) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "You are not part of an organization",
+        });
+      }
+      if (user.userRole !== UserRole.ADMIN) {
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: "You are not allowed to access this resource",
+        });
+      }
+      const { officeId, startDatetime, endDatetime } = input;
+
+      // Get all users in the organization who have desk bookings in the specified office and date range
+      const usersWithBookings = await prisma.user.findMany({
+        where: {
+          organizationId: user.organizationId,
+          deskSchedule: {
+            some: {
+              desk: {
+                floor: {
+                  officeId: officeId,
+                },
+              },
+              startTime: {
+                gte: startDatetime,
+              },
+              endTime: {
+                lte: endDatetime,
+              },
+            },
+          },
+        },
+        include: {
+          deskSchedule: {
+            where: {
+              desk: {
+                floor: {
+                  officeId: officeId,
+                },
+              },
+              startTime: {
+                gte: startDatetime,
+              },
+              endTime: {
+                lte: endDatetime,
+              },
+            },
+            orderBy: {
+              startTime: "asc",
+            },
+          },
+        },
+      });
+
+      // Calculate analytics for each user
+      const peopleAnalytics = usersWithBookings.map((user) => {
+        const totalBookings = user.deskSchedule.length;
+
+        // Calculate average weekly visits
+        const daysInRange = differenceInCalendarDays(
+          endDatetime,
+          startDatetime,
+        );
+        const weeksInRange = Math.max(1, daysInRange / 7);
+        const avgWeeklyVisits = totalBookings / weeksInRange;
+
+        // Find favorite day (most common day of week for bookings)
+        const dayCounts: Record<number, number> = {};
+        user.deskSchedule.forEach((booking) => {
+          if (booking.startTime) {
+            const dayOfWeek = getDay(booking.startTime);
+            dayCounts[dayOfWeek] = (dayCounts[dayOfWeek] || 0) + 1;
+          }
+        });
+
+        const favoriteDayNumber = Object.entries(dayCounts).reduce(
+          (maxDay, [day, count]) => {
+            const maxCount = dayCounts[maxDay] || 0;
+            return count > maxCount ? parseInt(day) : maxDay;
+          },
+          0,
+        );
+
+        const favoriteDayName = weekDayMap[favoriteDayNumber] || "monday";
+        const formattedFavoriteDay =
+          favoriteDayName.charAt(0).toUpperCase() + favoriteDayName.slice(1);
+
+        return {
+          userId: user.id,
+          userName: user.name || user.email || "Unknown User",
+          totalBookings,
+          avgWeeklyVisits: Math.round(avgWeeklyVisits * 10) / 10, // Round to 1 decimal place
+          favoriteDay: formattedFavoriteDay,
+        };
+      });
+
+      // Sort by total bookings (descending)
+      peopleAnalytics.sort((a, b) => b.totalBookings - a.totalBookings);
+
+      return peopleAnalytics;
+    }),
   getDeskUtilizationByDayOfWeek: publicProcedure
     .input(commonInput)
     .query(async (resolverProps) => {
