@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { FiHome } from "react-icons/fi";
 import { GrSchedules } from "react-icons/gr";
 import { HiOutlineBuildingOffice } from "react-icons/hi2";
+import { IoAnalytics } from "react-icons/io5";
 
 import { trpc } from "../../../utils/trpc";
 import { MenuItem } from "./MenuItem";
@@ -46,6 +47,16 @@ export const SidebarMainPaths = () => {
         href={"/app/schedule"}
         isActive={router.pathname === "/app/schedule"}
       />
+      {userQuery.data?.userRole === UserRole.ADMIN ? (
+        <MenuItem
+          title={"Analytics"}
+          icon={IoAnalytics}
+          href={"/app/analytics"}
+          isActive={router.pathname.startsWith("/app/analytics")}
+        />
+      ) : (
+        <></>
+      )}
     </VStack>
   );
 };
