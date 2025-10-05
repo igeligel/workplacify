@@ -115,14 +115,10 @@ const createHistoricalData = async (props: CreateHistoricalDataProps) => {
       const shuffledDesks = desksForTheDay.sort(() => {
         return randomInt(-1, 1);
       });
-      // desksForTheDay.sort(() => Math.random() - 0.5);
 
       // For each user, check the attendance for the day and if they are attending, create a desk schedule for them
       for (const user of props.users) {
         const attendance = userWeekAttendanceMap.get(user.id);
-        // console.log(
-        //   `User ${user.id} ${user.name} attandance for day ${day} is ${attendance?.[day]}`,
-        // );
         if (attendance?.[day]) {
           const desk = shuffledDesks.shift();
           if (desk) {
@@ -155,36 +151,6 @@ const createHistoricalData = async (props: CreateHistoricalDataProps) => {
   await prisma.deskSchedule.createMany({
     data: creationPayloads,
   });
-  // await Promise.all(queriesToBeExecuted);
-
-  // For each week in the past 365 days, create desk schedules for each user
-
-  // const startOfDayDate = startOfDay(new Date());
-  // // UTC
-  // const zonedDate = toZonedTime(startOfDayDate, berlinOffice1.timezone);
-
-  // await prisma.deskSchedule.create({
-  //   data: {
-  //     userId: user1.id,
-  //     deskId: floor1desk1.id,
-  //     date: zonedDate,
-  //     timezone: berlinOffice1.timezone,
-  //     wholeDay: true,
-  //     startTime: zonedDate,
-  //     endTime: addHours(zonedDate, 24),
-  //   },
-  // });
-  // await prisma.deskSchedule.create({
-  //   data: {
-  //     userId: user2.id,
-  //     deskId: floor1desk2.id,
-  //     date: zonedDate,
-  //     timezone: berlinOffice1.timezone,
-  //     wholeDay: true,
-  //     startTime: zonedDate,
-  //     endTime: addHours(zonedDate, 24),
-  //   },
-  // });
 };
 
 async function main() {
@@ -388,102 +354,6 @@ async function main() {
       y: 444.2213792067307,
     },
   });
-  // const desk7 = await prisma.desk.create({
-  //   data: {
-  //     floorId: berlinOffice1Floor1.id,
-  //     publicDeskId: "7",
-  //     x: 1056.921073717949,
-  //     y: 164.9946163862179,
-  //   },
-  // });
-  // const desk8 = await prisma.desk.create({
-  //   data: {
-  //     floorId: berlinOffice1Floor1.id,
-  //     publicDeskId: "8",
-  //     x: 1048.427483974359,
-  //     y: 325.3111227964743,
-  //   },
-  // });
-  // const desk9 = await prisma.desk.create({
-  //   data: {
-  //     floorId: berlinOffice1Floor1.id,
-  //     publicDeskId: "9",
-  //     x: 371.0637019230769,
-  //     y: 848.7285907451923,
-  //   },
-  // });
-  // const desk10 = await prisma.desk.create({
-  //   data: {
-  //     floorId: berlinOffice1Floor1.id,
-  //     publicDeskId: "10",
-  //     x: 286.1278044871794,
-  //     y: 985.6877253605768,
-  //   },
-  // });
-  // const desk11 = await prisma.desk.create({
-  //   data: {
-  //     floorId: berlinOffice1Floor1.id,
-  //     publicDeskId: "11",
-  //     x: 445.3826121794871,
-  //     y: 983.5643279246793,
-  //   },
-  // });
-  // const desk12 = await prisma.desk.create({
-  //   data: {
-  //     floorId: berlinOffice1Floor1.id,
-  //     publicDeskId: "12",
-  //     x: 372.1254006410256,
-  //     y: 1133.263847155449,
-  //   },
-  // });
-  // const desk13 = await prisma.desk.create({
-  //   data: {
-  //     floorId: berlinOffice1Floor1.id,
-  //     publicDeskId: "13",
-  //     x: 713.9923878205127,
-  //     y: 844.4817958733973,
-  //   },
-  // });
-  // const desk14 = await prisma.desk.create({
-  //   data: {
-  //     floorId: berlinOffice1Floor1.id,
-  //     publicDeskId: "14",
-  //     x: 641.7968749999999,
-  //     y: 986.7494240785255,
-  //   },
-  // });
-  // const desk15 = await prisma.desk.create({
-  //   data: {
-  //     floorId: berlinOffice1Floor1.id,
-  //     publicDeskId: "15",
-  //     x: 806.3601762820512,
-  //     y: 983.5643279246793,
-  //   },
-  // });
-  // const desk16 = await prisma.desk.create({
-  //   data: {
-  //     floorId: berlinOffice1Floor1.id,
-  //     publicDeskId: "16",
-  //     x: 715.0540865384614,
-  //     y: 1131.140449719551,
-  //   },
-  // });
-  // const desk17 = await prisma.desk.create({
-  //   data: {
-  //     floorId: berlinOffice1Floor1.id,
-  //     publicDeskId: "17",
-  //     x: 1052.674278846154,
-  //     y: 957.0218599759614,
-  //   },
-  // });
-  // const desk18 = await prisma.desk.create({
-  //   data: {
-  //     floorId: berlinOffice1Floor1.id,
-  //     publicDeskId: "18",
-  //     x: 1051.612580128205,
-  //     y: 1114.153270232372,
-  //   },
-  // });
 
   const berlinOffice1Floor2 = await prisma.floor.create({
     data: {
@@ -658,48 +528,6 @@ async function main() {
     users: [user1, user2, user3, user4, user5, user6, user7, ...analyticsUsers],
     office: berlinOffice1,
   });
-
-  // const startOfDayDateTwoDaysAgo = startOfDay(add(new Date(), { days: -2 }));
-  // // UTC
-  // const zonedDateTwoDaysAgo = toZonedTime(
-  //   startOfDayDateTwoDaysAgo,
-  //   berlinOffice1.timezone,
-  // );
-
-  // await prisma.deskSchedule.create({
-  //   data: {
-  //     userId: user3.id,
-  //     deskId: floor2desk1.id,
-  //     date: zonedDateTwoDaysAgo,
-  //     timezone: berlinOffice1.timezone,
-  //     wholeDay: true,
-  //     startTime: zonedDateTwoDaysAgo,
-  //     endTime: addHours(zonedDateTwoDaysAgo, 24),
-  //   },
-  // });
-
-  // await prisma.deskSchedule.create({
-  //   data: {
-  //     userId: user4.id,
-  //     deskId: floor2desk2.id,
-  //     date: zonedDateTwoDaysAgo,
-  //     timezone: berlinOffice1.timezone,
-  //     wholeDay: true,
-  //     startTime: zonedDateTwoDaysAgo,
-  //     endTime: addHours(zonedDateTwoDaysAgo, 24),
-  //   },
-  // });
-  // await prisma.deskSchedule.create({
-  //   data: {
-  //     userId: user5.id,
-  //     deskId: floor2desk3.id,
-  //     date: zonedDateTwoDaysAgo,
-  //     timezone: berlinOffice1.timezone,
-  //     wholeDay: true,
-  //     startTime: zonedDateTwoDaysAgo,
-  //     endTime: addHours(zonedDateTwoDaysAgo, 24),
-  //   },
-  // });
 
   const inviteCode = organization.inviteCode;
   console.log("✅✅✅ SEED SUCCEEDED ✅✅✅");
