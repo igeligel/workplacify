@@ -1,5 +1,5 @@
 import { User } from "@prisma/client";
-import { differenceInDays } from "date-fns";
+import { differenceInBusinessDays, differenceInDays } from "date-fns";
 
 import { prisma } from "../prisma";
 
@@ -8,12 +8,13 @@ type GetDeskUtilizationForDateRangeProps = {
   startDatetime: Date;
   endDatetime: Date;
   user: User;
+  includeWeekends: boolean;
 };
 
 export const getDeskUtilizationForDateRange = async (
   props: GetDeskUtilizationForDateRangeProps,
 ) => {
-  const { officeId, startDatetime, endDatetime, user } = props;
+  const { officeId, startDatetime, endDatetime, user, includeWeekends } = props;
   const officeWithDeskSchedules = await prisma.office.findMany({
     where: {
       id: officeId,
@@ -53,7 +54,9 @@ export const getDeskUtilizationForDateRange = async (
   });
 
   const amountOfDaysBetweenStartAndEndDatetime = Math.abs(
-    differenceInDays(startDatetime, endDatetime),
+    includeWeekends
+      ? differenceInDays(startDatetime, endDatetime)
+      : differenceInBusinessDays(startDatetime, endDatetime),
   );
 
   officeWithDeskSchedules.forEach((office) => {

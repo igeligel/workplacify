@@ -4,11 +4,188 @@
  * @link https://www.prisma.io/docs/guides/database/seed-database
  */
 import { faker } from "@faker-js/faker";
-import { PrismaClient, UserRole } from "@prisma/client";
-import { add, addHours, startOfDay } from "date-fns";
+import { Office, PrismaClient, User, UserRole } from "@prisma/client";
+import { randomInt } from "crypto";
+import {
+  add,
+  addHours,
+  eachWeekOfInterval,
+  startOfDay,
+  startOfWeek,
+} from "date-fns";
 import { toZonedTime } from "date-fns-tz";
 
 const prisma = new PrismaClient();
+
+/**
+ * Generates a random number following a normal (Gaussian) distribution.
+ * Uses the Box-Muller transform.
+ */
+function randomNormal(mean = 0, stdDev = 1): number {
+  let u = 0,
+    v = 0;
+  while (u === 0) {
+    // Replace with crypto.randomInt(0, 1)
+
+    u = randomInt(0, 1000) / 1000.0;
+  }
+  while (v === 0) {
+    v = randomInt(0, 1000) / 1000.0;
+  }
+  return (
+    mean + stdDev * Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v)
+  );
+}
+
+/**
+ * Generates attendance for weekdays based on a normal distribution.
+ *
+ * @param meanDays - average number of days attended per week (default 3)
+ * @param stdDev - standard deviation (default 1.2 for more spread)
+ * @returns an object with weekday attendance booleans
+ */
+function generateWeeklyAttendance(
+  meanDays = 3,
+  stdDev = 1.2,
+): Record<string, boolean> {
+  const weekdays = ["monday", "tuesday", "wednesday", "thursday", "friday"];
+
+  // Draw from normal distribution and clamp between 0 and 5
+  const attendedDays = Math.round(
+    Math.min(Math.max(randomNormal(meanDays, stdDev), 0), 5),
+  );
+
+  // Shuffle weekdays randomly
+  const shuffled = [...weekdays].sort(() => Math.random() - 0.5);
+
+  // Pick the first N days as attended
+  const attendedSet = new Set(shuffled.slice(0, attendedDays));
+
+  // Build result object
+  const attendance: Record<string, boolean> = {};
+  for (const day of weekdays) {
+    attendance[day] = attendedSet.has(day);
+  }
+
+  return attendance;
+}
+
+type CreateHistoricalDataProps = {
+  users: User[];
+  office: Office;
+};
+
+const createHistoricalData = async (props: CreateHistoricalDataProps) => {
+  const floorsWithDesks = await prisma.floor.findMany({
+    where: {
+      officeId: props.office.id,
+    },
+    include: {
+      desks: true,
+    },
+  });
+  const baseAllDesksForOffice = floorsWithDesks.flatMap((floor) => floor.desks);
+
+  type CreationPayload = {
+    userId: string;
+    deskId: string;
+    date: Date;
+    timezone: string;
+    wholeDay: boolean;
+    startTime: Date;
+    endTime: Date;
+  };
+  const creationPayloads: CreationPayload[] = [];
+
+  eachWeekOfInterval({
+    start: add(new Date(), { weeks: -104 }),
+    end: add(new Date(), { weeks: 2 }),
+  }).flatMap((week) => {
+    const beginningOfWeek = startOfWeek(week, { weekStartsOn: 1 });
+    const userWeekAttendanceMap = new Map<string, Record<string, boolean>>();
+    props.users.forEach((user) => {
+      const attendance = generateWeeklyAttendance();
+      userWeekAttendanceMap.set(user.id, attendance);
+    });
+
+    ["monday", "tuesday", "wednesday", "thursday", "friday"].forEach((day) => {
+      const desksForTheDay = [...baseAllDesksForOffice];
+      // Shuffle desks for the day
+      // Shuffle desks properly for each day based on crypto.
+      const shuffledDesks = desksForTheDay.sort(() => {
+        return randomInt(-1, 1);
+      });
+      // desksForTheDay.sort(() => Math.random() - 0.5);
+
+      // For each user, check the attendance for the day and if they are attending, create a desk schedule for them
+      for (const user of props.users) {
+        const attendance = userWeekAttendanceMap.get(user.id);
+        // console.log(
+        //   `User ${user.id} ${user.name} attandance for day ${day} is ${attendance?.[day]}`,
+        // );
+        if (attendance?.[day]) {
+          const desk = shuffledDesks.shift();
+          if (desk) {
+            const dayIndex = [
+              "monday",
+              "tuesday",
+              "wednesday",
+              "thursday",
+              "friday",
+            ].indexOf(day);
+            const zonedDate = toZonedTime(
+              add(beginningOfWeek, { days: dayIndex - 1 }),
+              props.office.timezone,
+            );
+            creationPayloads.push({
+              userId: user.id,
+              deskId: desk.id,
+              date: zonedDate,
+              timezone: props.office.timezone,
+              wholeDay: true,
+              startTime: zonedDate,
+              endTime: addHours(zonedDate, 24),
+            });
+          }
+        }
+      }
+    });
+  });
+
+  await prisma.deskSchedule.createMany({
+    data: creationPayloads,
+  });
+  // await Promise.all(queriesToBeExecuted);
+
+  // For each week in the past 365 days, create desk schedules for each user
+
+  // const startOfDayDate = startOfDay(new Date());
+  // // UTC
+  // const zonedDate = toZonedTime(startOfDayDate, berlinOffice1.timezone);
+
+  // await prisma.deskSchedule.create({
+  //   data: {
+  //     userId: user1.id,
+  //     deskId: floor1desk1.id,
+  //     date: zonedDate,
+  //     timezone: berlinOffice1.timezone,
+  //     wholeDay: true,
+  //     startTime: zonedDate,
+  //     endTime: addHours(zonedDate, 24),
+  //   },
+  // });
+  // await prisma.deskSchedule.create({
+  //   data: {
+  //     userId: user2.id,
+  //     deskId: floor1desk2.id,
+  //     date: zonedDate,
+  //     timezone: berlinOffice1.timezone,
+  //     wholeDay: true,
+  //     startTime: zonedDate,
+  //     endTime: addHours(zonedDate, 24),
+  //   },
+  // });
+};
 
 async function main() {
   // console.log({ prisma });
@@ -104,7 +281,7 @@ async function main() {
       currentOfficeId: berlinOffice1.id,
     },
   });
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   const user6 = await prisma.user.create({
     data: {
       email: faker.internet.email(),
@@ -115,7 +292,7 @@ async function main() {
       currentOfficeId: berlinOffice1.id,
     },
   });
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   const user7 = await prisma.user.create({
     data: {
       email: faker.internet.email(),
@@ -317,6 +494,7 @@ async function main() {
         "http://res.cloudinary.com/dpfc44mfl/image/upload/v1701200327/floor_plans/s1bjbtkfiwtdpjiegvjl.png",
     },
   });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const floor2desk1 = await prisma.desk.create({
     data: {
       floorId: berlinOffice1Floor2.id,
@@ -325,6 +503,7 @@ async function main() {
       y: 346.90625,
     },
   });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const floor2desk2 = await prisma.desk.create({
     data: {
       floorId: berlinOffice1Floor2.id,
@@ -333,6 +512,7 @@ async function main() {
       y: 346.90625,
     },
   });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const floor2desk3 = await prisma.desk.create({
     data: {
       floorId: berlinOffice1Floor2.id,
@@ -459,49 +639,67 @@ async function main() {
     },
   });
 
+  const userCreationgPromises = new Array(20).fill(0).map(() => {
+    return prisma.user.create({
+      data: {
+        email: faker.internet.email(),
+        name: faker.person.fullName(),
+        image: faker.image.avatar(),
+        organizationId: organization.id,
+        userRole: UserRole.MEMBER,
+        currentOfficeId: berlinOffice1.id,
+      },
+    });
+  });
+  const analyticsUsers = await Promise.all(userCreationgPromises);
+
   // Analytics
-
-  const startOfDayDateTwoDaysAgo = startOfDay(add(new Date(), { days: -2 }));
-  // UTC
-  const zonedDateTwoDaysAgo = toZonedTime(
-    startOfDayDateTwoDaysAgo,
-    berlinOffice1.timezone,
-  );
-
-  await prisma.deskSchedule.create({
-    data: {
-      userId: user3.id,
-      deskId: floor2desk1.id,
-      date: zonedDateTwoDaysAgo,
-      timezone: berlinOffice1.timezone,
-      wholeDay: true,
-      startTime: zonedDateTwoDaysAgo,
-      endTime: addHours(zonedDateTwoDaysAgo, 24),
-    },
+  await createHistoricalData({
+    users: [user1, user2, user3, user4, user5, user6, user7, ...analyticsUsers],
+    office: berlinOffice1,
   });
 
-  await prisma.deskSchedule.create({
-    data: {
-      userId: user4.id,
-      deskId: floor2desk2.id,
-      date: zonedDateTwoDaysAgo,
-      timezone: berlinOffice1.timezone,
-      wholeDay: true,
-      startTime: zonedDateTwoDaysAgo,
-      endTime: addHours(zonedDateTwoDaysAgo, 24),
-    },
-  });
-  await prisma.deskSchedule.create({
-    data: {
-      userId: user5.id,
-      deskId: floor2desk3.id,
-      date: zonedDateTwoDaysAgo,
-      timezone: berlinOffice1.timezone,
-      wholeDay: true,
-      startTime: zonedDateTwoDaysAgo,
-      endTime: addHours(zonedDateTwoDaysAgo, 24),
-    },
-  });
+  // const startOfDayDateTwoDaysAgo = startOfDay(add(new Date(), { days: -2 }));
+  // // UTC
+  // const zonedDateTwoDaysAgo = toZonedTime(
+  //   startOfDayDateTwoDaysAgo,
+  //   berlinOffice1.timezone,
+  // );
+
+  // await prisma.deskSchedule.create({
+  //   data: {
+  //     userId: user3.id,
+  //     deskId: floor2desk1.id,
+  //     date: zonedDateTwoDaysAgo,
+  //     timezone: berlinOffice1.timezone,
+  //     wholeDay: true,
+  //     startTime: zonedDateTwoDaysAgo,
+  //     endTime: addHours(zonedDateTwoDaysAgo, 24),
+  //   },
+  // });
+
+  // await prisma.deskSchedule.create({
+  //   data: {
+  //     userId: user4.id,
+  //     deskId: floor2desk2.id,
+  //     date: zonedDateTwoDaysAgo,
+  //     timezone: berlinOffice1.timezone,
+  //     wholeDay: true,
+  //     startTime: zonedDateTwoDaysAgo,
+  //     endTime: addHours(zonedDateTwoDaysAgo, 24),
+  //   },
+  // });
+  // await prisma.deskSchedule.create({
+  //   data: {
+  //     userId: user5.id,
+  //     deskId: floor2desk3.id,
+  //     date: zonedDateTwoDaysAgo,
+  //     timezone: berlinOffice1.timezone,
+  //     wholeDay: true,
+  //     startTime: zonedDateTwoDaysAgo,
+  //     endTime: addHours(zonedDateTwoDaysAgo, 24),
+  //   },
+  // });
 
   const inviteCode = organization.inviteCode;
   console.log("✅✅✅ SEED SUCCEEDED ✅✅✅");

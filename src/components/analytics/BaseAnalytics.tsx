@@ -1,5 +1,6 @@
 import {
   Box,
+  Checkbox,
   HStack,
   Heading,
   Portal,
@@ -8,36 +9,89 @@ import {
   Skeleton,
   Stack,
   Stat,
+  Text,
   createListCollection,
 } from "@chakra-ui/react";
-import { add } from "date-fns";
+import {
+  add,
+  endOfDay,
+  startOfDay,
+  startOfMonth,
+  startOfWeek,
+  startOfYear,
+} from "date-fns";
 import { useEffect, useMemo, useState } from "react";
 
 import { trpc } from "../../utils/trpc";
 import { ChartsDeskUtilizationByDayOfWeek } from "./charts-desk-utilization-by-day-of-week";
 
+type DateRange = {
+  startDate: Date;
+  endDate: Date;
+};
+
 export const BaseAnalytics = () => {
   const [officeValue, setOfficeValue] = useState<string[] | null>(null);
   const [dateRangeValue, setDateRangeValue] = useState<string[] | null>(null);
+  const [includeWeekends, setIncludeWeekends] = useState<boolean>(false);
 
   const getDateRangeOptionsQuery =
     trpc.analytics.getDateRangeOptions.useQuery();
   const getOfficeOptionsQuery = trpc.analytics.getOfficeOptions.useQuery();
 
-  // const startTime =
-
   const queryParams = useMemo(() => {
-    const dateRange = {
+    const defaultDateRange: DateRange = {
       startDate: add(new Date(), { days: -7 }),
       endDate: new Date(),
+    } as const;
+    const dateRangeOptionsMap: Record<string, DateRange> = {
+      weektodate: {
+        startDate: add(startOfWeek(new Date(), { weekStartsOn: 1 }), {
+          seconds: -1,
+        }),
+        endDate: new Date(),
+      },
+      last7days: defaultDateRange,
+      monthtodate: {
+        startDate: startOfMonth(new Date()),
+        endDate: new Date(),
+      },
+      last28days: {
+        startDate: add(new Date(), { days: -28 }),
+        endDate: new Date(),
+      },
+      last90days: {
+        startDate: add(new Date(), { days: -90 }),
+        endDate: new Date(),
+      },
+      yeartodate: {
+        startDate: startOfYear(new Date()),
+        endDate: new Date(),
+      },
+      last365days: {
+        startDate: add(new Date(), { days: -365 }),
+        endDate: new Date(),
+      },
+    } as const;
+    let computedDateRange = defaultDateRange;
+    if (dateRangeValue?.[0]) {
+      const mappedDateRange = dateRangeOptionsMap[dateRangeValue?.[0] ?? ""];
+      if (mappedDateRange) {
+        computedDateRange = mappedDateRange;
+      }
+    }
+    const dateRange = {
+      startDate: startOfDay(computedDateRange.startDate),
+      endDate: endOfDay(computedDateRange.endDate),
     };
 
     return {
       officeId: officeValue?.[0] ?? "",
       startDatetime: dateRange.startDate,
       endDatetime: dateRange.endDate,
+      includeWeekends: includeWeekends,
     };
-  }, [officeValue]);
+  }, [officeValue, includeWeekends, dateRangeValue]);
 
   const getDeskUtilizationQuery = trpc.analytics.getDeskUtilization.useQuery(
     queryParams,
@@ -65,7 +119,7 @@ export const BaseAnalytics = () => {
     weektodate: "Week to date",
     last7days: "Last 7 days",
     monthtodate: "Month to date",
-    last30days: "Last 30 days",
+    last28days: "Last 28 days",
     last90days: "Last 90 days",
     yeartodate: "Year to date",
     last365days: "Last 365 days",
@@ -123,11 +177,9 @@ export const BaseAnalytics = () => {
     minimumFractionDigits: 2,
   }).format(differenceOccupancyRate);
 
-  let differenceSign = "+/-";
+  let differenceSign = "";
   if (differenceOccupancyRate > 0.0) {
     differenceSign = "+";
-  } else if (differenceOccupancyRate < 0.0) {
-    differenceSign = "-";
   }
 
   const formattedPeakDayMap = {
@@ -161,9 +213,13 @@ export const BaseAnalytics = () => {
       >
         <Box>
           <Heading as={"h1"}>Workplacify Analytics 🏢</Heading>
+          <Text>Analyze your office utilization and peak days.</Text>
         </Box>
         <Stack direction={{ base: "column", md: "row" }} alignItems={"center"}>
-          <Stack direction={{ base: "column", md: "row" }}>
+          <Stack
+            direction={{ base: "column", md: "row" }}
+            alignItems={"center"}
+          >
             {officeValue && (
               <Select.Root
                 collection={officeFrameworks}
@@ -226,7 +282,18 @@ export const BaseAnalytics = () => {
                 </Portal>
               </Select.Root>
             )}
-            <Box>Include weekends?</Box>
+            <Box>
+              <Checkbox.Root
+                checked={includeWeekends}
+                onCheckedChange={(e) => {
+                  setIncludeWeekends(Boolean(e.checked));
+                }}
+              >
+                <Checkbox.HiddenInput />
+                <Checkbox.Control />
+                <Checkbox.Label>Include weekends?</Checkbox.Label>
+              </Checkbox.Root>
+            </Box>
           </Stack>
           {/* <Button variant={"outline"}>
             <Icon as={FiRefreshCcw} />
@@ -257,18 +324,11 @@ export const BaseAnalytics = () => {
                 </Stat.ValueText>
               </Skeleton>
 
-              {/* <FormatNumber
-            value={1340}
-            style="currency"
-            currency="USD"
-            maximumFractionDigits={0}
-          /> */}
-
               <Stat.HelpText mb="2">
                 {differenceSign}
-                {differenceOccupancyRateFormatted} from last week
+                {differenceOccupancyRateFormatted} from previous period
               </Stat.HelpText>
-              <Progress.Root value={differenceOccupancyRate * 100}>
+              <Progress.Root value={currentPeriodOccupancyRate * 100}>
                 <Progress.Track>
                   <Progress.Range />
                 </Progress.Track>
@@ -279,7 +339,7 @@ export const BaseAnalytics = () => {
             <Stat.Root>
               <Stat.Label>Peak Day</Stat.Label>
               <Stat.ValueText>
-                {formattedPeakDay} ({formattedPeakDayUtilization} Util)
+                {formattedPeakDay} ({formattedPeakDayUtilization} Utilization)
               </Stat.ValueText>
             </Stat.Root>
           </Box>

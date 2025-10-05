@@ -12,6 +12,7 @@ type SubItem = {
   id: number;
   title: string;
   icon: IconType;
+  link?: string;
 };
 
 export const SidebarActiveItems = () => {
@@ -19,8 +20,13 @@ export const SidebarActiveItems = () => {
   const t = useTranslations("AppMenu");
   const analyticsSubItems = [
     { id: 84824812000, title: "Base Analytics", icon: FiStar },
-    { id: 84824812001, title: "Area Analytics (Floors)", icon: FiStar },
-    { id: 84824812002, title: "People Analytics (Users)", icon: FiStar },
+    // { id: 84824812001, title: "Area Analytics (Floors)", icon: FiStar },
+    {
+      id: 84824812002,
+      title: "People Analytics (Users)",
+      icon: FiStar,
+      link: "/app/analytics/people-analytics",
+    },
   ];
 
   const analyticsPath = "/app/analytics";
@@ -60,7 +66,7 @@ export const SidebarActiveItems = () => {
               textDecoration={"none"}
               _hover={{ textDecoration: "none" }}
             >
-              <NextLink href={`#`}>
+              <NextLink href={`${item.link ?? "#"}`}>
                 <GroupedMenuItem
                   isActive={false}
                   title={item.title}

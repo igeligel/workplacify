@@ -1,6 +1,12 @@
 import { UserRole } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
-import { differenceInDays, eachDayOfInterval, getDay, subDays } from "date-fns";
+import {
+  differenceInCalendarDays,
+  differenceInDays,
+  eachDayOfInterval,
+  getDay,
+  subDays,
+} from "date-fns";
 import { z } from "zod";
 
 import { getDeskUtilizationForDateRange } from "../analytics/getDeskUtilization";
@@ -12,6 +18,7 @@ const commonInput = z.object({
   officeId: z.string(),
   startDatetime: z.date(),
   endDatetime: z.date(),
+  includeWeekends: z.boolean(),
 });
 
 const weekDayMap: Record<number, string> = {
@@ -45,8 +52,8 @@ export const analyticsRouter = router({
     return [
       { value: "weektodate" },
       { value: "last7days" },
-      { value: "monthtodate" },
-      { value: "last30days" },
+      // { value: "monthtodate" },
+      { value: "last28days" },
       { value: "last90days" },
       { value: "yeartodate" },
       { value: "last365days" },
@@ -94,7 +101,7 @@ export const analyticsRouter = router({
           message: "You are not allowed to access this resource",
         });
       }
-      const { officeId, startDatetime, endDatetime } = input;
+      const { officeId, startDatetime, endDatetime, includeWeekends } = input;
 
       const differenceInDaysBetweenDates = Math.abs(
         differenceInDays(startDatetime, endDatetime),
@@ -113,6 +120,7 @@ export const analyticsRouter = router({
         startDatetime,
         endDatetime,
         user,
+        includeWeekends,
       });
 
       const previousPeriod = await getDeskUtilizationForDateRange({
@@ -120,6 +128,7 @@ export const analyticsRouter = router({
         startDatetime: startDateTimePreviousPeriod,
         endDatetime: endDateTimePreviousPeriod,
         user,
+        includeWeekends,
       });
 
       const difference =
@@ -150,7 +159,7 @@ export const analyticsRouter = router({
           message: "You are not allowed to access this resource",
         });
       }
-      const { officeId, startDatetime, endDatetime } = input;
+      const { officeId, startDatetime, endDatetime, includeWeekends } = input;
       const officeWithDeskSchedules = await prisma.office.findMany({
         where: {
           id: officeId,
@@ -235,6 +244,7 @@ export const analyticsRouter = router({
       const days = eachDayOfInterval({
         start: startDatetime,
         end: endDatetime,
+        includeWeekends,
       });
       let amountOfDesks = 0;
       officeWithDeskSchedules.forEach((office) => {
@@ -277,10 +287,26 @@ export const analyticsRouter = router({
         return acc;
       }, initialValuePeakDay);
 
-      return {
+      const result = {
         statisticsPerDay: finalStatisticsPerDay,
         peakDay: peakDay,
       };
+
+      const differenceInDays = Math.abs(
+        differenceInCalendarDays(startDatetime, endDatetime),
+      );
+      const adjustmentIdentifier = differenceInDays / 7;
+      console.log({ differenceInDays, adjustmentIdentifier });
+
+      const adjustedResult = {
+        ...result,
+        peakDay: {
+          ...result.peakDay,
+          utilization: result.peakDay.utilization / adjustmentIdentifier,
+        },
+      };
+
+      return adjustedResult;
     }),
   // getTopAttendant: publicProcedure.query(async (resolverProps) => {}),
   getDeskUtilizationByDayOfWeek: publicProcedure
@@ -302,7 +328,9 @@ export const analyticsRouter = router({
           message: "You are not allowed to access this resource",
         });
       }
-      const { officeId, startDatetime, endDatetime } = input;
+      const { officeId, startDatetime, endDatetime, includeWeekends } = input;
+
+      // officeWithDeskSchedules
       const officeWithDeskSchedules = await prisma.office.findMany({
         where: {
           id: officeId,
@@ -329,6 +357,8 @@ export const analyticsRouter = router({
           },
         },
       });
+
+      const filteredOfficeWithDeskSchedules = officeWithDeskSchedules;
 
       type ResultEntry = {
         dayOfTheWeek:
@@ -357,15 +387,15 @@ export const analyticsRouter = router({
         "wednesday",
         "thursday",
         "friday",
-        "saturday",
-        "sunday",
+        ...(includeWeekends ? ["saturday", "sunday"] : []),
       ] as const;
+
       const initialResult: Result = [];
-      officeWithDeskSchedules.forEach((office) => {
+      filteredOfficeWithDeskSchedules.forEach((office) => {
         return office.floors.forEach((floor) => {
           eachDayOfWeek.forEach((day) => {
             const resultEntry: ResultEntry = {
-              dayOfTheWeek: day,
+              dayOfTheWeek: day as ResultEntry["dayOfTheWeek"],
               floor: {
                 id: floor.id,
                 name: floor.name,
@@ -382,7 +412,7 @@ export const analyticsRouter = router({
 
       type FloorId = string;
       const floorDeskAmount: Record<FloorId, number> = {};
-      officeWithDeskSchedules.forEach((office) => {
+      filteredOfficeWithDeskSchedules.forEach((office) => {
         return office.floors.forEach((floor) => {
           floor.desks.forEach(() => {
             if (typeof floorDeskAmount[floor.id] === "undefined") {
@@ -395,7 +425,7 @@ export const analyticsRouter = router({
       });
 
       // Figure out the utilizedDesksNumber for each day of the week + each floor.
-      officeWithDeskSchedules.forEach((office) => {
+      filteredOfficeWithDeskSchedules.forEach((office) => {
         return office.floors.forEach((floor) => {
           floor.desks.forEach((desk) => {
             desk.deskSchedule.forEach((deskSchedule) => {
@@ -458,7 +488,22 @@ export const analyticsRouter = router({
         };
       });
 
-      return finalResult;
+      const differenceInDays = Math.abs(
+        differenceInCalendarDays(startDatetime, endDatetime),
+      );
+      const adjustmentIdentifier = differenceInDays / 7;
+
+      const adjustmentsBasedOnWeeks = finalResult.map((item) => {
+        return {
+          ...item,
+          utilizationPercentage:
+            item.utilizationPercentage / adjustmentIdentifier,
+          utilizationPercentageOnSpecificDay:
+            item.utilizationPercentageOnSpecificDay / adjustmentIdentifier,
+        };
+      });
+
+      return adjustmentsBasedOnWeeks;
     }),
 
   // adwadwadaw: publicProcedure
