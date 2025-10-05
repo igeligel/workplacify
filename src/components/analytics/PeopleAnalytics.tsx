@@ -1,9 +1,33 @@
-import { Box, Table } from "@chakra-ui/react";
+import { Box, Stack, Table, Text } from "@chakra-ui/react";
+
+import { WorkplacifyFilters } from "./WorkplacifyFilters";
+import { useAnalyticsFiltersStore } from "./useAnalyticsFiltersStore";
 
 export const PeopleAnalytics = () => {
+  const officeValue = useAnalyticsFiltersStore((s) => s.officeValue);
+  const dateRangeValue = useAnalyticsFiltersStore((s) => s.dateRangeValue);
   return (
     <Box>
-      <Box>Filters</Box>
+      <Stack
+        direction={{ base: "column", md: "row" }}
+        justifyContent={"space-between"}
+      >
+        <Box>
+          <Text fontSize="lg" fontWeight="semibold">
+            People Analytics
+          </Text>
+          <Text>Analyze user booking behavior.</Text>
+        </Box>
+        <WorkplacifyFilters />
+      </Stack>
+      <Box mt={4}>
+        <Text color="fg.muted" fontSize="sm">
+          {officeValue?.[0]
+            ? `Office selected: ${officeValue[0]}`
+            : "Select an office"}
+          {dateRangeValue?.[0] ? ` · Range: ${dateRangeValue[0]}` : ""}
+        </Text>
+      </Box>
       <Box>
         {/* User                 Total Bookings   Avg. Weekly Visits   Favorite Day    │
 │ -------------------- --------------   --------------------   ------------    │
