@@ -19,7 +19,12 @@ export const SidebarActiveItems = () => {
   const router = useRouter();
   const t = useTranslations("AppMenu");
   const analyticsSubItems = [
-    { id: 84824812000, title: "Base Analytics", icon: FiStar },
+    {
+      id: 84824812000,
+      title: "Base Analytics",
+      icon: FiStar,
+      link: "/app/analytics",
+    },
     // { id: 84824812001, title: "Area Analytics (Floors)", icon: FiStar },
     {
       id: 84824812002,
@@ -58,6 +63,7 @@ export const SidebarActiveItems = () => {
           </Text>
         )}
         {currentItems.map((item) => {
+          const isActive = router.pathname === item.link;
           return (
             <Link
               asChild
@@ -68,7 +74,7 @@ export const SidebarActiveItems = () => {
             >
               <NextLink href={`${item.link ?? "#"}`}>
                 <GroupedMenuItem
-                  isActive={false}
+                  isActive={isActive}
                   title={item.title}
                   icon={item.icon}
                   iconColor={`gray.600`}
