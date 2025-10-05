@@ -14,6 +14,7 @@ import {
 } from "recharts";
 
 import { trpc } from "../../utils/trpc";
+import { useAnalyticsQueryParams } from "./WorkplacifyFilters";
 
 // type CustomTooltipProps = {
 //   active: boolean;
@@ -72,18 +73,9 @@ type ChartDataPoint = {
 
   [key: string]: string | number;
 };
-// & {
-//   moreInfo?: {
-//     testData: number;
-//   };
-// };
 
 type ChartsDeskUtilizationByDayOfWeekProps = {
-  queryParams: {
-    officeId: string;
-    startDatetime: Date;
-    endDatetime: Date;
-  };
+  queryParams: ReturnType<typeof useAnalyticsQueryParams>;
 };
 
 export const ChartsDeskUtilizationByDayOfWeek = (
