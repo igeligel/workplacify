@@ -2,6 +2,27 @@ import { BlogArticle } from "../chakra-starter/marketing-ui/BlogArticle/types";
 
 export const blogArticles: BlogArticle[] = [
   {
+    uuid: "1a2b3c4d-5e6f-7081-92a3-b4c5d6e7f809",
+    title: "Workplacify Analytics: Turn Desk Booking Data into ROI",
+    description:
+      "Introducing Workplacify Analytics. Learn how Base and People Analytics convert desk booking data into real estate savings, productivity gains, and better hybrid experiences.",
+    readingTime: "3 min",
+    url: "/blog/introducing-desk-booking-analytics",
+    image: "/og-images/introducing-desk-booking-analytics.png",
+    imageAlt: "Workplacify Analytics: Turn Desk Booking Data into ROI",
+    tags: [
+      { text: "workspace-management", color: "purple" },
+      { text: "hybrid-work", color: "blue" },
+      { text: "workplace-technology", color: "green" },
+    ],
+    author: {
+      name: "Kevin Peters",
+      jobTitle: "CEO of Workplacify",
+      image: "/profile-kevin-peters.png",
+    },
+    datePublished: new Date("2025-10-06T10:00:00.000Z"),
+  },
+  {
     uuid: "f8e7d6c5-b4a3-9201-8765-432109876543",
     title: "Create a Desk Sharing Policy That Works",
     description:
