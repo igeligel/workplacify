@@ -2,6 +2,27 @@ import { BlogArticle } from "../chakra-starter/marketing-ui/BlogArticle/types";
 
 export const blogArticles: BlogArticle[] = [
   {
+    uuid: "2b3c4d5e-6f7g-8h9i-0j1k-l2m3n4o5p6q7",
+    title: "Desk Booking for Law Firms: Balancing Privacy & Productivity",
+    description:
+      "Discover how desk booking systems help law firms adopt flexible seating while protecting client confidentiality and boosting productivity. Address the unique needs of law firms, such as the need for quiet spaces and confidentiality, and how a booking system can help.",
+    readingTime: "10 min",
+    url: "/blog/desk-booking-law-firms-privacy-productivity",
+    image: "/og-images/desk-booking-law-firms-privacy-productivity.png",
+    imageAlt: "Desk Booking for Law Firms: Balancing Privacy & Productivity",
+    tags: [
+      { text: "workspace-management", color: "purple" },
+      { text: "hybrid-work", color: "blue" },
+      { text: "professional-services", color: "teal" },
+    ],
+    author: {
+      name: "Kevin Peters",
+      jobTitle: "CEO of Workplacify",
+      image: "/profile-kevin-peters.png",
+    },
+    datePublished: new Date("2025-10-11T10:00:00.000Z"),
+  },
+  {
     uuid: "1a2b3c4d-5e6f-7081-92a3-b4c5d6e7f809",
     title: "Workplacify Analytics: Turn Desk Booking Data into ROI",
     description:
