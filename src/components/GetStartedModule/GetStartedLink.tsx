@@ -5,6 +5,7 @@ import {
   Icon,
   Image,
   Link,
+  Skeleton,
   Text,
   VStack,
 } from "@chakra-ui/react";
@@ -23,8 +24,13 @@ type GetStartedLinkProps = {
 
 export const GetStartedLink = (props: GetStartedLinkProps) => {
   const t = useTranslations("GetStartedModule");
+  const [imageLoaded, setImageLoaded] = useState(false);
   const { href, badges, heading, imageSource, imageAlt } = props;
   const [isElementHovered, setIsElementHovered] = useState(false);
+
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
 
   return (
     <Link
@@ -79,23 +85,28 @@ export const GetStartedLink = (props: GetStartedLinkProps) => {
               />
             </Text>
           </VStack>
-          <Box
-            maxWidth={{ base: "100%", lg: "80%" }}
-            maxHeight={{ base: "125px", lg: "none" }}
-            overflow={{ base: "hidden", lg: "visible" }}
-          >
-            <Image
-              borderTopLeftRadius={"lg"}
-              borderTopRightRadius={"lg"}
-              boxShadow={"lg"}
-              src={imageSource}
-              alt={imageAlt}
-              transition={"transform 0.25s ease-in-out"}
-              transform={
-                isElementHovered ? "translateY(0px)" : "translateY(10px)"
-              }
-            />
-          </Box>
+          <Skeleton loading={!imageLoaded}>
+            <Box
+              maxWidth={{ base: "100%", lg: "80%" }}
+              maxHeight={{ base: "125px", lg: "none" }}
+              overflow={{ base: "hidden", lg: "visible" }}
+            >
+              <Image
+                borderTopLeftRadius={"lg"}
+                borderTopRightRadius={"lg"}
+                boxShadow={"lg"}
+                src={imageSource}
+                alt={imageAlt}
+                transition={"transform 0.25s ease-in-out"}
+                onLoad={handleImageLoad}
+                transform={
+                  isElementHovered ? "translateY(0px)" : "translateY(10px)"
+                }
+                width={"100%"}
+                height={"100%"}
+              />
+            </Box>
+          </Skeleton>
         </VStack>
       </NextLink>
     </Link>

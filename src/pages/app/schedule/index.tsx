@@ -5,7 +5,8 @@ import {
   Container,
   HStack,
   Heading,
-  Spinner,
+  Skeleton,
+  SkeletonText,
   Stack,
   Tabs,
   Tag,
@@ -68,15 +69,11 @@ const SchedulePage = () => {
     isLoading: getOfficeSettingQuery.isLoading,
   });
 
-  if (!userQuery.data) {
-    return <div>{t("notLoggedIn")}</div>;
-  }
-
-  if (userQuery.data.currentOfficeId === null) {
+  if (userQuery.data?.currentOfficeId === null) {
     return <ScheduleNoOfficeSelected />;
   }
 
-  if (!getDeskSchedulesForDayQuery.data) {
+  if (!isLoading && !getDeskSchedulesForDayQuery.data) {
     return <div>{t("noSchedules")}</div>;
   }
 
@@ -96,49 +93,51 @@ const SchedulePage = () => {
       >
         {t("headingSchedule")}
       </Heading>
+
       <Stack
         display={"flex"}
         gap={{ base: 4, lg: 12 }}
         direction={{ base: "column", lg: "row" }}
       >
         <style>{css}</style>
-        <DayPicker
-          mode="single"
-          selected={day}
-          defaultMonth={day}
-          disabled={disabledDays}
-          onSelect={(newDay) => {
-            if (!newDay) return;
-            setDay(newDay);
-          }}
-          style={{
-            margin: "0 !important",
-          }}
-          locale={locale}
-        />
-        {isLoading ? (
-          <Spinner />
-        ) : (
-          <VStack alignItems={"flex-start"} width={"100%"}>
-            <Heading
-              fontSize={{
-                base: "xl",
-                lg: "3xl",
-              }}
-            >
-              {t("headingAllDesks")}
-            </Heading>
-            <Tabs.Root
-              width={"100%"}
-              colorPalette="orange"
-              lazyMount
-              unmountOnExit
-              defaultValue={"list-of-desks"}
-            >
+        <Skeleton loading={isLoading}>
+          <DayPicker
+            mode="single"
+            selected={day}
+            defaultMonth={day}
+            disabled={disabledDays}
+            onSelect={(newDay) => {
+              if (!newDay) return;
+              setDay(newDay);
+            }}
+            style={{
+              margin: "0 !important",
+            }}
+            locale={locale}
+          />
+        </Skeleton>
+        <VStack alignItems={"flex-start"} width={"100%"}>
+          <Heading
+            fontSize={{
+              base: "xl",
+              lg: "3xl",
+            }}
+          >
+            {t("headingAllDesks")}
+          </Heading>
+          <Tabs.Root
+            width={"100%"}
+            colorPalette="orange"
+            lazyMount
+            unmountOnExit
+            defaultValue={"list-of-desks"}
+          >
+            <Skeleton loading={isLoading}>
               <Tabs.List>
                 <Tabs.Trigger value="list-of-desks">
                   {t("listOfDesks")}
                 </Tabs.Trigger>
+
                 {getFloorsForCurrentOfficeQuery.data?.map((floor) => {
                   return (
                     <Tabs.Trigger key={floor.id} value={floor.id}>
@@ -147,183 +146,191 @@ const SchedulePage = () => {
                   );
                 })}
               </Tabs.List>
+            </Skeleton>
 
-              <Tabs.Content value="list-of-desks">
+            <Tabs.Content value="list-of-desks">
+              {isLoading ? (
+                <SkeletonText noOfLines={10} gap="8" />
+              ) : (
                 <VStack gap={3} alignItems={"flex-start"}>
-                  {Object.values(
-                    getDeskSchedulesForDayQuery.data.deskSchdulesMapped,
-                  )
-                    .sort((a, b) => {
-                      const floorComparison = a.desk.floor.name.localeCompare(
-                        b.desk.floor.name,
-                      );
-                      if (floorComparison !== 0) return floorComparison;
-                      return a.desk.id.localeCompare(b.desk.id);
-                    })
-                    .map((freeDeskSchedules) => {
-                      const onBookClick = async () => {
-                        try {
-                          await bookDeskMutation.mutateAsync({
-                            deskId: freeDeskSchedules.desk.id,
+                  {getDeskSchedulesForDayQuery.data &&
+                    Object.values(
+                      getDeskSchedulesForDayQuery.data.deskSchdulesMapped,
+                    )
+                      .sort((a, b) => {
+                        const floorComparison = a.desk.floor.name.localeCompare(
+                          b.desk.floor.name,
+                        );
+                        if (floorComparison !== 0) return floorComparison;
+                        return a.desk.id.localeCompare(b.desk.id);
+                      })
+                      .map((freeDeskSchedules) => {
+                        const onBookClick = async () => {
+                          try {
+                            await bookDeskMutation.mutateAsync({
+                              deskId: freeDeskSchedules.desk.id,
+                              day: formattedDate,
+                            });
+                            utils.schedule.getDeskSchedulesForDay.invalidate();
+                          } catch (e) {
+                            toaster.create({
+                              title: t("errorTitleWhileBooking"),
+                              description: t("errorDescriptionWhileBooking"),
+                              type: "error",
+                              duration: 5000,
+                              closable: true,
+                            });
+                          }
+                        };
+
+                        const onCancelReservationClick = async () => {
+                          const periodToCancel =
+                            freeDeskSchedules.usedPeriods.find(
+                              (e) => e.wholeDay === true,
+                            );
+                          const deskScheduleIdToCancel =
+                            periodToCancel?.deskScheduleId;
+                          if (!deskScheduleIdToCancel) return;
+                          await cancelDeskForDayMutation.mutateAsync({
+                            deskScheduleId: deskScheduleIdToCancel,
                             day: formattedDate,
                           });
                           utils.schedule.getDeskSchedulesForDay.invalidate();
-                        } catch (e) {
-                          toaster.create({
-                            title: t("errorTitleWhileBooking"),
-                            description: t("errorDescriptionWhileBooking"),
-                            type: "error",
-                            duration: 5000,
-                            closable: true,
-                          });
-                        }
-                      };
+                        };
 
-                      const onCancelReservationClick = async () => {
-                        const periodToCancel =
-                          freeDeskSchedules.usedPeriods.find(
-                            (e) => e.wholeDay === true,
+                        const canCancelReservation =
+                          freeDeskSchedules.usedPeriods.some(
+                            (period) => period.id === userQuery.data?.id,
                           );
-                        const deskScheduleIdToCancel =
-                          periodToCancel?.deskScheduleId;
-                        if (!deskScheduleIdToCancel) return;
-                        await cancelDeskForDayMutation.mutateAsync({
-                          deskScheduleId: deskScheduleIdToCancel,
-                          day: formattedDate,
-                        });
-                        utils.schedule.getDeskSchedulesForDay.invalidate();
-                      };
 
-                      const canCancelReservation =
-                        freeDeskSchedules.usedPeriods.some(
-                          (period) => period.id === userQuery.data?.id,
-                        );
+                        const numberOfFloors =
+                          getFloorsForCurrentOfficeQuery.data?.length || 0;
 
-                      const numberOfFloors =
-                        getFloorsForCurrentOfficeQuery.data?.length || 0;
-
-                      let floorDeskName = t("floorDeskNameSoloFloor", {
-                        deskId: freeDeskSchedules.desk.publicDeskId,
-                      });
-
-                      if (numberOfFloors >= 2) {
-                        floorDeskName = t("floorDeskName", {
-                          floorName: freeDeskSchedules.desk.floor.name,
+                        let floorDeskName = t("floorDeskNameSoloFloor", {
                           deskId: freeDeskSchedules.desk.publicDeskId,
                         });
-                      }
 
-                      return (
-                        <VStack
-                          gap={1}
-                          key={freeDeskSchedules.desk.id}
-                          alignItems={"flex-start"}
-                        >
-                          <HStack alignItems={"flex-start"}>
-                            <VStack
-                              alignItems={"flex-start"}
-                              justifyContent={"flex-start"}
-                            >
-                              <Heading
-                                fontSize={"md"}
-                                fontWeight={500}
-                                color={"gray.700"}
+                        if (numberOfFloors >= 2) {
+                          floorDeskName = t("floorDeskName", {
+                            floorName: freeDeskSchedules.desk.floor.name,
+                            deskId: freeDeskSchedules.desk.publicDeskId,
+                          });
+                        }
+
+                        return (
+                          <VStack
+                            gap={1}
+                            key={freeDeskSchedules.desk.id}
+                            alignItems={"flex-start"}
+                          >
+                            <HStack alignItems={"flex-start"}>
+                              <VStack
+                                alignItems={"flex-start"}
+                                justifyContent={"flex-start"}
                               >
-                                {floorDeskName}
-                                {freeDeskSchedules.usedPeriods.map(
-                                  (usedPeriod) => {
-                                    const isOccupiedWholeDay =
-                                      usedPeriod.wholeDay;
+                                <Heading
+                                  fontSize={"md"}
+                                  fontWeight={500}
+                                  color={"gray.700"}
+                                >
+                                  {floorDeskName}
+                                  {freeDeskSchedules.usedPeriods.map(
+                                    (usedPeriod) => {
+                                      const isOccupiedWholeDay =
+                                        usedPeriod.wholeDay;
 
-                                    const wholeDayText = t(
-                                      "isOccupiedWholeday",
-                                      {
-                                        userCount: usedPeriod.name ? 1 : 0,
-                                        userName: usedPeriod.name,
-                                      },
-                                    );
+                                      const wholeDayText = t(
+                                        "isOccupiedWholeday",
+                                        {
+                                          userCount: usedPeriod.name ? 1 : 0,
+                                          userName: usedPeriod.name,
+                                        },
+                                      );
 
-                                    const specificTimeText = t(
-                                      "isOccupiedSpecificTime",
-                                      {
-                                        userCount: usedPeriod.name ? 1 : 0,
-                                        userName: usedPeriod.name,
-                                        startTime:
-                                          usedPeriod.start.toLocaleTimeString(),
-                                        endTime:
-                                          usedPeriod.end.toLocaleTimeString(),
-                                      },
-                                    );
-                                    const label = isOccupiedWholeDay
-                                      ? wholeDayText
-                                      : specificTimeText;
+                                      const specificTimeText = t(
+                                        "isOccupiedSpecificTime",
+                                        {
+                                          userCount: usedPeriod.name ? 1 : 0,
+                                          userName: usedPeriod.name,
+                                          startTime:
+                                            usedPeriod.start.toLocaleTimeString(),
+                                          endTime:
+                                            usedPeriod.end.toLocaleTimeString(),
+                                        },
+                                      );
+                                      const label = isOccupiedWholeDay
+                                        ? wholeDayText
+                                        : specificTimeText;
 
-                                    const key = `${isOccupiedWholeDay.toString()}-${usedPeriod.id}`;
+                                      const key = `${isOccupiedWholeDay.toString()}-${usedPeriod.id}`;
 
-                                    return <Box key={key}>{label}</Box>;
-                                  },
+                                      return <Box key={key}>{label}</Box>;
+                                    },
+                                  )}
+                                </Heading>
+                                {freeDeskSchedules.desk.name && (
+                                  <Tooltip content={t("customNameForThisDesk")}>
+                                    <Tag.Root>
+                                      <Tag.Label>
+                                        {freeDeskSchedules.desk.name}
+                                      </Tag.Label>
+                                    </Tag.Root>
+                                  </Tooltip>
                                 )}
-                              </Heading>
-                              {freeDeskSchedules.desk.name && (
-                                <Tooltip content={t("customNameForThisDesk")}>
-                                  <Tag.Root>
-                                    <Tag.Label>
-                                      {freeDeskSchedules.desk.name}
-                                    </Tag.Label>
-                                  </Tag.Root>
-                                </Tooltip>
-                              )}
-                            </VStack>
-                            <Box>
-                              <Badge
-                                colorPalette={
-                                  freeDeskSchedules.wholeDayFree
-                                    ? "green"
-                                    : "red"
-                                }
+                              </VStack>
+                              <Box>
+                                <Badge
+                                  colorPalette={
+                                    freeDeskSchedules.wholeDayFree
+                                      ? "green"
+                                      : "red"
+                                  }
+                                >
+                                  {freeDeskSchedules.wholeDayFree
+                                    ? t("badgeLabelAvailable")
+                                    : t("badgeLabelBooked")}
+                                </Badge>
+                              </Box>
+                            </HStack>
+                            {canCancelReservation ? (
+                              <Button
+                                colorPalette="orange"
+                                backgroundColor={"orange.400"}
+                                _hover={{
+                                  backgroundColor: "orange.500",
+                                }}
+                                size={"sm"}
+                                onClick={onCancelReservationClick}
                               >
-                                {freeDeskSchedules.wholeDayFree
-                                  ? t("badgeLabelAvailable")
-                                  : t("badgeLabelBooked")}
-                              </Badge>
-                            </Box>
-                          </HStack>
-                          {canCancelReservation ? (
-                            <Button
-                              colorPalette="orange"
-                              backgroundColor={"orange.400"}
-                              _hover={{
-                                backgroundColor: "orange.500",
-                              }}
-                              size={"sm"}
-                              onClick={onCancelReservationClick}
-                            >
-                              {t("cancelReservation")}
-                            </Button>
-                          ) : (
-                            <Button
-                              colorPalette="orange"
-                              backgroundColor={"orange.400"}
-                              _hover={{
-                                backgroundColor: "orange.500",
-                              }}
-                              size={"sm"}
-                              onClick={onBookClick}
-                              disabled={!freeDeskSchedules.wholeDayFree}
-                            >
-                              {t("bookDesk")}
-                            </Button>
-                          )}
-                        </VStack>
-                      );
-                    })}
+                                {t("cancelReservation")}
+                              </Button>
+                            ) : (
+                              <Button
+                                colorPalette="orange"
+                                backgroundColor={"orange.400"}
+                                _hover={{
+                                  backgroundColor: "orange.500",
+                                }}
+                                size={"sm"}
+                                onClick={onBookClick}
+                                disabled={!freeDeskSchedules.wholeDayFree}
+                              >
+                                {t("bookDesk")}
+                              </Button>
+                            )}
+                          </VStack>
+                        );
+                      })}
                 </VStack>
-              </Tabs.Content>
+              )}
+            </Tabs.Content>
 
-              {getFloorsForCurrentOfficeQuery.data?.map((floor) => {
-                return (
-                  <Tabs.Content key={floor.id} value={floor.id}>
-                    {floor.floorPlan && userQuery.data?.id && (
+            {getFloorsForCurrentOfficeQuery.data?.map((floor) => {
+              return (
+                <Tabs.Content key={floor.id} value={floor.id}>
+                  {getDeskSchedulesForDayQuery.data &&
+                    floor.floorPlan &&
+                    userQuery.data?.id && (
                       <FloorDeskBooker
                         floor={floor}
                         deskSchedulesMapped={
@@ -333,12 +340,11 @@ const SchedulePage = () => {
                         day={day}
                       />
                     )}
-                  </Tabs.Content>
-                );
-              })}
-            </Tabs.Root>
-          </VStack>
-        )}
+                </Tabs.Content>
+              );
+            })}
+          </Tabs.Root>
+        </VStack>
       </Stack>
     </Container>
   );

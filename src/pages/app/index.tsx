@@ -11,7 +11,7 @@ import {
   Heading,
   Icon,
   Portal,
-  Spinner,
+  Skeleton,
   Text,
   Textarea,
   VStack,
@@ -68,22 +68,11 @@ const AppPage = () => {
                 const { uuid, Component } = module;
 
                 return (
-                  <GridItem key={uuid} w="100%" h={"100%"}>
-                    {isLoading ? (
-                      <Box
-                        minHeight={"350px"}
-                        height={"100%"}
-                        display={"flex"}
-                        justifyContent={"center"}
-                        alignItems={"center"}
-                        maxWidth={"80%"}
-                      >
-                        <Spinner />
-                      </Box>
-                    ) : (
+                  <Skeleton loading={isLoading} key={uuid}>
+                    <GridItem w="100%" h={"100%"}>
                       <Component />
-                    )}
-                  </GridItem>
+                    </GridItem>
+                  </Skeleton>
                 );
               })}
               <GridItem w="100%">
