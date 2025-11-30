@@ -35,7 +35,40 @@
     "openSourceDescription": "Self-host our software and customize it to your needs. We are <githubLink>on GitHub</githubLink>!",
     "openSourceCtaTitle": "Or self-host Workplacify",
     "openSourceCtaDescription": "We are open-source and self-hostable. Check out our GitHub repository.",
-    "openSourceCtaButton": "To the <githubIcon></githubIcon> GitHub repository"
+    "openSourceCtaButton": "To the <githubIcon></githubIcon> GitHub repository",
+    "plansThatFitYourOrganization": "Plans that fit your organization",
+    "freeTrialDescription": "Start with 3 month free trial. No credit card needed. Cancel at anytime.",
+    "predictablePricing": "Predictable pricing. No hidden fees. No usage fees or pricing per employee.",
+    "easiestToStart": "Easiest to start",
+    "starter": "Starter",
+    "per10UsersMonth": "per 10 users/month",
+    "taxesMightApplyAdditionally": "Taxes might apply additionally",
+    "createUpTo10Offices": "Create up to 10 offices",
+    "uploadUpTo50Floors": "Upload up to 50 floors",
+    "inviteUpTo200Colleagues": "Invite up to 200 colleagues",
+    "invitationTemplates": "Invitation templates",
+    "comingSoon": "Coming soon",
+    "basicWorkplaceAnalytics": "Basic Workplace Analytics",
+    "startDeskScheduling": "Start desk scheduling",
+    "startFreeTrial": "Start a free trial",
+    "limitedCapabilitiesNoCreditCardRequired": "Limited capabilities, no credit card required",
+    "largeCompanies": "Large companies",
+    "createUnlimitedOffices": "Create unlimited offices",
+    "uploadUnlimitedFloors": "Upload unlimited floors",
+    "inviteUnlimitedColleagues": "Invite unlimited colleagues",
+    "advancedWorkplaceAnalytics": "Advanced workplace analytics",
+    "slackIntegration": "Slack integration",
+    "monthlyEmailReports": "Monthly email reports",
+    "scheduleADemo": "Schedule a demo",
+    "subscribe": "Subscribe",
+    "enterprise": "Enterprise",
+    "tailoredToYourNeeds": "Tailored to your needs.",
+    "contactUs": "Contact us",
+    "sso": "SSO",
+    "selfHostingSupport": "Self-Hosting support",
+    "floorPlans": "Workplacify creates your floor plans",
+    "twentyFivePlusCommunicationTemplates": "25+ communication templates",
+    "customSsoProviders": "custom SSO providers"
   },
   "AppPage": {
     "startBoxHeading": "Get started with workplacify",
@@ -72,7 +105,10 @@
     "selectOffice": "Select Office",
     "labelAccount": "Account",
     "labelSettings": "Settings",
-    "labelLogout": "Logout"
+    "labelLogout": "Logout",
+    "labelAnalytics": "Analytics",
+    "labelBaseAnalytics": "Base Analytics",
+    "labelPeopleAnalytics": "People Analytics (Users)"
   },
   "OfficePages": {
     "headingOfficeList": "Offices",
@@ -139,7 +175,27 @@
     "labelRemoveOffice": "Remove office: {officeName}",
     "confirmRemoveOffice": "Removing an office cannot be undone. It will remove all schedules and all floors from the office.",
     "buttonLabelRemoveOffice": "Remove office",
-    "buttonLabelRemove": "Remove"
+    "buttonLabelRemove": "Remove",
+    "officeSettings": "Office Settings",
+    "officeSettingsDescription": "To adjust the office settings, please fill out the fields below.",
+    "allowSchedulingInThePast": "Allow scheduling in the past",
+    "allow": "Allow",
+    "helperTextAllowSchedulingInThePast": "If you want to allow scheduling in the past, select the days you want to allow. This is helpful to let your users book desks in the past for proper tracking.",
+    "durationSchedulingFuture": "Duration scheduling future",
+    "reset": "Reset",
+    "helperTextDurationSchedulingFuture": "How long you want to allow scheduling in the future. For example if today is the 1st of October, and you want to allow scheduling in the future for 14 days, so up to the 15th of October, set this field to 14.",
+    "restrictSchedulingToSpecificDays": "Restrict scheduling to specific days",
+    "helperTextRestrictSchedulingToSpecificDays": "If you want to restrict scheduling to specific days, select the days you want to allow.",
+    "weekdays": {
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday",
+      "sunday": "Sunday"
+    },
+    "submit": "Submit"
   },
   "SchedulePages": {
     "notLoggedIn": "Not logged in",
@@ -439,5 +495,49 @@
         "answer": "We recommend recalculating whenever there are significant changes in your workplace setup, such as changes in employee count, desk numbers, or costs."
       }
     }
+  },
+  "Analytics": {
+    "heading": "Workplacify Analytics 🏢",
+    "description": "Analyze your office utilization and peak days.",
+    "labelOverallUtilization": "Overall Desk Utilization",
+    "labelOverallUtilizationHelpText": "{differenceSign} {differenceOccupancyRateFormatted} from previous period",
+    "labelPeakDay": "Peak Day",
+    "weekdays": {
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday",
+      "sunday": "Sunday",
+      "mondayShort": "Mon",
+      "tuesdayShort": "Tue",
+      "wednesdayShort": "Wed",
+      "thursdayShort": "Thu",
+      "fridayShort": "Fri",
+      "saturdayShort": "Sat",
+      "sundayShort": "Sun"
+    },
+    "labelPeakDayHelpText": "{peakDay} ({peakDayUtilization} Utilization)",
+    "dateRangeOptions": {
+      "weektodate": "Week to date",
+      "last7days": "Last 7 days",
+      "monthtodate": "Month to date",
+      "last28days": "Last 28 days",
+      "last90days": "Last 90 days",
+      "yeartodate": "Year to date",
+      "last365days": "Last 365 days"
+    },
+    "labelSelectOffice": "Select office",
+    "labelDateRange": "Date range",
+    "labelIncludeWeekends": "Include weekends?",
+    "peopleAnalyticsHeading": "People Analytics",
+    "peopleAnalyticsDescription": "Analyze user booking behavior.",
+    "tableHeaderUser": "User",
+    "tableHeaderTotalBookings": "Total Bookings",
+    "tableHeaderAvgWeeklyVisits": "Avg. Weekly Visits",
+    "tableHeaderFavoriteDay": "Favorite Day",
+    "tableNoBookingDataFound": "No booking data found for the selected criteria",
+    "tableSelectOfficeAndDateRangeToViewPeopleAnalytics": "Select an office and date range to view people analytics"
   }
 }

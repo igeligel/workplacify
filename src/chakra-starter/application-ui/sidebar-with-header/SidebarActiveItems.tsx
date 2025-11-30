@@ -21,14 +21,14 @@ export const SidebarActiveItems = () => {
   const analyticsSubItems = [
     {
       id: 84824812000,
-      title: "Base Analytics",
+      title: t("labelBaseAnalytics"),
       icon: FiStar,
       link: "/app/analytics",
     },
     // { id: 84824812001, title: "Area Analytics (Floors)", icon: FiStar },
     {
       id: 84824812002,
-      title: "People Analytics (Users)",
+      title: t("labelPeopleAnalytics"),
       icon: FiStar,
       link: "/app/analytics/people-analytics",
     },

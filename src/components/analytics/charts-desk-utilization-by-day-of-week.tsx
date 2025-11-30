@@ -2,6 +2,7 @@
 
 import { Chart, useChart } from "@chakra-ui/charts";
 import { Box, Skeleton } from "@chakra-ui/react";
+import { useTranslations } from "next-intl";
 import {
   Bar,
   BarChart,
@@ -81,6 +82,7 @@ type ChartsDeskUtilizationByDayOfWeekProps = {
 export const ChartsDeskUtilizationByDayOfWeek = (
   props: ChartsDeskUtilizationByDayOfWeekProps,
 ) => {
+  const t = useTranslations("Analytics");
   const { queryParams } = props;
   const getDeskUtilizationByDayOfWeekQuery =
     trpc.analytics.getDeskUtilizationByDayOfWeek.useQuery(queryParams);
@@ -99,16 +101,28 @@ export const ChartsDeskUtilizationByDayOfWeek = (
     return acc;
   }, {});
 
+  const weekDaysMap = {
+    monday: t("weekdays.monday"),
+    tuesday: t("weekdays.tuesday"),
+    wednesday: t("weekdays.wednesday"),
+    thursday: t("weekdays.thursday"),
+    friday: t("weekdays.friday"),
+    saturday: t("weekdays.saturday"),
+    sunday: t("weekdays.sunday"),
+  } as Record<string, string>;
+
+  const shortWeekDaysMap = {
+    monday: t("weekdays.mondayShort"),
+    tuesday: t("weekdays.tuesdayShort"),
+    wednesday: t("weekdays.wednesdayShort"),
+    thursday: t("weekdays.thursdayShort"),
+    friday: t("weekdays.fridayShort"),
+    saturday: t("weekdays.saturdayShort"),
+    sunday: t("weekdays.sundayShort"),
+  } as Record<string, string>;
+
   // Return ordered by week day
-  const weekDays = [
-    "monday",
-    "tuesday",
-    "wednesday",
-    "thursday",
-    "friday",
-    "saturday",
-    "sunday",
-  ];
+  const weekDays = Object.keys(weekDaysMap);
 
   const data = weekDays
     .filter((day) => groupedByDay?.[day])
@@ -163,9 +177,10 @@ export const ChartsDeskUtilizationByDayOfWeek = (
               dataKey={chart.key("month")}
               orientation="left"
               stroke={chart.color("border")}
-              tickFormatter={(value) =>
-                typeof value === "string" ? value.slice(0, 3) : value
-              }
+              tickFormatter={(value) => {
+                const shortWeekDay = shortWeekDaysMap[value as string];
+                return typeof value === "string" ? shortWeekDay : value;
+              }}
             />
             <Tooltip
               animationDuration={100}
@@ -184,17 +199,20 @@ export const ChartsDeskUtilizationByDayOfWeek = (
               stroke={chart.color("red.fg")}
               strokeDasharray="3 3"
             />
-            {chart.series.map((item) => (
-              <Bar
-                barSize={30}
-                isAnimationActive={false}
-                key={item.name}
-                dataKey={chart.key(item.name)}
-                fill={chart.color(item.color)}
-                stroke={chart.color(item.color)}
-                stackId={item.stackId}
-              />
-            ))}
+            {chart.series.map((item) => {
+              debugger;
+              return (
+                <Bar
+                  barSize={30}
+                  isAnimationActive={false}
+                  key={item.name}
+                  dataKey={chart.key(item.name)}
+                  fill={chart.color(item.color)}
+                  stroke={chart.color(item.color)}
+                  stackId={item.stackId}
+                />
+              );
+            })}
           </BarChart>
         </Chart.Root>
       </Skeleton>

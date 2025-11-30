@@ -11,6 +11,7 @@ import {
   Skeleton,
   Stack,
 } from "@chakra-ui/react";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -18,6 +19,7 @@ import { trpc } from "../utils/trpc";
 import { toaster } from "./ui/toaster";
 
 export const DisplayOfficeSettings = () => {
+  const t = useTranslations("OfficePages");
   const createOrUpdateOfficeSettingMutation =
     trpc.officeSetting.createOrUpdate.useMutation();
   const [allowSchedulingInThePast, setAllowSchedulingInThePast] =
@@ -125,19 +127,31 @@ export const DisplayOfficeSettings = () => {
     });
   };
 
+  const weekdaysMap = {
+    monday: t("weekdays.monday"),
+    tuesday: t("weekdays.tuesday"),
+    wednesday: t("weekdays.wednesday"),
+    thursday: t("weekdays.thursday"),
+    friday: t("weekdays.friday"),
+    saturday: t("weekdays.saturday"),
+    sunday: t("weekdays.sunday"),
+  } as const;
+
+  const weekdays = Object.keys(weekdaysMap);
+
   return (
     <Box colorPalette="orange">
       <Fieldset.Root size="lg" maxW="md">
         <Stack>
-          <Fieldset.Legend>Office Settings</Fieldset.Legend>
+          <Fieldset.Legend>{t("officeSettings")}</Fieldset.Legend>
           <Fieldset.HelperText>
-            To adjust the office settings, please fill out the fields below.
+            {t("officeSettingsDescription")}
           </Fieldset.HelperText>
         </Stack>
 
         <Fieldset.Content>
           <Field.Root>
-            <Field.Label>Allow scheduling in the past</Field.Label>
+            <Field.Label>{t("allowSchedulingInThePast")}</Field.Label>
             <Skeleton asChild={isLoading} loading={isLoading}>
               <Checkbox.Root
                 size={"md"}
@@ -148,18 +162,16 @@ export const DisplayOfficeSettings = () => {
               >
                 <Checkbox.HiddenInput />
                 <Checkbox.Control />
-                <Checkbox.Label>Allow</Checkbox.Label>
+                <Checkbox.Label>{t("allow")}</Checkbox.Label>
               </Checkbox.Root>
             </Skeleton>
             <Field.HelperText>
-              If you want to allow scheduling in the past, select the days you
-              want to allow. This is helpful to let your users book desks in the
-              past for proper tracking.
+              {t("helperTextAllowSchedulingInThePast")}
             </Field.HelperText>
           </Field.Root>
 
           <Field.Root>
-            <Field.Label>Duration scheduling future</Field.Label>
+            <Field.Label>{t("durationSchedulingFuture")}</Field.Label>
 
             <Skeleton asChild={isLoading} loading={isLoading} width="100%">
               <Group attached w="full" maxW="sm">
@@ -177,15 +189,12 @@ export const DisplayOfficeSettings = () => {
                   variant="surface"
                   onClick={() => setDurationSchedulingFuture(undefined)}
                 >
-                  Reset
+                  {t("reset")}
                 </Button>
               </Group>
             </Skeleton>
             <Field.HelperText>
-              How long you want to allow scheduling in the future. For example
-              if today is the 1st of October, and you want to allow scheduling
-              in the future for 14 days, so up to the 15th of October, set this
-              field to 14.
+              {t("helperTextDurationSchedulingFuture")}
             </Field.HelperText>
           </Field.Root>
 
@@ -210,13 +219,12 @@ export const DisplayOfficeSettings = () => {
                 <Checkbox.HiddenInput />
                 <Checkbox.Control />
                 <Checkbox.Label>
-                  Restrict scheduling to specific days
+                  {t("restrictSchedulingToSpecificDays")}
                 </Checkbox.Label>
               </Checkbox.Root>
             </Skeleton>
             <Field.HelperText>
-              If you want to restrict scheduling to specific days, select the
-              days you want to allow.
+              {t("helperTextRestrictSchedulingToSpecificDays")}
             </Field.HelperText>
           </Field.Root>
 
@@ -230,21 +238,17 @@ export const DisplayOfficeSettings = () => {
                   }}
                 >
                   <Stack gap={6}>
-                    {[
-                      "monday",
-                      "tuesday",
-                      "wednesday",
-                      "thursday",
-                      "friday",
-                      "saturday",
-                      "sunday",
-                    ].map((day) => (
-                      <Checkbox.Root value={day} key={day}>
-                        <Checkbox.HiddenInput />
-                        <Checkbox.Control />
-                        <Checkbox.Label>{day}</Checkbox.Label>
-                      </Checkbox.Root>
-                    ))}
+                    {weekdays.map((day) => {
+                      return (
+                        <Checkbox.Root value={day} key={day}>
+                          <Checkbox.HiddenInput />
+                          <Checkbox.Control />
+                          <Checkbox.Label>
+                            {weekdaysMap[day as keyof typeof weekdaysMap]}
+                          </Checkbox.Label>
+                        </Checkbox.Root>
+                      );
+                    })}
                   </Stack>
                 </CheckboxGroup>
               </Box>
@@ -253,7 +257,7 @@ export const DisplayOfficeSettings = () => {
         </Fieldset.Content>
 
         <Button type="submit" alignSelf="flex-start" onClick={onSubmit}>
-          Submit
+          {t("submit")}
         </Button>
       </Fieldset.Root>
     </Box>

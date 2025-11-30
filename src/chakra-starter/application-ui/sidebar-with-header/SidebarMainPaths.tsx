@@ -49,7 +49,7 @@ export const SidebarMainPaths = () => {
       />
       {userQuery.data?.userRole === UserRole.ADMIN ? (
         <MenuItem
-          title={"Analytics"}
+          title={t("labelAnalytics")}
           icon={IoAnalytics}
           href={"/app/analytics"}
           isActive={router.pathname.startsWith("/app/analytics")}

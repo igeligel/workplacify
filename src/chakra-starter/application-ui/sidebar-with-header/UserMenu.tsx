@@ -58,12 +58,14 @@ export const UserMenu = ({ isUserAdmin }: Props) => {
       <VStack gap={"0.5"} marginTop={"2"}>
         {isUserAdmin ? (
           <Link
-            href={"/app/organization-settings"}
+            asChild
             width={"100%"}
             textDecoration={"none"}
             _hover={{ textDecoration: "none" }}
           >
-            <MenuItem title={t("labelOrganizationSettings")} icon={FiUsers} />
+            <NextLink href={"/app/organization-settings"}>
+              <MenuItem title={t("labelOrganizationSettings")} icon={FiUsers} />
+            </NextLink>
           </Link>
         ) : null}
 

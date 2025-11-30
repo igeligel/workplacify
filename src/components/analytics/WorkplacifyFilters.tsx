@@ -14,6 +14,7 @@ import {
   startOfWeek,
   startOfYear,
 } from "date-fns";
+import { useTranslations } from "next-intl";
 import { useEffect, useMemo } from "react";
 
 import { trpc } from "../../utils/trpc";
@@ -25,6 +26,7 @@ type DateRange = {
 };
 
 export const WorkplacifyFilters = () => {
+  const t = useTranslations("Analytics");
   const officeValue = useAnalyticsFiltersStore((s) => s.officeValue);
   const dateRangeValue = useAnalyticsFiltersStore((s) => s.dateRangeValue);
   const includeWeekends = useAnalyticsFiltersStore((s) => s.includeWeekends);
@@ -52,13 +54,13 @@ export const WorkplacifyFilters = () => {
   });
 
   const dateRangeLabelMap = {
-    weektodate: "Week to date",
-    last7days: "Last 7 days",
-    monthtodate: "Month to date",
-    last28days: "Last 28 days",
-    last90days: "Last 90 days",
-    yeartodate: "Year to date",
-    last365days: "Last 365 days",
+    weektodate: t("dateRangeOptions.weektodate"),
+    last7days: t("dateRangeOptions.last7days"),
+    monthtodate: t("dateRangeOptions.monthtodate"),
+    last28days: t("dateRangeOptions.last28days"),
+    last90days: t("dateRangeOptions.last90days"),
+    yeartodate: t("dateRangeOptions.yeartodate"),
+    last365days: t("dateRangeOptions.last365days"),
   } as Record<string, string>;
 
   const dateRangeOptions = getDateRangeOptionsQuery.data?.map((dateRange) => {
@@ -104,7 +106,7 @@ export const WorkplacifyFilters = () => {
             width={"200px"}
           >
             <Select.HiddenSelect />
-            <Select.Label>Select office</Select.Label>
+            <Select.Label>{t("labelSelectOffice")}</Select.Label>
             <Select.Control>
               <Select.Trigger>
                 <Select.ValueText placeholder="Select framework" />
@@ -135,7 +137,7 @@ export const WorkplacifyFilters = () => {
             width={"200px"}
           >
             <Select.HiddenSelect />
-            <Select.Label>Date range</Select.Label>
+            <Select.Label>{t("labelDateRange")}</Select.Label>
             <Select.Control>
               <Select.Trigger>
                 <Select.ValueText placeholder="Select framework" />
@@ -167,7 +169,7 @@ export const WorkplacifyFilters = () => {
           >
             <Checkbox.HiddenInput />
             <Checkbox.Control />
-            <Checkbox.Label>Include weekends?</Checkbox.Label>
+            <Checkbox.Label>{t("labelIncludeWeekends")}</Checkbox.Label>
           </Checkbox.Root>
         </Box>
       </Stack>

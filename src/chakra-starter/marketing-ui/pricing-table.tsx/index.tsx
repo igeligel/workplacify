@@ -65,15 +65,13 @@ export const ThreeTierPricing = () => {
     <Box>
       <VStack gap={2} textAlign="center">
         <Heading as="h2" fontSize="4xl" id="pricing">
-          Plans that fit your organization
+          {t("plansThatFitYourOrganization")}
         </Heading>
         <Text fontSize="lg" color={"gray.500"}>
-          Start with 3 month free trial. No credit card needed. Cancel at
-          anytime.
+          {t("freeTrialDescription")}
         </Text>
         <Text fontSize="lg" color={"gray.500"}>
-          Predictable pricing. No hidden fees. No usage fees or pricing per
-          employee.
+          {t("predictablePricing")}
         </Text>
       </VStack>
       <Stack
@@ -101,12 +99,12 @@ export const ThreeTierPricing = () => {
                 fontWeight="600"
                 rounded="xl"
               >
-                Easiest to start
+                {t("easiestToStart")}
               </Text>
             </Box>
             <Box py={4} px={12}>
               <Text fontWeight="500" fontSize="2xl">
-                Starter
+                {t("starter")}
               </Text>
               <HStack justifyContent="center">
                 <Text fontSize="3xl" fontWeight="600">
@@ -116,11 +114,11 @@ export const ThreeTierPricing = () => {
                   10
                 </Text>
                 <Box fontSize="xl" color="gray.500">
-                  per 10 users/month
+                  {t("per10UsersMonth")}
                 </Box>
               </HStack>
               <Text color={"gray.300"} fontSize={"sm"}>
-                Taxes might apply additionally
+                {t("taxesMightApplyAdditionally")}
               </Text>
             </Box>
             <VStack bg={highlightedBgColor} py={4} borderBottomRadius={"xl"}>
@@ -134,19 +132,19 @@ export const ThreeTierPricing = () => {
                   listStyleType="circle"
                 >
                   <PricingFeatureListItem>
-                    Create up to 10 offices
+                    {t("createUpTo10Offices")}
                   </PricingFeatureListItem>
                   <PricingFeatureListItem>
-                    Upload up to 50 floors
+                    {t("uploadUpTo50Floors")}
                   </PricingFeatureListItem>
                   <PricingFeatureListItem>
-                    Invite up to 200 colleagues
+                    {t("inviteUpTo200Colleagues")}
                   </PricingFeatureListItem>
                   <PricingFeatureListItem>
-                    Desk scheduling
+                    {t("deskScheduling")}
                   </PricingFeatureListItem>
                   <PricingFeatureListItem>
-                    Invitation templates
+                    {t("invitationTemplates")}
                   </PricingFeatureListItem>
                   <Separator role="presentation" />
                   <Box
@@ -161,11 +159,11 @@ export const ThreeTierPricing = () => {
                       color={"gray.400"}
                       fontWeight={"semibold"}
                     >
-                      Coming soon
+                      {t("comingSoon")}
                     </Heading>
                   </Box>
                   <PricingFeatureListItem mode={"coming-soon"}>
-                    Basic Workplace Analytics
+                    {t("basicWorkplaceAnalytics")}
                   </PricingFeatureListItem>
                 </Box>
               </List.Root>
@@ -186,7 +184,7 @@ export const ThreeTierPricing = () => {
                   // }}
                 >
                   <NextLink href={"/api/auth/signin"}>
-                    Start desk scheduling
+                    {t("startDeskScheduling")}
                   </NextLink>
                 </Button>
 
@@ -201,11 +199,11 @@ export const ThreeTierPricing = () => {
                     }}
                   >
                     <NextLink href={"/api/auth/signin"}>
-                      Start a free trial
+                      {t("startFreeTrial")}
                     </NextLink>
                   </Button>
                   <Text fontSize={"xs"} color={"gray.500"}>
-                    Limited capabilities, no credit card required
+                    {t("limitedCapabilitiesNoCreditCardRequired")}
                   </Text>
                 </VStack>
               </VStack>
@@ -217,7 +215,7 @@ export const ThreeTierPricing = () => {
           <Box position="relative">
             <Box py={4} px={12}>
               <Text fontWeight="500" fontSize="2xl">
-                Large companies
+                {t("largeCompanies")}
               </Text>
               <Text fontWeight="500">{">"} 200 employees</Text>
               <HStack justifyContent="center">
@@ -228,11 +226,11 @@ export const ThreeTierPricing = () => {
                   5
                 </Text>
                 <Text fontSize="xl" color="gray.500">
-                  per 10 users/month
+                  {t("per10UsersMonth")}
                 </Text>
               </HStack>
               <Text color={"gray.300"} fontSize={"sm"}>
-                Taxes might apply additionally
+                {t("taxesMightApplyAdditionally")}
               </Text>
             </Box>
             <VStack bg={notHighlightedBgColor} py={4} borderBottomRadius={"xl"}>
@@ -246,16 +244,16 @@ export const ThreeTierPricing = () => {
                   listStyleType="circle"
                 >
                   <PricingFeatureListItem>
-                    Create unlimited offices
+                    {t("createUnlimitedOffices")}
                   </PricingFeatureListItem>
                   <PricingFeatureListItem>
-                    Upload unlimited floors
+                    {t("uploadUnlimitedFloors")}
                   </PricingFeatureListItem>
                   <PricingFeatureListItem>
-                    Invite unlimited colleagues
+                    {t("inviteUnlimitedColleagues")}
                   </PricingFeatureListItem>
                   <PricingFeatureListItem>
-                    Desk scheduling
+                    {t("deskScheduling")}
                   </PricingFeatureListItem>
                   <Separator role="presentation" />
                   <Box
@@ -270,17 +268,17 @@ export const ThreeTierPricing = () => {
                       color={"gray.400"}
                       fontWeight={"semibold"}
                     >
-                      Coming soon
+                      {t("comingSoon")}
                     </Heading>
                   </Box>
                   <PricingFeatureListItem mode={"coming-soon"} comingSoon>
-                    Advanced workplace analytics
+                    {t("advancedWorkplaceAnalytics")}
                   </PricingFeatureListItem>
                   <PricingFeatureListItem mode={"coming-soon"} comingSoon>
-                    Slack integration
+                    {t("slackIntegration")}
                   </PricingFeatureListItem>
                   <PricingFeatureListItem mode={"coming-soon"} comingSoon>
-                    Monthly email reports
+                    {t("monthlyEmailReports")}
                   </PricingFeatureListItem>
                 </Box>
               </List.Root>
@@ -301,7 +299,7 @@ export const ThreeTierPricing = () => {
                     target="_blank"
                     href={"https://calendar.app.google/N3vdeHJkt452xi2XA"}
                   >
-                    Schedule a demo
+                    {t("scheduleADemo")}
                   </NextLink>
                 </Button>
 
@@ -314,7 +312,9 @@ export const ThreeTierPricing = () => {
                     textDecoration: "none",
                   }}
                 >
-                  <NextLink href={"/api/auth/signin"}>Subscribe</NextLink>
+                  <NextLink href={"/api/auth/signin"}>
+                    {t("subscribe")}
+                  </NextLink>
                 </Button>
               </VStack>
             </VStack>
@@ -323,7 +323,7 @@ export const ThreeTierPricing = () => {
         <PriceWrapper>
           <Box py={4} px={12}>
             <Text fontWeight="500" fontSize="2xl">
-              Enterprise
+              {t("enterprise")}
             </Text>
             <VStack paddingY={1}>
               <Box>
@@ -333,7 +333,7 @@ export const ThreeTierPricing = () => {
                   fontWeight={"normal"}
                   as={"p"}
                 >
-                  Tailored to your needs.
+                  {t("tailoredToYourNeeds")}
                 </Text>
               </Box>
               <Button
@@ -352,7 +352,7 @@ export const ThreeTierPricing = () => {
                     "mailto:kevinigeligeligel@gmail.com?subject=workplacify enterprise"
                   }
                 >
-                  Contact us
+                  {t("contactUs")}
                 </NextLink>
               </Button>
             </VStack>
@@ -368,17 +368,17 @@ export const ThreeTierPricing = () => {
                 listStyleType="circle"
               >
                 <PricingFeatureListItem>
-                  Create unlimited offices
+                  {t("createUnlimitedOffices")}
                 </PricingFeatureListItem>
                 <PricingFeatureListItem>
-                  Upload unlimited floors
+                  {t("uploadUnlimitedFloors")}
                 </PricingFeatureListItem>
-                <PricingFeatureListItem>SSO</PricingFeatureListItem>
+                <PricingFeatureListItem>{t("sso")}</PricingFeatureListItem>
                 <PricingFeatureListItem>
-                  Self-Hosting support
+                  {t("selfHostingSupport")}
                 </PricingFeatureListItem>
                 <PricingFeatureListItem>
-                  Workplacify creates your floor plans
+                  {t("floorPlans")}
                 </PricingFeatureListItem>
                 <Separator role="presentation" />
                 <Box
@@ -393,14 +393,14 @@ export const ThreeTierPricing = () => {
                     color={"gray.400"}
                     fontWeight={"semibold"}
                   >
-                    Coming soon
+                    {t("comingSoon")}
                   </Heading>
                 </Box>
                 <PricingFeatureListItem mode={"coming-soon"} comingSoon>
-                  25+ communication templates
+                  {t("twentyFivePlusCommunicationTemplates")}
                 </PricingFeatureListItem>
                 <PricingFeatureListItem mode={"coming-soon"} comingSoon>
-                  custom SSO providers
+                  {t("customSsoProviders")}
                 </PricingFeatureListItem>
               </Box>
             </List.Root>
@@ -420,7 +420,7 @@ export const ThreeTierPricing = () => {
                     "mailto:workplacify@gmail.com?subject=Workplacify inquiry"
                   }
                 >
-                  Contact Us
+                  {t("contactUs")}
                 </NextLink>
               </Button>
             </Box>

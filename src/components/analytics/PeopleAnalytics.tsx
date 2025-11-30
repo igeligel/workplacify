@@ -1,4 +1,5 @@
 import { Box, Skeleton, Stack, Table, Text } from "@chakra-ui/react";
+import { useTranslations } from "next-intl";
 
 import { trpc } from "../../utils/trpc";
 import {
@@ -8,6 +9,7 @@ import {
 import { useAnalyticsFiltersStore } from "./useAnalyticsFiltersStore";
 
 export const PeopleAnalytics = () => {
+  const t = useTranslations("Analytics");
   const officeValue = useAnalyticsFiltersStore((s) => s.officeValue);
   const dateRangeValue = useAnalyticsFiltersStore((s) => s.dateRangeValue);
 
@@ -28,9 +30,9 @@ export const PeopleAnalytics = () => {
       >
         <Box>
           <Text fontSize="lg" fontWeight="semibold">
-            People Analytics
+            {t("peopleAnalyticsHeading")}
           </Text>
-          <Text>Analyze user booking behavior.</Text>
+          <Text>{t("peopleAnalyticsDescription")}</Text>
         </Box>
         <WorkplacifyFilters />
       </Stack>
@@ -38,15 +40,15 @@ export const PeopleAnalytics = () => {
         <Table.Root size="sm">
           <Table.Header>
             <Table.Row>
-              <Table.ColumnHeader>User</Table.ColumnHeader>
+              <Table.ColumnHeader>{t("tableHeaderUser")}</Table.ColumnHeader>
               <Table.ColumnHeader textAlign="center">
-                Total Bookings
+                {t("tableHeaderTotalBookings")}
               </Table.ColumnHeader>
               <Table.ColumnHeader textAlign="center">
-                Avg. Weekly Visits
+                {t("tableHeaderAvgWeeklyVisits")}
               </Table.ColumnHeader>
               <Table.ColumnHeader textAlign="center">
-                Favorite Day
+                {t("tableHeaderFavoriteDay")}
               </Table.ColumnHeader>
             </Table.Row>
           </Table.Header>
@@ -90,8 +92,8 @@ export const PeopleAnalytics = () => {
                 <Table.Cell colSpan={4} textAlign="center" py={8}>
                   <Text color="fg.muted">
                     {officeValue?.[0] && dateRangeValue?.[0]
-                      ? "No booking data found for the selected criteria"
-                      : "Select an office and date range to view people analytics"}
+                      ? t("tableNoBookingDataFound")
+                      : t("tableSelectOfficeAndDateRangeToViewPeopleAnalytics")}
                   </Text>
                 </Table.Cell>
               </Table.Row>

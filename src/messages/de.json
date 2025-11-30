@@ -33,7 +33,40 @@
     "openSource": "Open-Source",
     "openSourceCtaTitle": "Oder hosten Sie Workplacify selbst",
     "openSourceCtaDescription": "Wir sind Open-Source und selbst hostbar. Sehen Sie sich unser GitHub-Repository an.",
-    "openSourceCtaButton": "Zum <githubIcon></githubIcon> GitHub-Repository"
+    "openSourceCtaButton": "Zum <githubIcon></githubIcon> GitHub-Repository",
+    "plansThatFitYourOrganization": "Pläne, die zu Ihrem Unternehmen passen",
+    "freeTrialDescription": "Beginnen Sie mit einer kostenlosen 3-monatigen Testphase. Keine Kreditkarte erforderlich. Jederzeit kündbar.",
+    "predictablePricing": "Vorhersehbare Preise. Keine versteckten Gebühren. Keine Nutzungsgebühren oder Preise pro Mitarbeiter.",
+    "easiestToStart": "Favorit",
+    "starter": "Basis-Plan",
+    "per10UsersMonth": "pro 10 Benutzer/Monat",
+    "taxesMightApplyAdditionally": "Steuern können zusätzlich anfallen",
+    "createUpTo10Offices": "Erstellen Sie bis zu 10 Büros",
+    "uploadUpTo50Floors": "Uploaden Sie bis zu 50 Etagen",
+    "inviteUpTo200Colleagues": "Laden Sie bis zu 200 Kollegen ein",
+    "invitationTemplates": "Einladungsvorlagen",
+    "comingSoon": "Bald verfügbar",
+    "basicWorkplaceAnalytics": "Grundlegende Büro-Analytik",
+    "createUnlimitedOffices": "Erstellen Sie unbegrenzt Büros",
+    "uploadUnlimitedFloors": "Uploaden Sie unbegrenzt Etagen",
+    "inviteUnlimitedColleagues": "Laden Sie unbegrenzt Kollegen ein",
+    "advancedWorkplaceAnalytics": "Erweiterte Büro-Analytik",
+    "slackIntegration": "Slack-Integration",
+    "monthlyEmailReports": "Monatliche E-Mail-Berichte",
+    "scheduleADemo": "Demo vereinbaren",
+    "subscribe": "Abonnieren",
+    "enterprise": "Enterprise",
+    "tailoredToYourNeeds": "Angepasst an Ihre Bedürfnisse.",
+    "contactUs": "Kontaktieren Sie uns",
+    "sso": "SSO",
+    "selfHostingSupport": "Selbst-Hosting-Support",
+    "floorPlans": "Workplacify erstellt Ihre Etagenpläne",
+    "twentyFivePlusCommunicationTemplates": "25+ Kommunikationsvorlagen",
+    "customSsoProviders": "Benutzerdefinierte SSO-Anbieter",
+    "startDeskScheduling": "Schreibtisch-Planung starten",
+    "startFreeTrial": "Kostenlose Testphase starten",
+    "limitedCapabilitiesNoCreditCardRequired": "Begrenzte Funktionen, keine Kreditkarte erforderlich",
+    "largeCompanies": "Große Unternehmen"
   },
   "AppPage": {
     "startBoxHeading": "Starten Sie mit workplacify",
@@ -70,7 +103,10 @@
     "selectedOffice": "Ausgewähltes Büro: {officeName}",
     "labelAccount": "Benutzerkonto",
     "labelSettings": "Einstellungen",
-    "labelLogout": "Abmelden"
+    "labelLogout": "Abmelden",
+    "labelAnalytics": "Analytik",
+    "labelBaseAnalytics": "Grundlegende Analytik",
+    "labelPeopleAnalytics": "Mitarbeiter-Analytik (Benutzer)"
   },
   "OfficePages": {
     "headingOfficeList": "Büros",
@@ -137,7 +173,27 @@
     "confirmRemoveOffice": "Das Entfernen eines Büros kann nicht rückgängig gemacht werden. Es werden alle Zeitpläne und alle Etagen aus dem Büro entfernt.",
     "labelRemoveOffice": "Büro entfernen: {officeName}",
     "buttonLabelRemoveOffice": "Büro entfernen",
-    "buttonLabelRemove": "Entfernen"
+    "buttonLabelRemove": "Entfernen",
+    "officeSettings": "Büroeinstellungen",
+    "officeSettingsDescription": "Um die Büroeinstellungen zu ändern, füllen Sie bitte die Felder unten aus.",
+    "allowSchedulingInThePast": "Zeitplanung in der Vergangenheit erlauben",
+    "allow": "Erlauben",
+    "helperTextAllowSchedulingInThePast": "Wenn Sie Zeitplanung in der Vergangenheit erlauben möchten, wählen Sie die Tage, die Sie erlauben möchten. Dies ist hilfreich, um Ihren Benutzern zu ermöglichen, Schreibtische in der Vergangenheit zu buchen.",
+    "durationSchedulingFuture": "Dauer der Zeitplanung in der Zukunft",
+    "reset": "Zurücksetzen",
+    "helperTextDurationSchedulingFuture": "Wie lange Sie Zeitplanung in der Zukunft erlauben möchten. Wenn heute der 1. Oktober ist und Sie Zeitplanung in der Zukunft für 14 Tage erlauben möchten, bis zum 15. Oktober, setzen Sie dieses Feld auf 14.",
+    "restrictSchedulingToSpecificDays": "Zeitplanung auf bestimmte Tage beschränken",
+    "helperTextRestrictSchedulingToSpecificDays": "Wenn Sie Zeitplanung auf bestimmte Tage beschränken möchten, wählen Sie die Tage, die Sie erlauben möchten.",
+    "weekdays": {
+      "monday": "Montag",
+      "tuesday": "Dienstag",
+      "wednesday": "Mittwoch",
+      "thursday": "Donnerstag",
+      "friday": "Freitag",
+      "saturday": "Samstag",
+      "sunday": "Sonntag"
+    },
+    "submit": "Speichern"
   },
   "SchedulePages": {
     "notLoggedIn": "Nicht angemeldet",
@@ -438,5 +494,49 @@
         "answer": "Wir empfehlen eine Neuberechnung, wenn sich wesentliche Änderungen in Ihrer Arbeitsplatzstruktur ergeben, wie zum Beispiel Änderungen in der Mitarbeiterzahl, der Anzahl der Schreibtische oder der Kosten."
       }
     }
+  },
+  "Analytics": {
+    "heading": "Workplacify Analytik 🏢",
+    "description": "Analysiere deine Büroauslastung und Spitzentage.",
+    "labelOverallUtilization": "Gesamte Schreibtischauslastung",
+    "labelOverallUtilizationHelpText": "{differenceSign} {differenceOccupancyRateFormatted} im Vergleich zum vorherigen Zeitraum",
+    "labelPeakDay": "Spitzentag",
+    "weekdays": {
+      "monday": "Montag",
+      "tuesday": "Dienstag",
+      "wednesday": "Mittwoch",
+      "thursday": "Donnerstag",
+      "friday": "Freitag",
+      "saturday": "Samstag",
+      "sunday": "Sonntag",
+      "mondayShort": "Mo",
+      "tuesdayShort": "Di",
+      "wednesdayShort": "Mi",
+      "thursdayShort": "Do",
+      "fridayShort": "Fr",
+      "saturdayShort": "Sa",
+      "sundayShort": "So"
+    },
+    "labelPeakDayHelpText": "{peakDay} ({peakDayUtilization} Auslastung)",
+    "dateRangeOptions": {
+      "weektodate": "Woche bis heute",
+      "last7days": "Letzte 7 Tage",
+      "monthtodate": "Monat bis heute",
+      "last28days": "Letzte 28 Tage",
+      "last90days": "Letzte 90 Tage",
+      "yeartodate": "Jahr bis heute",
+      "last365days": "Letzte 365 Tage"
+    },
+    "labelSelectOffice": "Büro auswählen",
+    "labelDateRange": "Zeitraum",
+    "labelIncludeWeekends": "Wochenenden inkludieren?",
+    "peopleAnalyticsHeading": "Mitarbeiter-Analytik (Benutzer)",
+    "peopleAnalyticsDescription": "Analysieren Sie das Buchungsverhalten der Benutzer.",
+    "tableHeaderUser": "Benutzer",
+    "tableHeaderTotalBookings": "Gesamte Buchungen",
+    "tableHeaderAvgWeeklyVisits": "Durchschn. wöchentliche Besuche",
+    "tableHeaderFavoriteDay": "Lieblingstag",
+    "tableNoBookingDataFound": "Keine Buchungsdaten für die ausgewählten Kriterien gefunden",
+    "tableSelectOfficeAndDateRangeToViewPeopleAnalytics": "Wählen Sie ein Büro und einen Zeitraum aus, um Mitarbeiter-Analytik anzuzeigen"
   }
 }

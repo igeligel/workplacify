@@ -8,6 +8,7 @@ import {
   Stat,
   Text,
 } from "@chakra-ui/react";
+import { useTranslations } from "next-intl";
 
 import { trpc } from "../../utils/trpc";
 import {
@@ -18,6 +19,7 @@ import { ChartsDeskUtilizationByDayOfWeek } from "./charts-desk-utilization-by-d
 import { useAnalyticsFiltersStore } from "./useAnalyticsFiltersStore";
 
 export const BaseAnalytics = () => {
+  const t = useTranslations("Analytics");
   const officeValue = useAnalyticsFiltersStore((s) => s.officeValue);
   const dateRangeValue = useAnalyticsFiltersStore((s) => s.dateRangeValue);
 
@@ -60,13 +62,13 @@ export const BaseAnalytics = () => {
   }
 
   const formattedPeakDayMap = {
-    monday: "Monday",
-    tuesday: "Tuesday",
-    wednesday: "Wednesday",
-    thursday: "Thursday",
-    friday: "Friday",
-    saturday: "Saturday",
-    sunday: "Sunday",
+    monday: t("weekdays.monday"),
+    tuesday: t("weekdays.tuesday"),
+    wednesday: t("weekdays.wednesday"),
+    thursday: t("weekdays.thursday"),
+    friday: t("weekdays.friday"),
+    saturday: t("weekdays.saturday"),
+    sunday: t("weekdays.sunday"),
   } as Record<string, string>;
   let formattedPeakDay = "";
   if (getPeakDayQuery.data?.peakDay.day) {
@@ -89,8 +91,8 @@ export const BaseAnalytics = () => {
         justifyContent={"space-between"}
       >
         <Box>
-          <Heading as={"h1"}>Workplacify Analytics 🏢</Heading>
-          <Text>Analyze your office utilization and peak days.</Text>
+          <Heading as={"h1"}>{t("heading")}</Heading>
+          <Text>{t("description")}</Text>
         </Box>
         <Stack direction={{ base: "column", md: "row" }} alignItems={"center"}>
           <WorkplacifyFilters />
@@ -112,7 +114,7 @@ export const BaseAnalytics = () => {
         <HStack alignItems={"flex-start"} gap={12}>
           <Box>
             <Stat.Root maxW="240px">
-              <Stat.Label>Overall Desk Utilization</Stat.Label>
+              <Stat.Label>{t("labelOverallUtilization")}</Stat.Label>
               <Skeleton asChild loading={getDeskUtilizationQuery.isLoading}>
                 <Stat.ValueText>
                   {currentPeriodOccupancyRateFormatted}
@@ -120,8 +122,10 @@ export const BaseAnalytics = () => {
               </Skeleton>
 
               <Stat.HelpText mb="2">
-                {differenceSign}
-                {differenceOccupancyRateFormatted} from previous period
+                {t("labelOverallUtilizationHelpText", {
+                  differenceSign,
+                  differenceOccupancyRateFormatted,
+                })}
               </Stat.HelpText>
               <Progress.Root value={currentPeriodOccupancyRate * 100}>
                 <Progress.Track>
@@ -132,10 +136,13 @@ export const BaseAnalytics = () => {
           </Box>
           <Box>
             <Stat.Root>
-              <Stat.Label>Peak Day</Stat.Label>
+              <Stat.Label>{t("labelPeakDay")}</Stat.Label>
               <Skeleton asChild loading={getPeakDayQuery.isLoading}>
                 <Stat.ValueText>
-                  {formattedPeakDay} ({formattedPeakDayUtilization} Utilization)
+                  {t("labelPeakDayHelpText", {
+                    peakDay: formattedPeakDay,
+                    peakDayUtilization: formattedPeakDayUtilization,
+                  })}
                 </Stat.ValueText>
               </Skeleton>
             </Stat.Root>
