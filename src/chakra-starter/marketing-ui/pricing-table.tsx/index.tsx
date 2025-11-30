@@ -98,6 +98,7 @@ export const ThreeTierPricing = () => {
                 fontSize="sm"
                 fontWeight="600"
                 rounded="xl"
+                textWrap="nowrap"
               >
                 {t("easiestToStart")}
               </Text>

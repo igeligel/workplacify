@@ -1,0 +1,543 @@
+{
+  "Menu": {
+    "pricing": "Prezzi",
+    "blog": "Blog",
+    "labelToTheApp": "Vai all'app",
+    "freeTools": "Strumenti Gratuiti",
+    "freeToolsDescription": "Esplora la nostra raccolta di strumenti gratuiti per la gestione del posto di lavoro",
+    "hybridWorkplacePolicyGenerator": "Generatore Policy Lavoro Ibrido",
+    "hybridWorkplacePolicyGeneratorDescription": "Crea policy professionali per il lavoro ibrido",
+    "deskSchedulingEfficiencyCalculator": "Calcolatore Efficienza Prenotazione Scrivanie",
+    "deskSchedulingEfficiencyCalculatorDescription": "Calcola i potenziali risparmi ottimizzando l'uso delle scrivanie",
+    "visitorBadgeGenerator": "Generatore Badge Visitatori",
+    "visitorBadgeGeneratorDescription": "Crea badge professionali per visitatori con codici QR"
+  },
+  "IndexPage": {
+    "IndexPageTitle": "Workplacify: Prenotazione Scrivanie & Ottimizzazione Spazi",
+    "IndexPageDescription": "Workplacify: La piattaforma open-source e self-hostable per la prenotazione delle scrivanie. Ottimizza il tuo ufficio ibrido, gestisci più sedi e migliora la collaborazione.",
+    "cta1": "Migliora l'efficienza dello spazio di lavoro",
+    "cta2": "La tua soluzione per la prenotazione scrivanie",
+    "ctaSubtitle": "Ottimizza l'uso delle scrivanie senza sforzo per una maggiore produttività e collaborazione sul posto di lavoro.",
+    "ctaActionAnnotation": "Invita il tuo team e inizia",
+    "ctaSubtitle2": "Prova gratuita disponibile; nessuna carta di credito richiesta",
+    "ctaAction": "Carica piantina & pianifica scrivanie",
+    "whyWorkplacify": "Perché Workplacify?",
+    "whyWorkplacifyDescription": "La prima piattaforma open-source e self-hostable per la prenotazione delle scrivanie. Aiuta i tuoi dipendenti a ottenere la loro scrivania preferita e ottimizza le spese dell'ufficio con analisi avanzate.",
+    "deskScheduling": "Prenotazione scrivanie",
+    "deskSchedulingDescription": "Mai avuto troppe persone in ufficio? Abbiamo la soluzione per te.",
+    "officeManagement": "Gestione ufficio",
+    "officeManagementDescription": "Gestisci più uffici, con più piani. Perfetto per aziende in crescita.",
+    "officeAnalytics": "Analisi ufficio",
+    "officeAnalyticsDescription": "Vuoi risparmiare sui costi degli spazi ufficio? I nostri strumenti di analisi ti aiuteranno a farlo.",
+    "floorPlanning": "Pianificazione piani",
+    "floorPlanningDescription": "Assegna le scrivanie ai tuoi piani e crea mappe eccezionali.",
+    "openSource": "Open-source",
+    "openSourceDescription": "Ospita il software autonomamente e personalizzalo secondo le tue esigenze. Siamo <githubLink>su GitHub</githubLink>!",
+    "openSourceCtaTitle": "O ospita Workplacify autonomamente",
+    "openSourceCtaDescription": "Siamo open-source e self-hostable. Dai un'occhiata al nostro repository GitHub.",
+    "openSourceCtaButton": "Vai al repository <githubIcon></githubIcon> GitHub",
+    "plansThatFitYourOrganization": "Piani adatti alla tua organizzazione",
+    "freeTrialDescription": "Inizia con 3 mesi di prova gratuita. Nessuna carta di credito necessaria. Cancella in qualsiasi momento.",
+    "predictablePricing": "Prezzi prevedibili. Nessun costo nascosto. Nessuna commissione di utilizzo o prezzo per dipendente.",
+    "easiestToStart": "Il più facile per iniziare",
+    "starter": "Starter",
+    "per10UsersMonth": "per 10 utenti/mese",
+    "taxesMightApplyAdditionally": "Potrebbero essere applicate tasse aggiuntive",
+    "createUpTo10Offices": "Crea fino a 10 uffici",
+    "uploadUpTo50Floors": "Carica fino a 50 piani",
+    "inviteUpTo200Colleagues": "Invita fino a 200 colleghi",
+    "invitationTemplates": "Modelli di invito",
+    "comingSoon": "Prossimamente",
+    "basicWorkplaceAnalytics": "Analisi base dello spazio di lavoro",
+    "startDeskScheduling": "Inizia a prenotare scrivanie",
+    "startFreeTrial": "Inizia una prova gratuita",
+    "limitedCapabilitiesNoCreditCardRequired": "Funzionalità limitate, nessuna carta di credito richiesta",
+    "largeCompanies": "Grandi aziende",
+    "createUnlimitedOffices": "Crea uffici illimitati",
+    "uploadUnlimitedFloors": "Carica piani illimitati",
+    "inviteUnlimitedColleagues": "Invita colleghi illimitati",
+    "advancedWorkplaceAnalytics": "Analisi avanzate dello spazio di lavoro",
+    "slackIntegration": "Integrazione Slack",
+    "monthlyEmailReports": "Report mensili via email",
+    "scheduleADemo": "Prenota una demo",
+    "subscribe": "Abbonati",
+    "enterprise": "Enterprise",
+    "tailoredToYourNeeds": "Su misura per le tue esigenze.",
+    "contactUs": "Contattaci",
+    "sso": "SSO",
+    "selfHostingSupport": "Supporto Self-Hosting",
+    "floorPlans": "Workplacify crea le tue piantine",
+    "twentyFivePlusCommunicationTemplates": "25+ modelli di comunicazione",
+    "customSsoProviders": "provider SSO personalizzati"
+  },
+  "AppPage": {
+    "startBoxHeading": "Inizia con Workplacify",
+    "trialLabel": "Prova",
+    "trialDaysLeft": "{daysLeft}/{trialDuration} giorni rimasti",
+    "feedbackHeading": "Manca qualcosa?",
+    "feedbackButton": "Richiedi funzionalità"
+  },
+  "GetStartedModule": {
+    "officeCreateHeading": "Crea un nuovo ufficio",
+    "officeCreateImageAlt": "Anteprima di come appare la creazione di un ufficio",
+    "officeCreateBadgeNew": "nuovo",
+    "getStartedLink": "Inizia",
+    "inviteEmployeesHeading": "Invita i tuoi colleghi",
+    "inviteEmployeesBadgeRecommended": "consigliato",
+    "inviteEmployeesBadgeNew": "nuovo",
+    "getStartedButtonLinkStart": "Inizia",
+    "chooseOfficeBadgeNew": "nuovo",
+    "chooseOfficeHeading": "Scegli il tuo ufficio",
+    "chooseOfficeImageAlt": "Anteprima di come appare la selezione di un ufficio",
+    "inviteEmployeesImageAlt": "Anteprima di come appare l'invito ai colleghi",
+    "scheduleDeskHeading": "Prenota una scrivania per i prossimi giorni",
+    "scheduleDeskImageAlt": "Anteprima di come appare la prenotazione di una scrivania in Workplacify",
+    "scheduleDeskBadgeNew": "nuovo"
+  },
+  "AppMenu": {
+    "labelHome": "Home",
+    "labelOffices": "Uffici",
+    "labelSchedule": "Prenotazioni",
+    "labelSubmenu": "Sottomenu",
+    "noActiveItems": "Non ci sono elementi attivi al momento.",
+    "labelOrganizationSettings": "Impostazioni Organizzazione",
+    "selectedOffice": "Ufficio Selezionato: {officeName}",
+    "selectOffice": "Seleziona Ufficio",
+    "labelAccount": "Account",
+    "labelSettings": "Impostazioni",
+    "labelLogout": "Esci",
+    "labelAnalytics": "Analisi",
+    "labelBaseAnalytics": "Analisi Base",
+    "labelPeopleAnalytics": "Analisi Persone (Utenti)"
+  },
+  "OfficePages": {
+    "headingOfficeList": "Uffici",
+    "labelAddOffice": "Aggiungi ufficio",
+    "labelAllOffices": "Tutti gli uffici",
+    "displayNoOffices": "Nessun ufficio presente",
+    "tableHeaderName": "Nome",
+    "tableHeaderNumberOfDesks": "Numero di Scrivanie",
+    "tableHeaderOccupancy": "Occupazione ultimi 7 giorni",
+    "toastTitleOfficeAdded": "Ufficio aggiunto.",
+    "toastDescriptionOfficeAdded": "Abbiamo aggiunto l'ufficio.",
+    "headingAddOffice": "Aggiungi un ufficio",
+    "buttonSaveOffice": "Salva ufficio",
+    "headingOfficeInformation": "Informazioni Ufficio",
+    "formLabelOfficeName": "Nome Ufficio",
+    "formHelperTextOfficeName": "Usa un nome come Berlino, Unter den Linden",
+    "formLabelOfficeDescription": "Descrizione",
+    "formHelperTextOfficeDescription": "Consiglio utile: Aggiungi un link alle istruzioni del tuo ufficio.",
+    "formLabelOfficeTimezone": "Fuso orario",
+    "labelOfficeNotFound": "Ufficio non trovato",
+    "buttonAddOffice": "Aggiungi ufficio",
+    "buttonBackToOffices": "Uffici",
+    "headingOfficeName": "Nome: {officeName}",
+    "officeDescription": "Descrizione: {officeDescription}",
+    "buttonAddFloor": "Aggiungi piano",
+    "headingFloors": "Piani",
+    "noFloorsThereYet": "Nessun piano presente",
+    "addFloor": "Aggiungi piano",
+    "floorTableHeaderName": "Nome",
+    "floorTableHeaderDescription": "Descrizione",
+    "floorTableHeaderHasFloorPlan": "Ha piantina",
+    "floorTableHeaderNumberOfDesks": "Numero di scrivanie",
+    "floorTableHeaderOccupancyPast7d": "Occupazione ultimi 7gg",
+    "floorTableButtonRemove": "Rimuovi",
+    "floorRemoveModalHeader": "Rimuovi {floorName}",
+    "floorRemoveModalButtonRemove": "Rimuovi",
+    "tabTitleDeskList": "Lista scrivanie",
+    "deskTableHeaderDeskId": "Id",
+    "deskTableHeaderDeskName": "Nome",
+    "deskTableHeaderDeskActions": "Azioni",
+    "deskTableButtonEdit": "Modifica",
+    "HeaderDeskEdit": "Modifica scrivania",
+    "labelDeskName": "Nome",
+    "buttonClose": "Chiudi",
+    "buttonSave": "Salva",
+    "headingAddFloor": "Aggiungi un piano",
+    "buttonSaveFloor": "Salva piano",
+    "headingFloorInformation": "Informazioni Piano",
+    "errorTitleUploadingFloorPlan": "Errore durante il caricamento della piantina",
+    "errorDescriptionUploadingFloorPlan": "Per favore riprova più tardi",
+    "errorTitleFileShouldBeImage": "Il file deve essere un'immagine",
+    "errorFileMustBeLessOrEqual5MB": "Il file deve essere inferiore o uguale a 5MB",
+    "labelFloorName": "Nome Piano",
+    "helperTextFloorNameUniqueIdentifier": "Usa un identificatore unico come BER-001",
+    "labelFloorDescription": "Descrizione",
+    "helperTextFloorDescriptionOptional": "Consiglio utile: Istruzioni speciali per questo piano?",
+    "buttonUploadFloorPlan": "Carica piantina",
+    "alertMarkerModeEnabled": "Sei in modalità marcatore. Non puoi zoomare o spostare l'immagine. Clicca sull'immagine per aggiungere una scrivania.",
+    "labelZoomControls": "Controlli zoom",
+    "labelToggleMarkerMode": "Modalità marcatore attiva?",
+    "labelDeskNameWithId": "Scrivania attuale: #{id}",
+    "buttonRemoveDesk": "Rimuovi",
+    "floorRemovalDescription": "Rimuovere un piano rimuoverà anche tutte le prenotazioni collegate.",
+    "labelRemoveOffice": "Rimuovi ufficio: {officeName}",
+    "confirmRemoveOffice": "La rimozione di un ufficio non può essere annullata. Verranno rimosse tutte le prenotazioni e tutti i piani dall'ufficio.",
+    "buttonLabelRemoveOffice": "Rimuovi ufficio",
+    "buttonLabelRemove": "Rimuovi",
+    "officeSettings": "Impostazioni Ufficio",
+    "officeSettingsDescription": "Per modificare le impostazioni dell'ufficio, compila i campi sottostanti.",
+    "allowSchedulingInThePast": "Consenti prenotazioni nel passato",
+    "allow": "Consenti",
+    "helperTextAllowSchedulingInThePast": "Se vuoi consentire la prenotazione nel passato, seleziona i giorni che vuoi permettere. Questo è utile per permettere agli utenti di prenotare scrivanie retroattivamente per un tracciamento corretto.",
+    "durationSchedulingFuture": "Durata prenotazione futura",
+    "reset": "Reimposta",
+    "helperTextDurationSchedulingFuture": "Quanto tempo nel futuro vuoi permettere le prenotazioni. Ad esempio, se oggi è il 1° ottobre e vuoi permettere prenotazioni per 14 giorni futuri (fino al 15 ottobre), imposta questo campo a 14.",
+    "restrictSchedulingToSpecificDays": "Limita la prenotazione a giorni specifici",
+    "helperTextRestrictSchedulingToSpecificDays": "Se vuoi limitare la prenotazione a giorni specifici, seleziona i giorni che vuoi consentire.",
+    "weekdays": {
+      "monday": "Lunedì",
+      "tuesday": "Martedì",
+      "wednesday": "Mercoledì",
+      "thursday": "Giovedì",
+      "friday": "Venerdì",
+      "saturday": "Sabato",
+      "sunday": "Domenica"
+    },
+    "submit": "Invia"
+  },
+  "SchedulePages": {
+    "notLoggedIn": "Non connesso",
+    "noSchedules": "Nessuna prenotazione",
+    "headingSchedule": "Prenotazione",
+    "headingAllDesks": "Tutte le scrivanie",
+    "listOfDesks": "Lista di tutte le scrivanie",
+    "errorTitleWhileBooking": "Errore durante la prenotazione",
+    "errorDescriptionWhileBooking": "Hai già prenotato una scrivania in questo ufficio per questo giorno.",
+    "badgeLabelAvailable": "Disponibile",
+    "badgeLabelBooked": "Prenotata",
+    "isOccupiedWholeday": "È occupata tutto il giorno{userCount, plural, =0 {} =1 { da {userName}} other {}}",
+    "isOccupiedSpecificTime": "È occupata dalle {startTime} alle {endTime}{userCount, plural, =0 {} =1 { da {userName}} other {}}",
+    "customNameForThisDesk": "Nome personalizzato per questa scrivania",
+    "cancelReservation": "Cancella prenotazione",
+    "bookDesk": "Prenota",
+    "floorDeskName": "{floorName} - Scrivania {deskId}",
+    "deskName": "Scrivania #{deskId}",
+    "bookDeskWithName": "Prenota {deskName}",
+    "doYouWantToBookIt": "Vuoi prenotarla?",
+    "close": "Chiudi",
+    "bookDeskForDay": "Prenota per il giorno",
+    "zoomControls": "Controlli zoom",
+    "floorDeskNameSoloFloor": "Scrivania {deskId}"
+  },
+  "UserSettings": {
+    "toastTitleAccountUpdated": "Account aggiornato.",
+    "toastDescriptionAccountUpdated": "Nome dell'account modificato.",
+    "headingAccountSettings": "Impostazioni account",
+    "buttonSaveAccount": "Salva account",
+    "headingOfficeInformation": "Informazioni Ufficio",
+    "labelOfficeName": "Nome",
+    "helperTextOfficeName": "Usa il tuo vero nome affinché i colleghi possano identificarti",
+    "exampleName": "Mario Rossi"
+  },
+  "HybridWorkplacePolicyGenerator": {
+    "meta": {
+      "title": "Generatore Policy Lavoro Ibrido - Strumento Gratuito",
+      "description": "Crea policy professionali per il lavoro ibrido con il nostro generatore facile da usare. Stabilisci linee guida chiare per la tua organizzazione senza sforzo e gratis!",
+      "imageAlt": "Uno screenshot dello strumento generatore di policy per il lavoro ibrido"
+    },
+    "hero": {
+      "heading": "Generatore Gratuito Policy Lavoro Ibrido",
+      "text": "Genera una policy professionale per il lavoro ibrido per la tua organizzazione in pochi minuti"
+    },
+    "form": {
+      "companyName": {
+        "label": "Nome Azienda",
+        "placeholder": "Inserisci il nome della tua azienda"
+      },
+      "workHours": {
+        "label": "Orari di Lavoro",
+        "placeholder": "es. 9:00 - 17:00"
+      },
+      "remoteWorkDays": {
+        "label": "Giorni di Lavoro da Remoto"
+      },
+      "officeWorkDays": {
+        "label": "Giorni di Lavoro in Ufficio"
+      },
+      "communicationTools": {
+        "label": "Strumenti di Comunicazione",
+        "placeholder": "es. Slack, Zoom, Microsoft Teams"
+      },
+      "performanceExpectations": {
+        "label": "Aspettative di Performance",
+        "placeholder": "Descrivi le aspettative di performance per il lavoro ibrido..."
+      },
+      "contactInformation": {
+        "label": "Informazioni di Contatto",
+        "placeholder": "es. Responsabile HR: hr@azienda.com"
+      },
+      "generateButton": "Genera Policy",
+      "generatingButton": "Generazione in corso...",
+      "weekDays": {
+        "monday": "Lunedì",
+        "tuesday": "Martedì",
+        "wednesday": "Mercoledì",
+        "thursday": "Giovedì",
+        "friday": "Venerdì"
+      }
+    },
+    "toast": {
+      "missingInformation": {
+        "title": "Informazioni Mancanti",
+        "description": "Per favore compila tutti i campi richiesti"
+      }
+    },
+    "preview": {
+      "title": "Policy Lavoro Ibrido",
+      "companyName": "Nome Azienda",
+      "workHours": "Orari di Lavoro",
+      "remoteWork": {
+        "title": "Giorni di Lavoro da Remoto",
+        "description": "I dipendenti sono autorizzati a lavorare da remoto nei seguenti giorni:"
+      },
+      "officeWork": {
+        "title": "Giorni di Lavoro in Ufficio",
+        "description": "I dipendenti sono tenuti a essere presenti in ufficio nei seguenti giorni:"
+      },
+      "communication": {
+        "title": "Strumenti di Comunicazione",
+        "primaryTools": "Strumenti di Comunicazione Principali",
+        "expectations": "I membri del team sono tenuti a mantenere comunicazioni regolari e ad essere reattivi durante l'orario di lavoro, indipendentemente dalla loro posizione lavorativa."
+      },
+      "expectations": {
+        "title": "Aspettative di Performance",
+        "description": "Standard di performance e aspettative per il lavoro ibrido:"
+      },
+      "contact": {
+        "title": "Informazioni di Contatto",
+        "description": "Per domande o dubbi riguardanti questa policy, contattare:"
+      },
+      "loading": "Caricamento documento...",
+      "downloadMessage": "Scarica la policy ora! Per un'anteprima apri questo link nel browser.",
+      "introduction": {
+        "title": "Introduzione",
+        "description": "Questa policy delinea l'approccio di {companyName} al lavoro ibrido, combinando il lavoro da remoto e in ufficio per massimizzare la produttività, l'equilibrio tra lavoro e vita privata e la collaborazione del team."
+      },
+      "workSchedule": {
+        "title": "Orario di Lavoro",
+        "standardHours": "Orari di Lavoro Standard"
+      },
+      "footer": "Generato con Workplacify - www.workplacify.com"
+    },
+    "faq": {
+      "isFree": {
+        "question": "Il Generatore di Policy per il Lavoro Ibrido è davvero gratuito?",
+        "answer": "Sì, è completamente gratuito! Puoi generare e scaricare la tua policy senza alcun costo."
+      },
+      "customization": {
+        "question": "Posso personalizzare la policy dopo averla generata?",
+        "answer": "Sì, la policy generata è completamente modificabile. Puoi scaricarla e apportare eventuali modifiche aggiuntive necessarie per la tua organizzazione."
+      },
+      "dataSecurity": {
+        "question": "I miei dati sono al sicuro?",
+        "answer": "Non memorizziamo nessuna delle informazioni inserite. La policy viene generata lato client e i dati rimangono sul tuo dispositivo."
+      },
+      "workHours": {
+        "question": "Cosa devo includere nella sezione orari di lavoro?",
+        "answer": "Dovresti specificare gli orari di lavoro principali della tua azienda, incluse eventuali finestre di flessibilità. Ad esempio: '9:00 - 17:00 con orari di inizio flessibili tra le 8:00 e le 10:00'."
+      },
+      "timeZones": {
+        "question": "Come gestisco i diversi fusi orari nella policy?",
+        "answer": "Puoi specificare il fuso orario principale per la tua azienda e includere linee guida per la collaborazione tra fusi orari nella sezione strumenti di comunicazione."
+      },
+      "multiplePolicies": {
+        "question": "Posso generare più policy per dipartimenti diversi?",
+        "answer": "Sì, puoi generare policy separate per dipartimenti o team diversi con i loro requisiti e orari specifici."
+      },
+      "legalCompliance": {
+        "question": "La policy generata è conforme alla legge?",
+        "answer": "Sebbene il nostro generatore fornisca una base solida, raccomandiamo di far esaminare la policy dal vostro team legale per assicurarsi che soddisfi i requisiti specifici della vostra giurisdizione."
+      },
+      "updateFrequency": {
+        "question": "Quanto spesso dovrei aggiornare la policy per il lavoro ibrido?",
+        "answer": "Si consiglia di rivedere e aggiornare la policy ogni 6-12 mesi o ogni volta che ci sono cambiamenti significativi nella struttura o nei requisiti del posto di lavoro."
+      }
+    },
+    "sections": {
+      "createPolicies": {
+        "heading": "Crea Policy Professionali",
+        "description": "Scopri uno strumento completo per creare policy per il lavoro ibrido ben strutturate. Il nostro generatore ti aiuta a stabilire linee guida chiare che promuovono la produttività e l'equilibrio vita-lavoro nel moderno ambiente lavorativo."
+      },
+      "noTechnicalSkills": {
+        "heading": "Nessuna Competenza Tecnica Richiesta",
+        "description": "Che tu sia un organizzatore esperto di policy aziendali o alle prime armi, il nostro strumento user-friendly semplifica il processo di creazione di design accattivanti per le policy. Non hai bisogno di conoscenze tecniche specializzate per creare policy che lascino il segno."
+      },
+      "generateFree": {
+        "heading": "Genera Gratuitamente",
+        "description": "Goditi la libertà di generare policy aziendali senza costi e senza bisogno di registrazione. Il nostro strumento ti permette di creare policy senza sforzo dal tuo computer, iPad o iPhone, quando e dove vuoi.",
+        "callToAction": "Migliora la gestione del tuo posto di lavoro con policy chiare, complete e professionali. Prova oggi il Generatore di Policy per il Lavoro Ibrido e stabilisci linee guida efficaci per la tua forza lavoro ibrida."
+      }
+    },
+    "cta": {
+      "heading": "Pronto a portare la gestione del tuo ufficio al livello successivo?",
+      "description": "Ottieni accesso alla nostra suite completa di strumenti di gestione. Ottimizza le policy, le procedure e le comunicazioni della tua organizzazione con la nostra piattaforma professionale.",
+      "button": "Esplora le funzionalità premium"
+    },
+    "features": {
+      "tag": "Strumento gratuito",
+      "title": "Genera Policy Professionali per il Lavoro Ibrido",
+      "description": "Crea una policy completa per il lavoro ibrido su misura per le esigenze della tua organizzazione. Il nostro generatore ti aiuta a stabilire linee guida chiare per il lavoro da remoto e in ufficio.",
+      "benefits": {
+        "first": "Modelli personalizzabili per diverse esigenze organizzative",
+        "second": "Linee guida chiare per orari di lavoro da remoto e in ufficio",
+        "third": "Formattazione e struttura professionali",
+        "fourth": "Generazione PDF istantanea"
+      },
+      "imageAlt": "Anteprima di un documento di policy per il lavoro ibrido generato"
+    }
+  },
+  "DeskSchedulingEfficiencyCalculator": {
+    "meta": {
+      "title": "Calcolatore Efficienza Prenotazione Scrivanie | Workplacify",
+      "description": "Calcola il tuo potenziale risparmio di tempo e costi ottimizzando l'uso delle scrivanie nel tuo ufficio ibrido con il nostro calcolatore gratuito e facile da usare.",
+      "imageAlt": "Anteprima Calcolatore Efficienza Prenotazione Scrivanie"
+    },
+    "hero": {
+      "heading": "Calcola l'Efficienza della Prenotazione Scrivanie",
+      "text": "Scopri quanto tempo e denaro potresti risparmiare ottimizzando l'uso delle scrivanie con Workplacify."
+    },
+    "form": {
+      "numEmployees": {
+        "label": "Numero di Dipendenti",
+        "placeholder": "es. 100"
+      },
+      "numDesks": {
+        "label": "Numero di Scrivanie",
+        "placeholder": "es. 80"
+      },
+      "deskUtilization": {
+        "label": "Utilizzo Attuale Scrivanie (%)",
+        "placeholder": "es. 60"
+      },
+      "avgSalary": {
+        "label": "Stipendio Medio Dipendente (all'anno)",
+        "placeholder": "es. 50000"
+      },
+      "officeSpaceCost": {
+        "label": "Costo Spazio Ufficio (al mese)",
+        "placeholder": "es. 10000"
+      },
+      "calculateButton": "Calcola Risparmi",
+      "calculatingButton": "Calcolo in corso...",
+      "errors": {
+        "missingFields": {
+          "title": "Informazioni Mancanti",
+          "description": "Per favore compila tutti i campi richiesti per calcolare i risparmi."
+        }
+      }
+    },
+    "results": {
+      "heading": "I Tuoi Potenziali Risparmi",
+      "timeSaved": "Tempo Risparmiato: {value} ore all'anno",
+      "costSaved": "Costi Risparmiati: ${value} all'anno",
+      "ctaButton": "Inizia a Ottimizzare Ora",
+      "timeEfficiency": {
+        "title": "Efficienza Temporale",
+        "perYear": "all'anno",
+        "hours": "ore"
+      },
+      "costEfficiency": {
+        "title": "Efficienza dei Costi",
+        "perYear": "all'anno"
+      }
+    },
+    "features": {
+      "tag": "Funzionalità",
+      "title": "Perché usare il nostro calcolatore?",
+      "description": "Prendi decisioni basate sui dati per l'ottimizzazione del tuo ufficio con il nostro calcolatore facile da usare.",
+      "benefits": {
+        "first": "Stima il risparmio di tempo grazie all'allocazione efficiente delle scrivanie",
+        "second": "Calcola le potenziali riduzioni dei costi",
+        "third": "Ottimizza la configurazione del tuo ufficio ibrido",
+        "fourth": "Prendi decisioni informate sugli spazi ufficio"
+      }
+    },
+    "cta": {
+      "heading": "Pronto a Ottimizzare il Tuo Ufficio?",
+      "description": "Inizia la tua prova gratuita oggi e guarda la differenza che Workplacify può fare.",
+      "button": "Prova Workplacify Gratis"
+    },
+    "sections": {
+      "dataDecisions": {
+        "heading": "Prendi Decisioni Basate sui Dati",
+        "description": "Trasforma la gestione del tuo ufficio con approfondimenti completi basati sui dati. Il nostro sofisticato calcolatore ti aiuta a quantificare il reale impatto dell'ottimizzazione delle scrivanie, mostrandoti esattamente quanto tempo e denaro potresti risparmiare. Analizzando la tua configurazione attuale e i modelli di utilizzo, puoi prendere decisioni informate sull'allocazione degli spazi e la gestione delle risorse basate su metriche concrete e calcoli reali. Smetti di indovinare e inizia a ottimizzare con dati utilizzabili che portano a miglioramenti significativi."
+      },
+      "easyToUse": {
+        "heading": "Facile da Usare",
+        "description": "Nessun foglio di calcolo complesso, formule confuse o competenza tecnica necessaria. Il nostro calcolatore intuitivo ti guida attraverso ogni passaggio con input chiari e diretti e risultati istantanei e facili da capire. Inserisci semplicemente le informazioni base sul tuo ufficio, come il numero di dipendenti e l'utilizzo attuale delle scrivanie, e lascia che il nostro strumento faccia il lavoro pesante. In pochi secondi, riceverai dettagli sul tuo potenziale di ottimizzazione, presentati in un formato chiaro che ti aiuta a prendere decisioni informate sulla configurazione del tuo ufficio."
+      },
+      "freeToUse": {
+        "heading": "Gratuito da Usare",
+        "description": "Accedi a potenti intuizioni sull'ottimizzazione dell'ufficio senza barriere di costo. Il nostro calcolatore professionale è completamente gratuito, senza costi nascosti, abbonamenti o limiti di utilizzo. Calcola i tuoi risparmi potenziali tutte le volte che vuoi, sperimenta diversi scenari e condividi i risultati dettagliati con il tuo team - tutto a costo zero. Che tu stia gestendo un piccolo ufficio o una grande impresa, puoi iniziare a ottimizzare l'efficienza del tuo spazio di lavoro oggi senza alcun impegno finanziario. Sperimenta la piena potenza dell'ottimizzazione guidata dai dati senza spendere un centesimo."
+      }
+    },
+    "faq": {
+      "isFree": {
+        "question": "Questo calcolatore è gratuito?",
+        "answer": "Sì, il nostro calcolatore di efficienza per la prenotazione scrivanie è completamente gratuito. Puoi calcolare i tuoi risparmi potenziali quante volte vuoi."
+      },
+      "accuracy": {
+        "question": "Quanto sono accurati i calcoli?",
+        "answer": "I calcoli si basano su standard del settore e metriche comuni degli uffici. Tuttavia, i risparmi effettivi possono variare a seconda della tua situazione specifica e dell'implementazione."
+      },
+      "metrics": {
+        "question": "Quali metriche vengono utilizzate nei calcoli?",
+        "answer": "Consideriamo fattori come il numero di dipendenti, le scrivanie disponibili, il tasso di utilizzo attuale, lo stipendio medio e i costi dello spazio ufficio per stimare sia i risparmi di tempo che di costi."
+      },
+      "export": {
+        "question": "Posso salvare o esportare i miei risultati?",
+        "answer": "Attualmente, puoi fare uno screenshot o annotare i tuoi risultati. Per analisi e report più dettagliati, considera la registrazione di un account Workplacify."
+      },
+      "recalculate": {
+        "question": "Quanto spesso dovrei ricalcolare?",
+        "answer": "Ti consigliamo di ricalcolare ogni volta che ci sono cambiamenti significativi nella configurazione del tuo ufficio, come variazioni nel numero di dipendenti, numero di scrivanie o costi."
+      }
+    }
+  },
+  "Analytics": {
+    "heading": "Analisi Workplacify 🏢",
+    "description": "Analizza l'utilizzo del tuo ufficio e i giorni di picco.",
+    "labelOverallUtilization": "Utilizzo Complessivo Scrivanie",
+    "labelOverallUtilizationHelpText": "{differenceSign} {differenceOccupancyRateFormatted} rispetto al periodo precedente",
+    "labelPeakDay": "Giorno di Picco",
+    "weekdays": {
+      "monday": "Lunedì",
+      "tuesday": "Martedì",
+      "wednesday": "Mercoledì",
+      "thursday": "Giovedì",
+      "friday": "Venerdì",
+      "saturday": "Sabato",
+      "sunday": "Domenica",
+      "mondayShort": "Lun",
+      "tuesdayShort": "Mar",
+      "wednesdayShort": "Mer",
+      "thursdayShort": "Gio",
+      "fridayShort": "Ven",
+      "saturdayShort": "Sab",
+      "sundayShort": "Dom"
+    },
+    "labelPeakDayHelpText": "{peakDay} ({peakDayUtilization} Utilizzo)",
+    "dateRangeOptions": {
+      "weektodate": "Da inizio settimana",
+      "last7days": "Ultimi 7 giorni",
+      "monthtodate": "Da inizio mese",
+      "last28days": "Ultimi 28 giorni",
+      "last90days": "Ultimi 90 giorni",
+      "yeartodate": "Da inizio anno",
+      "last365days": "Ultimi 365 giorni"
+    },
+    "labelSelectOffice": "Seleziona ufficio",
+    "labelDateRange": "Intervallo date",
+    "labelIncludeWeekends": "Includere fine settimana?",
+    "peopleAnalyticsHeading": "Analisi Persone",
+    "peopleAnalyticsDescription": "Analizza il comportamento di prenotazione degli utenti.",
+    "tableHeaderUser": "Utente",
+    "tableHeaderTotalBookings": "Prenotazioni Totali",
+    "tableHeaderAvgWeeklyVisits": "Media Visite Settimanali",
+    "tableHeaderFavoriteDay": "Giorno Preferito",
+    "tableNoBookingDataFound": "Nessun dato di prenotazione trovato per i criteri selezionati",
+    "tableSelectOfficeAndDateRangeToViewPeopleAnalytics": "Seleziona un ufficio e un intervallo di date per visualizzare le analisi delle persone"
+  }
+}

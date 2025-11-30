@@ -11,12 +11,12 @@ import {
   Tag,
   VStack,
 } from "@chakra-ui/react";
-import { formatISO } from "date-fns";
+import { Locale, formatISO } from "date-fns";
 import { GetServerSideProps } from "next";
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import { DayPicker } from "react-day-picker";
-import { de } from "react-day-picker/locale";
+import { de, it } from "react-day-picker/locale";
 
 import { FloorDeskBooker } from "../../../components/FloorDeskBooker";
 import { ScheduleNoOfficeSelected } from "../../../components/ScheduleNoOfficeSelected";
@@ -80,6 +80,12 @@ const SchedulePage = () => {
     return <div>{t("noSchedules")}</div>;
   }
 
+  const localesMap: Record<string, Locale> = {
+    de: de,
+    it: it,
+  };
+  const locale = localesMap[currentLocale] || undefined;
+
   return (
     <Container maxW={"container.2xl"} paddingX={{ base: 2, lg: 4 }}>
       <Heading
@@ -108,7 +114,7 @@ const SchedulePage = () => {
           style={{
             margin: "0 !important",
           }}
-          locale={currentLocale === "de" ? de : undefined}
+          locale={locale}
         />
         {isLoading ? (
           <Spinner />
