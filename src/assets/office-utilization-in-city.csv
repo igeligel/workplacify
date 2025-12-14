@@ -1,0 +1,90 @@
+city,country,region,attendance_low_percentage,attendance_high_percentage,util_peak_low_percentage,util_peak_high_percentage,hybrid_work_trend_2025,prime_rent_usd_sqft,est_savings_usd_per_emp
+New York,US,AMER,52,58,70,75,worksCouncilsProtectRemoteRights,95,4275
+San Francisco,US,AMER,42,48,55,60,mandatesTighteningFourDays,75,3375
+London,GB,EMEA,48,55,70,78,techSectorStabilisingGradualEnforcementOfThreeDayMandatesHighSubleaseAvailability,145,6525
+Singapore,SG,APAC,80,85,88,92,tuesdayWednesdayThursdayPatternsDominantCityDistrictPushingFourDays,110,4950
+Tokyo,JP,APAC,75,80,85,90,highPresenteeismOfficeIsPrimaryHybridIsFlexibleHoursNotRemoteDays,125,5625
+Hong Kong,CN,APAC,65,70,72,78,culturalNormOfDailyPresenceLimitedRemoteWorkAdoptionOutsideForeignMNCs,130,5850
+Sydney,AU,APAC,60,65,78,85,highVacancyEmpowersTenantsFlexibilityUsedAsRetentionToolDespiteTraditionalCulture,90,4050
+Paris,FR,EMEA,60,65,75,82,strongRTOSixFourDaysFlightToQualityPremiumAssetsEarnTheCommuteFocus,105,4725
+Berlin,DE,EMEA,50,55,60,70,steadyThreeFourDayCultureSmallerHomeSizesDriveOfficeUsage,55,2475
+Dubai,AE,EMEA,85,90,90,95,worksCouncilsProtectRemoteRightsTwoThreeDaysRemoteStandard,70,3150
+Toronto,CA,AMER,40,45,55,65,officeCentricHubResidencyVisaRulesDrivePresenceMinimalRemoteWork,45,2025
+Austin,US,AMER,55,60,65,75,commuteFrictionKeepsAttendanceLowHeavyHybridAdoption,65,2925
+Mumbai,IN,APAC,80,85,88,95,techRTOMandatesIncreasingFlightToNewDevelopmentsInCBAndDomain,60,2700
+Shanghai,CN,APAC,85,90,90,95,trafficDictatesTimingsButCultureIsOfficeFirstRapidDemandForGradeASpace,50,2250
+Chicago,US,AMER,50,55,60,70,nearlyFullReturnRemoteWorkRareOversupplyInMarketLoweringRents,40,1800
+Los Angeles,US,AMER,45,50,58,65,midWeekPeaksStrongFridaysDeadTenantMarketAllowingUpgrades,55,2475
+Frankfurt,DE,EMEA,55,60,65,72,creativeEntertainmentIndustriesResistingStrictMandatesHighHybridFlexibility,60,2700
+Melbourne,AU,APAC,55,60,70,80,bankingSectorDrivingHigherAttendanceFlightToSustainableEsgBuildings,65,2925
+Seoul,KR,APAC,80,85,88,95,laggingSydneyInRTOStrongResistanceToFiveDayMandates,95,4275
+Dublin,IE,EMEA,55,60,68,75,topDownHierarchyDrivesAttendanceFocusOnSmartOfficesAndTechIntegration,70,3150
+Zurich,CH,EMEA,60,65,70,80,techHeavyThreeDaysInOfficeNormStrongDemandForSustainableCityCentreSpace,100,4500
+Boston,US,AMER,50,55,60,70,highQualityOfLifeCommuteSupportsRTOSThreeFourDaysStandard,70,3150
+Seattle,US,AMER,40,45,50,60,bioTechLabRolesDriveAveragesUpRapidUnassignedSeatingAdoption,55,2475
+Washington DC,US,AMER,45,50,55,65,techGiantsEnforcingRTOStrictIn2025StillLaggingNationalAverage,60,2700
+Miami,US,AMER,60,65,70,80,federalMandatesPushingNumbersUpSlowRecoveryInDowntownCore,85,3825
+Houston,US,AMER,60,65,70,80,lifestyleFinanceMigrationHubHighInPersonCultureTightOfficeSupply,40,1800
+Dallas,US,AMER,55,60,65,75,energySectorDrivesHighAttendanceFourDaysCommonCarCentricCommuteAccepted,45,2025
+Vancouver,CA,AMER,45,50,55,65,returnToOfficeLargelyNormalizedSuburbanCampusesSeeingHighUsage,50,2250
+Calgary,CA,AMER,55,60,65,75,highCostOfLivingPushesHybridUsageStrongDemandForTransitLinkedOffices,35,1575
+Montreal,CA,AMER,40,45,50,60,energySectorDominanceHigherAttendanceThanOtherCanadianCities,35,1575
+Mexico City,MX,AMER,65,70,75,85,strongCulturalResistanceToMandatesTwoDaysInOfficeCommon,35,1575
+Sao Paulo,BR,AMER,60,65,70,80,strongInPersonCultureHybridLimitedToMNCsAndTechStartups,40,1800
+Madrid,ES,EMEA,65,70,75,82,trafficIssuesDriveSomeHybridUseButFaceTimeCultureRemainsDominant,45,2025
+Barcelona,ES,EMEA,60,65,70,78,socialOfficeCultureHighAttendanceSiestaScheduleLargelyReplaced,40,1800
+Milan,IT,EMEA,60,65,70,80,techDigitalHubMoreFlexibleThanMadridCoWorkingVeryPopular,65,2925
+Rome,IT,EMEA,65,70,75,82,strongRTOfinanceFashionThreeFourDaysStandardFlightToPortaNuovaDistrict,50,2250
+Amsterdam,NL,EMEA,50,55,60,70,publicSectorDominanceMaintainsHighInPersonPresenceLowRemoteAdoption,90,4050
+Brussels,BE,EMEA,55,60,65,75,culturalEmphasisOnWorkLifeBalanceTwoThreeDaysRemoteIsNormalAndAccepted,55,2475
+Munich,DE,EMEA,55,60,65,75,euInstitutionsDrivingPresenceThreeDaysInOfficeIsTheLegislativeNorm,65,2925
+Hamburg,DE,EMEA,55,60,65,75,techAutoHubExpensiveRealEstateDrivingEfficiencyDeskSharing,50,2250
+Stockholm,SE,EMEA,50,55,60,70,tradingShippingFocusModerateHybridAdoptionStableAttendance,75,3375
+Oslo,NO,EMEA,55,60,65,75,highTrustCultureVoluntaryHybridWorksWellTwoThreeDaysRemoteCommon,65,2925
+Copenhagen,DK,EMEA,55,60,65,75,similarToSwedenBalancedHybridEmphasisOnOfficeAsSocialHub,60,2700
+Warsaw,PL,EMEA,50,55,60,70,flatHierarchiesThreeDaysInOfficeBikingCultureSupportsEasyCommute,30,1350
+Prague,CZ,EMEA,55,60,65,75,bpoSsChubHybridUsedAsKeyRecruitingToolModernStockAbundant,30,1350
+Riyadh,SA,EMEA,85,90,92,98,costEffectiveHubModerateRTOMandatesThreeDaysCommon,65,2925
+Tel Aviv,IL,EMEA,65,70,75,85,governmentMandatesVision2030DrivingFullOccupancyMinimalRemoteWork,80,3600
+Johannesburg,ZA,EMEA,60,65,70,80,techHeavyHybridStandardButInPersonCollaborationHighlyValued,25,1125
+Beijing,CN,APAC,85,90,90,95,safetyInfrastructureIssuesDriveOfficeUsageGeneratorsInternet,65,2925
+Shenzhen,CN,APAC,80,85,88,95,soEDominanceStrictAttendanceHybridVirtuallyNonExistent,60,2700
+Bangalore,IN,APAC,60,65,75,85,techHubBut996CulturePervadesHighPhysicalPresenceExpectations,50,2250
+Delhi NCR,IN,APAC,70,75,80,90,trafficCreatesHybridDemandTwoThreeDaysLargeCampusesConsolidating,45,2025
+Manila,PH,APAC,75,80,80,90,higherAttendanceThanBangaloreOperationalRolesDominate,30,1350
+Kuala Lumpur,MY,APAC,70,75,75,85,bpoSectorMovingBackToOfficeForDataSecurityRegulatoryMandates,30,1350
+Jakarta,ID,APAC,75,80,80,90,flightToQualityInKLCCHybridFlexibilityLowComparedToNeighbors,30,1350
+Bangkok,TH,APAC,70,75,75,85,trafficIsMajorFactorButTraditionalManagementPrefersVisibility,35,1575
+Ho Chi Minh City,VN,APAC,80,85,88,95,conglomerateCultureOfficePresenceSignalsCommitmentHybridRare,40,1800
+Taipei,TW,APAC,80,85,88,95,rapidGrowthPhaseIntenseWorkCultureOfficeIsStatusSymbol,55,2475
+Brisbane,AU,APAC,60,65,70,80,hardwareTechCultureRequiresPresenceLowRemotePenetration,55,2475
+Perth,AU,APAC,70,75,80,90,lifestyleCitySlightlyHigherAttendanceThanMelbourneThreeFourDays,65,2925
+Atlanta,US,AMER,50,55,60,70,miningDrivenIsolatedGeographyHighInPersonCulture,45,2025
+Denver,US,AMER,50,55,60,70,corporateHqsesEnforcingThreeFourDaysSuburbanCommuteImpactsConsistency,40,1800
+Philadelphia,US,AMER,48,53,60,68,lifestyleFocusFridaysVeryLowOccupancyTuesdayWednesdayPeak,40,1800
+Phoenix,US,AMER,55,60,65,75,slowCbdRecoveryRelyingOnEduMedsSectorForFootTraffic,40,1800
+San Diego,US,AMER,50,55,60,70,sprawlEncouragesDrivingGrowingTechPresenceBoostingOfficeUse,55,2475
+Rio de Janeiro,BR,AMER,60,65,70,80,biotechDefenseRequiresPresenceTechWorkersPreferRemote,35,1575
+Buenos Aires,AR,AMER,55,60,65,75,energyGovSectorsDriveAttendanceInformalFlexibleFridays,30,1350
+Santiago,CL,AMER,65,70,75,85,economicVolatilityDrivesCostSavingHybridModels,40,1800
+Bogota,CO,AMER,60,65,70,80,traditionalBusinessCultureHighOfficeOccupancy,30,1350
+Lima,PE,AMER,70,75,80,90,trafficPicoYPlacaInfluencesHybridSchedulesHeavily,30,1350
+Vienna,AT,EMEA,55,60,65,75,highQualityOfLifeTraditionalBankingInsuranceCultureLimitsRemote,55,2475
+Lisbon,PT,EMEA,60,65,70,80,digitalNomadHubButLocalsOftenWorkInOfficeGrowingTechScene,40,1800
+Helsinki,FI,EMEA,50,55,60,70,highDigitalLiteracyFlexibleWorkLegallySupported,60,2700
+Budapest,HU,EMEA,50,55,65,75,sscCapitalHybridUsedToAttractYoungTalent,25,1125
+Geneva,CH,EMEA,60,65,70,80,ngoFinanceHeavySteadyAttendanceHighCostOfRealEstate,110,4950
+Cairo,EG,EMEA,80,85,85,95,traditionalManagementStyleLowInternetReliabilityAtHomeLimitsRemote,30,1350
+Lagos,NG,EMEA,75,80,85,95,powerInfrastructureAtHomeUnreliableOfficeIsNecessary,40,1800
+Nairobi,KE,EMEA,70,75,80,90,growingTechHubHybridEmergingButOfficeRemainsPrimary,30,1350
+Abu Dhabi,AE,EMEA,80,85,85,95,govOilSectorDominanceStrictAttendancePolicies,60,2700
+Doha,QA,EMEA,80,85,85,95,similarToUAEHighOfficeAttendanceDrivenByEx PatsAndPolicy,60,2700
+Auckland,NZ,APAC,60,65,70,80,3DayOfficeWeekStandardFocusOnWorkspaceQuality,55,2475
+Osaka,JP,APAC,70,75,80,90,merchantCultureHighlyTraditionalRHigherThanTokyo,90,4050
+Guangzhou,CN,APAC,80,85,85,95,tradingHubFaceToFaceNegotiationEssential,55,2475
+Hyderabad,IN,APAC,60,65,75,85,pharmaTechMixLargeCampusesModerateHybridAdoption,45,2025
+Chennai,IN,APAC,70,75,80,90,manufacturingAutoSaaSMoreTraditionalConservativeWorkCulture,40,1800
+Cape Town,ZA,EMEA,55,60,65,75,techCreativeHubMoreFlexibleThanJohannesburg,30,1350
+Lyon,FR,EMEA,55,60,65,75,industrialBioTechFocusAttendanceStable,40,1800
+Manchester,GB,EMEA,50,55,65,75,mediaTechPresenceTuesdayThursdayCrowdVeryVisible,45,2025
+Edinburgh,GB,EMEA,50,55,60,70,financeSectorRTOStrongPublicSectorLagging,50,2250

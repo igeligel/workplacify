@@ -1,6 +1,6 @@
 import { useTheme } from "next-themes";
 
 export const useBlogArticlesTheme = () => {
-  const { theme, forcedTheme } = useTheme();
-  return { theme: forcedTheme || theme };
+  const { theme, forcedTheme, resolvedTheme } = useTheme();
+  return { theme: forcedTheme || resolvedTheme || theme };
 };

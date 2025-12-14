@@ -103,6 +103,14 @@ export const Footer = () => {
             >
               GitHub
             </Link>
+
+            <Link
+              href={"https://www.linkedin.com/company/workplacify"}
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+            >
+              LinkedIn
+            </Link>
           </Stack>
           {/* <Stack align={"flex-start"}>
             <ListHeader>Follow Us</ListHeader>

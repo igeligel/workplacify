@@ -1,10 +1,12 @@
-import { Container, Heading, Separator, Text } from "@chakra-ui/react";
+import { Container, Heading, Text } from "@chakra-ui/react";
 import React from "react";
 
 import { BlogArticlesFeatured } from "./BlogArticlesFeatured";
 import { BlogArticlesFooter } from "./BlogArticlesFooter";
 import { BlogArticlesList } from "./BlogArticlesList";
 import { BlogArticlesListItem } from "./BlogArticlesListItem";
+import { BlogArticlesMainSection } from "./BlogArticlesMainSection";
+import { BlogArticlesMainSectionHeading } from "./BlogArticlesMainSectionHeading";
 import { blogArticles as defaultBlogArticles } from "./data";
 
 const featuredBlogArticleData = defaultBlogArticles.find(
@@ -22,6 +24,10 @@ export const BlogArticles = (props: BlogArticlesProps) => {
   const { heading, featuredBlogArticle, blogArticlesList, blogArticlesFooter } =
     props;
 
+  const sortedBlogArticles = defaultBlogArticles.sort(
+    (a, b) => b.datePublished.getTime() - a.datePublished.getTime(),
+  );
+
   return (
     <Container maxW={"6xl"} padding={{ base: "0", md: "2" }}>
       <Heading as="h1">{heading || "Stories by Chakra Templates"}</Heading>
@@ -29,26 +35,28 @@ export const BlogArticles = (props: BlogArticlesProps) => {
         <BlogArticlesFeatured featuredBlogArticle={featuredBlogArticleData} />
       )}
 
-      <Heading as="h2" marginTop="5" fontSize={"2xl"}>
-        Latest articles
-      </Heading>
-      <Separator marginTop="5" />
-      {blogArticlesList || (
-        <BlogArticlesList>
-          {defaultBlogArticles
-            .sort(
-              (a, b) => b.datePublished.getTime() - a.datePublished.getTime(),
-            )
-            .map((blogArticle) => {
-              return (
-                <BlogArticlesListItem
-                  key={blogArticle.uuid}
-                  blogArticle={blogArticle}
-                />
-              );
-            })}
-        </BlogArticlesList>
-      )}
+      <BlogArticlesMainSection
+        heading={
+          <BlogArticlesMainSectionHeading>
+            Latest articles
+          </BlogArticlesMainSectionHeading>
+        }
+        blogArticlesList={
+          blogArticlesList || (
+            <BlogArticlesList>
+              {sortedBlogArticles.map((blogArticle) => {
+                return (
+                  <BlogArticlesListItem
+                    key={blogArticle.uuid}
+                    blogArticle={blogArticle}
+                  />
+                );
+              })}
+            </BlogArticlesList>
+          )
+        }
+      />
+
       {blogArticlesFooter || (
         <BlogArticlesFooter
           heading={"What we write about"}
