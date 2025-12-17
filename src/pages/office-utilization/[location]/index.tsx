@@ -8,6 +8,7 @@ import {
   Grid,
   Heading,
   Icon,
+  Link,
   List,
   Stack,
   Text,
@@ -72,7 +73,8 @@ const OfficeUtilizationPage = (
   );
 
   const t = useTranslations("OfficeUtilization");
-  const { locationData, comparisonCities } = props;
+  const { locationData, comparisonCities: comparisonCitiesFromProps } = props;
+  const comparisonCities = comparisonCitiesFromProps as LocationData[];
   let [sortedBlogArticles] = createShuffle([
     sortedBlogArticlesButNotShuffled,
     locationData.city,
@@ -85,12 +87,10 @@ const OfficeUtilizationPage = (
     ],
   });
 
-  const comparisonCitiesData = (comparisonCities as LocationData[]).map(
-    (city) => ({
-      allocation: parseInt(city.attendance_high_percentage),
-      name: city.city,
-    }),
-  );
+  const comparisonCitiesData = comparisonCities.map((city) => ({
+    allocation: parseInt(city.attendance_high_percentage),
+    name: city.city,
+  }));
 
   const mainCityData = {
     allocation: parseInt(locationData.attendance_high_percentage),
@@ -145,14 +145,18 @@ const OfficeUtilizationPage = (
     Util_Peak_High: locationData.util_peak_high_percentage,
   });
 
+  const kebabCasedLocation = kebabCase(locationData.city.toLowerCase());
+
+  const fullUrl = `${url}/office-utilization/${kebabCasedLocation}`;
+
   return (
     <>
       <NextSeo
         title={title}
         description={description}
-        canonical={`${url}/office-utilization/${locationData.city.toLowerCase()}`}
+        canonical={fullUrl}
         openGraph={{
-          url,
+          url: fullUrl,
           type: "website",
           title: title,
           description,
@@ -182,7 +186,7 @@ const OfficeUtilizationPage = (
       >
         <Container maxW="3xl" paddingTop={4} colorPalette={"orange"}>
           <Stack direction="row" justify="space-between" align="center">
-            <Heading size="3xl" color={"orange.1000"} marginTop={4}>
+            <Heading size="3xl" color={"orange.1000"} marginTop={4} as={"h1"}>
               Office Utilization — {City} • 2025
             </Heading>
             <Box>
@@ -415,6 +419,32 @@ const OfficeUtilizationPage = (
               </Box>
             </Grid>
           </Grid>
+        </Container>
+      </Box>
+
+      <Box marginTop={6}>
+        <Container maxW="4xl">
+          <Heading as={"h2"} fontWeight={500}>
+            Related Office Utilization Pages
+          </Heading>
+          <Stack direction="row" gap={2}>
+            {comparisonCities.map((city, index) => (
+              <>
+                <Box key={city.city}>
+                  <Link colorPalette="orange" asChild>
+                    <NextLink
+                      href={`/office-utilization/${kebabCase(city.city.toLowerCase())}`}
+                    >
+                      <Text textWrap={"nowrap"}>{city.city}</Text>
+                    </NextLink>
+                  </Link>
+                </Box>
+                {index < comparisonCities.length - 1 && (
+                  <Box borderWidth={0}>{"•"}</Box>
+                )}
+              </>
+            ))}
+          </Stack>
         </Container>
       </Box>
 

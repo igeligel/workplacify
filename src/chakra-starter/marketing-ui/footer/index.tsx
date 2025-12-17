@@ -71,7 +71,41 @@ export const Footer = () => {
                 <Link href={"#"}>Pricing</Link>
                 <Link href={"#"}>Releases</Link>
           </Stack> */}
-          <Stack align={"flex-start"}></Stack>
+          <Stack align={"flex-start"}>
+            <ListHeader>Office Utilization Reports</ListHeader>
+            <Link asChild>
+              <NextLink href={"/office-utilization/new-york"}>
+                New York
+              </NextLink>
+            </Link>
+            <Link asChild>
+              <NextLink href={"/office-utilization/london"}>London</NextLink>
+            </Link>
+            <Link asChild>
+              <NextLink href={"/office-utilization/tokyo"}>Tokyo</NextLink>
+            </Link>
+            <Link asChild>
+              <NextLink href={"/office-utilization/shanghai"}>
+                Shanghai
+              </NextLink>
+            </Link>
+            <Link asChild>
+              <NextLink href={"/office-utilization/singapore"}>
+                Singapore
+              </NextLink>
+            </Link>
+            <Link asChild>
+              <NextLink href={"/office-utilization/san-francisco"}>
+                San Francisco
+              </NextLink>
+            </Link>
+            <Link asChild>
+              <NextLink href={"/office-utilization/paris"}>Paris</NextLink>
+            </Link>
+            <Link asChild>
+              <NextLink href={"/office-utilization/beijing"}>Beijing</NextLink>
+            </Link>
+          </Stack>
           {/* <Stack align={"flex-start"}>
             <ListHeader>Company</ListHeader>
             <Text>Coming soon</Text>
