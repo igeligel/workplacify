@@ -5,6 +5,7 @@ import {
   Button,
   Card,
   Container,
+  Flex,
   Grid,
   Heading,
   Icon,
@@ -202,7 +203,14 @@ const OfficeUtilizationPage = (
           </Text>
           <Stack>
             <Box paddingY={4} borderRadius={"md"}>
-              <Grid templateColumns="repeat(4, 1fr)" gap="6" width={"100%"}>
+              <Grid
+                templateColumns={{
+                  base: "repeat(2, 1fr)",
+                  md: "repeat(4, 1fr)",
+                }}
+                gap="6"
+                width={"100%"}
+              >
                 <Box
                   backgroundColor={"white"}
                   padding={2}
@@ -323,9 +331,19 @@ const OfficeUtilizationPage = (
       <Box marginTop={12}>
         <Container maxW="4xl">
           <Grid templateColumns="repeat(1, 1fr)" gapY={"8"}>
-            <Grid templateColumns="repeat(12, 1fr)" gapX={"12"}>
+            <Grid
+              templateColumns={{
+                base: "repeat(1, 1fr)",
+                md: "repeat(12, 1fr)",
+              }}
+              gapX={"12"}
+              gapY={{ base: "6", md: "0" }}
+            >
               <Card.Root
-                gridColumn="span 7 / span 7"
+                gridColumn={{
+                  base: "span 1 / span 1",
+                  md: "span 7 / span 7",
+                }}
                 width="100%"
                 variant={"outline"}
                 colorPalette="orange"
@@ -338,7 +356,12 @@ const OfficeUtilizationPage = (
                   </Card.Description>
                 </Card.Body>
               </Card.Root>
-              <Box gridColumn="span 5 / span 5">
+              <Box
+                gridColumn={{
+                  base: "span 1 / span 1",
+                  md: "span 5 / span 5",
+                }}
+              >
                 <Heading>Interpretation</Heading>
                 <List.Root paddingLeft={4}>
                   <List.Item>Return-to-office push increasing</List.Item>
@@ -349,8 +372,20 @@ const OfficeUtilizationPage = (
                 </List.Root>
               </Box>
             </Grid>
-            <Grid templateColumns="repeat(12, 1fr)" gapX={"12"}>
-              <Box gridColumn="span 5 / span 5">
+            <Grid
+              templateColumns={{
+                base: "repeat(1, 1fr)",
+                md: "repeat(12, 1fr)",
+              }}
+              gapX={"12"}
+              gapY={{ base: "6", md: "0" }}
+            >
+              <Box
+                gridColumn={{
+                  base: "span 1 / span 1",
+                  md: "span 5 / span 5",
+                }}
+              >
                 <Heading>Cost Implications</Heading>
                 <List.Root paddingLeft={4}>
                   <List.Item>
@@ -365,7 +400,12 @@ const OfficeUtilizationPage = (
                   </List.Item>
                 </List.Root>
               </Box>
-              <Box gridColumn="span 7 / span 7">
+              <Box
+                gridColumn={{
+                  base: "span 1 / span 1",
+                  md: "span 7 / span 7",
+                }}
+              >
                 <Heading>How {City} Compares Globally</Heading>
                 <Box marginTop={2}>
                   <Chart.Root
@@ -427,9 +467,14 @@ const OfficeUtilizationPage = (
           <Heading as={"h2"} fontWeight={500}>
             Related Office Utilization Pages
           </Heading>
-          <Stack direction="row" gap={2}>
-            {comparisonCities.map((city, index) => (
-              <>
+          <Flex
+            direction={{ base: "column", md: "row" }}
+            gap={2}
+            flexWrap="wrap"
+            align={{ base: "flex-start", md: "center" }}
+          >
+            {comparisonCities.flatMap((city, index) => {
+              const items = [
                 <Box key={city.city}>
                   <Link colorPalette="orange" asChild>
                     <NextLink
@@ -438,13 +483,21 @@ const OfficeUtilizationPage = (
                       <Text textWrap={"nowrap"}>{city.city}</Text>
                     </NextLink>
                   </Link>
-                </Box>
-                {index < comparisonCities.length - 1 && (
-                  <Box borderWidth={0}>{"•"}</Box>
-                )}
-              </>
-            ))}
-          </Stack>
+                </Box>,
+              ];
+              if (index < comparisonCities.length - 1) {
+                items.push(
+                  <Box
+                    key={`separator-${index}`}
+                    display={{ base: "none", md: "block" }}
+                  >
+                    {"•"}
+                  </Box>,
+                );
+              }
+              return items;
+            })}
+          </Flex>
         </Container>
       </Box>
 
