@@ -561,13 +561,29 @@ const OfficeUtilizationPage = (
   );
 };
 
-export const getStaticPaths = (async () => {
+export const getStaticPaths = (async (props) => {
+  const { locales } = props;
   const records = await getOfficeUtilizationData();
-  const paths = records.map((record) => ({
-    params: {
-      location: kebabCase(record.city.toLowerCase()),
-    },
-  }));
+  const paths = records.flatMap((record) => {
+    const transformedRecord = {
+      params: {
+        location: kebabCase(record.city.toLowerCase()),
+      },
+    };
+
+    if (!locales) {
+      return transformedRecord;
+    }
+    return locales.map((locale) => {
+      if (locale === "en") {
+        return transformedRecord;
+      }
+      return {
+        ...transformedRecord,
+        locale: locale,
+      };
+    });
+  });
 
   return {
     paths: paths,
