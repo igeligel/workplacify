@@ -5,7 +5,7 @@ export const blogArticles: BlogArticle[] = [
     uuid: "2b3c4d5e-6f7g-8h9i-0j1k-l2m3n4o5p6q7",
     title: "Desk Booking for Law Firms: Balancing Privacy & Productivity",
     description:
-      "Discover how desk booking systems help law firms adopt flexible seating while protecting client confidentiality and boosting productivity. Address the unique needs of law firms, such as the need for quiet spaces and confidentiality, and how a booking system can help.",
+      "How desk booking helps law firms adopt flexible seating while protecting client confidentiality and boosting productivity.",
     readingTime: "10 min",
     url: "/blog/desk-booking-law-firms-privacy-productivity",
     image: "/og-images/desk-booking-law-firms-privacy-productivity.png",
@@ -26,7 +26,7 @@ export const blogArticles: BlogArticle[] = [
     uuid: "1a2b3c4d-5e6f-7081-92a3-b4c5d6e7f809",
     title: "Workplacify Analytics: Turn Desk Booking Data into ROI",
     description:
-      "Introducing Workplacify Analytics. Learn how Base and People Analytics convert desk booking data into real estate savings, productivity gains, and better hybrid experiences.",
+      "Workplacify Analytics turns desk booking data into ROI. Base and People Analytics drive real estate savings and better hybrid experiences.",
     readingTime: "3 min",
     url: "/blog/introducing-desk-booking-analytics",
     image: "/og-images/introducing-desk-booking-analytics.png",
@@ -47,7 +47,7 @@ export const blogArticles: BlogArticle[] = [
     uuid: "f8e7d6c5-b4a3-9201-8765-432109876543",
     title: "Create a Desk Sharing Policy That Works",
     description:
-      "Learn how to create and implement a comprehensive desk sharing policy that your employees will embrace. Get step-by-step guidance on building a fair, efficient hot desking system with the right tools and communication strategy.",
+      "Create a desk sharing policy that works. Step-by-step guide to building a fair, efficient hot desking system your team will embrace.",
     readingTime: "12 min",
     url: "/blog/working-desk-sharing-policy",
     image: "/og-images/working-desk-sharing-policy.png",
@@ -77,7 +77,7 @@ export const blogArticles: BlogArticle[] = [
     uuid: "a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6",
     title: "Master Your Office: Desk Booking Limitations with Workplacify",
     description:
-      "Learn how to optimize your hybrid workspace with smart desk booking limitations. Discover how Workplacify's new Office Settings feature helps prevent ghost bookings, ensures fair access, and delivers real ROI through better space utilization.",
+      "Optimize hybrid workspaces with smart desk booking limits. Prevent ghost bookings, ensure fair access, and get real ROI from better space use.",
     readingTime: "8 min",
     url: "/blog/desk-booking-limitations",
     image: "/og-images/desk-booking-limitations.png",
@@ -107,7 +107,7 @@ export const blogArticles: BlogArticle[] = [
     uuid: "d4e5f6g7-h8i9-j0k1-l2m3-n4o5p6q7r8s9",
     title: "Why We Chose to Be Open-Source: The Workplacify Philosophy",
     description:
-      "Discover why we built Workplacify as an open-source platform. Learn how transparency, community collaboration, and freedom to adapt are reshaping workplace technology.",
+      "Why we built Workplacify as open-source: transparency, community collaboration, and freedom to adapt reshape workplace technology.",
     readingTime: "7 min",
     url: "/blog/open-source-desk-booking-philosophy",
     image: "/og-images/open-source-desk-booking-philosophy.png",
@@ -137,7 +137,7 @@ export const blogArticles: BlogArticle[] = [
     uuid: "b1c2d3e4-f5g6-7h8i-9j0k-l1m2n3o4p5q7",
     title: "Empty Office? How to Improve Office Occupancy",
     description:
-      "Learn practical strategies to improve office occupancy in your startup. From data-driven insights to creating a magnetic workplace, discover how to make your office a place where people want to be.",
+      "Practical strategies to improve office occupancy. Data-driven insights to create a workplace where people want to be.",
     readingTime: "15 min",
     url: "/blog/empty-office-improve-occupancy",
     image: "/og-images/empty-office-improve-occupancy.png",
@@ -167,7 +167,7 @@ export const blogArticles: BlogArticle[] = [
     uuid: "e7b2c3d4-f5g6-7h8i-9j0k-l1m2n3o4p5q6",
     title: "5 Hot Desking Problems & How to Solve Them",
     description:
-      "Discover practical solutions to common hot desking challenges, from desk hunting to team culture. Learn how to create an efficient, collaborative flexible workspace.",
+      "Practical solutions to hot desking challenges: desk hunting, team culture. Build an efficient, collaborative flexible workspace.",
     readingTime: "12 min",
     url: "/blog/solve-hot-desking-problems",
     image: "/og-images/five-hot-desking-problems-how-to-solve-them.png",
@@ -287,7 +287,7 @@ export const blogArticles: BlogArticle[] = [
     uuid: "cbc011d8-ba37-4aea-a126-135f87ba36ba",
     title: "Desk Sharing for Startups: Cut Costs & Boost Agility",
     description:
-      "Learn how desk sharing helps startups cut costs, boost collaboration, and attract top talent. Discover the financial and cultural benefits of flexible seating.",
+      "Desk sharing for startups: cut costs, boost collaboration, attract top talent. Financial and cultural benefits of flexible seating.",
     readingTime: "8 min",
     url: "/blog/desk-sharing-startups-cut-costs-boost-agility",
     image: "/og-images/desk-sharing-startups-cut-costs-boost-agility.png",
@@ -317,7 +317,7 @@ export const blogArticles: BlogArticle[] = [
     uuid: "9ee34256-8c5c-4428-b5c8-764d74167a97",
     title: "5 Signs You've Outgrown Your Office Spreadsheet",
     description:
-      "Discover 5 signs you've outgrown your office spreadsheet, from errors to security risks, and learn when to upgrade to smarter workplace management tools.",
+      "5 signs you've outgrown your office spreadsheet. Discover when to upgrade to smarter workplace management tools.",
     readingTime: "8 min",
     url: "/blog/signs-outgrown-office-spreadsheet",
     image: "/og-images/signs-outgrown-office-spreadsheet.png",
@@ -347,7 +347,7 @@ export const blogArticles: BlogArticle[] = [
     uuid: "a08a4a54-a5e6-4a6b-a915-8ff273d465ba",
     title: "Desk Scheduling: The Hidden Costs of Your Spreadsheet",
     description:
-      "Tired of your desk scheduling spreadsheet? Uncover the hidden costs in wasted admin time, lost productivity, and poor data. Learn how modern office management software can boost workspace efficiency and provide the analytics you need to make smarter decisions.",
+      "Uncover the hidden costs of desk scheduling spreadsheets: wasted admin time, lost productivity. Learn how modern software boosts efficiency.",
     readingTime: "8 min",
     url: "/blog/desk-scheduling-the-hidden-costs-of-your-spreadsheet",
     image:

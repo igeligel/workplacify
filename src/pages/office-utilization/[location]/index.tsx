@@ -74,8 +74,14 @@ const OfficeUtilizationPage = (
   );
 
   const t = useTranslations("OfficeUtilization");
-  const { locationData, comparisonCities: comparisonCitiesFromProps } = props;
+  const {
+    locationData,
+    comparisonCities: comparisonCitiesFromProps,
+    relatedCities: relatedCitiesFromProps,
+  } = props;
   const comparisonCities = comparisonCitiesFromProps as LocationData[];
+  const relatedCities = (relatedCitiesFromProps ??
+    comparisonCities) as LocationData[];
   let [sortedBlogArticles] = createShuffle([
     sortedBlogArticlesButNotShuffled,
     locationData.city,
@@ -473,7 +479,7 @@ const OfficeUtilizationPage = (
             flexWrap="wrap"
             align={{ base: "flex-start", md: "center" }}
           >
-            {comparisonCities.flatMap((city, index) => {
+            {relatedCities.flatMap((city, index) => {
               const items = [
                 <Box key={city.city}>
                   <Link colorPalette="orange" asChild>
@@ -485,7 +491,7 @@ const OfficeUtilizationPage = (
                   </Link>
                 </Box>,
               ];
-              if (index < comparisonCities.length - 1) {
+              if (index < relatedCities.length - 1) {
                 items.push(
                   <Box
                     key={`separator-${index}`}
@@ -614,84 +620,97 @@ export const getStaticProps: GetStaticProps = async (context) => {
     return { notFound: true, props: { messages } };
   }
 
-  const comparisonCities = records.filter((record) => {
-    return Boolean(
-      record.country === locationData.country &&
-        record.region === locationData.region &&
-        record.city !== locationData.city,
-    );
-  });
+  // Same-region cities for chart comparison (wider than same-country for single-city countries)
+  const sameRegionCities = records.filter(
+    (record) =>
+      record.region === locationData.region &&
+      record.city !== locationData.city,
+  );
 
   const finalComparisonCities: LocationData[] = [];
 
-  const sortedAttendanceSameRegion = comparisonCities
-    .sort((a, b) => {
-      return (
-        parseInt(a.attendance_high_percentage) -
-        parseInt(b.attendance_high_percentage)
-      );
-    })
-    .slice(0, 2);
+  // Prefer same-country peers for chart relevance, then same-region
+  const sameCountryCities = sameRegionCities.filter(
+    (record) => record.country === locationData.country,
+  );
+  const comparisonPool =
+    sameCountryCities.length >= 4 ? sameCountryCities : sameRegionCities;
 
-  finalComparisonCities.push(...sortedAttendanceSameRegion);
+  const sortedAttendance = [...comparisonPool].sort(
+    (a, b) =>
+      parseInt(a.attendance_high_percentage) -
+      parseInt(b.attendance_high_percentage),
+  );
+  finalComparisonCities.push(...sortedAttendance.slice(0, 2));
 
-  const sortedByEstimatedSavings = comparisonCities
+  const sortedByLowestSavings = comparisonPool
     .filter(
       (record) => !finalComparisonCities.some((r) => r.city === record.city),
     )
-    .sort((a, b) => {
-      return (
+    .sort(
+      (a, b) =>
         parseInt(a.est_savings_usd_per_emp) -
-        parseInt(b.est_savings_usd_per_emp)
-      );
-    })
-    .slice(0, 2);
+        parseInt(b.est_savings_usd_per_emp),
+    );
+  finalComparisonCities.push(...sortedByLowestSavings.slice(0, 2));
 
-  finalComparisonCities.push(...sortedByEstimatedSavings);
-
-  const descendingEstimatedSavings = comparisonCities
+  const sortedByHighestSavings = comparisonPool
     .filter(
       (record) => !finalComparisonCities.some((r) => r.city === record.city),
     )
-    .sort((a, b) => {
-      return (
-        parseInt(a.est_savings_usd_per_emp) -
-        parseInt(b.est_savings_usd_per_emp)
-      );
-    })
-    .slice(0, 2);
-  finalComparisonCities.push(...descendingEstimatedSavings);
+    .sort(
+      (a, b) =>
+        parseInt(b.est_savings_usd_per_emp) -
+        parseInt(a.est_savings_usd_per_emp),
+    );
+  finalComparisonCities.push(...sortedByHighestSavings.slice(0, 2));
 
-  const bigCitiesList = [
+  // Fill remaining slots with hub cities (deterministic per city via seeded shuffle)
+  const hubCitySlugs = [
     "london",
     "new-york",
     "hong-kong",
     "tokyo",
     "shanghai",
+    "singapore",
+    "dubai",
+    "paris",
+    "sydney",
+    "berlin",
   ];
-  // Shuffle big cities as well
-  const bigCities = records
-    .filter(
-      (record) =>
-        kebabCase(record.city.toLowerCase()) !==
-          kebabCase(locationData.city.toLowerCase()) &&
-        bigCitiesList.includes(kebabCase(record.city.toLowerCase())),
-    )
-    .sort(() => {
-      return Math.random() - 0.5;
-    });
+  const hubCities = records.filter(
+    (record) =>
+      kebabCase(record.city.toLowerCase()) !==
+        kebabCase(locationData.city.toLowerCase()) &&
+      hubCitySlugs.includes(kebabCase(record.city.toLowerCase())),
+  );
 
-  while (finalComparisonCities.length < 8 && bigCities.length > 0) {
-    if (finalComparisonCities.length < 8) {
-      const randomCity = bigCities.shift();
-      if (randomCity) {
-        finalComparisonCities.push(randomCity);
-      }
+  const citySeed = [...locationData.city].reduce(
+    (h, c) => (h * 31 + c.charCodeAt(0)) | 0,
+    0,
+  );
+  const [shuffledHubCities] = createShuffle([hubCities, citySeed]);
+  for (const city of shuffledHubCities) {
+    if (finalComparisonCities.length >= 8) break;
+    if (!finalComparisonCities.some((r) => r.city === city.city)) {
+      finalComparisonCities.push(city);
     }
   }
 
+  // Related cities for internal links: wider pool, seeded shuffle for diverse link distribution
+  const allOtherCities = records.filter(
+    (record) => record.city !== locationData.city,
+  );
+  const [shuffledRelated] = createShuffle([allOtherCities, citySeed]);
+  const relatedCities = shuffledRelated.slice(0, 20);
+
   return {
-    props: { messages, locationData, comparisonCities: finalComparisonCities },
+    props: {
+      messages,
+      locationData,
+      comparisonCities: finalComparisonCities,
+      relatedCities,
+    },
   };
 };
 

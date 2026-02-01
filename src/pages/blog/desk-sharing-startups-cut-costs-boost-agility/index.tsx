@@ -698,8 +698,7 @@ const BlogContent = () => {
 const DeskSharingStartupsCutCostsBoostAgility = () => {
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}/blog/desk-sharing-startups-cut-costs-boost-agility`;
   const title = "Desk Sharing for Startups: Cut Costs & Boost Agility";
-  const description =
-    "Learn how desk sharing can help startups reduce real estate costs by 30%, improve team collaboration, and attract top talent. A strategic guide to flexible workspace management.";
+  const description = article.description;
 
   return (
     <>

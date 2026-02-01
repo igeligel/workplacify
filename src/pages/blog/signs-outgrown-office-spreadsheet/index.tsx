@@ -682,14 +682,13 @@ const BlogArticleComponent = () => {
     <>
       <NextSeo
         title="5 Signs You've Outgrown Your Office Spreadsheet"
-        description="Is your office spreadsheet becoming a bottleneck? Discover the 5 telltale signs that indicate it's time to upgrade your workplace management tools, and learn how to transition to a more efficient solution."
+        description={article.description}
         canonical={url}
         openGraph={{
           url,
           type: "article",
           title: "5 Signs You've Outgrown Your Office Spreadsheet",
-          description:
-            "Is your office spreadsheet becoming a bottleneck? Discover the 5 telltale signs that indicate it's time to upgrade your workplace management tools, and learn how to transition to a more efficient solution.",
+          description: article.description,
           images: [
             {
               url: `${url}/og-images/5-signs-youve-outgrown-your-office-spreadsheet.png`,
