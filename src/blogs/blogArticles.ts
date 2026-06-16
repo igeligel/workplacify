@@ -374,6 +374,36 @@ export const blogArticles: BlogArticle[] = [
     },
     datePublished: new Date("2025-08-20T18:00:00.000Z"),
   },
+  {
+    uuid: "b3c4d5e6-f7g8-9h0i-1j2k-l3m4n5o6p7q8",
+    title: "Justify Desk Booking Software to Your CFO: A Guide to ROI",
+    description:
+      "Build a compelling business case for desk booking software. Calculate ROI from real estate savings, productivity gains, and employee retention.",
+    readingTime: "8 min",
+    url: "/blog/justify-desk-booking-software-roi-cfo-guide",
+    image: "/og-images/justify-desk-booking-software-roi-cfo-guide.png",
+    imageAlt: "Justify Desk Booking Software to Your CFO: A Guide to ROI",
+    tags: [
+      {
+        text: "workspace-management",
+        color: "purple",
+      },
+      {
+        text: "hybrid-work",
+        color: "blue",
+      },
+      {
+        text: "workplace-technology",
+        color: "green",
+      },
+    ],
+    author: {
+      name: "Kevin Peters",
+      jobTitle: "CEO of Workplacify",
+      image: "/profile-kevin-peters.png",
+    },
+    datePublished: new Date("2026-06-14T10:00:00.000Z"),
+  },
 ];
 
 export const featuredBlogArticle = blogArticles.find(
