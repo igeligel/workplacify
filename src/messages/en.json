@@ -10,7 +10,9 @@
     "deskSchedulingEfficiencyCalculator": "Desk Scheduling Efficiency Calculator",
     "deskSchedulingEfficiencyCalculatorDescription": "Calculate potential savings from optimizing desk usage",
     "visitorBadgeGenerator": "Visitor Badge Generator",
-    "visitorBadgeGeneratorDescription": "Create professional visitor badges with QR codes"
+    "visitorBadgeGeneratorDescription": "Create professional visitor badges with QR codes",
+    "officeRightsizingCalculator": "Office Rightsizing Calculator",
+    "officeRightsizingCalculatorDescription": "Calculate how much office space you can save with hybrid work"
   },
   "IndexPage": {
     "IndexPageTitle": "Workplacify: Desk Scheduling & Workplace Optimization",
@@ -642,6 +644,94 @@
       "returnToOfficePushIncreasing": "Return-to-office push increasing",
       "amenityRichSpacesInHigherDemand": "Amenity-rich spaces in higher demand",
       "utilizationExpectedToRiseOverNext12Months": "Utilization expected to rise over next 12 months"
+    }
+  },
+  "OfficeRightsizingCalculator": {
+    "meta": {
+      "title": "Office Space Rightsizing Calculator | Workplacify",
+      "description": "Calculate how much office space and cost you can save by rightsizing your hybrid workplace. Free office downsizing calculator for companies of any size in any city.",
+      "imageAlt": "Office Rightsizing Calculator Preview"
+    },
+    "hero": {
+      "heading": "Office Space Sizing Calculator: How Much Space Can You Cut?",
+      "text": "Save costs on office space by rightsizing for hybrid work. See your Rightsizing Potential in seconds."
+    },
+    "form": {
+      "employees": {
+        "label": "Number of Employees",
+        "placeholder": "e.g., 200"
+      },
+      "currentDesks": {
+        "label": "Current Number of Desks",
+        "placeholder": "e.g., 200"
+      },
+      "city": {
+        "label": "City",
+        "placeholder": "Select a city"
+      },
+      "peakUtilization": {
+        "label": "Peak Desk Utilization (%)",
+        "placeholder": "e.g., 75"
+      }
+    },
+
+    "results": {
+      "heading": "Your Rightsizing Potential",
+      "currentDesks": "Current Desks",
+      "recommendedDesks": "Recommended Desks",
+      "desksSaved": "Desks You Can Cut",
+      "annualSavings": "Annual Cost Savings",
+      "perYear": "per year",
+      "calculationBreakdown": "Calculation Breakdown",
+      "ctaButton": "See How Workplacify Tracks This For You"
+    },
+    "features": {
+      "tag": "Features",
+      "title": "Why Rightsize Your Office?",
+      "description": "Hybrid work has permanently changed how we use office space. Rightsizing helps you align your real estate footprint with actual usage.",
+      "benefits": {
+        "first": "Reduce real estate costs by eliminating unused desks",
+        "second": "Improve energy efficiency and sustainability",
+        "third": "Invest savings into higher-quality collaboration spaces",
+        "fourth": "Make data-driven decisions with real utilization data"
+      }
+    },
+    "cta": {
+      "heading": "Ready to Track Your Real Office Utilization?",
+      "description": "Workplacify gives you real-time data on desk usage, attendance patterns, and peak days so you can rightsize with confidence.",
+      "button": "Try Workplacify Free"
+    },
+    "sections": {
+      "methodology": {
+        "heading": "How We Calculate Your Savings",
+        "description": "We start with your current desk count (assumed 1:1 with employees for dedicated seating). Using your peak utilization rate — the highest percentage of desks occupied on any given day — we calculate the recommended number of desks. The difference is multiplied by your city's prime office rent and the industry-standard 75 sq ft per desk to estimate annual savings."
+      },
+      "dataDriven": {
+        "heading": "Rightsizing With Real Data Is Better",
+        "description": "This calculator gives you a rough estimate. Workplacify goes further by tracking actual desk utilization, attendance trends, and peak day patterns across your offices — so you can rightsize with confidence, not guesses."
+      }
+    },
+    "faq": {
+      "whatIs": {
+        "question": "What is office rightsizing?",
+        "answer": "Office rightsizing is the process of adjusting your office space footprint to match actual employee attendance patterns. In a hybrid workplace, not everyone is in the office every day, so you likely need fewer desks than employees."
+      },
+      "utilizationRate": {
+        "question": "What is a good peak utilization rate?",
+        "answer": "Industry benchmarks show peak utilization typically ranges from 50-80%. A rate of 75% means that on your busiest day, only 75% of desks are occupied. If your utilization is below 70%, you have significant rightsizing potential."
+      },
+      "sqftPerDesk": {
+        "question": "Why 75 sq ft per desk?",
+        "answer": "75 sq ft per desk is the industry standard for calculating office space per workstation in the US and Europe. This includes the desk footprint plus shared space like aisles, common areas, and amenities."
+      },
+      "accuracy": {
+        "question": "How accurate is this calculator?",
+        "answer": "This calculator provides a high-level estimate based on your inputs and city average rent data. For precise savings, use Workplacify to track your actual real-time desk utilization data."
+      },
+      "startSaving": {
+        "question": "How can I start saving on office space?",
+        "answer": "Start by tracking your actual desk utilization with Workplacify. With real data on attendance patterns and peak days, you can confidently reduce your footprint, implement desk hotelling, and save thousands per year."
+      }
     }
   }
 }

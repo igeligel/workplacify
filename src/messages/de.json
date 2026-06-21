@@ -8,7 +8,11 @@
     "hybridWorkplacePolicyGenerator": "Hybrid-Arbeitsplatz-Richtlinien Generator",
     "hybridWorkplacePolicyGeneratorDescription": "Erstellen Sie professionelle Hybrid-Arbeitsplatz-Richtlinien",
     "deskSchedulingEfficiencyCalculator": "Schreibtisch-Planungseffizienz-Rechner",
-    "deskSchedulingEfficiencyCalculatorDescription": "Berechnen Sie potenzielle Einsparungen durch optimierte Schreibtischnutzung"
+    "deskSchedulingEfficiencyCalculatorDescription": "Berechnen Sie potenzielle Einsparungen durch optimierte Schreibtischnutzung",
+    "visitorBadgeGenerator": "Besucherausweis-Generator",
+    "visitorBadgeGeneratorDescription": "Erstellen Sie professionelle Besucherausweise mit QR-Codes",
+    "officeRightsizingCalculator": "Büroflächen-Rechner",
+    "officeRightsizingCalculatorDescription": "Berechnen Sie, wie viel Bürofläche Sie durch hybrides Arbeiten einsparen können"
   },
   "IndexPage": {
     "IndexPageTitle": "Workplacify: Arbeitsplatzplanung & Arbeitsplatzoptimierung",
@@ -538,5 +542,92 @@
     "tableHeaderFavoriteDay": "Lieblingstag",
     "tableNoBookingDataFound": "Keine Buchungsdaten für die ausgewählten Kriterien gefunden",
     "tableSelectOfficeAndDateRangeToViewPeopleAnalytics": "Wählen Sie ein Büro und einen Zeitraum aus, um Mitarbeiter-Analytik anzuzeigen"
+  },
+  "OfficeRightsizingCalculator": {
+    "meta": {
+      "title": "Büroflächen-Rechner | Workplacify",
+      "description": "Berechnen Sie, wie viel Bürofläche und Kosten Sie durch die Anpassung Ihres hybriden Arbeitsplatzes einsparen können. Kostenloser Büroflächen-Rechner für Unternehmen jeder Größe in jeder Stadt.",
+      "imageAlt": "Vorschau des Büroflächen-Rechners"
+    },
+    "hero": {
+      "heading": "Büroflächen-Rechner: Wie viel Platz können Sie einsparen?",
+      "text": "Sparen Sie Kosten für Büroflächen durch die Optimierung für hybrides Arbeiten. Sehen Sie Ihr Einsparungspotenzial in Sekunden."
+    },
+    "form": {
+      "employees": {
+        "label": "Anzahl der Mitarbeiter",
+        "placeholder": "z.B. 200"
+      },
+      "currentDesks": {
+        "label": "Aktuelle Anzahl Schreibtische",
+        "placeholder": "z.B. 200"
+      },
+      "city": {
+        "label": "Stadt",
+        "placeholder": "Wählen Sie eine Stadt"
+      },
+      "peakUtilization": {
+        "label": "Spitzenauslastung Schreibtische (%)",
+        "placeholder": "z.B. 75"
+      }
+    },
+    "results": {
+      "heading": "Ihr Einsparungspotenzial",
+      "currentDesks": "Aktuelle Schreibtische",
+      "recommendedDesks": "Empfohlene Schreibtische",
+      "desksSaved": "Einsparbare Schreibtische",
+      "annualSavings": "Jährliche Kosteneinsparung",
+      "perYear": "pro Jahr",
+      "calculationBreakdown": "Berechnungsdetails",
+      "ctaButton": "Sehen Sie, wie Workplacify dies für Sie verfolgt"
+    },
+    "features": {
+      "tag": "Funktionen",
+      "title": "Warum Ihre Büroflächen optimieren?",
+      "description": "Hybrides Arbeiten hat die Nutzung von Büroflächen dauerhaft verändert. Die Optimierung hilft Ihnen, Ihre Immobilienfläche an die tatsächliche Nutzung anzupassen.",
+      "benefits": {
+        "first": "Reduzieren Sie Immobilienkosten durch den Wegfall ungenutzter Schreibtische",
+        "second": "Verbessern Sie die Energieeffizienz und Nachhaltigkeit",
+        "third": "Investieren Sie Einsparungen in hochwertigere Kollaborationsflächen",
+        "fourth": "Treffen Sie datenbasierte Entscheidungen mit echten Nutzungsdaten"
+      }
+    },
+    "cta": {
+      "heading": "Bereit, Ihre tatsächliche Büroauslastung zu verfolgen?",
+      "description": "Workplacify liefert Ihnen Echtzeitdaten zur Schreibtischnutzung, Anwesenheitsmustern und Spitzentagen, damit Sie Ihre Flächen mit Zuversicht optimieren können.",
+      "button": "Workplacify kostenlos testen"
+    },
+    "sections": {
+      "methodology": {
+        "heading": "Wie wir Ihre Einsparungen berechnen",
+        "description": "Wir beginnen mit Ihrer aktuellen Schreibtischanzahl (Annahme 1:1 mit Mitarbeitern für feste Sitzplätze). Mit Ihrer Spitzenauslastung — dem höchsten Prozentsatz belegter Schreibtische an einem Tag — berechnen wir die empfohlene Schreibtischzahl. Die Differenz wird mit der Prime-Miete Ihrer Stadt und den branchenüblichen 75 m² pro Schreibtisch multipliziert, um die jährlichen Einsparungen zu schätzen."
+      },
+      "dataDriven": {
+        "heading": "Optimierung mit echten Daten ist besser",
+        "description": "Dieser Rechner gibt Ihnen eine grobe Schätzung. Workplacify geht weiter, indem es die tatsächliche Schreibtischnutzung, Anwesenheitstrends und Spitzentage in Ihren Büros verfolgt — damit Sie Ihre Flächen mit Zuversicht optimieren können, nicht mit Vermutungen."
+      }
+    },
+    "faq": {
+      "whatIs": {
+        "question": "Was ist Büroflächenoptimierung?",
+        "answer": "Büroflächenoptimierung ist der Prozess der Anpassung Ihrer Bürofläche an die tatsächlichen Anwesenheitsmuster der Mitarbeiter. In einem hybriden Arbeitsplatz sind nicht jeden Tag alle im Büro, daher benötigen Sie wahrscheinlich weniger Schreibtische als Mitarbeiter."
+      },
+      "utilizationRate": {
+        "question": "Was ist eine gute Spitzenauslastungsrate?",
+        "answer": "Branchenbenchmarks zeigen, dass die Spitzenauslastung typischerweise zwischen 50-80% liegt. Eine Rate von 75% bedeutet, dass an Ihrem geschäftigsten Tag nur 75% der Schreibtische belegt sind. Wenn Ihre Auslastung unter 70% liegt, haben Sie erhebliches Optimierungspotenzial."
+      },
+      "sqftPerDesk": {
+        "question": "Warum 75 m² pro Schreibtisch?",
+        "answer": "75 m² pro Schreibtisch ist der Industriestandard für die Berechnung der Bürofläche pro Arbeitsplatz in den USA und Europa. Dies umfasst den Schreibtischfußabdruck plus gemeinsame Flächen wie Gänge, Gemeinschaftsbereiche und Annehmlichkeiten."
+      },
+      "accuracy": {
+        "question": "Wie genau ist dieser Rechner?",
+        "answer": "Dieser Rechner liefert eine grobe Schätzung basierend auf Ihren Eingaben und den durchschnittlichen Mietdaten der Stadt. Für präzise Einsparungen nutzen Sie Workplacify, um Ihre tatsächlichen Echtzeit-Schreibtischnutzungsdaten zu verfolgen."
+      },
+      "startSaving": {
+        "question": "Wie kann ich mit dem Sparen bei Büroflächen beginnen?",
+        "answer": "Beginnen Sie damit, Ihre tatsächliche Schreibtischnutzung mit Workplacify zu verfolgen. Mit echten Daten zu Anwesenheitsmustern und Spitzentagen können Sie Ihre Fläche sicher reduzieren, Desk Hotelling einführen und Tausende pro Jahr sparen."
+      }
+    }
   }
 }

@@ -77,6 +77,11 @@ export const NavbarWithDrawer = () => {
           subLabel: t("visitorBadgeGeneratorDescription"),
           href: "/free-tools/visitor-badge-generator",
         },
+        {
+          label: t("officeRightsizingCalculator"),
+          subLabel: t("officeRightsizingCalculatorDescription"),
+          href: "/free-tools/rightsizing-office-calculator",
+        },
       ],
     },
     {

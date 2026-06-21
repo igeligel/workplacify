@@ -10,7 +10,9 @@
     "deskSchedulingEfficiencyCalculator": "Calcolatore Efficienza Prenotazione Scrivanie",
     "deskSchedulingEfficiencyCalculatorDescription": "Calcola i potenziali risparmi ottimizzando l'uso delle scrivanie",
     "visitorBadgeGenerator": "Generatore Badge Visitatori",
-    "visitorBadgeGeneratorDescription": "Crea badge professionali per visitatori con codici QR"
+    "visitorBadgeGeneratorDescription": "Crea badge professionali per visitatori con codici QR",
+    "officeRightsizingCalculator": "Calcolatore Ridimensionamento Ufficio",
+    "officeRightsizingCalculatorDescription": "Calcola quanto spazio ufficio puoi risparmiare con il lavoro ibrido"
   },
   "IndexPage": {
     "IndexPageTitle": "Workplacify: Prenotazione Scrivanie & Ottimizzazione Spazi",
@@ -539,5 +541,92 @@
     "tableHeaderFavoriteDay": "Giorno Preferito",
     "tableNoBookingDataFound": "Nessun dato di prenotazione trovato per i criteri selezionati",
     "tableSelectOfficeAndDateRangeToViewPeopleAnalytics": "Seleziona un ufficio e un intervallo di date per visualizzare le analisi delle persone"
+  },
+  "OfficeRightsizingCalculator": {
+    "meta": {
+      "title": "Calcolatore Ridimensionamento Spazi Ufficio | Workplacify",
+      "description": "Calcola quanto spazio ufficio e costi puoi risparmiare ridimensionando il tuo posto di lavoro ibrido. Calcolatore gratuito di ridimensionamento ufficio per aziende di qualsiasi dimensione in qualsiasi città.",
+      "imageAlt": "Anteprima Calcolatore Ridimensionamento Ufficio"
+    },
+    "hero": {
+      "heading": "Calcolatore Dimensionamento Spazi Ufficio: Quanto Spazio Puoi Tagliare?",
+      "text": "Risparmia sui costi degli spazi ufficio ridimensionando per il lavoro ibrido. Vedi il tuo potenziale di ridimensionamento in secondi."
+    },
+    "form": {
+      "employees": {
+        "label": "Numero di Dipendenti",
+        "placeholder": "es. 200"
+      },
+      "currentDesks": {
+        "label": "Numero Attuale di Scrivanie",
+        "placeholder": "es. 200"
+      },
+      "city": {
+        "label": "Città",
+        "placeholder": "Seleziona una città"
+      },
+      "peakUtilization": {
+        "label": "Utilizzo Massimo Scrivanie (%)",
+        "placeholder": "es. 75"
+      }
+    },
+    "results": {
+      "heading": "Il Tuo Potenziale di Ridimensionamento",
+      "currentDesks": "Scrivanie Attuali",
+      "recommendedDesks": "Scrivanie Consigliate",
+      "desksSaved": "Scrivanie Riducibili",
+      "annualSavings": "Risparmio Annuale",
+      "perYear": "all'anno",
+      "calculationBreakdown": "Dettaglio Calcolo",
+      "ctaButton": "Scopri Come Workplacify Lo Traccia Per Te"
+    },
+    "features": {
+      "tag": "Caratteristiche",
+      "title": "Perché Ridimensionare il Tuo Ufficio?",
+      "description": "Il lavoro ibrido ha cambiato permanentemente l'uso degli spazi ufficio. Il ridimensionamento ti aiuta ad allineare la tua impronta immobiliare con l'utilizzo effettivo.",
+      "benefits": {
+        "first": "Riduci i costi immobiliari eliminando le scrivanie inutilizzate",
+        "second": "Migliora l'efficienza energetica e la sostenibilità",
+        "third": "Investi i risparmi in spazi di collaborazione di maggiore qualità",
+        "fourth": "Prendi decisioni basate sui dati con dati di utilizzo reali"
+      }
+    },
+    "cta": {
+      "heading": "Pronto a Monitorare il Tuo Utilizzo Reale dell'Ufficio?",
+      "description": "Workplacify ti fornisce dati in tempo reale sull'uso delle scrivanie, i modelli di presenza e i giorni di punta in modo da poter ridimensionare con sicurezza.",
+      "button": "Prova Workplacify Gratis"
+    },
+    "sections": {
+      "methodology": {
+        "heading": "Come Calcoliamo i Tuoi Risparmi",
+        "description": "Partiamo dal numero attuale di scrivanie (assumendo 1:1 con i dipendenti per postazioni assegnate). Usando il tasso di utilizzo massimo — la percentuale più alta di scrivanie occupate in un giorno — calcoliamo il numero raccomandato di scrivanie. La differenza viene moltiplicata per l'affitto prime della tua città e i 75 mq standard per scrivania per stimare il risparmio annuale."
+      },
+      "dataDriven": {
+        "heading": "Ridimensionare con Dati Reali è Meglio",
+        "description": "Questo calcolatore fornisce una stima approssimativa. Workplacify va oltre monitorando l'utilizzo effettivo delle scrivanie, le tendenze di presenza e i modelli dei giorni di punta nei tuoi uffici — così puoi ridimensionare con sicurezza, non con supposizioni."
+      }
+    },
+    "faq": {
+      "whatIs": {
+        "question": "Cos'è il ridimensionamento dell'ufficio?",
+        "answer": "Il ridimensionamento dell'ufficio è il processo di adeguamento della superficie dei tuoi spazi ufficio ai modelli effettivi di presenza dei dipendenti. In un ambiente di lavoro ibrido, non tutti sono in ufficio ogni giorno, quindi probabilmente hai bisogno di meno scrivanie che dipendenti."
+      },
+      "utilizationRate": {
+        "question": "Qual è un buon tasso di utilizzo massimo?",
+        "answer": "I benchmark di settore mostrano che l'utilizzo massimo varia tipicamente dal 50-80%. Un tasso del 75% significa che nel tuo giorno più affollato, solo il 75% delle scrivanie è occupato. Se il tuo utilizzo è inferiore al 70%, hai un significativo potenziale di ridimensionamento."
+      },
+      "sqftPerDesk": {
+        "question": "Perché 75 mq per scrivania?",
+        "answer": "75 mq per scrivania è lo standard industriale per il calcolo dello spazio ufficio per postazione di lavoro negli Stati Uniti e in Europa. Include l'impronta della scrivania più gli spazi condivisi come corridoi, aree comuni e servizi."
+      },
+      "accuracy": {
+        "question": "Quanto è accurato questo calcolatore?",
+        "answer": "Questo calcolatore fornisce una stima di alto livello basata sui tuoi input e sui dati medi degli affitti cittadini. Per risparmi precisi, usa Workplacify per monitorare i tuoi dati di utilizzo delle scrivanie in tempo reale."
+      },
+      "startSaving": {
+        "question": "Come posso iniziare a risparmiare sugli spazi ufficio?",
+        "answer": "Inizia monitorando l'utilizzo effettivo delle tue scrivanie con Workplacify. Con dati reali sui modelli di presenza e i giorni di punta, puoi ridurre con sicurezza la tua impronta, implementare l'hotelling delle scrivanie e risparmiare migliaia all'anno."
+      }
+    }
   }
 }

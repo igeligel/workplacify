@@ -12,6 +12,7 @@ import {
 import { useState } from "react";
 
 import { useBlogArticleTheme } from "../../chakra-starter/marketing-ui/BlogArticle/useBlogArticleTheme";
+import { formatCurrency, handleNumericInput } from "../../utils/calculator";
 
 type RoiResult = {
   annualSavings: number;
@@ -29,13 +30,6 @@ const calculateRoi = (
   const roiPercent = softwareCost > 0 ? (netSavings / softwareCost) * 100 : 0;
   return { annualSavings, netSavings, roiPercent };
 };
-
-const formatCurrency = (value: number) =>
-  new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    maximumFractionDigits: 0,
-  }).format(value);
 
 type PlanTier = "starter" | "large" | "enterprise";
 type PricingMode = "workplacify" | "custom";
@@ -96,17 +90,6 @@ export const RoiCalculator = () => {
   const planBg = theme === "dark" ? "gray.700" : "white";
   const planSelectedBg = theme === "dark" ? "orange.800" : "orange.100";
   const planBorder = theme === "dark" ? "gray.600" : "orange.300";
-
-  const handleNumericInput = (value: string, setter: (v: string) => void) => {
-    if (value === "" || value === "0") {
-      setter(value);
-      return;
-    }
-    const num = Number(value);
-    if (!isNaN(num) && num >= 0) {
-      setter(value);
-    }
-  };
 
   return (
     <Box
